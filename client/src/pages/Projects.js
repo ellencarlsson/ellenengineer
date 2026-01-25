@@ -6,7 +6,7 @@ function Projects() {
     <div className="projects-page">
       <div className="projects-container">
         <h1 className="page-title">Mina Projekt</h1>
-        <div className="projects-placeholder nature-card-decoration">
+        <div className="projects-placeholder">
           <p>Projektsektionen kommer snart!</p>
           <p>Här kommer dina projekt att visas med bilder och beskrivningar.</p>
         </div>

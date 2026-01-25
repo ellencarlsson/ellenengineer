@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/pages/About.css';
-import flowerSvg from '../assets/svg/flower.svg';
 
 function About() {
   return (
@@ -8,7 +7,7 @@ function About() {
       <div className="about-container">
         <h1 className="page-title">Om mig</h1>
         <div className="about-content">
-          <div className="about-text nature-card-decoration">
+          <div className="about-text">
             <h2>Hej!</h2>
             <p>
               Jag är Ellen Carlsson, en passionerad mjukvaruutvecklare med fokus på
@@ -20,11 +19,7 @@ function About() {
             </p>
           </div>
 
-          <div className="section-divider">
-            <img src={flowerSvg} alt="" />
-          </div>
-
-          <div className="skills-section nature-card-decoration">
+          <div className="skills-section">
             <h3>Teknologier & Färdigheter</h3>
             <div className="skills-grid">
               <div className="skill-item">React</div>
@@ -38,11 +33,7 @@ function About() {
             </div>
           </div>
 
-          <div className="section-divider">
-            <img src={flowerSvg} alt="" />
-          </div>
-
-          <div className="education-section nature-card-decoration">
+          <div className="education-section">
             <h3>Utbildning & Erfarenhet</h3>
             <p>Information om din utbildning och erfarenhet kommer här.</p>
           </div>
