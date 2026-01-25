@@ -1,41 +1,93 @@
 .header {
-  background-color: #1a1a2e;
-  color: white;
-  padding: 1rem 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-sm));
+  color: var(--text-light);
+  padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn var(--transition-normal);
+  border-bottom: 2px solid var(--glass-border);
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: var(--max-width-lg);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--spacing-md);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #61dafb;
-  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  animation: slideInLeft var(--transition-slow);
+  letter-spacing: -0.5px;
+}
+
+.logo:hover {
+  filter: brightness(1.2);
+  transform: scale(1.05);
 }
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: var(--spacing-md);
+  animation: slideInRight var(--transition-slow);
 }
 
-.nav a {
-  color: white;
+.nav-link {
+  color: var(--text-medium);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  position: relative;
 }
 
-.nav a:hover {
-  color: #61dafb;
+.nav-link:hover {
+  color: var(--accent-coral);
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.nav-link.active {
+  color: var(--accent-coral);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--gradient-sunset);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .nav {
+    gap: var(--spacing-sm);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
+  }
 }

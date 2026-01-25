@@ -1,0 +1,87 @@
+/* Dark Warm Sunset Theme - Mörka varma toner */
+:root {
+  /* Primära färger - Mörka varma toner */
+  --primary-dark: #1a1423;
+  --primary-plum: #2d1b3d;
+  --primary-deep: #3d2645;
+
+  /* Accent färger - Korall & Persika */
+  --accent-coral: #ff6b6b;
+  --accent-peach: #ff8e72;
+  --accent-rose: #ff9999;
+  --accent-purple: #c89bff;
+  --accent-lavender: #dda5ff;
+
+  /* Text färger */
+  --text-light: #e8d5f2;
+  --text-medium: #b8a7c9;
+  --text-slate: #9988aa;
+  --text-accent: #ff8e72;
+
+  /* Bakgrunder */
+  --background-dark: #1a1423;
+  --background-plum: #2d1b3d;
+  --background-card: rgba(45, 27, 61, 0.7);
+  --background-lighter: rgba(61, 38, 69, 0.5);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(45, 27, 61, 0.6);
+  --glass-border: rgba(255, 107, 107, 0.2);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1a1423 0%, #2d1b3d 50%, #3d2645 100%);
+  --gradient-sunset: linear-gradient(135deg, #ff8e72 0%, #ff6b6b 50%, #c89bff 100%);
+  --gradient-soft: linear-gradient(135deg, #3d2645 0%, #2d1b3d 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-coral: 0 0 30px rgba(255, 107, 107, 0.4);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 5rem;
+
+  /* Typography */
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 2.5rem;
+  --font-size-hero: 4rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Max widths */
+  --max-width-sm: 600px;
+  --max-width-md: 800px;
+  --max-width-lg: 1200px;
+  --max-width-xl: 1400px;
+
+  /* Blur for glassmorphism */
+  --blur-sm: 10px;
+  --blur-md: 20px;
+}
