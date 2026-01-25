@@ -6,21 +6,40 @@ function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        <NavLink to="/" className="logo">Ellen Engineer</NavLink>
-        <nav className="nav">
-          <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-            Hem
-          </NavLink>
-          <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-            Om mig
-          </NavLink>
-          <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-            Projekt
-          </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-            Kontakt
-          </NavLink>
-        </nav>
+        <div className="header-left">
+          <NavLink to="/" className="nav-link">EC</NavLink>
+          <nav className="nav">
+            <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Projekt
+            </NavLink>
+            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Om Mig
+            </NavLink>
+          </nav>
+        </div>
+
+        <div className="header-center">
+          <div className="header-title">
+            <h1 className="name-first">Ellen</h1>
+            <div className="title-row">
+              <p className="header-subtitle">Dataingenjör </p>
+              <h1 className="name-last">Carlsson</h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="header-right">
+          <div className="nav-pill">
+            <a href="/resume.pdf" className="nav-link" target="_blank" rel="noopener noreferrer">
+              CV
+            </a>
+          </div>
+          <div className="nav-pill">
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Kontakta mig
+            </NavLink>
+          </div>
+        </div>
       </div>
     </header>
   );
