@@ -1,13 +1,21 @@
 import React from 'react';
 import './styles/App.css';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Ellen Engineer</h1>
-        <p>Portfolio Website - Coming Soon</p>
-      </header>
+      <Header />
+      <Hero />
+      <About />
+      <Projects />
+      <Contact />
+      <Footer />
     </div>
   );
 }
