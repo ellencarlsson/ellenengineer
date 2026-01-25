@@ -1,8 +1,9 @@
 .footer {
-  background-color: var(--primary-green-dark);
-  color: var(--background-white);
+  background-color: var(--primary-navy);
+  color: var(--text-slate);
   padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
   margin-top: auto;
+  border-top: 1px solid rgba(100, 255, 218, 0.1);
 }
 
 .footer-container {
@@ -20,48 +21,35 @@
 
 .footer-section h3,
 .footer-section h4 {
-  color: var(--accent-green);
+  color: var(--accent-cyan);
   margin-bottom: var(--spacing-sm);
   font-weight: var(--font-weight-semibold);
 }
 
 .footer-section p {
-  color: var(--light-green);
+  color: var(--text-slate);
   line-height: var(--line-height-normal);
 }
 
 .footer-section a {
   display: block;
-  color: var(--light-green);
+  color: var(--text-slate);
   text-decoration: none;
   margin-bottom: var(--spacing-xs);
   transition: all var(--transition-normal);
-  padding-left: var(--spacing-xs);
-  position: relative;
-}
-
-.footer-section a::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
+  padding-left: 0;
 }
 
 .footer-section a:hover {
-  color: var(--accent-green);
-  padding-left: var(--spacing-md);
-}
-
-.footer-section a:hover::before {
-  opacity: 1;
+  color: var(--accent-cyan);
+  padding-left: var(--spacing-xs);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--primary-green);
-  color: var(--light-green);
+  border-top: 1px solid rgba(100, 255, 218, 0.1);
+  color: var(--text-slate);
   font-size: var(--font-size-sm);
 }
 
@@ -75,11 +63,7 @@
     text-align: center;
   }
 
-  .footer-section a::before {
-    display: none;
-  }
-
   .footer-section a:hover {
-    padding-left: var(--spacing-xs);
+    padding-left: 0;
   }
 }

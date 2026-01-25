@@ -2,6 +2,7 @@
   min-height: 80vh;
   padding: var(--spacing-xl) var(--spacing-md);
   animation: fadeIn var(--transition-slow);
+  background: var(--gradient-primary);
 }
 
 .about-container {
@@ -11,10 +12,22 @@
 
 .page-title {
   font-size: var(--font-size-hero);
-  color: var(--primary-green);
-  text-align: center;
+  color: var(--text-lightest-slate);
+  text-align: left;
   margin-bottom: var(--spacing-lg);
   animation: fadeInUp var(--transition-slow);
+  font-weight: var(--font-weight-bold);
+  position: relative;
+}
+
+.page-title::before {
+  content: '< ';
+  color: var(--accent-cyan);
+}
+
+.page-title::after {
+  content: ' />';
+  color: var(--accent-cyan);
 }
 
 .about-content {
@@ -24,37 +37,58 @@
 }
 
 .about-text {
-  background-color: var(--background-white);
-  padding: var(--spacing-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-sm));
+  border: 1px solid var(--glass-border);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   animation: slideInLeft var(--transition-slow);
+  transition: all var(--transition-normal);
+}
+
+.about-text:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-cyan);
+  transform: translateY(-4px);
 }
 
 .about-text h2 {
-  color: var(--primary-green);
+  color: var(--accent-cyan);
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 .about-text p {
-  color: var(--text-medium);
+  color: var(--text-slate);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-md);
 }
 
 .skills-section {
-  background-color: var(--background-white);
-  padding: var(--spacing-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-sm));
+  border: 1px solid var(--glass-border);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   animation: slideInRight var(--transition-slow) 0.2s backwards;
+  transition: all var(--transition-normal);
+}
+
+.skills-section:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-cyan);
+  transform: translateY(-4px);
 }
 
 .skills-section h3 {
-  color: var(--primary-green);
+  color: var(--accent-cyan);
   margin-bottom: var(--spacing-md);
   font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 .skills-grid {
@@ -64,40 +98,53 @@
 }
 
 .skill-item {
-  background: var(--gradient-light);
+  background: transparent;
   padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
   text-align: center;
   font-weight: var(--font-weight-medium);
-  color: var(--primary-green);
-  border: 2px solid var(--border-color);
+  color: var(--text-lightest-slate);
+  border: 2px solid var(--text-slate);
   transition: all var(--transition-normal);
+  font-size: var(--font-size-sm);
 }
 
 .skill-item:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--secondary-green);
-  background-color: var(--light-green);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: var(--shadow-cyan);
+  background: rgba(100, 255, 218, 0.05);
 }
 
 .education-section {
-  background-color: var(--background-white);
-  padding: var(--spacing-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-sm));
+  border: 1px solid var(--glass-border);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   animation: fadeInUp var(--transition-slow) 0.4s backwards;
+  transition: all var(--transition-normal);
+}
+
+.education-section:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-cyan);
+  transform: translateY(-4px);
 }
 
 .education-section h3 {
-  color: var(--primary-green);
+  color: var(--accent-cyan);
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 .education-section p {
-  color: var(--text-medium);
+  color: var(--text-slate);
   line-height: var(--line-height-relaxed);
+  font-size: var(--font-size-md);
 }
 
 @media (max-width: 768px) {
@@ -107,6 +154,7 @@
 
   .page-title {
     font-size: var(--font-size-xxl);
+    text-align: center;
   }
 
   .skills-grid {

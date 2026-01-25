@@ -1,37 +1,40 @@
-/* Grönt naturtema - Färgvariabler */
+/* Modern Tech Theme - Färgvariabler */
 :root {
-  /* Primära gröna nyanser */
-  --primary-green: #2d5016;
-  --primary-green-light: #4a7c2c;
-  --primary-green-dark: #1a3009;
+  /* Primära färger - Marinblå */
+  --primary-dark: #0a192f;
+  --primary-navy: #112240;
+  --primary-light-navy: #172a45;
 
-  /* Sekundära gröna nyanser */
-  --secondary-green: #6b9f4d;
-  --accent-green: #8bc34a;
-  --light-green: #c5e1a5;
+  /* Accent färger - Cyan/Aqua */
+  --accent-cyan: #64ffda;
+  --accent-cyan-light: #8cffec;
+  --accent-cyan-dark: #4dd0ba;
 
-  /* Naturfärger - jord och himmel */
-  --earth-brown: #5d4037;
-  --sky-blue: #81c4e8;
-  --sand-beige: #f5f5dc;
+  /* Sekundära färger - Grå/Slate */
+  --text-slate: #8892b0;
+  --text-light-slate: #a8b2d1;
+  --text-lightest-slate: #ccd6f6;
 
-  /* Neutrala färger */
-  --background-light: #f9fdf7;
+  /* Bakgrunder */
+  --background-dark: #0a192f;
+  --background-light: #112240;
+  --background-card: rgba(17, 34, 64, 0.7);
   --background-white: #ffffff;
-  --text-dark: #1a3009;
-  --text-medium: #2d5016;
-  --text-light: #6b9f4d;
-  --border-color: #c5e1a5;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(100, 255, 218, 0.05);
+  --glass-border: rgba(100, 255, 218, 0.1);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #4a7c2c 0%, #2d5016 100%);
-  --gradient-hero: linear-gradient(135deg, #6b9f4d 0%, #4a7c2c 50%, #2d5016 100%);
-  --gradient-light: linear-gradient(180deg, #f9fdf7 0%, #e8f5e0 100%);
+  --gradient-primary: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+  --gradient-hero: linear-gradient(135deg, #0a192f 0%, #112240 50%, #172a45 100%);
+  --gradient-accent: linear-gradient(135deg, #64ffda 0%, #4dd0ba 100%);
 
   /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(45, 80, 22, 0.1);
-  --shadow-md: 0 4px 8px rgba(45, 80, 22, 0.15);
-  --shadow-lg: 0 8px 16px rgba(45, 80, 22, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  --shadow-cyan: 0 0 20px rgba(100, 255, 218, 0.3);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -47,7 +50,7 @@
   --font-size-lg: 1.5rem;
   --font-size-xl: 2rem;
   --font-size-xxl: 2.5rem;
-  --font-size-hero: 3.5rem;
+  --font-size-hero: 4rem;
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -62,7 +65,7 @@
   --radius-sm: 5px;
   --radius-md: 10px;
   --radius-lg: 15px;
-  --radius-full: 50%;
+  --radius-xl: 20px;
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -74,4 +77,8 @@
   --max-width-md: 800px;
   --max-width-lg: 1200px;
   --max-width-xl: 1400px;
+
+  /* Blur for glassmorphism */
+  --blur-sm: 10px;
+  --blur-md: 20px;
 }

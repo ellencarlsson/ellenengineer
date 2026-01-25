@@ -1,12 +1,14 @@
 .header {
-  background-color: var(--primary-green-dark);
-  color: var(--background-white);
+  background-color: var(--primary-dark);
+  backdrop-filter: blur(var(--blur-sm));
+  color: var(--text-lightest-slate);
   padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow-md);
   animation: fadeIn var(--transition-normal);
+  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
 }
 
 .header-container {
@@ -21,14 +23,16 @@
 .logo {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--accent-green);
+  color: var(--accent-cyan);
   text-decoration: none;
   transition: color var(--transition-normal);
   animation: slideInLeft var(--transition-slow);
+  letter-spacing: -0.5px;
 }
 
 .logo:hover {
-  color: var(--light-green);
+  color: var(--accent-cyan-light);
+  text-shadow: var(--shadow-cyan);
 }
 
 .nav {
@@ -38,38 +42,46 @@
 }
 
 .nav-link {
-  color: var(--background-white);
+  color: var(--text-slate);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-sm);
   transition: all var(--transition-normal);
   position: relative;
 }
 
+.nav-link::before {
+  content: '< ';
+  color: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
 .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: var(--accent-green);
-  transition: all var(--transition-normal);
-  transform: translateX(-50%);
+  content: ' />';
+  color: var(--accent-cyan);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  opacity: 1;
 }
 
 .nav-link:hover {
-  color: var(--accent-green);
-}
-
-.nav-link:hover::after {
-  width: 80%;
+  color: var(--accent-cyan);
 }
 
 .nav-link.active {
-  color: var(--accent-green);
-  background-color: rgba(139, 195, 74, 0.1);
+  color: var(--accent-cyan);
+}
+
+.nav-link.active::before,
+.nav-link.active::after {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -82,7 +94,12 @@
   }
 
   .nav-link {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     padding: var(--spacing-xs);
+  }
+
+  .nav-link::before,
+  .nav-link::after {
+    display: none;
   }
 }

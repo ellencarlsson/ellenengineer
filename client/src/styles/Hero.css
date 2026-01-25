@@ -1,11 +1,11 @@
 .hero {
   background: var(--gradient-hero);
-  color: var(--background-white);
-  min-height: 85vh;
+  color: var(--text-lightest-slate);
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: left;
   padding: var(--spacing-xl) var(--spacing-md);
   position: relative;
   overflow: hidden;
@@ -19,104 +19,130 @@
   right: 0;
   bottom: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(197, 225, 165, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(139, 195, 74, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(100, 255, 218, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 
 .hero-container {
-  max-width: var(--max-width-md);
+  max-width: var(--max-width-lg);
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .hero h1 {
   font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-sm);
   animation: fadeInUp 1s ease;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--text-lightest-slate);
+  letter-spacing: -2px;
+  line-height: var(--line-height-tight);
+}
+
+.hero h1::before {
+  content: 'Hi, my name is';
+  display: block;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
+  color: var(--accent-cyan);
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0;
 }
 
 .hero-subtitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xxl);
   margin-bottom: var(--spacing-md);
-  color: var(--light-green);
+  color: var(--text-slate);
   animation: fadeInUp 1s ease 0.2s backwards;
+  font-weight: var(--font-weight-semibold);
 }
 
 .hero-description {
   font-size: var(--font-size-md);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
   line-height: var(--line-height-relaxed);
   animation: fadeInUp 1s ease 0.4s backwards;
-  opacity: 0.95;
+  color: var(--text-slate);
+  max-width: 600px;
 }
 
 .hero-buttons {
   display: flex;
   gap: var(--spacing-sm);
-  justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 1s ease 0.6s backwards;
 }
 
 .btn {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
   text-decoration: none;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-md);
   transition: all var(--transition-normal);
   display: inline-block;
+  cursor: pointer;
 }
 
 .btn-primary {
-  background-color: var(--accent-green);
-  color: var(--primary-green-dark);
-  box-shadow: var(--shadow-md);
+  background-color: transparent;
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
+}
+
+.btn-primary:hover {
+  background-color: rgba(100, 255, 218, 0.1);
+  box-shadow: var(--shadow-cyan);
+  transform: translate(-4px, -4px);
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--background-white);
-  border: 2px solid var(--background-white);
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-}
-
-.btn-primary:hover {
-  background-color: var(--light-green);
+  color: var(--text-lightest-slate);
+  border: 2px solid var(--text-slate);
 }
 
 .btn-secondary:hover {
-  background-color: var(--background-white);
-  color: var(--primary-green);
+  background-color: rgba(136, 146, 176, 0.1);
+  border-color: var(--text-lightest-slate);
+  transform: translate(-4px, -4px);
 }
 
 @media (max-width: 768px) {
   .hero {
-    min-height: 70vh;
+    min-height: 80vh;
     padding: var(--spacing-lg) var(--spacing-sm);
+    text-align: center;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero h1 {
     font-size: var(--font-size-xxl);
   }
 
+  .hero h1::before {
+    font-size: var(--font-size-sm);
+  }
+
   .hero-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
   }
 
   .hero-description {
     font-size: var(--font-size-sm);
+    text-align: center;
   }
 
   .hero-buttons {
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 
   .btn {
