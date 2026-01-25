@@ -11,14 +11,12 @@ function Hero() {
 
   const terminalLines = [
     { type: 'command', text: '$ whoami' },
-    { type: 'output', text: 'Ellen Carlsson - Full Stack Developer' },
+    { type: 'output', text: 'Ellen Carlsson - Dataingenjör' },
     { type: 'command', text: '$ cat about.txt' },
-    { type: 'output', text: 'Studerar datateknik med inriktning mot mjukvaruutveckling.' },
-    { type: 'output', text: 'Passionerad om att lösa problem och bygga genomtänkta lösningar.' },
-    { type: 'command', text: '$ ls skills/' },
-    { type: 'output', text: 'React.js    Node.js    MongoDB    Express    Git' },
+    { type: 'output', text: 'Studerat Datateknik med inriktning mjukvaruutveckling med mobila plattformar' },
+    { type: 'output', text: 'Gillar att se lösningar i vardagsproblem' },
     { type: 'command', text: '$ echo $CURRENT_STATUS' },
-    { type: 'output', text: 'Avslutar värnplikt juni 2026 → Söker utvecklarroll' },
+    { type: 'output', text: 'Genomför för närvarande 15 månaders värnplikt, som avslutas sommaren 2026 i Halmstad.' },
     { type: 'command', text: '$ ./explore_projects.sh' },
     { type: 'link', text: '→ Klicka här för att se mina projekt' }
   ];
