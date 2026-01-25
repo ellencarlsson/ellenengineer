@@ -20,10 +20,10 @@ function Header() {
 
         <div className="header-center">
           <div className="header-title">
-            <h1 className="glitch name-first" data-text="Ellen">Ellen</h1>
+            <h1 className="name-first">Ellen</h1>
             <div className="title-row">
-              <p className="glitch header-subtitle" data-text="Dataingenjör">Dataingenjör </p>
-              <h1 className="glitch name-last" data-text="Carlsson">Carlsson</h1>
+              <p className="header-subtitle">Dataingenjör </p>
+              <h1 className="name-last">Carlsson</h1>
             </div>
           </div>
         </div>
