@@ -1,9 +1,9 @@
-/* Soft Sunset Theme - Varma färger */
+/* Dark Warm Sunset Theme - Mörka varma toner */
 :root {
-  /* Primära färger - Varma toner */
-  --primary-cream: #fef6f0;
-  --primary-peach: #ffe5d9;
-  --primary-warm: #fff5f0;
+  /* Primära färger - Mörka varma toner */
+  --primary-dark: #1a1423;
+  --primary-plum: #2d1b3d;
+  --primary-deep: #3d2645;
 
   /* Accent färger - Korall & Persika */
   --accent-coral: #ff6b6b;
@@ -13,31 +13,31 @@
   --accent-lavender: #dda5ff;
 
   /* Text färger */
-  --text-dark: #4a4a4a;
-  --text-medium: #6b6b6b;
-  --text-light: #8a8a8a;
-  --text-accent: #ff6b6b;
+  --text-light: #e8d5f2;
+  --text-medium: #b8a7c9;
+  --text-slate: #9988aa;
+  --text-accent: #ff8e72;
 
   /* Bakgrunder */
-  --background-light: #fef6f0;
-  --background-cream: #fff5f0;
-  --background-white: #ffffff;
-  --background-card: rgba(255, 229, 217, 0.5);
+  --background-dark: #1a1423;
+  --background-plum: #2d1b3d;
+  --background-card: rgba(45, 27, 61, 0.7);
+  --background-lighter: rgba(61, 38, 69, 0.5);
 
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(45, 27, 61, 0.6);
   --glass-border: rgba(255, 107, 107, 0.2);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #fef6f0 0%, #ffe5d9 50%, #ffd5c8 100%);
+  --gradient-primary: linear-gradient(135deg, #1a1423 0%, #2d1b3d 50%, #3d2645 100%);
   --gradient-sunset: linear-gradient(135deg, #ff8e72 0%, #ff6b6b 50%, #c89bff 100%);
-  --gradient-soft: linear-gradient(135deg, #ffe5d9 0%, #ffd5c8 100%);
+  --gradient-soft: linear-gradient(135deg, #3d2645 0%, #2d1b3d 100%);
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(255, 107, 107, 0.1);
-  --shadow-md: 0 4px 16px rgba(255, 107, 107, 0.15);
-  --shadow-lg: 0 8px 24px rgba(255, 107, 107, 0.2);
-  --shadow-coral: 0 0 30px rgba(255, 107, 107, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-coral: 0 0 30px rgba(255, 107, 107, 0.4);
 
   /* Spacing */
   --spacing-xs: 0.5rem;

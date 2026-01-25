@@ -114,8 +114,8 @@
   font-size: var(--font-size-sm);
   font-family: inherit;
   transition: all var(--transition-normal);
-  background-color: white;
-  color: var(--text-dark);
+  background-color: var(--background-lighter);
+  color: var(--text-light);
 }
 
 .form-group input:focus,

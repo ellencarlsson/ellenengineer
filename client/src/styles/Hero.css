@@ -1,6 +1,6 @@
 .hero {
   background: var(--gradient-primary);
-  color: var(--text-dark);
+  color: var(--text-light);
   min-height: 90vh;
   display: flex;
   align-items: center;

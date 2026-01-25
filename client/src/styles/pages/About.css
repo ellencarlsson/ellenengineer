@@ -90,12 +90,12 @@
 }
 
 .skill-item {
-  background: white;
+  background: var(--background-lighter);
   padding: var(--spacing-sm);
   border-radius: var(--radius-md);
   text-align: center;
   font-weight: var(--font-weight-medium);
-  color: var(--text-dark);
+  color: var(--text-light);
   border: 2px solid var(--glass-border);
   transition: all var(--transition-normal);
   font-size: var(--font-size-sm);

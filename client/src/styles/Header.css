@@ -1,7 +1,7 @@
 .header {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--blur-sm));
-  color: var(--text-dark);
+  color: var(--text-light);
   padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;

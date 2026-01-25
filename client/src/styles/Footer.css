@@ -1,7 +1,7 @@
 .footer {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--blur-sm));
-  color: var(--text-dark);
+  color: var(--text-light);
   padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
   margin-top: auto;
   border-top: 2px solid var(--glass-border);
