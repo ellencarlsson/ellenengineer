@@ -78,17 +78,94 @@
 }
 
 .name-first {
-  font-family: 'Cabin Sketch';
-  font-style: bold;
-  font-weight: 700;
+  font-family: 'Kavoon', cursive;
+  font-style: normal;
+  font-weight: 400;
   font-size: 96px;
   line-height: 112px;
   color: #3D2616;
   display: block;
   margin: 0;
   text-align: center;
-  -webkit-text-stroke: 1px #3D2616;
-  paint-order: stroke fill;
+  position: relative;
+  text-shadow:
+    2px 2px 0px rgba(61, 38, 22, 0.1),
+    -1px -1px 0px rgba(255, 255, 255, 0.1);
+}
+
+.name-first::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(61, 38, 22, 0.08) 1px,
+      rgba(61, 38, 22, 0.08) 2px
+    );
+  background-size: 200% 100%, 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  animation: noise 0.15s infinite, scanline 4s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes noise {
+  0%, 100% {
+    opacity: 1;
+    background-position: 0 0, 0 0;
+  }
+  10% {
+    opacity: 0.9;
+    background-position: -5px 0, -5px -10px;
+  }
+  20% {
+    opacity: 1;
+    background-position: 5px 0, 5px 5px;
+  }
+  30% {
+    opacity: 0.85;
+    background-position: -3px 0, -8px 3px;
+  }
+  40% {
+    opacity: 1;
+    background-position: 2px 0, 3px -8px;
+  }
+  50% {
+    opacity: 0.9;
+    background-position: -2px 0, -2px 7px;
+  }
+  60% {
+    opacity: 1;
+    background-position: 4px 0, 7px -3px;
+  }
+  70% {
+    opacity: 0.85;
+    background-position: -4px 0, -4px 5px;
+  }
+  80% {
+    opacity: 1;
+    background-position: 3px 0, 6px -6px;
+  }
+  90% {
+    opacity: 0.9;
+    background-position: -6px 0, -7px 2px;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 200% 0, 0 100%;
+  }
 }
 
 .title-row {
@@ -101,17 +178,39 @@
 }
 
 .name-last {
-  font-family: 'Cabin Sketch';
-  font-style: bold;
-  font-weight: 700;
+  font-family: 'Kavoon', cursive;
+  font-style: normal;
+  font-weight: 400;
   font-size: 64px;
   line-height: 75px;
   color: #3D2616;
   display: inline-block;
   margin: 0;
   padding-top: 10px;
-  -webkit-text-stroke: 1px #3D2616;
-  paint-order: stroke fill;
+  position: relative;
+}
+
+.name-last::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(61, 38, 22, 0.08) 1px,
+      rgba(61, 38, 22, 0.08) 2px
+    );
+  background-size: 200% 100%, 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  animation: noise 0.15s infinite, scanline 4s linear infinite;
+  mix-blend-mode: overlay;
 }
 
 /* Glitch Effect */
@@ -168,7 +267,7 @@
 }
 
 .header-subtitle {
-  font-family: 'Cabin Sketch';
+  font-family: 'Della Respira', serif;
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
