@@ -1,14 +1,14 @@
 .header {
-  background-color: var(--primary-dark);
+  background: var(--glass-bg);
   backdrop-filter: blur(var(--blur-sm));
-  color: var(--text-lightest-slate);
+  color: var(--text-dark);
   padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow-md);
   animation: fadeIn var(--transition-normal);
-  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+  border-bottom: 2px solid var(--glass-border);
 }
 
 .header-container {
@@ -23,16 +23,19 @@
 .logo {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--accent-cyan);
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-decoration: none;
-  transition: color var(--transition-normal);
+  transition: all var(--transition-normal);
   animation: slideInLeft var(--transition-slow);
   letter-spacing: -0.5px;
 }
 
 .logo:hover {
-  color: var(--accent-cyan-light);
-  text-shadow: var(--shadow-cyan);
+  filter: brightness(1.2);
+  transform: scale(1.05);
 }
 
 .nav {
@@ -42,7 +45,7 @@
 }
 
 .nav-link {
-  color: var(--text-slate);
+  color: var(--text-medium);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-sm);
@@ -52,36 +55,26 @@
   position: relative;
 }
 
-.nav-link::before {
-  content: '< ';
-  color: var(--accent-cyan);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
-
-.nav-link::after {
-  content: ' />';
-  color: var(--accent-cyan);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
-
-.nav-link:hover::before,
-.nav-link:hover::after {
-  opacity: 1;
-}
-
 .nav-link:hover {
-  color: var(--accent-cyan);
+  color: var(--accent-coral);
+  background: rgba(255, 107, 107, 0.1);
 }
 
 .nav-link.active {
-  color: var(--accent-cyan);
+  color: var(--accent-coral);
+  font-weight: var(--font-weight-semibold);
 }
 
-.nav-link.active::before,
 .nav-link.active::after {
-  opacity: 1;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--gradient-sunset);
+  border-radius: 2px;
 }
 
 @media (max-width: 768px) {
@@ -96,10 +89,5 @@
   .nav-link {
     font-size: var(--font-size-xs);
     padding: var(--spacing-xs);
-  }
-
-  .nav-link::before,
-  .nav-link::after {
-    display: none;
   }
 }

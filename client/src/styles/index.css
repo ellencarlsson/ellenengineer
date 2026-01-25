@@ -17,8 +17,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: var(--line-height-normal);
-  background-color: var(--background-dark);
-  color: var(--text-light-slate);
+  background: var(--gradient-primary);
+  color: var(--text-dark);
+  min-height: 100vh;
 }
 
 code {

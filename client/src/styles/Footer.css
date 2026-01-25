@@ -1,9 +1,10 @@
 .footer {
-  background-color: var(--primary-navy);
-  color: var(--text-slate);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-sm));
+  color: var(--text-dark);
   padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
   margin-top: auto;
-  border-top: 1px solid rgba(100, 255, 218, 0.1);
+  border-top: 2px solid var(--glass-border);
 }
 
 .footer-container {
@@ -21,19 +22,19 @@
 
 .footer-section h3,
 .footer-section h4 {
-  color: var(--accent-cyan);
+  color: var(--accent-coral);
   margin-bottom: var(--spacing-sm);
   font-weight: var(--font-weight-semibold);
 }
 
 .footer-section p {
-  color: var(--text-slate);
+  color: var(--text-medium);
   line-height: var(--line-height-normal);
 }
 
 .footer-section a {
   display: block;
-  color: var(--text-slate);
+  color: var(--text-medium);
   text-decoration: none;
   margin-bottom: var(--spacing-xs);
   transition: all var(--transition-normal);
@@ -41,15 +42,15 @@
 }
 
 .footer-section a:hover {
-  color: var(--accent-cyan);
+  color: var(--accent-coral);
   padding-left: var(--spacing-xs);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: var(--spacing-md);
-  border-top: 1px solid rgba(100, 255, 218, 0.1);
-  color: var(--text-slate);
+  border-top: 2px solid var(--glass-border);
+  color: var(--text-medium);
   font-size: var(--font-size-sm);
 }
 
