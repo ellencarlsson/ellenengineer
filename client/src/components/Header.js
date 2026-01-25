@@ -7,13 +7,13 @@ function Header() {
     <header className="header">
       <div className="header-container">
         <div className="header-left">
-          <NavLink to="/" className="logo-initials">EC</NavLink>
+          <NavLink to="/" className="nav-link">EC</NavLink>
           <nav className="nav">
             <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Projects
+              Projekt
             </NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              About
+              Om Mig
             </NavLink>
           </nav>
         </div>
@@ -22,22 +22,23 @@ function Header() {
           <div className="header-title">
             <h1 className="glitch name-first" data-text="Ellen">Ellen</h1>
             <div className="title-row">
-              <p className="header-subtitle">Dataingenjör </p>
-              <h1 className=" name-last" data-text="Carlsson">Carlsson</h1>
+              <p className="glitch header-subtitle" data-text="Dataingenjör">Dataingenjör </p>
+              <h1 className="glitch name-last" data-text="Carlsson">Carlsson</h1>
             </div>
           </div>
         </div>
 
         <div className="header-right">
-          <a href="/resume.pdf" className="resume-link" target="_blank" rel="noopener noreferrer">
-            RESUME
-          </a>
-          <NavLink to="/contact" className="mail-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </NavLink>
+          <div className="nav-pill">
+            <a href="/resume.pdf" className="nav-link" target="_blank" rel="noopener noreferrer">
+              CV
+            </a>
+          </div>
+          <div className="nav-pill">
+            <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              Kontakta mig
+            </NavLink>
+          </div>
         </div>
       </div>
     </header>

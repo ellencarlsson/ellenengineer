@@ -1,5 +1,11 @@
 .App {
   min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
 }
 
 html {
