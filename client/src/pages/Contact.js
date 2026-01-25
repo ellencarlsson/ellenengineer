@@ -50,7 +50,7 @@ function Contact() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form nature-card-decoration" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Namn</label>
               <input

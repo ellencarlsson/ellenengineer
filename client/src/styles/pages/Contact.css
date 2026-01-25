@@ -1,3 +1,4 @@
+@import '../NatureElements.css';
 .contact-page {
   min-height: 80vh;
   padding: var(--spacing-xl) var(--spacing-md);
