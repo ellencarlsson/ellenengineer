@@ -1,0 +1,77 @@
+/* Grönt naturtema - Färgvariabler */
+:root {
+  /* Primära gröna nyanser */
+  --primary-green: #2d5016;
+  --primary-green-light: #4a7c2c;
+  --primary-green-dark: #1a3009;
+
+  /* Sekundära gröna nyanser */
+  --secondary-green: #6b9f4d;
+  --accent-green: #8bc34a;
+  --light-green: #c5e1a5;
+
+  /* Naturfärger - jord och himmel */
+  --earth-brown: #5d4037;
+  --sky-blue: #81c4e8;
+  --sand-beige: #f5f5dc;
+
+  /* Neutrala färger */
+  --background-light: #f9fdf7;
+  --background-white: #ffffff;
+  --text-dark: #1a3009;
+  --text-medium: #2d5016;
+  --text-light: #6b9f4d;
+  --border-color: #c5e1a5;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4a7c2c 0%, #2d5016 100%);
+  --gradient-hero: linear-gradient(135deg, #6b9f4d 0%, #4a7c2c 50%, #2d5016 100%);
+  --gradient-light: linear-gradient(180deg, #f9fdf7 0%, #e8f5e0 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(45, 80, 22, 0.1);
+  --shadow-md: 0 4px 8px rgba(45, 80, 22, 0.15);
+  --shadow-lg: 0 8px 16px rgba(45, 80, 22, 0.2);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 5rem;
+
+  /* Typography */
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 2.5rem;
+  --font-size-hero: 3.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* Border radius */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --radius-full: 50%;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Max widths */
+  --max-width-sm: 600px;
+  --max-width-md: 800px;
+  --max-width-lg: 1200px;
+  --max-width-xl: 1400px;
+}

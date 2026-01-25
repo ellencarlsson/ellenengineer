@@ -1,0 +1,42 @@
+.projects-page {
+  min-height: 80vh;
+  padding: var(--spacing-xl) var(--spacing-md);
+  animation: fadeIn var(--transition-slow);
+}
+
+.projects-container {
+  max-width: var(--max-width-lg);
+  margin: 0 auto;
+}
+
+.projects-placeholder {
+  background-color: var(--background-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  animation: fadeInUp var(--transition-slow);
+}
+
+.projects-placeholder p {
+  font-size: var(--font-size-lg);
+  color: var(--text-medium);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-sm);
+}
+
+.projects-placeholder p:first-child {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-green);
+}
+
+@media (max-width: 768px) {
+  .projects-page {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .page-title {
+    font-size: var(--font-size-xxl);
+  }
+}

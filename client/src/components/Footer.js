@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 function Footer() {
@@ -12,15 +13,16 @@ function Footer() {
           </div>
           <div className="footer-section">
             <h4>Länkar</h4>
-            <a href="#home">Hem</a>
-            <a href="#about">Om mig</a>
-            <a href="#projects">Projekt</a>
-            <a href="#contact">Kontakt</a>
+            <Link to="/">Hem</Link>
+            <Link to="/about">Om mig</Link>
+            <Link to="/projects">Projekt</Link>
+            <Link to="/contact">Kontakt</Link>
           </div>
           <div className="footer-section">
             <h4>Sociala medier</h4>
             <a href="https://github.com/ellencarlsson" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#linkedin">LinkedIn</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:your-email@example.com">Email</a>
           </div>
         </div>
         <div className="footer-bottom">
