@@ -18,7 +18,7 @@
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: fadeInUp 0.8s ease-out;
-  margin-top: -100px;
+  margin-top: -80px;
 }
 
 /* Terminal Header - VS Code Style */
