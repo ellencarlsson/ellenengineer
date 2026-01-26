@@ -1,96 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/pages/Contact.css';
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: Implementera backend submission
-    console.log('Form submitted:', formData);
-    alert('Tack för ditt meddelande! (Backend kommer implementeras senare)');
-    setFormData({ name: '', email: '', message: '' });
-  };
-
   return (
     <div className="contact-page">
       <div className="contact-container">
         <h1 className="page-title">Kontakta mig</h1>
 
-        <div className="contact-content">
-          <div className="contact-info">
-            <h2>Låt oss prata!</h2>
-            <p>
-              Har du en fråga, ett projektförslag eller vill bara säga hej?
-              Fyll i formuläret så hör jag av mig så snart som möjligt.
-            </p>
-
-            <div className="social-links">
-              <h3>Hitta mig här</h3>
-              <a href="https://github.com/ellencarlsson" target="_blank" rel="noopener noreferrer" className="social-link">
-                GitHub
-              </a>
-              <a href="#linkedin" className="social-link">
-                LinkedIn
-              </a>
-              <a href="mailto:din-email@example.com" className="social-link">
-                Email
-              </a>
+        <div className="code-editor">
+          <div className="editor-header">
+            <div className="editor-tabs">
+              <div className="editor-tab active">
+                <span className="file-icon">📄</span>
+                <span>contact.js</span>
+              </div>
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Namn</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+          <div className="code-content">
+            <div className="line-numbers">
+              <div className="line-number">1</div>
+              <div className="line-number">2</div>
+              <div className="line-number">3</div>
+              <div className="line-number">4</div>
+              <div className="line-number">5</div>
+              <div className="line-number">6</div>
+              <div className="line-number">7</div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+            <div className="code-lines">
+              <div className="code-line">
+                <span className="keyword">const</span>{' '}
+                <span className="variable">contact</span>{' '}
+                <span className="operator">=</span>{' '}
+                <span className="punctuation">{'{'}</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="property">email</span>
+                <span className="operator">:</span>{' '}
+                <a href="mailto:ellen.carlsson@example.com" className="string">
+                  "ellen.carlsson@example.com"
+                </a>
+                <span className="punctuation">,</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="property">linkedin</span>
+                <span className="operator">:</span>{' '}
+                <a href="https://linkedin.com/in/ellen-carlsson" target="_blank" rel="noopener noreferrer" className="string">
+                  "linkedin.com/in/ellen-carlsson"
+                </a>
+              </div>
+              <div className="code-line">
+                <span className="punctuation">{'}'}</span>
+                <span className="punctuation">;</span>
+              </div>
+              <div className="code-line"></div>
+              <div className="code-line">
+                <span className="comment">// Hör gärna av dig! 👋</span>
+              </div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Meddelande</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" className="submit-btn">
-              Skicka meddelande
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
