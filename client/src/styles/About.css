@@ -49,8 +49,13 @@
   margin-bottom: 8px;
 }
 
+.content-line.command {
+  color: #3D2616;
+  font-weight: 500;
+}
+
 .content-line.output {
-  color: #f0ebe0;
+  color: #3D2616;
   line-height: 1.6;
   max-width: 500px;
 }
@@ -176,34 +181,35 @@
 
 /* Image Display - Slides in from right */
 .image-display {
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 10px;
   right: 60px;
-  transform: translateY(-50%);
-  z-index: 100;
-  animation: slideInFromRight 0.6s ease-out;
-  max-width: 280px;
-  max-height: 350px;
+  z-index: 15;
+  animation: slideInFromRight 0.8s ease-out;
+  width: 340px;
+  height: 480px;
 }
 
 @keyframes slideInFromRight {
   from {
-    right: -600px;
+    right: -500px;
     opacity: 0;
   }
   to {
     right: 60px;
-    opacity: 1;
+    opacity: 0.85;
   }
 }
 
 .milestone-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  border-radius: 2px 0 0 2px;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2);
+  filter: saturate(0.7) contrast(0.85) brightness(0.95);
+  transition: all 0.4s ease;
 }
 
 /* Responsive */
