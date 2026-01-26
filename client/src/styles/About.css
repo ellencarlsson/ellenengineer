@@ -29,6 +29,23 @@
   max-height: 500px;
 }
 
+/* Info lines for year/location - prompt is normal, value is bold */
+.terminal-line.info {
+  color: #4ec9b0;
+  font-weight: 400;
+}
+
+.terminal-line.info strong {
+  font-weight: 700;
+}
+
+/* Title line for README.md */
+.terminal-line.title {
+  color: #ce9178;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
 /* Game World Container - Below terminal */
 .game-world-container {
   position: relative;
