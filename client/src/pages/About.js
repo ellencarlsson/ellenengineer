@@ -4,7 +4,6 @@ import '../styles/About.css';
 function About() {
   const [playerPos, setPlayerPos] = useState({ x: 2500, y: 400 });
   const [cameraX, setCameraX] = useState(2500);
-  const [showInstructions, setShowInstructions] = useState(true);
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
@@ -13,8 +12,6 @@ function About() {
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
-  const lastMoveTimeRef = useRef(Date.now());
-  const initialFadeTimerRef = useRef(null);
   const previousMilestoneRef = useRef(null);
   const terminalLinesRef = useRef([]);
 
@@ -125,33 +122,6 @@ function About() {
     }
   }, [currentCharIndex, currentLineIndex]);
 
-  // Initial fade out after 3 seconds
-  useEffect(() => {
-    initialFadeTimerRef.current = setTimeout(() => {
-      setShowInstructions(false);
-    }, 3000);
-
-    return () => {
-      if (initialFadeTimerRef.current) {
-        clearTimeout(initialFadeTimerRef.current);
-      }
-    };
-  }, []);
-
-  // Check for inactivity and show instructions again
-  useEffect(() => {
-    const checkInactivity = setInterval(() => {
-      const timeSinceLastMove = Date.now() - lastMoveTimeRef.current;
-      if (timeSinceLastMove > 5000 && !showInstructions) {
-        setShowInstructions(true);
-        // Auto hide again after 3 seconds
-        setTimeout(() => setShowInstructions(false), 3000);
-      }
-    }, 1000);
-
-    return () => clearInterval(checkInactivity);
-  }, [showInstructions]);
-
   // Handle keyboard input
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -186,25 +156,13 @@ function About() {
       setPlayerPos(prev => {
         let newX = prev.x;
         let newY = prev.y;
-        let hasMoved = false;
 
         // Horizontal movement
         if (keysRef.current['a'] || keysRef.current['arrowleft']) {
           newX -= MOVE_SPEED;
-          hasMoved = true;
         }
         if (keysRef.current['d'] || keysRef.current['arrowright']) {
           newX += MOVE_SPEED;
-          hasMoved = true;
-        }
-
-        // Track movement for instruction visibility
-        if (hasMoved || keysRef.current[' ']) {
-          lastMoveTimeRef.current = Date.now();
-          if (showInstructions && initialFadeTimerRef.current) {
-            clearTimeout(initialFadeTimerRef.current);
-            setShowInstructions(false);
-          }
         }
 
         // Keep player in bounds
@@ -261,10 +219,6 @@ function About() {
   return (
     <section id="about" className="about-game">
       <div className="game-container">
-        <div className={`game-instructions ${showInstructions ? 'visible' : 'hidden'}`}>
-          <p>navigate --wasd --arrows | jump --space</p>
-        </div>
-
         {/* Terminal Window - Always visible */}
         <div className="terminal-window-about">
             <div className="terminal-header">

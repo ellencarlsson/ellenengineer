@@ -12,51 +12,14 @@
   overflow: hidden;
 }
 
-.game-instructions {
-  position: fixed;
-  top: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(37, 37, 37, 0.95);
-  color: #4ec9b0;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: 1px solid #4ec9b0;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  font-size: 13px;
-  z-index: 100;
-  box-shadow:
-    0 0 15px rgba(78, 201, 176, 0.2),
-    0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  opacity: 1;
-}
-
-.game-instructions::before {
-  content: '$ ';
-  color: #569cd6;
-  margin-right: 4px;
-}
-
-.game-instructions.visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.game-instructions.hidden {
-  opacity: 0;
-  transform: translateX(-50%) translateY(-10px);
-  pointer-events: none;
-}
-
 /* Terminal Window - Same as Home */
 .terminal-window-about {
   position: fixed;
-  top: 50%;
+  top: calc(50% - 80px);
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 800px;
-  width: 90%;
+  max-width: 900px;
+  width: 100%;
   background: #1e1e1e;
   border-radius: 10px;
   overflow: hidden;
@@ -149,8 +112,8 @@
 .terminal-window-about .terminal-body {
   display: flex;
   background: #1e1e1e;
-  min-height: 300px;
-  max-height: 400px;
+  min-height: 250px;
+  max-height: 350px;
   overflow-y: auto;
 }
 
@@ -383,12 +346,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .game-instructions {
-    font-size: 12px;
-    padding: 8px 16px;
-    top: 100px;
-  }
-
   .terminal-window-about {
     width: 95%;
   }
