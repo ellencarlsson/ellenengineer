@@ -9,6 +9,7 @@ function About() {
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
   const [isWalking, setIsWalking] = useState(false);
+  const [fadingOutImage, setFadingOutImage] = useState(false);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
@@ -92,26 +93,34 @@ function About() {
     const lines = [];
 
     if (leavingMilestone && !nearestMilestone) {
-      // Leaving a directory
-      lines.push({ type: 'command', text: `cd ..` });
+      // Leaving a directory - show full prompt with cd ..
+      lines.push({
+        type: 'command',
+        text: `ellen@ellenengineer:~/${leavingMilestone.directory}$ cd ..`
+      });
     } else if (nearestMilestone) {
-      // Show year and location with bold values
+      // Inside directory - show cat command
+      lines.push({
+        type: 'command',
+        text: `ellen@ellenengineer:~/${nearestMilestone.directory}$ cat README.md`
+      });
+      lines.push({ type: 'output', text: ' ' });
+      // Show year and location info
       lines.push({
         type: 'info',
-        text: `ellen@year:~$ `,
+        text: `Year: `,
         boldText: nearestMilestone.year
       });
       lines.push({
         type: 'info',
-        text: `ellen@location:~$ `,
+        text: `Location: `,
         boldText: nearestMilestone.location
       });
       lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'title', text: 'README.md' });
       lines.push({ type: 'output', text: nearestMilestone.description });
     } else {
-      // Base directory
-      lines.push({ type: 'output', text: '' });
+      // Base directory - show idle prompt
+      lines.push({ type: 'command', text: 'ellen@ellenengineer:~$' });
     }
 
     return lines;
@@ -207,12 +216,20 @@ function About() {
 
       if (foundMilestone) {
         setNearestMilestone(foundMilestone);
+        setFadingOutImage(false);
         previousMilestoneRef.current = foundMilestone;
       } else {
         // Leaving a milestone - show cd .. notification
         if (previousMilestoneRef.current && nearestMilestone) {
           setLeavingMilestone(previousMilestoneRef.current);
           setTimeout(() => setLeavingMilestone(null), 2000);
+          // Trigger fade out animation if previous milestone had an image
+          if (previousMilestoneRef.current.image) {
+            setFadingOutImage(true);
+            setTimeout(() => {
+              setFadingOutImage(false);
+            }, 600); // Match animation duration
+          }
           previousMilestoneRef.current = null;
         }
         setNearestMilestone(null);
@@ -224,44 +241,19 @@ function About() {
 
   return (
     <section id="about" className="about-game">
-      {/* Terminal Window - Fixed, always centered */}
-      <div className="terminal-window terminal-window--game">
-            <div className="terminal-header">
-              <div className="terminal-buttons">
-                <span className="terminal-button close"></span>
-                <span className="terminal-button minimize"></span>
-                <span className="terminal-button maximize"></span>
+      {/* Content Display - Top Left */}
+      <div className="content-display">
+        <div className="content-lines">
+          {terminalLinesRef.current.map((lineData, index) => {
+            return (
+              <div key={index} className={`content-line ${lineData.type}`}>
+                {lineData.text}
+                {lineData.boldText && <strong>{lineData.boldText}</strong>}
               </div>
-              <div className="terminal-title">ellen@life:~/ellen-life</div>
-              <div className="terminal-tabs">
-                <div className="terminal-tab active">
-                  <span className="tab-icon">⚡</span>
-                  <span>terminal</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="terminal-body">
-              <div className="line-numbers">
-                {terminalLinesRef.current.map((_, index) => (
-                  <div key={index} className="line-number">{index + 1}</div>
-                ))}
-              </div>
-
-              <div className="terminal-content">
-                <pre>
-                  {terminalLinesRef.current.map((lineData, index) => {
-                    return (
-                      <div key={index} className={`terminal-line ${lineData.type}`}>
-                        {lineData.text}
-                        {lineData.boldText && <strong>{lineData.boldText}</strong>}
-                      </div>
-                    );
-                  })}
-                </pre>
-              </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Game World - Static, full screen */}
       <div className="game-world-container">
@@ -294,27 +286,14 @@ function About() {
         </div>
       </div>
 
-      {/* Image Terminal - Slides in from right when milestone has image */}
-      {nearestMilestone && nearestMilestone.image && (
-        <div className="image-terminal-container">
-          <div className="terminal-window terminal-window--image">
-            <div className="terminal-header">
-              <div className="terminal-buttons">
-                <span className="terminal-button close"></span>
-                <span className="terminal-button minimize"></span>
-                <span className="terminal-button maximize"></span>
-              </div>
-              <div className="terminal-title">ellen@images:~/{nearestMilestone.year}</div>
-            </div>
-
-            <div className="terminal-body terminal-body--image">
-              <img
-                src={nearestMilestone.image}
-                alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
-                className="milestone-image"
-              />
-            </div>
-          </div>
+      {/* Image Display - Slides in from right when milestone has image */}
+      {((nearestMilestone && nearestMilestone.image) || (fadingOutImage && leavingMilestone && leavingMilestone.image)) && (
+        <div className={`image-display ${fadingOutImage ? 'fade-out' : ''}`}>
+          <img
+            src={nearestMilestone ? nearestMilestone.image : leavingMilestone.image}
+            alt={nearestMilestone ? `${nearestMilestone.year} - ${nearestMilestone.location}` : `${leavingMilestone.year} - ${leavingMilestone.location}`}
+            className="milestone-image"
+          />
         </div>
       )}
     </section>

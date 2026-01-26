@@ -11,14 +11,17 @@ function Hero() {
   const [skippedByUser, setSkippedByUser] = useState(false);
 
   const terminalLines = [
-    { type: 'command', text: '$ whoami' },
-    { type: 'output', text: 'Ellen Carlsson - Dataingenjör' },
-    { type: 'command', text: '$ cat about.txt' },
+    { type: 'command', text: 'ellen@ellenengineer:~$ whoami' },
+    { type: 'output', text: 'Ellen Carlsson - Engineer' },
+    { type: 'output', text: '' },
+    { type: 'command', text: 'ellen@ellenengineer:~$ cat about.txt' },
     { type: 'output', text: 'Studerat Datateknik med inriktning mjukvaruutveckling med mobila plattformar' },
     { type: 'output', text: 'Gillar att se lösningar i vardagsproblem' },
-    { type: 'command', text: '$ echo $CURRENT_STATUS' },
+    { type: 'output', text: '' },
+    { type: 'command', text: 'ellen@ellenengineer:~$ echo $CURRENT_STATUS' },
     { type: 'output', text: 'Genomför för närvarande 15 månaders värnplikt, som avslutas sommaren 2026 i Halmstad.' },
-    { type: 'command', text: '$ ./explore_projects.sh' },
+    { type: 'output', text: '' },
+    { type: 'command', text: 'ellen@ellenengineer:~$ ./explore_projects.sh' },
     { type: 'link', text: '→ Klicka här för att se mina projekt' }
   ];
 
@@ -114,7 +117,7 @@ function Hero() {
                     {lineType === 'link' ? (
                       <Link to="/projects" className="terminal-link">{line}</Link>
                     ) : (
-                      line
+                      line || '\u00A0'
                     )}
                   </div>
                 );
