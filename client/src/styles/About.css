@@ -15,8 +15,8 @@
 /* Terminal Window - Same as Home */
 .terminal-window-about {
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 28vh;
+  transform: translateX(-50%);
   max-width: 900px;
   width: 100%;
   background: #1e1e1e;
@@ -24,18 +24,17 @@
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   z-index: 200;
-  margin-top: -150px;
   animation: fadeInTerminal 0.3s ease-out;
 }
 
 @keyframes fadeInTerminal {
   from {
     opacity: 0;
-    transform: translate(-50%, -45%);
+    transform: translateX(-50%);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
   }
 }
 
@@ -186,7 +185,6 @@
   width: 3500px;
   height: 100vh;
   position: absolute;
-  transition: transform 0.05s linear;
   will-change: transform;
 }
 
@@ -260,7 +258,6 @@
   height: 80px;
   z-index: 50;
   transform: translateX(-50%);
-  transition: bottom 0.05s linear;
 }
 
 .player-head {

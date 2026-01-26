@@ -3,7 +3,7 @@ import '../styles/About.css';
 
 function About() {
   const [playerPos, setPlayerPos] = useState({ x: 2500, y: 400 });
-  const [cameraX, setCameraX] = useState(2500);
+  const [cameraX, setCameraX] = useState(2100); // Start at playerPos.x - 400 to avoid initial jump
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
@@ -190,18 +190,21 @@ function About() {
         return prev + (targetX - prev) * 0.1;
       });
 
-      // Check nearest milestone
-      const closest = milestones.reduce((nearest, milestone) => {
-        const distance = Math.abs(playerPos.x - milestone.position);
-        if (!nearest || distance < nearest.distance) {
-          return { milestone, distance };
+      // Check nearest milestone with asymmetric detection
+      // Player should be "inside" milestone when 100px behind or 100px ahead
+      let foundMilestone = null;
+      for (const milestone of milestones) {
+        const distanceFromMilestone = playerPos.x - milestone.position;
+        // Check if player is within range: -100 (behind) to +100 (ahead)
+        if (distanceFromMilestone >= -100 && distanceFromMilestone <= 100) {
+          foundMilestone = milestone;
+          break;
         }
-        return nearest;
-      }, null);
+      }
 
-      if (closest && closest.distance < 150) {
-        setNearestMilestone(closest.milestone);
-        previousMilestoneRef.current = closest.milestone;
+      if (foundMilestone) {
+        setNearestMilestone(foundMilestone);
+        previousMilestoneRef.current = foundMilestone;
       } else {
         // Leaving a milestone - show cd .. notification
         if (previousMilestoneRef.current && nearestMilestone) {
