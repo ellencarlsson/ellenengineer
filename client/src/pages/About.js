@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Hero.css';
 import '../styles/About.css';
+import PlayerAvatar from '../components/PlayerAvatar';
 
 function About() {
   const [playerPos, setPlayerPos] = useState({ x: 130, y: 400 });
@@ -278,21 +279,13 @@ function About() {
 
           {/* Player */}
           <div
-            className={`player ${isWalking ? 'walking' : ''}`}
+            className="player"
             style={{
               left: `${playerPos.x}px`,
-              bottom: `${60 + (400 - playerPos.y)}px`
+              bottom: `${41 + (400 - playerPos.y)}px`
             }}
           >
-            <div className="player-head"></div>
-            <div className="player-body">
-              <div className="player-arm player-arm-left"></div>
-              <div className="player-arm player-arm-right"></div>
-            </div>
-            <div className="player-legs">
-              <div className="player-leg player-leg-left"></div>
-              <div className="player-leg player-leg-right"></div>
-            </div>
+            <PlayerAvatar isWalking={isWalking} />
           </div>
         </div>
       </div>
