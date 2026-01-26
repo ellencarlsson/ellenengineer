@@ -1,0 +1,46 @@
+.soldier {
+  display: block;
+}
+
+/* Arm animations */
+.soldier.walking .arm-left {
+  animation: swingArmLeft 0.4s infinite;
+  transform-origin: 68px 95px;
+}
+
+.soldier.walking .arm-right {
+  animation: swingArmRight 0.4s infinite;
+  transform-origin: 132px 95px;
+}
+
+@keyframes swingArmLeft {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes swingArmRight {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+/* Leg animations */
+.soldier.walking .leg-left {
+  animation: swingLegLeft 0.4s infinite;
+  transform-origin: 92px 155px;
+}
+
+.soldier.walking .leg-right {
+  animation: swingLegRight 0.4s infinite;
+  transform-origin: 108px 155px;
+}
+
+@keyframes swingLegLeft {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes swingLegRight {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+}
+

@@ -1,57 +1,103 @@
 import React, { useState, useEffect, useRef } from 'react';
+import '../styles/Hero.css';
 import '../styles/About.css';
+import PlayerAvatar from '../components/PlayerAvatar';
 
 function About() {
-  const [playerPos, setPlayerPos] = useState({ x: 2500, y: 400 });
-  const [cameraX, setCameraX] = useState(2500);
+  const [playerPos, setPlayerPos] = useState({ x: 130, y: 400 });
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [isWalking, setIsWalking] = useState(false);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
   const previousMilestoneRef = useRef(null);
   const terminalLinesRef = useRef([]);
 
-  const milestones = [
-    {
-      year: 2002,
-      position: 500,
-      directory: '2002_born/',
-      location: 'öxnevalla',
-      description: 'Född i Öxnevalla'
-    },
-    {
-      year: 2021,
-      position: 1000,
-      directory: '2021_studies/',
-      location: 'jönköping',
-      description: 'Började studera Datateknik vid Jönköping University'
-    },
-    {
-      year: 2024,
-      position: 1500,
-      directory: '2024_projects/',
-      location: 'jönköping',
-      description: 'Utvecklade flera projekt inom mobilutveckling'
-    },
-    {
-      year: 2025,
-      position: 2000,
-      directory: '2025_military/',
-      location: 'halmstad',
-      description: 'Påbörjade 15 månaders värnplikt i Halmstad'
-    },
-    {
-      year: 2026,
-      position: 2500,
-      directory: '2026_next/',
-      location: '?',
-      description: 'Nästa kapitel...'
-    }
-  ];
+  // Calculate positions dynamically based on screen width
+  const getMilestones = () => {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const leftMargin = 80;
+    const rightMargin = screenWidth * 0.2; // Use half the screen for spacing
+    const availableWidth = screenWidth - leftMargin - rightMargin;
+    const spacing = availableWidth / 9; // 10 milestones = 9 gaps
+
+    return [
+      {
+        year: 2002,
+        position: leftMargin,
+        directory: '2002_born/',
+        location: 'Öxnevalla',
+        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.'
+      },
+      {
+        year: 2021,
+        position: leftMargin + spacing,
+        directory: '2021_studies/',
+        location: 'Jönköping',
+        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.'
+      },
+      {
+        year: 2022,
+        position: leftMargin + spacing * 2,
+        directory: '2022_programming/',
+        location: 'Jönköping',
+        description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 3,
+        directory: '2023_projects/',
+        location: 'Jönköping',
+        description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor.'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 4,
+        directory: '2023_landlord/',
+        location: 'Jönköping',
+        description: 'Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster.'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 5,
+        directory: '2023_saab/',
+        location: 'Linköping',
+        description: 'Hade min praktik på SAAB, Training & Simulation, och arbetade även där som sommarjobbare.'
+      },
+      {
+        year: 2024,
+        position: leftMargin + spacing * 6,
+        directory: '2024_projects/',
+        location: 'Jönköping',
+        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa.'
+      },
+      {
+        year: 2024,
+        position: leftMargin + spacing * 7,
+        directory: '2024_military_interest/',
+        location: 'Jönköping',
+        description: 'Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten."'
+      },
+      {
+        year: 2025,
+        position: leftMargin + spacing * 8,
+        directory: '2025_military/',
+        location: 'Halmstad',
+        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.'
+      },
+      {
+        year: 2026,
+        position: leftMargin + spacing * 9,
+        directory: '2026_next/',
+        location: '?',
+        description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
+      }
+    ];
+  };
+
+  const milestones = getMilestones();
 
   const GROUND_Y = 400;
   const GRAVITY = 0.8;
@@ -64,21 +110,20 @@ function About() {
 
     if (leavingMilestone && !nearestMilestone) {
       // Leaving a directory
-      lines.push({ type: 'command', text: `~/ellen-life/${leavingMilestone.year}$ cd ..` });
-      lines.push({ type: 'output', text: `~/ellen-life$` });
+      lines.push({ type: 'command', text: `cd ..` });
     } else if (nearestMilestone) {
-      // Entering and reading a directory
-      lines.push({ type: 'command', text: `~/ellen-life$ cd ${nearestMilestone.year}` });
-      lines.push({ type: 'command', text: `~/ellen-life/${nearestMilestone.year}$ cat README.md` });
-      lines.push({ type: 'output', text: '' });
+      // Show README content
+      lines.push({ type: 'command', text: `ellen@life:~$ cd ${nearestMilestone.year}` });
+      lines.push({ type: 'command', text: `ellen@life:~/${nearestMilestone.year}$ cat README.md` });
+      lines.push({ type: 'output', text: ' ' });
       lines.push({ type: 'output', text: `Year: ${nearestMilestone.year}` });
       lines.push({ type: 'output', text: `Location: ${nearestMilestone.location}` });
-      lines.push({ type: 'output', text: `Description: ${nearestMilestone.description}` });
-      lines.push({ type: 'output', text: '' });
-      lines.push({ type: 'output', text: `~/ellen-life/${nearestMilestone.year}$` });
+      lines.push({ type: 'output', text: ' ' });
+      lines.push({ type: 'output', text: 'Description:' });
+      lines.push({ type: 'output', text: nearestMilestone.description });
     } else {
       // Base directory
-      lines.push({ type: 'output', text: '~/ellen-life$' });
+      lines.push({ type: 'output', text: '' });
     }
 
     return lines;
@@ -88,39 +133,9 @@ function About() {
   useEffect(() => {
     const newLines = getTerminalLines();
     terminalLinesRef.current = newLines;
-    setDisplayedText('');
-    setCurrentLineIndex(0);
-    setCurrentCharIndex(0);
+    // Display text immediately without typewriter effect
+    setDisplayedText(newLines.map(line => line.text).join('\n'));
   }, [nearestMilestone, leavingMilestone]);
-
-  // Typewriter effect
-  useEffect(() => {
-    const lines = terminalLinesRef.current;
-
-    if (currentLineIndex >= lines.length) {
-      return;
-    }
-
-    const currentLine = lines[currentLineIndex];
-    const delay = currentLine.type === 'command' ? 20 : 10; // Very fast typing
-
-    if (currentCharIndex < currentLine.text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + currentLine.text[currentCharIndex]);
-        setCurrentCharIndex(prev => prev + 1);
-      }, delay);
-
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + '\n');
-        setCurrentLineIndex(prev => prev + 1);
-        setCurrentCharIndex(0);
-      }, 50); // Short pause between lines
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentCharIndex, currentLineIndex]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -156,17 +171,23 @@ function About() {
       setPlayerPos(prev => {
         let newX = prev.x;
         let newY = prev.y;
+        let moving = false;
 
         // Horizontal movement
         if (keysRef.current['a'] || keysRef.current['arrowleft']) {
           newX -= MOVE_SPEED;
+          moving = true;
         }
         if (keysRef.current['d'] || keysRef.current['arrowright']) {
           newX += MOVE_SPEED;
+          moving = true;
         }
 
-        // Keep player in bounds
-        newX = Math.max(100, Math.min(3000, newX));
+        setIsWalking(moving);
+
+        // Keep player in bounds (within screen width)
+        const screenWidth = window.innerWidth;
+        newX = Math.max(50, Math.min(screenWidth - 50, newX));
 
         // Apply gravity
         velocityRef.current.y += GRAVITY;
@@ -184,24 +205,21 @@ function About() {
         return { x: newX, y: newY };
       });
 
-      // Smooth camera follow
-      setCameraX(prev => {
-        const targetX = playerPos.x - 400;
-        return prev + (targetX - prev) * 0.1;
-      });
-
-      // Check nearest milestone
-      const closest = milestones.reduce((nearest, milestone) => {
-        const distance = Math.abs(playerPos.x - milestone.position);
-        if (!nearest || distance < nearest.distance) {
-          return { milestone, distance };
+      // Check nearest milestone with detection range
+      // Player should be "inside" milestone when 50px behind or 50px ahead
+      let foundMilestone = null;
+      for (const milestone of milestones) {
+        const distanceFromMilestone = playerPos.x - milestone.position;
+        // Check if player is within range: -50 (behind) to +50 (ahead)
+        if (distanceFromMilestone >= -50 && distanceFromMilestone <= 50) {
+          foundMilestone = milestone;
+          break;
         }
-        return nearest;
-      }, null);
+      }
 
-      if (closest && closest.distance < 150) {
-        setNearestMilestone(closest.milestone);
-        previousMilestoneRef.current = closest.milestone;
+      if (foundMilestone) {
+        setNearestMilestone(foundMilestone);
+        previousMilestoneRef.current = foundMilestone;
       } else {
         // Leaving a milestone - show cd .. notification
         if (previousMilestoneRef.current && nearestMilestone) {
@@ -218,10 +236,8 @@ function About() {
 
   return (
     <section id="about" className="about-game">
-      <div className="game-container">
-        <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
-          {/* Terminal Window - Always visible */}
-          <div className="terminal-window-about" style={{ left: `${cameraX + (window.innerWidth / 2)}px` }}>
+      {/* Terminal Window - Fixed, always centered */}
+      <div className="terminal-window terminal-window--game">
             <div className="terminal-header">
               <div className="terminal-buttons">
                 <span className="terminal-button close"></span>
@@ -261,20 +277,21 @@ function About() {
             </div>
           </div>
 
-          {/* Ground */}
+      {/* Game World - Static, full screen */}
+      <div className="game-world-container">
+        <div className="game-world">
+          {/* Ground line */}
           <div className="ground"></div>
 
-          {/* Milestones - small markers */}
+          {/* Milestones - Folder icons */}
           {milestones.map((milestone, index) => (
             <div
               key={index}
               className={`milestone ${nearestMilestone === milestone ? 'active' : ''}`}
               style={{ left: `${milestone.position}px` }}
             >
-              <div className="milestone-marker">
-                <div className="marker-icon">📁</div>
-                <div className="marker-year">{milestone.year}</div>
-              </div>
+              <div className="folder-icon">📁</div>
+              <div className="folder-label">/{milestone.year}</div>
             </div>
           ))}
 
@@ -283,12 +300,10 @@ function About() {
             className="player"
             style={{
               left: `${playerPos.x}px`,
-              bottom: `${600 - playerPos.y}px`
+              bottom: `${41 + (400 - playerPos.y)}px`
             }}
           >
-            <div className="player-head"></div>
-            <div className="player-body"></div>
-            <div className="player-legs"></div>
+            <PlayerAvatar isWalking={isWalking} />
           </div>
         </div>
       </div>
