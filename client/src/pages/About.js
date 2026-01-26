@@ -7,6 +7,7 @@ function About() {
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
+  const [isWalking, setIsWalking] = useState(false);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
@@ -26,36 +27,41 @@ function About() {
         year: 2002,
         position: leftMargin,
         directory: '2002_born/',
-        location: 'öxnevalla',
-        description: 'Född i Öxnevalla'
+        location: 'Öxnevalla',
+        description: 'Född i Öxnevalla.',
+        status: 'Completed'
       },
       {
         year: 2021,
         position: leftMargin + spacing,
         directory: '2021_studies/',
-        location: 'jönköping',
-        description: 'Började studera Datateknik vid Jönköping University'
+        location: 'Jönköping',
+        description: 'Började studera datateknik vid Jönköping University.\nFokus på programmering och systemutveckling.',
+        status: 'Completed'
       },
       {
         year: 2024,
         position: leftMargin + spacing * 2,
         directory: '2024_projects/',
-        location: 'jönköping',
-        description: 'Utvecklade flera projekt inom mobilutveckling'
+        location: 'Jönköping',
+        description: 'Studerade datateknik med inriktning mot mjukvaruutveckling\nför mobila plattformar. Utvecklade flera projekt inom iOS\noch Android med fokus på användarupplevelse och struktur.',
+        status: 'Completed'
       },
       {
         year: 2025,
         position: leftMargin + spacing * 3,
         directory: '2025_military/',
-        location: 'halmstad',
-        description: 'Påbörjade 15 månaders värnplikt i Halmstad'
+        location: 'Halmstad',
+        description: 'Påbörjade 15 månaders värnplikt i Halmstad.',
+        status: 'In Progress'
       },
       {
         year: 2026,
         position: leftMargin + spacing * 4,
         directory: '2026_next/',
         location: '?',
-        description: 'Nästa kapitel...'
+        description: 'Nästa kapitel...',
+        status: 'Upcoming'
       }
     ];
   };
@@ -75,8 +81,19 @@ function About() {
       // Leaving a directory
       lines.push({ type: 'command', text: `cd ..` });
     } else if (nearestMilestone) {
-      // Show year
-      lines.push({ type: 'output', text: `${nearestMilestone.year}` });
+      // Show README content
+      lines.push({ type: 'command', text: `ellen@life:~$ cd ${nearestMilestone.year}` });
+      lines.push({ type: 'command', text: `ellen@life:~/${nearestMilestone.year}$ cat README.md` });
+      lines.push({ type: 'output', text: ' ' });
+      lines.push({ type: 'output', text: `Year: ${nearestMilestone.year}` });
+      lines.push({ type: 'output', text: `Location: ${nearestMilestone.location}` });
+      lines.push({ type: 'output', text: ' ' });
+      lines.push({ type: 'output', text: 'Description:' });
+      lines.push({ type: 'output', text: nearestMilestone.description });
+      lines.push({ type: 'output', text: ' ' });
+      lines.push({ type: 'status', text: `Status: ${nearestMilestone.status || 'Completed'}`, status: nearestMilestone.status });
+      lines.push({ type: 'output', text: ' ' });
+      lines.push({ type: 'output', text: `ellen@life:~/${nearestMilestone.year}$` });
     } else {
       // Base directory
       lines.push({ type: 'output', text: '~/ellen-life$' });
@@ -127,14 +144,19 @@ function About() {
       setPlayerPos(prev => {
         let newX = prev.x;
         let newY = prev.y;
+        let moving = false;
 
         // Horizontal movement
         if (keysRef.current['a'] || keysRef.current['arrowleft']) {
           newX -= MOVE_SPEED;
+          moving = true;
         }
         if (keysRef.current['d'] || keysRef.current['arrowright']) {
           newX += MOVE_SPEED;
+          moving = true;
         }
+
+        setIsWalking(moving);
 
         // Keep player in bounds (within screen width)
         const screenWidth = window.innerWidth;
@@ -216,9 +238,17 @@ function About() {
                   {displayedText.split('\n').map((line, index) => {
                     const lineData = terminalLinesRef.current.find(l => l.text === line.trim());
                     const lineType = lineData ? lineData.type : 'output';
+                    const statusValue = lineData?.status;
+
+                    let statusClass = '';
+                    if (lineType === 'status') {
+                      if (statusValue === 'Completed') statusClass = 'status-completed';
+                      else if (statusValue === 'In Progress') statusClass = 'status-progress';
+                      else if (statusValue === 'Upcoming') statusClass = 'status-upcoming';
+                    }
 
                     return (
-                      <div key={index} className={`terminal-line ${lineType}`}>
+                      <div key={index} className={`terminal-line ${lineType} ${statusClass}`}>
                         {line}
                       </div>
                     );
@@ -248,15 +278,21 @@ function About() {
 
           {/* Player */}
           <div
-            className="player"
+            className={`player ${isWalking ? 'walking' : ''}`}
             style={{
               left: `${playerPos.x}px`,
               bottom: `${60 + (400 - playerPos.y)}px`
             }}
           >
             <div className="player-head"></div>
-            <div className="player-body"></div>
-            <div className="player-legs"></div>
+            <div className="player-body">
+              <div className="player-arm player-arm-left"></div>
+              <div className="player-arm player-arm-right"></div>
+            </div>
+            <div className="player-legs">
+              <div className="player-leg player-leg-left"></div>
+              <div className="player-leg player-leg-right"></div>
+            </div>
           </div>
         </div>
       </div>

@@ -29,6 +29,19 @@
   max-height: 500px;
 }
 
+/* Status colors */
+.terminal-line.status-completed {
+  color: #4ec9b0;
+}
+
+.terminal-line.status-progress {
+  color: #dcdcaa;
+}
+
+.terminal-line.status-upcoming {
+  color: #569cd6;
+}
+
 /* Game World Container - Below terminal */
 .game-world-container {
   position: relative;
@@ -159,22 +172,21 @@
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Blonde hair */
+/* Blonde hair on top */
 .player-head::before {
   content: '';
   position: absolute;
-  top: -8px;
+  top: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 36px;
-  height: 20px;
-  background: #F5DEB3;
-  border-radius: 50% 50% 0 0;
+  width: 30px;
+  height: 16px;
+  background: #E8D4A0;
+  border-radius: 50% 50% 40% 40%;
   border: 2px solid #3D2616;
-  border-bottom: none;
 }
 
-/* Eyes */
+/* Eyes and small ponytail */
 .player-head::after {
   content: '';
   position: absolute;
@@ -184,13 +196,16 @@
   height: 4px;
   background: #3D2616;
   border-radius: 50%;
-  box-shadow: 12px 0 0 #3D2616;
+  box-shadow:
+    12px 0 0 #3D2616,
+    16px -12px 0 5px #E8D4A0,
+    16px -6px 0 4px #E8D4A0;
 }
 
 .player-body {
   width: 24px;
   height: 28px;
-  background: #569cd6;
+  background: #4a5f3a;
   position: absolute;
   top: 32px;
   left: 50%;
@@ -199,17 +214,92 @@
   border: 2px solid #3D2616;
 }
 
+/* Arms */
+.player-arm {
+  width: 6px;
+  height: 18px;
+  background: #4a5f3a;
+  border: 2px solid #3D2616;
+  border-radius: 3px;
+  position: absolute;
+  top: 2px;
+  transform-origin: top center;
+}
+
+.player-arm-left {
+  left: -8px;
+}
+
+.player-arm-right {
+  right: -8px;
+}
+
+/* Arms swing when walking */
+.player.walking .player-arm-left {
+  animation: swingArmLeft 0.4s infinite;
+}
+
+.player.walking .player-arm-right {
+  animation: swingArmRight 0.4s infinite;
+}
+
+@keyframes swingArmLeft {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes swingArmRight {
+  0%, 100% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+/* Legs container */
 .player-legs {
   width: 20px;
   height: 20px;
-  background: #4ec9b0;
   position: absolute;
   top: 58px;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 0 0 4px 4px;
+}
+
+/* Individual legs */
+.player-leg {
+  width: 8px;
+  height: 20px;
+  background: #3d4d2f;
   border: 2px solid #3D2616;
-  border-top: none;
+  border-radius: 0 0 3px 3px;
+  position: absolute;
+  bottom: 0;
+  transform-origin: top center;
+}
+
+.player-leg-left {
+  left: 0;
+}
+
+.player-leg-right {
+  right: 0;
+}
+
+/* Legs move when walking */
+.player.walking .player-leg-left {
+  animation: walkLegLeft 0.4s infinite;
+}
+
+.player.walking .player-leg-right {
+  animation: walkLegRight 0.4s infinite;
+}
+
+@keyframes walkLegLeft {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes walkLegRight {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
 }
 
 /* Responsive */
