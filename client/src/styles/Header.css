@@ -1,9 +1,14 @@
 .header {
   background: transparent;
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0;
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
 }
 
 .header-container {
@@ -12,7 +17,7 @@
   padding: 0 var(--spacing-md);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-md);
 }
 
@@ -41,6 +46,9 @@
   padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--radius-pill);
   transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
 }
 
 .nav-link:hover {
@@ -60,6 +68,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
 }
 
 .header-title {
@@ -78,15 +87,40 @@
 }
 
 .name-first {
-  font-family: 'Kavoon', cursive;
+  /*font-family: 'Kavoon', cursive;
   font-style: normal;
-  font-weight: 400;
-  font-size: 96px;
+  font-weight: 400;*/
+  font-size: 70px;
   line-height: 112px;
   color: #3D2616;
   display: block;
   margin: 0;
   text-align: center;
+}
+
+.header-subtitle {
+  font-family: 'Cabin Sketch', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 37px;
+  color: #3D2616;
+  margin: 0;
+  margin-top: 0px;
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.name-last {
+  /*font-family: 'Kavoon', cursive;
+  font-style: normal;
+  font-weight: 400;*/
+  font-size: 70px;
+  line-height: 75px;
+  color: #3D2616;
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 0px;
 }
 
 .title-row {
@@ -95,19 +129,7 @@
   justify-content: center;
   gap: 8px;
   flex-wrap: nowrap;
-  margin-top: -40px;
-}
-
-.name-last {
-  font-family: 'Kavoon', cursive;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 75px;
-  color: #3D2616;
-  display: inline-block;
-  margin: 0;
-  padding-top: 10px;
+  margin-top: -35px;
 }
 
 /* Glitch Effect */
@@ -163,18 +185,6 @@
   }
 }
 
-.header-subtitle {
-  font-family: 'Della Respira', serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 37px;
-  color: #3D2616;
-  margin: 0;
-  margin-top: 20px;
-  display: inline-block;
-}
-
 /* Right side - CV + Contact */
 .header-right {
   display: flex;
@@ -188,6 +198,9 @@
   padding: var(--spacing-xs);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  min-height: 40px;
 }
 
 @media (max-width: 768px) {

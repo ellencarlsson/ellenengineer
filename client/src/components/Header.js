@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.css';
 
 function Header() {
+  const [isHidden, setIsHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 100) {
+        // Past threshold, hide header
+        setIsHidden(true);
+      } else {
+        // Near top, show header
+        setIsHidden(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <header className="header">
+    <header className={`header ${isHidden ? 'header-hidden' : ''}`}>
       <div className="header-container">
         <div className="header-left">
           <NavLink to="/" className="nav-link">EC</NavLink>

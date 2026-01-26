@@ -8,6 +8,7 @@ function Hero() {
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
+  const [skippedByUser, setSkippedByUser] = useState(false);
 
   const terminalLines = [
     { type: 'command', text: '$ whoami' },
@@ -27,6 +28,7 @@ function Hero() {
     setDisplayedText(fullText);
     setCurrentLineIndex(terminalLines.length);
     setIsComplete(true);
+    setSkippedByUser(true);
   };
 
   // Listen for Enter key
@@ -122,11 +124,9 @@ function Hero() {
           </div>
         </div>
 
-        {!isComplete && (
-          <div className="terminal-hint">
-            <span className="hint-key">Enter</span> för att hoppa över animationen
-          </div>
-        )}
+        <div className={`terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
+          <span className="hint-key">Enter</span> för att hoppa över animationen
+        </div>
       </div>
     </section>
   );
