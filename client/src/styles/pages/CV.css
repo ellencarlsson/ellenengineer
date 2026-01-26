@@ -1,0 +1,232 @@
+.cv-page {
+  min-height: 85vh;
+  padding: var(--spacing-xl) var(--spacing-md);
+  animation: fadeIn var(--transition-slow);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.cv-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* CV Header */
+.cv-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.cv-title {
+  font-family: 'Courier New', monospace;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #3d2617;
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 2px 2px 0 rgba(61, 38, 23, 0.1);
+}
+
+.cv-subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #6b5344;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* CV Viewer Box */
+.cv-viewer-box {
+  border: 1px solid #8b6f47;
+  border-radius: 8px;
+  background: rgba(245, 240, 235, 0.3);
+  overflow: hidden;
+  animation: fadeInUp 1s ease-out;
+}
+
+.cv-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: transparent;
+  border-bottom: 1px solid rgba(139, 111, 71, 0.3);
+}
+
+.cv-viewer-title-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cv-icon {
+  width: 20px;
+  height: 20px;
+  color: #3d2617;
+  flex-shrink: 0;
+}
+
+.cv-viewer-label {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3d2617;
+  letter-spacing: 0.5px;
+}
+
+.open-cv-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d2617;
+  background: transparent;
+  border: 1px solid #8b6f47;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.open-cv-button:hover {
+  background: rgba(139, 111, 71, 0.1);
+  transform: translateY(-1px);
+}
+
+.external-icon {
+  width: 16px;
+  height: 16px;
+  color: #3d2617;
+}
+
+/* CV Preview */
+.cv-preview {
+  width: 100%;
+  height: 1400px;
+  background: #e5ddd3;
+  border-bottom: 1px solid rgba(139, 111, 71, 0.3);
+}
+
+.cv-pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* CV Actions */
+.cv-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: 20px;
+  justify-content: center;
+}
+
+.cv-action-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.cv-action-button.primary {
+  background: linear-gradient(135deg, #3d6b60 0%, #2d5348 100%);
+  color: #f5f0eb;
+  border: 2px solid #2d5348;
+}
+
+.cv-action-button.primary:hover {
+  background: linear-gradient(135deg, #4a7f72 0%, #3d6b60 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(61, 107, 96, 0.3);
+}
+
+.cv-action-button.primary .button-icon {
+  color: #f5f0eb;
+}
+
+.cv-action-button.secondary {
+  background: transparent;
+  color: #3d2617;
+  border: 2px solid #8b6f47;
+}
+
+.cv-action-button.secondary:hover {
+  background: rgba(139, 111, 71, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 111, 71, 0.2);
+}
+
+.cv-action-button.secondary .button-icon {
+  color: #3d2617;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .cv-page {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    padding-top: 100px;
+  }
+
+  .cv-title {
+    font-size: 36px;
+  }
+
+  .cv-preview {
+    height: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cv-title {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+
+  .cv-subtitle {
+    font-size: 12px;
+  }
+
+  .cv-viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cv-preview {
+    height: 800px;
+  }
+
+  .cv-actions {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .cv-action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .open-cv-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

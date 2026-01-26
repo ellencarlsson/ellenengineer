@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import CV from './pages/CV';
 import Contact from './pages/Contact';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
+            <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
