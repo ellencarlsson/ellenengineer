@@ -1,0 +1,290 @@
+.robot-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideInLeft 1s ease-out;
+}
+
+/* Robot */
+.robot {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Head */
+.robot-head {
+  position: relative;
+  width: 120px;
+  height: 100px;
+  background: linear-gradient(135deg, #8b6f47 0%, #6d5638 100%);
+  border-radius: 20px;
+  margin: 0 auto;
+  box-shadow:
+    inset -5px -5px 10px rgba(0, 0, 0, 0.3),
+    inset 5px 5px 10px rgba(255, 255, 255, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Antenna */
+.antenna {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(180deg, #8b6f47 0%, #6d5638 100%);
+  animation: antennaWave 2s ease-in-out infinite;
+}
+
+@keyframes antennaWave {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  75% {
+    transform: translateX(-50%) rotate(10deg);
+  }
+}
+
+.antenna-ball {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}
+
+/* Eyes */
+.eyes {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+}
+
+.eye {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle at 40% 40%, #e8f4f8, #b8d4dc);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 2px 4px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.pupil {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle at 30% 30%, #1a1a1a, #000);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: lookAround 4s ease-in-out infinite;
+}
+
+@keyframes lookAround {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(-70%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -50%);
+  }
+  75% {
+    transform: translate(-30%, -50%);
+  }
+}
+
+/* Mouth */
+.mouth {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  background: #3d2616;
+  border-radius: 0 0 20px 20px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Body */
+.robot-body {
+  position: relative;
+  width: 140px;
+  height: 120px;
+  background: linear-gradient(135deg, #8b6f47 0%, #6d5638 100%);
+  border-radius: 20px 20px 10px 10px;
+  margin: 10px auto 0;
+  box-shadow:
+    inset -5px -5px 15px rgba(0, 0, 0, 0.3),
+    inset 5px 5px 15px rgba(255, 255, 255, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.chest-panel {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #6d5638 0%, #4a3a24 100%);
+  border-radius: 10px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #4ecdc4, #2a9d8f);
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px rgba(78, 205, 196, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+/* Arms */
+.arm {
+  position: absolute;
+  width: 20px;
+  height: 80px;
+  background: linear-gradient(180deg, #8b6f47 0%, #6d5638 100%);
+  border-radius: 10px;
+  box-shadow:
+    inset -2px -2px 5px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.left-arm {
+  top: 20px;
+  left: -25px;
+  animation: waveLeft 3s ease-in-out infinite;
+}
+
+.right-arm {
+  top: 20px;
+  right: -25px;
+  animation: waveRight 3s ease-in-out infinite;
+}
+
+@keyframes waveLeft {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes waveRight {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+.hand {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #6d5638 0%, #4a3a24 100%);
+  border-radius: 50%;
+  box-shadow:
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Legs */
+.robot-legs {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.leg {
+  width: 30px;
+  height: 50px;
+  background: linear-gradient(180deg, #8b6f47 0%, #6d5638 100%);
+  border-radius: 10px;
+  box-shadow:
+    inset -2px -2px 5px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.foot {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 16px;
+  background: linear-gradient(135deg, #6d5638 0%, #4a3a24 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 968px) {
+  .robot {
+    transform: scale(0.8);
+  }
+}

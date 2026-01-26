@@ -1,0 +1,78 @@
+/* Brown & Rose Theme - Inspired by Mason Wong */
+:root {
+  /* Primära färger - Beige & Bruna toner */
+  --primary-beige: #c9b5a0;
+  --primary-sand: #d4c4b0;
+  --primary-brown: #8b6f47;
+  --primary-dark-brown: #3d2617;
+
+  /* Accent färger - Rosa & Bruna */
+  --accent-rose: #e8a5a5;
+  --accent-pink: #d4949d;
+  --accent-mauve: #b08b8f;
+  --accent-burgundy: #8b4a4f;
+
+  /* Text färger */
+  --text-dark: #3d2617;
+  --text-medium: #6b5344;
+  --text-light: #9d8776;
+  --text-white: #ffffff;
+
+  /* Bakgrunder */
+  --background-beige: #c9b5a0;
+  --background-light: #e5ddd3;
+  --background-white: #ffffff;
+  --background-cream: #f5f0eb;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(61, 38, 23, 0.1);
+  --shadow-md: 0 4px 16px rgba(61, 38, 23, 0.15);
+  --shadow-lg: 0 8px 24px rgba(61, 38, 23, 0.2);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 5rem;
+
+  /* Typography */
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 3rem;
+  --font-size-hero: 5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
+  --radius-circle: 50%;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Max widths */
+  --max-width-sm: 600px;
+  --max-width-md: 800px;
+  --max-width-lg: 1200px;
+  --max-width-xl: 1400px;
+
+  /* Blur for glassmorphism */
+  --blur-sm: 10px;
+  --blur-md: 20px;
+}

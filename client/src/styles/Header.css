@@ -1,0 +1,238 @@
+.header {
+  background: transparent;
+  padding: var(--spacing-sm) 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+.header-container {
+  max-width: var(--max-width-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Left side - Initials + Navigation */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--background-white);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.nav-link {
+  color: var(--text-medium);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.nav-link:hover {
+  color: var(--text-dark);
+  background: var(--background-cream);
+}
+
+.nav-link.active {
+  color: var(--text-dark);
+  background: var(--background-cream);
+}
+
+/* Center - Title */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.header-title h1 {
+  font-family: 'Cabin Sketch', cursive;
+  font-style: normal;
+  font-weight: 700;
+  color: #3D2616;
+  margin: 0;
+}
+
+.name-first {
+  /*font-family: 'Kavoon', cursive;
+  font-style: normal;
+  font-weight: 400;*/
+  font-size: 70px;
+  line-height: 112px;
+  color: #3D2616;
+  display: block;
+  margin: 0;
+  text-align: center;
+}
+
+.header-subtitle {
+  font-family: 'Cabin Sketch', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 37px;
+  color: #3D2616;
+  margin: 0;
+  margin-top: 0px;
+  margin-left: 100px;
+  display: inline-block;
+}
+
+.name-last {
+  /*font-family: 'Kavoon', cursive;
+  font-style: normal;
+  font-weight: 400;*/
+  font-size: 70px;
+  line-height: 75px;
+  color: #3D2616;
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 0px;
+}
+
+.title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-top: -35px;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch::before {
+  animation: glitch-before 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  color: var(--accent-burgundy);
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-after 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  color: var(--accent-rose);
+  z-index: -2;
+}
+
+@keyframes glitch-before {
+  0%, 96%, 100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  97% {
+    opacity: 0.7;
+    transform: translate(-2px, -1px);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+}
+
+@keyframes glitch-after {
+  0%, 96%, 100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  98% {
+    opacity: 0.7;
+    transform: translate(2px, 1px);
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  }
+}
+
+/* Right side - CV + Contact */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.nav-pill {
+  background: var(--background-white);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 var(--spacing-sm);
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .name-first {
+    font-size: 56px;
+    line-height: 65px;
+    margin-bottom: -20px;
+  }
+
+  .name-last {
+    font-size: 40px;
+    line-height: 47px;
+  }
+
+  .header-subtitle {
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  .title-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
