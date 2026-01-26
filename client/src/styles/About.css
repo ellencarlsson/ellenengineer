@@ -1,12 +1,5 @@
 .about-game {
-  background: linear-gradient(to bottom,
-    #F5E6D3 0%,
-    #D4C5B3 15%,
-    #8B7355 30%,
-    #3D2616 50%,
-    #2d2d2d 70%,
-    #1e1e1e 100%
-  );
+  background: transparent;
   min-height: 100vh;
   overflow: hidden;
   position: relative;
@@ -234,34 +227,20 @@
   will-change: transform;
 }
 
-/* Ground - Terminal Grid */
+/* Ground - Subtle line */
 .ground {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
-  background: linear-gradient(to bottom, #1e1e1e 0%, #252525 100%);
-  border-top: 2px solid #4ec9b0;
-  box-shadow: 0 -4px 20px rgba(78, 201, 176, 0.2);
-}
-
-.ground::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(78, 201, 176, 0.15) 19px, rgba(78, 201, 176, 0.15) 20px),
-    repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(78, 201, 176, 0.15) 19px, rgba(78, 201, 176, 0.15) 20px);
+  height: 2px;
+  background: rgba(78, 201, 176, 0.2);
 }
 
 /* Milestone Markers - Small and Discrete */
 .milestone {
   position: absolute;
-  bottom: 200px;
+  bottom: 10px;
   transform: translateX(-50%);
   z-index: 10;
   transition: transform 0.3s ease;
@@ -387,7 +366,7 @@
   border-top: none;
 }
 
-/* Terminal atmosphere - gradient grid intensity */
+/* Subtle background grid */
 .about-game::before {
   content: '';
   position: fixed;
@@ -396,13 +375,8 @@
   width: 100%;
   height: 100%;
   background-image:
-    linear-gradient(to bottom,
-      rgba(78, 201, 176, 0) 0%,
-      rgba(78, 201, 176, 0.05) 50%,
-      rgba(78, 201, 176, 0.15) 100%
-    ),
-    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(78, 201, 176, 0.1) 39px, rgba(78, 201, 176, 0.1) 40px),
-    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(78, 201, 176, 0.1) 39px, rgba(78, 201, 176, 0.1) 40px);
+    repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(78, 201, 176, 0.03) 79px, rgba(78, 201, 176, 0.03) 80px),
+    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(78, 201, 176, 0.03) 79px, rgba(78, 201, 176, 0.03) 80px);
   pointer-events: none;
   z-index: 1;
 }

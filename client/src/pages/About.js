@@ -7,12 +7,16 @@ function About() {
   const [showInstructions, setShowInstructions] = useState(true);
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
   const lastMoveTimeRef = useRef(Date.now());
   const initialFadeTimerRef = useRef(null);
   const previousMilestoneRef = useRef(null);
+  const terminalLinesRef = useRef([]);
 
   const milestones = [
     {
@@ -83,7 +87,43 @@ function About() {
     return lines;
   };
 
-  const terminalLines = getTerminalLines();
+  // Update terminal lines when state changes
+  useEffect(() => {
+    const newLines = getTerminalLines();
+    terminalLinesRef.current = newLines;
+    setDisplayedText('');
+    setCurrentLineIndex(0);
+    setCurrentCharIndex(0);
+  }, [nearestMilestone, leavingMilestone]);
+
+  // Typewriter effect
+  useEffect(() => {
+    const lines = terminalLinesRef.current;
+
+    if (currentLineIndex >= lines.length) {
+      return;
+    }
+
+    const currentLine = lines[currentLineIndex];
+    const delay = currentLine.type === 'command' ? 20 : 10; // Very fast typing
+
+    if (currentCharIndex < currentLine.text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + currentLine.text[currentCharIndex]);
+        setCurrentCharIndex(prev => prev + 1);
+      }, delay);
+
+      return () => clearTimeout(timeout);
+    } else {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + '\n');
+        setCurrentLineIndex(prev => prev + 1);
+        setCurrentCharIndex(0);
+      }, 50); // Short pause between lines
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentCharIndex, currentLineIndex]);
 
   // Initial fade out after 3 seconds
   useEffect(() => {
@@ -225,41 +265,46 @@ function About() {
           <p>navigate --wasd --arrows | jump --space</p>
         </div>
 
-        {/* Terminal Window */}
+        {/* Terminal Window - Always visible */}
         <div className="terminal-window-about">
-          <div className="terminal-header">
-            <div className="terminal-buttons">
-              <span className="terminal-button close"></span>
-              <span className="terminal-button minimize"></span>
-              <span className="terminal-button maximize"></span>
+            <div className="terminal-header">
+              <div className="terminal-buttons">
+                <span className="terminal-button close"></span>
+                <span className="terminal-button minimize"></span>
+                <span className="terminal-button maximize"></span>
+              </div>
+              <div className="terminal-title">ellen@life:~/ellen-life</div>
+              <div className="terminal-tabs">
+                <div className="terminal-tab active">
+                  <span className="tab-icon">⚡</span>
+                  <span>terminal</span>
+                </div>
+              </div>
             </div>
-            <div className="terminal-title">ellen@life:~/ellen-life</div>
-            <div className="terminal-tabs">
-              <div className="terminal-tab active">
-                <span className="tab-icon">⚡</span>
-                <span>terminal</span>
+
+            <div className="terminal-body">
+              <div className="line-numbers">
+                {displayedText.split('\n').map((_, index) => (
+                  <div key={index} className="line-number">{index + 1}</div>
+                ))}
+              </div>
+
+              <div className="terminal-content">
+                <pre>
+                  {displayedText.split('\n').map((line, index) => {
+                    const lineData = terminalLinesRef.current.find(l => l.text === line.trim());
+                    const lineType = lineData ? lineData.type : 'output';
+
+                    return (
+                      <div key={index} className={`terminal-line ${lineType}`}>
+                        {line}
+                      </div>
+                    );
+                  })}
+                </pre>
               </div>
             </div>
           </div>
-
-          <div className="terminal-body">
-            <div className="line-numbers">
-              {terminalLines.map((_, index) => (
-                <div key={index} className="line-number">{index + 1}</div>
-              ))}
-            </div>
-
-            <div className="terminal-content">
-              <pre>
-                {terminalLines.map((line, index) => (
-                  <div key={index} className={`terminal-line ${line.type}`}>
-                    {line.text}
-                  </div>
-                ))}
-              </pre>
-            </div>
-          </div>
-        </div>
 
         <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
           {/* Ground */}
