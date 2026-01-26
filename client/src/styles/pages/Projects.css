@@ -1,65 +1,467 @@
 .projects-page {
-  min-height: 80vh;
+  min-height: 85vh;
   padding: var(--spacing-xl) var(--spacing-md);
   animation: fadeIn var(--transition-slow);
-  background: var(--gradient-primary);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120px;
 }
 
-.projects-container {
-  max-width: var(--max-width-lg);
-  margin: 0 auto;
+.drives-container {
+  max-width: 1200px;
+  width: 100%;
 }
 
-.page-title {
-  font-size: var(--font-size-hero);
-  background: var(--gradient-sunset);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: left;
-  margin-bottom: var(--spacing-lg);
-  animation: fadeInUp var(--transition-slow);
-  font-weight: var(--font-weight-bold);
-}
-
-.projects-placeholder {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--blur-sm));
-  border: 2px solid var(--glass-border);
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+/* Page Header */
+.page-header {
   text-align: center;
-  animation: fadeInUp var(--transition-slow);
-  transition: all var(--transition-normal);
+  margin-bottom: var(--spacing-xl);
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.projects-placeholder:hover {
-  border-color: var(--accent-coral);
-  box-shadow: var(--shadow-coral);
-  transform: translateY(-4px);
-}
-
-.projects-placeholder p {
-  font-size: var(--font-size-lg);
-  color: var(--text-medium);
-  line-height: var(--line-height-relaxed);
+.drives-title {
+  font-family: 'Courier New', monospace;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #3d2617;
   margin-bottom: var(--spacing-sm);
+  text-shadow: 2px 2px 0 rgba(61, 38, 23, 0.1);
 }
 
-.projects-placeholder p:first-child {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--accent-coral);
+.drives-subtitle {
+  font-family: 'SF Mono', 'Monaco', monospace;
+  font-size: 14px;
+  color: #6b5344;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Drives Grid */
+.drives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: var(--spacing-xl);
+  animation: fadeInUp 1s ease-out;
+}
+
+.drive-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Hard Drive Card */
+.hard-drive {
+  background: linear-gradient(135deg, #d4c4b0 0%, #b5a693 100%);
+  border: 3px solid #8b6f47;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.hard-drive:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hard-drive.mounted {
+  border-color: #3d6b60;
+  box-shadow:
+    0 8px 16px rgba(61, 107, 96, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Drive Top Panel */
+.drive-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(61, 38, 23, 0.2);
+}
+
+/* Screws */
+.drive-screws {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.screw {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b6f47 0%, #6b5344 100%);
+  border: 1px solid #3d2617;
+  position: relative;
+}
+
+.screw::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 1px;
+  background: #3d2617;
+}
+
+/* Brand */
+.drive-brand {
+  text-align: center;
+  flex: 1;
+  margin-left: 40px;
+}
+
+.brand-name {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #3d2617;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.model-number {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #6b5344;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* LED Indicator */
+.drive-led {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px currentColor,
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.led.green {
+  background: #28ca42;
+  color: #28ca42;
+}
+
+.led.blue {
+  background: #569cd6;
+  color: #569cd6;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.led-label {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  color: #3d2617;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Drive Preview */
+.drive-preview {
+  width: 100%;
+  height: 200px;
+  background: #e5ddd3;
+  border: 2px solid #8b6f47;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.drive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drive-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.placeholder-icon {
+  font-size: 64px;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.placeholder-text {
+  font-family: 'Courier New', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  color: #8b6f47;
+  opacity: 0.5;
+}
+
+/* Drive Label */
+.drive-label {
+  background: #f5f0eb;
+  border: 2px solid #8b6f47;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.label-text {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3d2617;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.label-barcode {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #3d2617;
+  letter-spacing: -1px;
+  opacity: 0.6;
+}
+
+/* Drive Specs */
+.drive-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.spec-label {
+  color: #6b5344;
+  font-weight: 600;
+}
+
+.spec-value {
+  color: #3d2617;
+  font-weight: 700;
+}
+
+/* Mount Hint */
+.drive-mount-hint {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: #3d6b60;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 6px;
+  background: rgba(61, 107, 96, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.hard-drive.mounted .drive-mount-hint {
+  background: rgba(61, 107, 96, 0.2);
+  color: #3d2617;
+}
+
+/* Drive Contents (Mounted) */
+.drive-contents {
+  background: rgba(245, 240, 235, 0.9);
+  border: 2px solid #3d6b60;
+  border-radius: 8px;
+  padding: 20px;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(61, 107, 96, 0.2);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contents-header {
+  border-bottom: 2px solid #3d6b60;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.contents-title {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3d2617;
+  margin-bottom: 4px;
+}
+
+.contents-path {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #6b5344;
+}
+
+.contents-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.content-file {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #3d6b60;
+  font-weight: 700;
+}
+
+.content-text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #3d2617;
+  line-height: 1.6;
+}
+
+.content-text strong {
+  font-size: 16px;
+  color: #3d2617;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.content-text p {
+  margin: 0;
+  color: #6b5344;
+}
+
+/* Tech Tags */
+.content-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3d2617;
+  background: #d4c4b0;
+  border: 1px solid #8b6f47;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Links */
+.content-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.content-link {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #3d6b60;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.content-link:hover {
+  color: #8b6f47;
+  border-bottom: 1px solid #8b6f47;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .projects-page {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    padding-top: 100px;
+  }
+
+  .drives-title {
+    font-size: 36px;
+  }
+
+  .drives-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
 }
 
 @media (max-width: 768px) {
-  .projects-page {
-    padding: var(--spacing-md) var(--spacing-sm);
+  .drives-title {
+    font-size: 28px;
+    letter-spacing: 2px;
   }
 
-  .page-title {
-    font-size: var(--font-size-xxl);
-    text-align: center;
+  .drives-subtitle {
+    font-size: 12px;
+  }
+
+  .hard-drive {
+    padding: 16px;
+  }
+
+  .drive-preview {
+    height: 160px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .drive-contents {
+    padding: 16px;
   }
 }
