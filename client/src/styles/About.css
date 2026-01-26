@@ -2,92 +2,99 @@
   background: transparent;
   min-height: 85vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: var(--spacing-xl) var(--spacing-md);
   position: relative;
   overflow: hidden;
 }
 
 
-/* Terminal Window - Game specific (only height override) */
+/* Terminal Window - Centered at top */
 .terminal-window--game {
-  /* No positioning - uses same layout as Hero */
+  max-width: 900px;
+  width: 100%;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: none;
+  animation: fadeInUp 0.8s ease-out;
+  margin-top: -50px;
 }
 
-/* Game terminal has shorter height */
+/* Game terminal height */
 .terminal-window--game .terminal-body {
-  min-height: 250px;
-  max-height: 350px;
+  min-height: 400px;
+  max-height: 500px;
+}
+
+/* Game World Container - Below terminal */
+.game-world-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 200px;
+  overflow: hidden;
+  z-index: 10;
 }
 
 .game-world {
-  width: 3500px;
-  height: 100vh;
-  position: absolute;
-  will-change: transform;
+  width: 100%;
+  height: 200px;
+  position: relative;
 }
 
 /* Ground - Subtle line */
 .ground {
   position: absolute;
-  bottom: 300px;
+  bottom: 60px;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: rgba(78, 201, 176, 0.2);
+  height: 1px;
+  background: rgba(139, 119, 101, 0.3);
 }
 
-/* Milestone Markers - Small and Discrete */
+/* Milestone - Folder style */
 .milestone {
   position: absolute;
-  bottom: 310px;
+  bottom: 65px;
   transform: translateX(-50%);
-  z-index: 10;
-  transition: transform 0.3s ease;
-}
-
-.milestone.active {
-  transform: translateX(-50%) scale(1.2);
-}
-
-.milestone-marker {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  transition: all 0.3s ease;
+  opacity: 0.6;
 }
 
-.marker-icon {
-  font-size: 24px;
-  filter: grayscale(0.5);
+.milestone.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-3px);
+}
+
+.folder-icon {
+  font-size: 32px;
+  filter: grayscale(0.8) brightness(0.8);
   transition: all 0.3s ease;
 }
 
-.milestone.active .marker-icon {
-  filter: grayscale(0);
-  animation: pulse 1.5s ease-in-out infinite;
+.milestone.active .folder-icon {
+  filter: grayscale(0) brightness(1);
+  text-shadow: 0 0 8px rgba(78, 201, 176, 0.4);
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.marker-year {
+.folder-label {
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  font-size: 14px;
-  color: #858585;
-  transition: color 0.3s ease;
+  font-size: 11px;
+  color: rgba(139, 119, 101, 0.7);
+  transition: all 0.3s ease;
 }
 
-.milestone.active .marker-year {
+.milestone.active .folder-label {
   color: #4ec9b0;
   font-weight: 600;
+  text-shadow: 0 0 4px rgba(78, 201, 176, 0.3);
 }
 
 
@@ -98,7 +105,6 @@
   height: 80px;
   z-index: 50;
   transform: translateX(-50%);
-  display: none; /* Temporarily hidden */
 }
 
 .player-head {

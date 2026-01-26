@@ -3,8 +3,8 @@ import '../styles/Hero.css';
 import '../styles/About.css';
 
 function About() {
-  const [playerPos, setPlayerPos] = useState({ x: 2500, y: 400 });
-  const [cameraX, setCameraX] = useState(2100); // Start at playerPos.x - 400 to avoid initial jump
+  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const [playerPos, setPlayerPos] = useState({ x: screenWidth * 0.1 + 50, y: 400 });
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
@@ -16,43 +16,53 @@ function About() {
   const previousMilestoneRef = useRef(null);
   const terminalLinesRef = useRef([]);
 
-  const milestones = [
-    {
-      year: 2002,
-      position: 500,
-      directory: '2002_born/',
-      location: 'öxnevalla',
-      description: 'Född i Öxnevalla'
-    },
-    {
-      year: 2021,
-      position: 1000,
-      directory: '2021_studies/',
-      location: 'jönköping',
-      description: 'Började studera Datateknik vid Jönköping University'
-    },
-    {
-      year: 2024,
-      position: 1500,
-      directory: '2024_projects/',
-      location: 'jönköping',
-      description: 'Utvecklade flera projekt inom mobilutveckling'
-    },
-    {
-      year: 2025,
-      position: 2000,
-      directory: '2025_military/',
-      location: 'halmstad',
-      description: 'Påbörjade 15 månaders värnplikt i Halmstad'
-    },
-    {
-      year: 2026,
-      position: 2500,
-      directory: '2026_next/',
-      location: '?',
-      description: 'Nästa kapitel...'
-    }
-  ];
+  // Calculate positions dynamically based on screen width
+  const getMilestones = () => {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const margin = screenWidth * 0.1; // 10% margin on each side
+    const availableWidth = screenWidth - (margin * 2);
+    const spacing = availableWidth / 4; // 5 milestones = 4 gaps
+
+    return [
+      {
+        year: 2002,
+        position: margin,
+        directory: '2002_born/',
+        location: 'öxnevalla',
+        description: 'Född i Öxnevalla'
+      },
+      {
+        year: 2021,
+        position: margin + spacing,
+        directory: '2021_studies/',
+        location: 'jönköping',
+        description: 'Började studera Datateknik vid Jönköping University'
+      },
+      {
+        year: 2024,
+        position: margin + spacing * 2,
+        directory: '2024_projects/',
+        location: 'jönköping',
+        description: 'Utvecklade flera projekt inom mobilutveckling'
+      },
+      {
+        year: 2025,
+        position: margin + spacing * 3,
+        directory: '2025_military/',
+        location: 'halmstad',
+        description: 'Påbörjade 15 månaders värnplikt i Halmstad'
+      },
+      {
+        year: 2026,
+        position: margin + spacing * 4,
+        directory: '2026_next/',
+        location: '?',
+        description: 'Nästa kapitel...'
+      }
+    ];
+  };
+
+  const milestones = getMilestones();
 
   const GROUND_Y = 400;
   const GRAVITY = 0.8;
@@ -166,8 +176,9 @@ function About() {
           newX += MOVE_SPEED;
         }
 
-        // Keep player in bounds
-        newX = Math.max(100, Math.min(3000, newX));
+        // Keep player in bounds (within screen width)
+        const screenWidth = window.innerWidth;
+        newX = Math.max(50, Math.min(screenWidth - 50, newX));
 
         // Apply gravity
         velocityRef.current.y += GRAVITY;
@@ -183,12 +194,6 @@ function About() {
         }
 
         return { x: newX, y: newY };
-      });
-
-      // Smooth camera follow
-      setCameraX(prev => {
-        const targetX = playerPos.x - 400;
-        return prev + (targetX - prev) * 0.1;
       });
 
       // Check nearest milestone with asymmetric detection
@@ -222,7 +227,7 @@ function About() {
 
   return (
     <section id="about" className="about-game">
-      {/* Terminal Window - Same layout as Hero */}
+      {/* Terminal Window - Fixed, always centered */}
       <div className="terminal-window terminal-window--game">
             <div className="terminal-header">
               <div className="terminal-buttons">
@@ -262,6 +267,39 @@ function About() {
               </div>
             </div>
           </div>
+
+      {/* Game World - Static, full screen */}
+      <div className="game-world-container">
+        <div className="game-world">
+          {/* Ground line */}
+          <div className="ground"></div>
+
+          {/* Milestones - Folder icons */}
+          {milestones.map((milestone, index) => (
+            <div
+              key={index}
+              className={`milestone ${nearestMilestone === milestone ? 'active' : ''}`}
+              style={{ left: `${milestone.position}px` }}
+            >
+              <div className="folder-icon">📁</div>
+              <div className="folder-label">/{milestone.year}</div>
+            </div>
+          ))}
+
+          {/* Player */}
+          <div
+            className="player"
+            style={{
+              left: `${playerPos.x}px`,
+              bottom: `${60 + (400 - playerPos.y)}px`
+            }}
+          >
+            <div className="player-head"></div>
+            <div className="player-body"></div>
+            <div className="player-legs"></div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
