@@ -143,6 +143,14 @@ function ProjectDetail() {
               </div>
               <div className="about-content">
                 <div className="about-item">
+                  <span className="about-label">PLATFORMS:</span>
+                </div>
+                <div className="about-tech-list">
+                  <span className="about-tech-badge">Apple Watch</span>
+                  <span className="about-tech-badge">iPhone</span>
+                </div>
+                <div className="about-divider"></div>
+                <div className="about-item">
                   <span className="about-label">TECH STACK:</span>
                 </div>
                 <div className="about-tech-list">
