@@ -219,8 +219,9 @@ function About() {
   return (
     <section id="about" className="about-game">
       <div className="game-container">
-        {/* Terminal Window - Always visible */}
-        <div className="terminal-window-about">
+        <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
+          {/* Terminal Window - Always visible */}
+          <div className="terminal-window-about" style={{ left: `${cameraX + (window.innerWidth / 2)}px` }}>
             <div className="terminal-header">
               <div className="terminal-buttons">
                 <span className="terminal-button close"></span>
@@ -260,7 +261,6 @@ function About() {
             </div>
           </div>
 
-        <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
           {/* Ground */}
           <div className="ground"></div>
 
