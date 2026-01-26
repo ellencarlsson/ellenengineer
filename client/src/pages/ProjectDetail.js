@@ -109,9 +109,12 @@ function ProjectDetail() {
         {/* Project Title Header - GitHub Style */}
         <div className="project-header-title">
           <Link to="/projects" className="back-link">
-            ← Back to Storage Drives
+            ← Back
           </Link>
-          <h1 className="github-project-name">{project.name}</h1>
+          <div className="project-title-row">
+            <h1 className="github-project-name">{project.name}</h1>
+            <p className="project-tagline">AI-powered sign language recognition using Apple Watch motion sensors</p>
+          </div>
         </div>
 
         {/* Main Content - GitHub Style Layout */}
@@ -146,17 +149,54 @@ function ProjectDetail() {
                   <span className="about-label">PLATFORMS:</span>
                 </div>
                 <div className="about-tech-list">
-                  <span className="about-tech-badge">Apple Watch</span>
-                  <span className="about-tech-badge">iPhone</span>
+                  <div className="about-tech-badge">
+                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="6" y="4" width="12" height="14" rx="3" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M6 7H18" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M6 15H18" stroke="currentColor" strokeWidth="1.5"/>
+                      <circle cx="12" cy="11" r="1" fill="currentColor"/>
+                      <path d="M8 18V20C8 20.5523 8.44772 21 9 21H15C15.5523 21 16 20.5523 16 20V18" stroke="currentColor" strokeWidth="1.5"/>
+                    </svg>
+                    Apple Watch
+                  </div>
+                  <div className="about-tech-badge">
+                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M7 5H17" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M7 19H17" stroke="currentColor" strokeWidth="1.5"/>
+                      <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
+                    </svg>
+                    iPhone
+                  </div>
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
                   <span className="about-label">TECH STACK:</span>
                 </div>
                 <div className="about-tech-list">
-                  {project.techStack.map((tech, idx) => (
-                    <span key={idx} className="about-tech-badge">{tech}</span>
-                  ))}
+                  <div className="about-tech-badge">
+                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 8C6 8 8 6 12 6C16 6 18 8 18 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M18 16C18 16 16 18 12 18C8 18 6 16 6 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M6 8L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M18 8L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                      <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                    </svg>
+                    Swift
+                  </div>
+                  <div className="about-tech-badge">
+                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="6" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                      <circle cx="12" cy="6" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                      <circle cx="12" cy="18" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                      <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M8 12H10" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M14 12H16" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M12 8V10" stroke="currentColor" strokeWidth="1.5"/>
+                      <path d="M12 14V16" stroke="currentColor" strokeWidth="1.5"/>
+                    </svg>
+                    Create ML
+                  </div>
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
