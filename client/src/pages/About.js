@@ -19,9 +19,9 @@ function About() {
   const getMilestones = () => {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
     const leftMargin = 80;
-    const rightMargin = screenWidth * 0.2; // Use half the screen for spacing
+    const rightMargin = screenWidth * 0.2;
     const availableWidth = screenWidth - leftMargin - rightMargin;
-    const spacing = availableWidth / 9; // 10 milestones = 9 gaps
+    const spacing = availableWidth / 6; // 7 milestones = 6 gaps
 
     return [
       {
@@ -29,14 +29,16 @@ function About() {
         position: leftMargin,
         directory: '2002_born/',
         location: 'Öxnevalla',
-        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.'
+        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
+        image: '/images/2002.jpg'
       },
       {
         year: 2021,
         position: leftMargin + spacing,
         directory: '2021_studies/',
         location: 'Jönköping',
-        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.'
+        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
+        image: '/images/2021.jpg'
       },
       {
         year: 2022,
@@ -50,46 +52,27 @@ function About() {
         position: leftMargin + spacing * 3,
         directory: '2023_projects/',
         location: 'Jönköping',
-        description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor.'
-      },
-      {
-        year: 2023,
-        position: leftMargin + spacing * 4,
-        directory: '2023_landlord/',
-        location: 'Jönköping',
-        description: 'Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster.'
-      },
-      {
-        year: 2023,
-        position: leftMargin + spacing * 5,
-        directory: '2023_saab/',
-        location: 'Linköping',
-        description: 'Hade min praktik på SAAB, Training & Simulation, och arbetade även där som sommarjobbare.'
+        description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor. Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster. Hade min praktik på SAAB, Training & Simulation, och arbetade även där som sommarjobbare.'
       },
       {
         year: 2024,
-        position: leftMargin + spacing * 6,
+        position: leftMargin + spacing * 4,
         directory: '2024_projects/',
         location: 'Jönköping',
-        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa.'
-      },
-      {
-        year: 2024,
-        position: leftMargin + spacing * 7,
-        directory: '2024_military_interest/',
-        location: 'Jönköping',
-        description: 'Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten."'
+        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa. Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten.',
+        image: '/images/2024.jpg'
       },
       {
         year: 2025,
-        position: leftMargin + spacing * 8,
+        position: leftMargin + spacing * 5,
         directory: '2025_military/',
         location: 'Halmstad',
-        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.'
+        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
+        image: '/images/2025.jpg'
       },
       {
         year: 2026,
-        position: leftMargin + spacing * 9,
+        position: leftMargin + spacing * 6,
         directory: '2026_next/',
         location: '?',
         description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
@@ -112,14 +95,19 @@ function About() {
       // Leaving a directory
       lines.push({ type: 'command', text: `cd ..` });
     } else if (nearestMilestone) {
-      // Show README content
-      lines.push({ type: 'command', text: `ellen@life:~$ cd ${nearestMilestone.year}` });
-      lines.push({ type: 'command', text: `ellen@life:~/${nearestMilestone.year}$ cat README.md` });
+      // Show year and location with bold values
+      lines.push({
+        type: 'info',
+        text: `ellen@year:~$ `,
+        boldText: nearestMilestone.year
+      });
+      lines.push({
+        type: 'info',
+        text: `ellen@location:~$ `,
+        boldText: nearestMilestone.location
+      });
       lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'output', text: `Year: ${nearestMilestone.year}` });
-      lines.push({ type: 'output', text: `Location: ${nearestMilestone.location}` });
-      lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'output', text: 'Description:' });
+      lines.push({ type: 'title', text: 'README.md' });
       lines.push({ type: 'output', text: nearestMilestone.description });
     } else {
       // Base directory
@@ -133,8 +121,8 @@ function About() {
   useEffect(() => {
     const newLines = getTerminalLines();
     terminalLinesRef.current = newLines;
-    // Display text immediately without typewriter effect
-    setDisplayedText(newLines.map(line => line.text).join('\n'));
+    // Don't use simple text join anymore, we'll render with JSX for bold support
+    setDisplayedText('updated'); // Just trigger re-render
   }, [nearestMilestone, leavingMilestone]);
 
   // Handle keyboard input
@@ -255,20 +243,18 @@ function About() {
 
             <div className="terminal-body">
               <div className="line-numbers">
-                {displayedText.split('\n').map((_, index) => (
+                {terminalLinesRef.current.map((_, index) => (
                   <div key={index} className="line-number">{index + 1}</div>
                 ))}
               </div>
 
               <div className="terminal-content">
                 <pre>
-                  {displayedText.split('\n').map((line, index) => {
-                    const lineData = terminalLinesRef.current.find(l => l.text === line.trim());
-                    const lineType = lineData ? lineData.type : 'output';
-
+                  {terminalLinesRef.current.map((lineData, index) => {
                     return (
-                      <div key={index} className={`terminal-line ${lineType}`}>
-                        {line}
+                      <div key={index} className={`terminal-line ${lineData.type}`}>
+                        {lineData.text}
+                        {lineData.boldText && <strong>{lineData.boldText}</strong>}
                       </div>
                     );
                   })}
@@ -307,6 +293,30 @@ function About() {
           </div>
         </div>
       </div>
+
+      {/* Image Terminal - Slides in from right when milestone has image */}
+      {nearestMilestone && nearestMilestone.image && (
+        <div className="image-terminal-container">
+          <div className="terminal-window terminal-window--image">
+            <div className="terminal-header">
+              <div className="terminal-buttons">
+                <span className="terminal-button close"></span>
+                <span className="terminal-button minimize"></span>
+                <span className="terminal-button maximize"></span>
+              </div>
+              <div className="terminal-title">ellen@images:~/{nearestMilestone.year}</div>
+            </div>
+
+            <div className="terminal-body terminal-body--image">
+              <img
+                src={nearestMilestone.image}
+                alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
+                className="milestone-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

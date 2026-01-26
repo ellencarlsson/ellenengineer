@@ -29,6 +29,23 @@
   max-height: 500px;
 }
 
+/* Info lines for year/location - prompt is normal, value is bold */
+.terminal-line.info {
+  color: #4ec9b0;
+  font-weight: 400;
+}
+
+.terminal-line.info strong {
+  font-weight: 700;
+}
+
+/* Title line for README.md */
+.terminal-line.title {
+  color: #ce9178;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
 /* Game World Container - Below terminal */
 .game-world-container {
   position: relative;
@@ -144,6 +161,61 @@
   height: 104px;
   z-index: 50;
   transform: translateX(-50%);
+}
+
+/* Image Terminal - Slides in from right */
+.image-terminal-container {
+  position: fixed;
+  top: calc(50% + 46px);
+  right: 40px;
+  transform: translateY(-50%);
+  z-index: 100;
+  animation: slideInFromRight 0.5s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    right: -500px;
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    right: 40px;
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
+
+.terminal-window--image {
+  width: 250px !important;
+  max-width: 250px !important;
+  min-width: 250px !important;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-body--image {
+  padding: 12px;
+  background: #1e1e1e;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px !important;
+  max-height: 400px !important;
+  min-height: 400px !important;
+}
+
+.milestone-image {
+  max-height: 100% !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 /* Responsive */
