@@ -44,7 +44,7 @@ function Header() {
           <div className="header-title">
             <h1 className="name-first">Ellen</h1>
             <div className="title-row">
-              <p className="header-subtitle">Dataingenjör </p>
+              <p className="header-subtitle">Engineer </p>
               <h1 className="name-last">Carlsson</h1>
             </div>
           </div>

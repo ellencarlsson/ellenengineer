@@ -9,6 +9,7 @@ function About() {
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
   const [isWalking, setIsWalking] = useState(false);
+  const [fadingOutImage, setFadingOutImage] = useState(false);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
@@ -215,12 +216,20 @@ function About() {
 
       if (foundMilestone) {
         setNearestMilestone(foundMilestone);
+        setFadingOutImage(false);
         previousMilestoneRef.current = foundMilestone;
       } else {
         // Leaving a milestone - show cd .. notification
         if (previousMilestoneRef.current && nearestMilestone) {
           setLeavingMilestone(previousMilestoneRef.current);
           setTimeout(() => setLeavingMilestone(null), 2000);
+          // Trigger fade out animation if previous milestone had an image
+          if (previousMilestoneRef.current.image) {
+            setFadingOutImage(true);
+            setTimeout(() => {
+              setFadingOutImage(false);
+            }, 600); // Match animation duration
+          }
           previousMilestoneRef.current = null;
         }
         setNearestMilestone(null);
@@ -278,11 +287,11 @@ function About() {
       </div>
 
       {/* Image Display - Slides in from right when milestone has image */}
-      {nearestMilestone && nearestMilestone.image && (
-        <div className="image-display">
+      {((nearestMilestone && nearestMilestone.image) || (fadingOutImage && leavingMilestone && leavingMilestone.image)) && (
+        <div className={`image-display ${fadingOutImage ? 'fade-out' : ''}`}>
           <img
-            src={nearestMilestone.image}
-            alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
+            src={nearestMilestone ? nearestMilestone.image : leavingMilestone.image}
+            alt={nearestMilestone ? `${nearestMilestone.year} - ${nearestMilestone.location}` : `${leavingMilestone.year} - ${leavingMilestone.location}`}
             className="milestone-image"
           />
         </div>

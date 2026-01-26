@@ -188,9 +188,13 @@
   top: 10px;
   right: 60px;
   z-index: 15;
-  animation: slideInFromRight 0.8s ease-out;
+  animation: slideInFromRight 0.8s ease-out forwards;
   width: 340px;
   height: 480px;
+}
+
+.image-display.fade-out {
+  animation: slideOutToRight 0.6s ease-in forwards;
 }
 
 @keyframes slideInFromRight {
@@ -201,6 +205,17 @@
   to {
     right: 60px;
     opacity: 0.85;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    right: 60px;
+    opacity: 0.85;
+  }
+  to {
+    right: -500px;
+    opacity: 0;
   }
 }
 
