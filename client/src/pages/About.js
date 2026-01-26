@@ -286,7 +286,7 @@ function About() {
             className="player"
             style={{
               left: `${playerPos.x}px`,
-              bottom: `${600 - playerPos.y}px`
+              bottom: `${300 + (400 - playerPos.y)}px`
             }}
           >
             <div className="player-head"></div>

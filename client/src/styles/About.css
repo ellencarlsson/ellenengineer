@@ -15,8 +15,8 @@
 /* Terminal Window - Same as Home */
 .terminal-window-about {
   position: absolute;
-  top: 28vh;
-  transform: translateX(-50%);
+  top: calc(42.5vh - 80px);
+  transform: translate(-50%, -50%);
   max-width: 900px;
   width: 100%;
   background: #1e1e1e;
@@ -30,11 +30,11 @@
 @keyframes fadeInTerminal {
   from {
     opacity: 0;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -191,7 +191,7 @@
 /* Ground - Subtle line */
 .ground {
   position: absolute;
-  bottom: 0;
+  bottom: 300px;
   left: 0;
   width: 100%;
   height: 2px;
@@ -201,7 +201,7 @@
 /* Milestone Markers - Small and Discrete */
 .milestone {
   position: absolute;
-  bottom: 10px;
+  bottom: 310px;
   transform: translateX(-50%);
   z-index: 10;
   transition: transform 0.3s ease;
