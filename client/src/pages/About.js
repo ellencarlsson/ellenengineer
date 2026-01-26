@@ -8,8 +8,6 @@ function About() {
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
@@ -75,18 +73,10 @@ function About() {
 
     if (leavingMilestone && !nearestMilestone) {
       // Leaving a directory
-      lines.push({ type: 'command', text: `~/ellen-life/${leavingMilestone.year}$ cd ..` });
-      lines.push({ type: 'output', text: `~/ellen-life$` });
+      lines.push({ type: 'command', text: `cd ..` });
     } else if (nearestMilestone) {
-      // Entering and reading a directory
-      lines.push({ type: 'command', text: `~/ellen-life$ cd ${nearestMilestone.year}` });
-      lines.push({ type: 'command', text: `~/ellen-life/${nearestMilestone.year}$ cat README.md` });
-      lines.push({ type: 'output', text: '' });
-      lines.push({ type: 'output', text: `Year: ${nearestMilestone.year}` });
-      lines.push({ type: 'output', text: `Location: ${nearestMilestone.location}` });
-      lines.push({ type: 'output', text: `Description: ${nearestMilestone.description}` });
-      lines.push({ type: 'output', text: '' });
-      lines.push({ type: 'output', text: `~/ellen-life/${nearestMilestone.year}$` });
+      // Show year
+      lines.push({ type: 'output', text: `${nearestMilestone.year}` });
     } else {
       // Base directory
       lines.push({ type: 'output', text: '~/ellen-life$' });
@@ -99,39 +89,9 @@ function About() {
   useEffect(() => {
     const newLines = getTerminalLines();
     terminalLinesRef.current = newLines;
-    setDisplayedText('');
-    setCurrentLineIndex(0);
-    setCurrentCharIndex(0);
+    // Display text immediately without typewriter effect
+    setDisplayedText(newLines.map(line => line.text).join('\n'));
   }, [nearestMilestone, leavingMilestone]);
-
-  // Typewriter effect
-  useEffect(() => {
-    const lines = terminalLinesRef.current;
-
-    if (currentLineIndex >= lines.length) {
-      return;
-    }
-
-    const currentLine = lines[currentLineIndex];
-    const delay = currentLine.type === 'command' ? 20 : 10; // Very fast typing
-
-    if (currentCharIndex < currentLine.text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + currentLine.text[currentCharIndex]);
-        setCurrentCharIndex(prev => prev + 1);
-      }, delay);
-
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + '\n');
-        setCurrentLineIndex(prev => prev + 1);
-        setCurrentCharIndex(0);
-      }, 50); // Short pause between lines
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentCharIndex, currentLineIndex]);
 
   // Handle keyboard input
   useEffect(() => {
@@ -196,13 +156,13 @@ function About() {
         return { x: newX, y: newY };
       });
 
-      // Check nearest milestone with asymmetric detection
-      // Player should be "inside" milestone when 100px behind or 100px ahead
+      // Check nearest milestone with detection range
+      // Player should be "inside" milestone when 50px behind or 50px ahead
       let foundMilestone = null;
       for (const milestone of milestones) {
         const distanceFromMilestone = playerPos.x - milestone.position;
-        // Check if player is within range: -100 (behind) to +100 (ahead)
-        if (distanceFromMilestone >= -100 && distanceFromMilestone <= 100) {
+        // Check if player is within range: -50 (behind) to +50 (ahead)
+        if (distanceFromMilestone >= -50 && distanceFromMilestone <= 50) {
           foundMilestone = milestone;
           break;
         }

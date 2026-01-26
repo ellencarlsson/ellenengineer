@@ -75,13 +75,13 @@
 
 .folder-icon {
   font-size: 32px;
-  filter: grayscale(0.8) brightness(0.8);
+  filter: sepia(0.4) brightness(0.9) saturate(0.7);
   transition: all 0.3s ease;
 }
 
 .milestone.active .folder-icon {
-  filter: grayscale(0) brightness(1);
-  text-shadow: 0 0 8px rgba(78, 201, 176, 0.4);
+  filter: sepia(0.5) brightness(1.1) saturate(1);
+  text-shadow: 0 0 8px rgba(222, 184, 135, 0.5);
 }
 
 .folder-label {
@@ -92,9 +92,9 @@
 }
 
 .milestone.active .folder-label {
-  color: #4ec9b0;
+  color: #D2A679;
   font-weight: 600;
-  text-shadow: 0 0 4px rgba(78, 201, 176, 0.3);
+  text-shadow: 0 0 4px rgba(222, 184, 135, 0.4);
 }
 
 
