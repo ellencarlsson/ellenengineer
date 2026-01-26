@@ -29,7 +29,8 @@ function About() {
         position: leftMargin,
         directory: '2002_born/',
         location: 'Öxnevalla',
-        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.'
+        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
+        image: '/images/2002.jpg'
       },
       {
         year: 2021,
@@ -289,6 +290,30 @@ function About() {
           </div>
         </div>
       </div>
+
+      {/* Image Terminal - Slides in from right when milestone has image */}
+      {nearestMilestone && nearestMilestone.image && (
+        <div className="image-terminal-container">
+          <div className="terminal-window terminal-window--image">
+            <div className="terminal-header">
+              <div className="terminal-buttons">
+                <span className="terminal-button close"></span>
+                <span className="terminal-button minimize"></span>
+                <span className="terminal-button maximize"></span>
+              </div>
+              <div className="terminal-title">ellen@images:~/{nearestMilestone.year}</div>
+            </div>
+
+            <div className="terminal-body terminal-body--image">
+              <img
+                src={nearestMilestone.image}
+                alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
+                className="milestone-image"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
