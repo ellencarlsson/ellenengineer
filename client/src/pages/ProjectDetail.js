@@ -106,181 +106,155 @@ function ProjectDetail() {
   return (
     <div className="project-detail-page">
       <div className="project-detail-container">
-        {/* Back Button */}
-        <Link to="/projects" className="back-button">
-          ← Back to Storage Drives
-        </Link>
+        {/* Project Title Header - GitHub Style */}
+        <div className="project-header-title">
+          <Link to="/projects" className="back-link">
+            ← Back to Storage Drives
+          </Link>
+          <h1 className="github-project-name">{project.name}</h1>
+        </div>
 
-        {/* Mounted Drive Header */}
-        <div className="mounted-header">
-          <div className="mount-status">
-            <div className={`status-led ${project.status === 'VERIFIED' ? 'green' : 'blue'}`}></div>
-            <span className="status-text">DRIVE MOUNTED</span>
+        {/* Main Content - GitHub Style Layout */}
+        <div className="github-layout">
+          {/* Left Column - README */}
+          <div className="main-column">
+            <div className="readme-box">
+              <div className="readme-header">
+                <div className="readme-title-section">
+                  <span className="readme-icon">📖</span>
+                  <span className="readme-label">README</span>
+                </div>
+              </div>
+              <div className="readme-accent-line"></div>
+              <div className="readme-content">
+                <p className="readme-description">{project.description}</p>
+
+                <h2 className="readme-section-title">Tech Stack</h2>
+                <div className="readme-divider"></div>
+                <ul className="readme-tech-list">
+                  {project.techStack.map((tech, idx) => (
+                    <li key={idx} className="readme-tech-item">{tech}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="mount-info">
-            <div className="mount-path">/mnt/{project.id}/</div>
-            <div className="mount-label">{project.label}</div>
+
+          {/* Right Column - About */}
+          <div className="sidebar-column">
+            <div className="about-section">
+              <div className="about-header">
+                <span className="about-title">ABOUT</span>
+              </div>
+              <div className="about-content">
+                <div className="about-item">
+                  <span className="about-label">TECH STACK:</span>
+                </div>
+                <div className="about-tech-list">
+                  {project.techStack.map((tech, idx) => (
+                    <span key={idx} className="about-tech-badge">{tech}</span>
+                  ))}
+                </div>
+                <div className="about-divider"></div>
+                <div className="about-item">
+                  <span className="about-label">YEAR:</span>
+                  <span className="about-value">{project.year}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Drive Specs Card */}
-        <div className="specs-card">
-          <div className="specs-header">
-            <div className="specs-icon">💾</div>
-            <div className="specs-title">
-              <div className="brand-name">{project.model.split(' ')[0]}</div>
-              <div className="model-number">{project.model}</div>
+        {/* DEMO-VIDEO.mp4 */}
+        {project.demoVideo && (
+          <div className="file-section fullwidth-section">
+            <div className="file-header">
+              <span className="file-icon">🎬</span>
+              <span className="file-name">DEMO-VIDEO.mp4</span>
             </div>
-          </div>
-          <div className="specs-grid">
-            <div className="spec-item">
-              <span className="spec-label">CAPACITY:</span>
-              <span className="spec-value">{project.capacity}</span>
+            <div className="file-content">
+              <div className="video-container">
+                <video controls className="demo-video">
+                  <source src={project.demoVideo} type="video/mp4" />
+                  Din webbläsare stödjer inte video.
+                </video>
+              </div>
             </div>
-            <div className="spec-item">
-              <span className="spec-label">INTERFACE:</span>
-              <span className="spec-value">{project.interface}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">YEAR:</span>
-              <span className="spec-value">{project.year}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">STATUS:</span>
-              <span className="spec-value">{project.status}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Project Preview */}
-        {project.image && (
-          <div className="project-preview">
-            <img src={project.image} alt={project.name} className="preview-image" />
           </div>
         )}
 
-        {/* File System View */}
-        <div className="filesystem-container">
-          {/* README.txt */}
-          <div className="file-section">
+        {/* HOW-IT-WORKS.sys - Full Screen */}
+        {project.hasWorkflow && (
+          <div className="file-section workflow-section fullwidth-section">
             <div className="file-header">
-              <span className="file-icon">📄</span>
-              <span className="file-name">README.txt</span>
+              <span className="file-icon">⚙️</span>
+              <span className="file-name">HOW-IT-WORKS.sys</span>
             </div>
             <div className="file-content">
-              <h2 className="project-title">{project.name}</h2>
-              <p className="project-description">{project.description}</p>
-            </div>
-          </div>
+              <div className="system-diagram">
+                {project.workflow.map((step) => (
+                  <div key={step.step} className="workflow-step">
+                    <div className="step-card">
+                      {/* LED Indicator */}
+                      <div className="step-led-container">
+                        <div className={`step-led ${step.ledColor}`}></div>
+                      </div>
 
-          {/* TECH-STACK.txt */}
-          <div className="file-section">
-            <div className="file-header">
-              <span className="file-icon">📄</span>
-              <span className="file-name">TECH-STACK.txt</span>
-            </div>
-            <div className="file-content">
-              <div className="tech-grid">
-                {project.techStack.map((tech, idx) => (
-                  <div key={idx} className="tech-badge">
-                    {tech}
+                      {/* Step Number */}
+                      <div className="step-number">STEP {step.step}</div>
+
+                      {/* Icon */}
+                      <div className="step-icon">{step.icon}</div>
+
+                      {/* Content */}
+                      <div className="step-content">
+                        <div className="step-title">{step.title}</div>
+                        <div className="step-description">{step.description}</div>
+                        <div className="step-details">{step.details}</div>
+                      </div>
+
+                      {/* Vintage Label */}
+                      <div className="step-label">
+                        <div className="label-barcode">|| ||| |||| ||| ||</div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+        )}
 
-          {/* HOW-IT-WORKS.sys */}
-          {project.hasWorkflow && (
-            <div className="file-section workflow-section">
-              <div className="file-header">
-                <span className="file-icon">⚙️</span>
-                <span className="file-name">HOW-IT-WORKS.sys</span>
-              </div>
-              <div className="file-content">
-                <div className="system-diagram">
-                  {project.workflow.map((step) => (
-                    <div key={step.step} className="workflow-step">
-                      <div className="step-card">
-                        {/* LED Indicator */}
-                        <div className="step-led-container">
-                          <div className={`step-led ${step.ledColor}`}></div>
-                        </div>
-
-                        {/* Step Number */}
-                        <div className="step-number">STEP {step.step}</div>
-
-                        {/* Icon */}
-                        <div className="step-icon">{step.icon}</div>
-
-                        {/* Content */}
-                        <div className="step-content">
-                          <div className="step-title">{step.title}</div>
-                          <div className="step-description">{step.description}</div>
-                          <div className="step-details">{step.details}</div>
-                        </div>
-
-                        {/* Vintage Label */}
-                        <div className="step-label">
-                          <div className="label-barcode">|| ||| |||| ||| ||</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* DEMO-VIDEO.mp4 */}
-          {project.demoVideo && (
-            <div className="file-section">
-              <div className="file-header">
-                <span className="file-icon">🎬</span>
-                <span className="file-name">DEMO-VIDEO.mp4</span>
-              </div>
-              <div className="file-content">
-                <div className="video-container">
-                  <video controls className="demo-video">
-                    <source src={project.demoVideo} type="video/mp4" />
-                    Din webbläsare stödjer inte video.
-                  </video>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* LINKS.txt */}
-          <div className="file-section">
-            <div className="file-header">
-              <span className="file-icon">📄</span>
-              <span className="file-name">LINKS.txt</span>
-            </div>
-            <div className="file-content">
-              <div className="links-container">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link github"
-                  >
-                    <span className="link-icon">→</span>
-                    <span className="link-text">View on GitHub</span>
-                  </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link demo"
-                  >
-                    <span className="link-icon">→</span>
-                    <span className="link-text">Live Demo</span>
-                  </a>
-                )}
-              </div>
+        {/* LINKS.txt */}
+        <div className="file-section fullwidth-section">
+          <div className="file-header">
+            <span className="file-icon">📄</span>
+            <span className="file-name">LINKS.txt</span>
+          </div>
+          <div className="file-content">
+            <div className="links-container">
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link github"
+                >
+                  <span className="link-icon">→</span>
+                  <span className="link-text">View on GitHub</span>
+                </a>
+              )}
+              {project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link demo"
+                >
+                  <span className="link-icon">→</span>
+                  <span className="link-text">Live Demo</span>
+                </a>
+              )}
             </div>
           </div>
         </div>
