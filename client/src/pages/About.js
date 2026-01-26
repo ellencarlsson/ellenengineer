@@ -37,7 +37,8 @@ function About() {
         position: leftMargin + spacing,
         directory: '2021_studies/',
         location: 'Jönköping',
-        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.'
+        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
+        image: '/images/2021.jpg'
       },
       {
         year: 2022,
@@ -58,14 +59,16 @@ function About() {
         position: leftMargin + spacing * 4,
         directory: '2024_projects/',
         location: 'Jönköping',
-        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa. Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten.'
+        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa. Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten.',
+        image: '/images/2024.jpg'
       },
       {
         year: 2025,
         position: leftMargin + spacing * 5,
         directory: '2025_military/',
         location: 'Halmstad',
-        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.'
+        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
+        image: '/images/2025.jpg'
       },
       {
         year: 2026,
