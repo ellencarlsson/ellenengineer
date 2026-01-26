@@ -30,32 +30,27 @@
   margin-bottom: 4px;
 }
 
-/* Info lines for year/location - prompt is normal, value is bold */
+/* Terminal command/prompt lines */
+.content-line.command {
+  color: #3d6b60;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Info lines for year/location - label is normal, value is bold */
 .content-line.info {
-  color: #9aad8a;
+  color: #6b6159;
   font-weight: 400;
+  margin-bottom: 2px;
 }
 
 .content-line.info strong {
   font-weight: 700;
-  color: #f0ebe0;
-}
-
-/* Title line for README.md */
-.content-line.title {
-  color: #e6b89c;
-  font-weight: 600;
-  margin-top: 12px;
-  margin-bottom: 8px;
-}
-
-.content-line.command {
-  color: #3D2616;
-  font-weight: 500;
+  color: #5a5248;
 }
 
 .content-line.output {
-  color: #3D2616;
+  color: #6b6159;
   line-height: 1.6;
   max-width: 500px;
 }

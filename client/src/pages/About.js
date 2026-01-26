@@ -92,26 +92,34 @@ function About() {
     const lines = [];
 
     if (leavingMilestone && !nearestMilestone) {
-      // Leaving a directory
-      lines.push({ type: 'command', text: `cd ..` });
+      // Leaving a directory - show full prompt with cd ..
+      lines.push({
+        type: 'command',
+        text: `ellen@ellenengineer:~/${leavingMilestone.directory}$ cd ..`
+      });
     } else if (nearestMilestone) {
-      // Show year and location with bold values
+      // Inside directory - show cat command
+      lines.push({
+        type: 'command',
+        text: `ellen@ellenengineer:~/${nearestMilestone.directory}$ cat README.md`
+      });
+      lines.push({ type: 'output', text: ' ' });
+      // Show year and location info
       lines.push({
         type: 'info',
-        text: `ellen@year:~$ `,
+        text: `Year: `,
         boldText: nearestMilestone.year
       });
       lines.push({
         type: 'info',
-        text: `ellen@location:~$ `,
+        text: `Location: `,
         boldText: nearestMilestone.location
       });
       lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'title', text: 'README.md' });
       lines.push({ type: 'output', text: nearestMilestone.description });
     } else {
-      // Base directory
-      lines.push({ type: 'output', text: '' });
+      // Base directory - show idle prompt
+      lines.push({ type: 'command', text: 'ellen@ellenengineer:~$' });
     }
 
     return lines;
