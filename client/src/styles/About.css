@@ -13,7 +13,7 @@
 /* Content Display - Top Left */
 .content-display {
   position: absolute;
-  top: 80px;
+  top: 40px;
   left: 60px;
   max-width: 600px;
   animation: fadeInUp 0.8s ease-out;
@@ -34,7 +34,7 @@
 .content-line.command {
   color: #3d6b60;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 /* Info lines for year/location - label is normal, value is bold */
@@ -42,6 +42,10 @@
   color: #6b6159;
   font-weight: 400;
   margin-bottom: 2px;
+}
+
+.content-line.info:first-of-type {
+  margin-top: 8px;
 }
 
 .content-line.info strong {
@@ -53,6 +57,10 @@
   color: #6b6159;
   line-height: 1.6;
   max-width: 500px;
+}
+
+.content-line.info + .content-line.output {
+  margin-top: 12px;
 }
 
 /* Game World Container - Below content */
