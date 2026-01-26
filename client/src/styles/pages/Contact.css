@@ -9,9 +9,10 @@
 }
 
 .contact-container {
-  max-width: 800px;
+  max-width: 750px;
   width: 100%;
   margin: 0 auto;
+  margin-top: -100px;
 }
 
 .page-title {
@@ -21,113 +22,143 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-align: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
   animation: fadeInUp var(--transition-slow);
   font-weight: var(--font-weight-bold);
 }
 
-/* GitHub README Styling - Warm Theme */
-.readme-container {
-  background: #1e1b16;
-  border: 1px solid #3d372e;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: fadeInUp 0.8s ease-out;
-  margin-top: -290px;
-}
-
-.readme-header {
-  background: #2a2520;
-  border-bottom: 1px solid #3d372e;
-  padding: 12px 16px;
+/* API Header */
+.api-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: var(--spacing-sm);
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.readme-icon {
-  font-size: 16px;
-}
-
-.readme-filename {
-  color: #f0ebe0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.readme-content {
-  padding: 32px;
-  color: #f0ebe0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  min-height: 500px;
-}
-
-.readme-title {
-  font-size: 32px;
+.api-title {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 20px;
   font-weight: 600;
   color: #f0ebe0;
-  margin: 0 0 16px 0;
-  border-bottom: 1px solid #3d372e;
-  padding-bottom: 8px;
 }
 
-.readme-description {
-  font-size: 16px;
+.api-version {
+  background: #9aad8a;
+  color: #1e1b16;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.api-description {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  font-size: 15px;
   color: #a39b8d;
-  margin: 0 0 24px 0;
-  line-height: 1.6;
+  margin-bottom: var(--spacing-xl);
+  animation: fadeInUp 0.9s ease-out;
 }
 
-.readme-subtitle {
-  font-size: 24px;
-  font-weight: 600;
-  color: #f0ebe0;
-  margin: 24px 0 16px 0;
-  border-bottom: 1px solid #3d372e;
-  padding-bottom: 8px;
-}
-
-.contact-links {
+/* API Endpoints */
+.api-endpoints {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 16px;
+  animation: fadeInUp 1s ease-out;
 }
 
-.contact-link {
+.endpoint {
+  display: flex;
+  align-items: stretch;
+  text-decoration: none;
+  background: rgba(42, 37, 32, 0.6);
+  border: 1px solid #3d372e;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 20px;
+  gap: 16px;
+}
+
+.endpoint:hover {
+  background: rgba(52, 47, 40, 0.8);
+  border-color: #9aad8a;
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.endpoint-method {
+  background: #9aad8a;
+  color: #1e1b16;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 20px;
-  background: #2a2520;
-  border: 1px solid #3d372e;
-  border-radius: 6px;
-  color: #9aad8a;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  font-size: 16px;
+  justify-content: center;
+  min-width: 50px;
+  height: fit-content;
 }
 
-.contact-link:hover {
-  background: #342f28;
-  border-color: #9aad8a;
-  box-shadow: 0 0 0 3px rgba(154, 173, 138, 0.15);
-  transform: translateX(4px);
+.endpoint-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.contact-icon {
-  width: 20px;
-  height: 20px;
-  color: #9aad8a;
-  flex-shrink: 0;
+.endpoint-path {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 17px;
+  font-weight: 600;
+  color: #f0ebe0;
 }
 
-.contact-link span {
+.endpoint-description {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-size: 14px;
+  color: #a39b8d;
+  line-height: 1.5;
+}
+
+.endpoint-response {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.response-label {
+  color: #9aad8a;
+  font-weight: 600;
+}
+
+.response-value {
+  color: #e6b89c;
+  margin-left: 6px;
+}
+
+.endpoint-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.endpoint:hover .endpoint-icon {
+  opacity: 1;
+}
+
+.endpoint-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #9aad8a;
 }
 
 @media (max-width: 768px) {
@@ -135,29 +166,52 @@
     padding: var(--spacing-md) var(--spacing-sm);
   }
 
+  .contact-container {
+    margin-top: -50px;
+  }
+
   .page-title {
     font-size: var(--font-size-xxl);
   }
 
-  .readme-content {
-    padding: 24px 20px;
+  .api-title {
+    font-size: 18px;
   }
 
-  .readme-title {
-    font-size: 24px;
+  .api-version {
+    font-size: 11px;
+    padding: 3px 8px;
   }
 
-  .readme-subtitle {
-    font-size: 20px;
-  }
-
-  .contact-link {
-    padding: 12px 16px;
+  .api-description {
     font-size: 14px;
   }
 
-  .contact-icon {
-    width: 18px;
-    height: 18px;
+  .endpoint {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .endpoint-method {
+    font-size: 11px;
+    padding: 4px 10px;
+    min-width: 45px;
+  }
+
+  .endpoint-path {
+    font-size: 15px;
+  }
+
+  .endpoint-description {
+    font-size: 13px;
+  }
+
+  .endpoint-response {
+    font-size: 12px;
+  }
+
+  .endpoint-icon svg {
+    width: 20px;
+    height: 20px;
   }
 }
