@@ -33,7 +33,6 @@
 .game-world-container {
   position: relative;
   width: 100%;
-  max-width: 1200px;
   height: 200px;
   overflow: hidden;
   z-index: 10;
@@ -45,14 +44,27 @@
   position: relative;
 }
 
-/* Ground - Subtle line */
+/* Ground - Subtle line with arrow */
 .ground {
   position: absolute;
   bottom: 60px;
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgba(139, 119, 101, 0.3);
+  background: rgba(139, 119, 101, 0.4);
+}
+
+.ground::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid rgba(139, 119, 101, 0.4);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
 }
 
 /* Milestone - Folder style */

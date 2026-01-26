@@ -3,8 +3,7 @@ import '../styles/Hero.css';
 import '../styles/About.css';
 
 function About() {
-  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-  const [playerPos, setPlayerPos] = useState({ x: screenWidth * 0.1 + 50, y: 400 });
+  const [playerPos, setPlayerPos] = useState({ x: 130, y: 400 });
   const [nearestMilestone, setNearestMilestone] = useState(null);
   const [leavingMilestone, setLeavingMilestone] = useState(null);
   const [displayedText, setDisplayedText] = useState('');
@@ -17,42 +16,43 @@ function About() {
   // Calculate positions dynamically based on screen width
   const getMilestones = () => {
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const margin = screenWidth * 0.1; // 10% margin on each side
-    const availableWidth = screenWidth - (margin * 2);
+    const leftMargin = 80;
+    const rightMargin = screenWidth * 0.2; // Use half the screen for spacing
+    const availableWidth = screenWidth - leftMargin - rightMargin;
     const spacing = availableWidth / 4; // 5 milestones = 4 gaps
 
     return [
       {
         year: 2002,
-        position: margin,
+        position: leftMargin,
         directory: '2002_born/',
         location: 'öxnevalla',
         description: 'Född i Öxnevalla'
       },
       {
         year: 2021,
-        position: margin + spacing,
+        position: leftMargin + spacing,
         directory: '2021_studies/',
         location: 'jönköping',
         description: 'Började studera Datateknik vid Jönköping University'
       },
       {
         year: 2024,
-        position: margin + spacing * 2,
+        position: leftMargin + spacing * 2,
         directory: '2024_projects/',
         location: 'jönköping',
         description: 'Utvecklade flera projekt inom mobilutveckling'
       },
       {
         year: 2025,
-        position: margin + spacing * 3,
+        position: leftMargin + spacing * 3,
         directory: '2025_military/',
         location: 'halmstad',
         description: 'Påbörjade 15 månaders värnplikt i Halmstad'
       },
       {
         year: 2026,
-        position: margin + spacing * 4,
+        position: leftMargin + spacing * 4,
         directory: '2026_next/',
         location: '?',
         description: 'Nästa kapitel...'
