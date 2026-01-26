@@ -121,11 +121,9 @@ function About() {
       lines.push({ type: 'output', text: ' ' });
       lines.push({ type: 'output', text: 'Description:' });
       lines.push({ type: 'output', text: nearestMilestone.description });
-      lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'output', text: `ellen@life:~/${nearestMilestone.year}$` });
     } else {
       // Base directory
-      lines.push({ type: 'output', text: '~/ellen-life$' });
+      lines.push({ type: 'output', text: '' });
     }
 
     return lines;
