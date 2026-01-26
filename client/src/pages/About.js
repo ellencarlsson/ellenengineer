@@ -21,7 +21,7 @@ function About() {
     const leftMargin = 80;
     const rightMargin = screenWidth * 0.2; // Use half the screen for spacing
     const availableWidth = screenWidth - leftMargin - rightMargin;
-    const spacing = availableWidth / 4; // 5 milestones = 4 gaps
+    const spacing = availableWidth / 7; // 8 milestones = 7 gaps
 
     return [
       {
@@ -29,7 +29,7 @@ function About() {
         position: leftMargin,
         directory: '2002_born/',
         location: 'Öxnevalla',
-        description: 'Född i Öxnevalla.',
+        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
         status: 'Completed'
       },
       {
@@ -37,31 +37,55 @@ function About() {
         position: leftMargin + spacing,
         directory: '2021_studies/',
         location: 'Jönköping',
-        description: 'Började studera datateknik vid Jönköping University.\nFokus på programmering och systemutveckling.',
+        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
+        status: 'Completed'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 2,
+        directory: '2023_landlord/',
+        location: 'Jönköping',
+        description: 'Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster.',
+        status: 'Completed'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 3,
+        directory: '2023_saab/',
+        location: 'Linköping',
+        description: 'Hade min praktik på Saab och arbetade även där som sommarjobbare.',
         status: 'Completed'
       },
       {
         year: 2024,
-        position: leftMargin + spacing * 2,
+        position: leftMargin + spacing * 4,
         directory: '2024_projects/',
         location: 'Jönköping',
-        description: 'Studerade datateknik med inriktning mot mjukvaruutveckling\nför mobila plattformar. Utvecklade flera projekt inom iOS\noch Android med fokus på användarupplevelse och struktur.',
+        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa.',
+        status: 'Completed'
+      },
+      {
+        year: 2024,
+        position: leftMargin + spacing * 5,
+        directory: '2024_military_interest/',
+        location: 'Jönköping',
+        description: 'Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten."',
         status: 'Completed'
       },
       {
         year: 2025,
-        position: leftMargin + spacing * 3,
+        position: leftMargin + spacing * 6,
         directory: '2025_military/',
         location: 'Halmstad',
-        description: 'Påbörjade 15 månaders värnplikt i Halmstad.',
+        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
         status: 'In Progress'
       },
       {
         year: 2026,
-        position: leftMargin + spacing * 4,
+        position: leftMargin + spacing * 7,
         directory: '2026_next/',
         location: '?',
-        description: 'Nästa kapitel...',
+        description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.',
         status: 'Upcoming'
       }
     ];

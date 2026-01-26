@@ -44,13 +44,3 @@
   50% { transform: rotate(-10deg); }
 }
 
-/* Ponytail bounce when walking */
-.soldier.walking .ponytail {
-  animation: ponytailBounce 0.2s infinite;
-  transform-origin: 125px 60px;
-}
-
-@keyframes ponytailBounce {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-3deg); }
-}
