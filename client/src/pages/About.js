@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import '../styles/Hero.css';
 import '../styles/About.css';
 
 function About() {
@@ -221,10 +222,8 @@ function About() {
 
   return (
     <section id="about" className="about-game">
-      <div className="game-container">
-        <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
-          {/* Terminal Window - Always visible */}
-          <div className="terminal-window-about" style={{ left: `${cameraX + (window.innerWidth / 2)}px` }}>
+      {/* Terminal Window - Same layout as Hero */}
+      <div className="terminal-window terminal-window--game">
             <div className="terminal-header">
               <div className="terminal-buttons">
                 <span className="terminal-button close"></span>
@@ -263,38 +262,6 @@ function About() {
               </div>
             </div>
           </div>
-
-          {/* Ground */}
-          <div className="ground"></div>
-
-          {/* Milestones - small markers */}
-          {milestones.map((milestone, index) => (
-            <div
-              key={index}
-              className={`milestone ${nearestMilestone === milestone ? 'active' : ''}`}
-              style={{ left: `${milestone.position}px` }}
-            >
-              <div className="milestone-marker">
-                <div className="marker-icon">📁</div>
-                <div className="marker-year">{milestone.year}</div>
-              </div>
-            </div>
-          ))}
-
-          {/* Player */}
-          <div
-            className="player"
-            style={{
-              left: `${playerPos.x}px`,
-              bottom: `${300 + (400 - playerPos.y)}px`
-            }}
-          >
-            <div className="player-head"></div>
-            <div className="player-body"></div>
-            <div className="player-legs"></div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

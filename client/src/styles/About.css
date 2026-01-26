@@ -1,184 +1,24 @@
 .about-game {
   background: transparent;
-  min-height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.game-container {
-  width: 100%;
-  height: 100vh;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
   position: relative;
   overflow: hidden;
 }
 
-/* Terminal Window - Same as Home */
-.terminal-window-about {
-  position: absolute;
-  top: calc(42.5vh - 80px);
-  transform: translate(-50%, -50%);
-  max-width: 900px;
-  width: 100%;
-  background: #1e1e1e;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  z-index: 200;
-  animation: fadeInTerminal 0.3s ease-out;
+
+/* Terminal Window - Game specific (only height override) */
+.terminal-window--game {
+  /* No positioning - uses same layout as Hero */
 }
 
-@keyframes fadeInTerminal {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* Terminal Header - VS Code Style */
-.terminal-window-about .terminal-header {
-  background: #2d2d2d;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid #1e1e1e;
-}
-
-.terminal-window-about .terminal-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.terminal-window-about .terminal-button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: block;
-}
-
-.terminal-window-about .terminal-button.close {
-  background: #ff5f57;
-}
-
-.terminal-window-about .terminal-button.minimize {
-  background: #ffbd2e;
-}
-
-.terminal-window-about .terminal-button.maximize {
-  background: #28ca42;
-}
-
-.terminal-window-about .terminal-title {
-  color: #999;
-  font-size: 12px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  flex: 1;
-  text-align: center;
-  user-select: none;
-}
-
-.terminal-window-about .terminal-tabs {
-  display: flex;
-  gap: 4px;
-}
-
-.terminal-window-about .terminal-tab {
-  background: #1e1e1e;
-  color: #ccc;
-  padding: 4px 12px;
-  border-radius: 4px 4px 0 0;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-}
-
-.terminal-window-about .terminal-tab.active {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.terminal-window-about .tab-icon {
-  font-size: 14px;
-}
-
-/* Terminal Body */
-.terminal-window-about .terminal-body {
-  display: flex;
-  background: #1e1e1e;
+/* Game terminal has shorter height */
+.terminal-window--game .terminal-body {
   min-height: 250px;
   max-height: 350px;
-  overflow-y: auto;
-}
-
-.terminal-window-about .line-numbers {
-  background: #1e1e1e;
-  color: #858585;
-  padding: 20px 8px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.8;
-  text-align: right;
-  user-select: none;
-  border-right: 1px solid #2d2d2d;
-  min-width: 45px;
-}
-
-.terminal-window-about .line-number {
-  padding: 0 8px;
-}
-
-.terminal-window-about .terminal-content {
-  flex: 1;
-  padding: 20px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #d4d4d4;
-}
-
-.terminal-window-about .terminal-content pre {
-  margin: 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-/* Terminal Line Styling */
-.terminal-window-about .terminal-line {
-  margin: 0;
-  padding: 0;
-}
-
-.terminal-window-about .terminal-line.command {
-  color: #4ec9b0;
-  font-weight: 500;
-}
-
-.terminal-window-about .terminal-line.output {
-  color: #ce9178;
-}
-
-/* Scrollbar Styling */
-.terminal-window-about .terminal-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-.terminal-window-about .terminal-body::-webkit-scrollbar-track {
-  background: #1e1e1e;
-}
-
-.terminal-window-about .terminal-body::-webkit-scrollbar-thumb {
-  background: #424242;
-  border-radius: 5px;
-}
-
-.terminal-window-about .terminal-body::-webkit-scrollbar-thumb:hover {
-  background: #4e4e4e;
 }
 
 .game-world {
@@ -258,6 +98,7 @@
   height: 80px;
   z-index: 50;
   transform: translateX(-50%);
+  display: none; /* Temporarily hidden */
 }
 
 .player-head {
@@ -328,34 +169,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .terminal-window-about {
-    width: 95%;
-  }
-
-  .terminal-window-about .terminal-body {
-    min-height: 250px;
-    max-height: 350px;
-  }
-
-  .terminal-window-about .terminal-content {
-    font-size: 12px;
-    padding: 15px;
-  }
-
-  .terminal-window-about .line-numbers {
-    font-size: 12px;
-    min-width: 35px;
-  }
-
-  .terminal-window-about .terminal-title {
-    font-size: 10px;
-  }
-
-  .terminal-window-about .terminal-tab {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
   .player {
     width: 32px;
     height: 64px;
@@ -369,17 +182,5 @@
   .player-body {
     width: 20px;
     height: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .terminal-window-about .terminal-content {
-    font-size: 11px;
-    padding: 12px;
-  }
-
-  .terminal-window-about .line-numbers {
-    font-size: 11px;
-    padding: 12px 4px;
   }
 }
