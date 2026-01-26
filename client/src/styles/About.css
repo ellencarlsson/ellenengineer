@@ -29,19 +29,6 @@
   max-height: 500px;
 }
 
-/* Status colors */
-.terminal-line.status-completed {
-  color: #4ec9b0;
-}
-
-.terminal-line.status-progress {
-  color: #dcdcaa;
-}
-
-.terminal-line.status-upcoming {
-  color: #569cd6;
-}
-
 /* Game World Container - Below terminal */
 .game-world-container {
   position: relative;

@@ -21,7 +21,7 @@ function About() {
     const leftMargin = 80;
     const rightMargin = screenWidth * 0.2; // Use half the screen for spacing
     const availableWidth = screenWidth - leftMargin - rightMargin;
-    const spacing = availableWidth / 7; // 8 milestones = 7 gaps
+    const spacing = availableWidth / 9; // 10 milestones = 9 gaps
 
     return [
       {
@@ -29,64 +29,70 @@ function About() {
         position: leftMargin,
         directory: '2002_born/',
         location: 'Öxnevalla',
-        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
-        status: 'Completed'
+        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.'
       },
       {
         year: 2021,
         position: leftMargin + spacing,
         directory: '2021_studies/',
         location: 'Jönköping',
-        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
-        status: 'Completed'
+        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.'
       },
       {
-        year: 2023,
+        year: 2022,
         position: leftMargin + spacing * 2,
-        directory: '2023_landlord/',
+        directory: '2022_programming/',
         location: 'Jönköping',
-        description: 'Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster.',
-        status: 'Completed'
+        description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
       },
       {
         year: 2023,
         position: leftMargin + spacing * 3,
+        directory: '2023_projects/',
+        location: 'Jönköping',
+        description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor.'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 4,
+        directory: '2023_landlord/',
+        location: 'Jönköping',
+        description: 'Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster.'
+      },
+      {
+        year: 2023,
+        position: leftMargin + spacing * 5,
         directory: '2023_saab/',
         location: 'Linköping',
-        description: 'Hade min praktik på Saab och arbetade även där som sommarjobbare.',
-        status: 'Completed'
+        description: 'Hade min praktik på SAAB, Training & Simulation, och arbetade även där som sommarjobbare.'
       },
       {
         year: 2024,
-        position: leftMargin + spacing * 4,
+        position: leftMargin + spacing * 6,
         directory: '2024_projects/',
         location: 'Jönköping',
-        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa.',
-        status: 'Completed'
+        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa.'
       },
       {
         year: 2024,
-        position: leftMargin + spacing * 5,
+        position: leftMargin + spacing * 7,
         directory: '2024_military_interest/',
         location: 'Jönköping',
-        description: 'Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten."',
-        status: 'Completed'
+        description: 'Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten."'
       },
       {
         year: 2025,
-        position: leftMargin + spacing * 6,
+        position: leftMargin + spacing * 8,
         directory: '2025_military/',
         location: 'Halmstad',
-        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
-        status: 'In Progress'
+        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.'
       },
       {
         year: 2026,
-        position: leftMargin + spacing * 7,
+        position: leftMargin + spacing * 9,
         directory: '2026_next/',
         location: '?',
-        description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.',
-        status: 'Upcoming'
+        description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
       }
     ];
   };
@@ -115,8 +121,6 @@ function About() {
       lines.push({ type: 'output', text: ' ' });
       lines.push({ type: 'output', text: 'Description:' });
       lines.push({ type: 'output', text: nearestMilestone.description });
-      lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'status', text: `Status: ${nearestMilestone.status || 'Completed'}`, status: nearestMilestone.status });
       lines.push({ type: 'output', text: ' ' });
       lines.push({ type: 'output', text: `ellen@life:~/${nearestMilestone.year}$` });
     } else {
@@ -263,17 +267,9 @@ function About() {
                   {displayedText.split('\n').map((line, index) => {
                     const lineData = terminalLinesRef.current.find(l => l.text === line.trim());
                     const lineType = lineData ? lineData.type : 'output';
-                    const statusValue = lineData?.status;
-
-                    let statusClass = '';
-                    if (lineType === 'status') {
-                      if (statusValue === 'Completed') statusClass = 'status-completed';
-                      else if (statusValue === 'In Progress') statusClass = 'status-progress';
-                      else if (statusValue === 'Upcoming') statusClass = 'status-upcoming';
-                    }
 
                     return (
-                      <div key={index} className={`terminal-line ${lineType} ${statusClass}`}>
+                      <div key={index} className={`terminal-line ${lineType}`}>
                         {line}
                       </div>
                     );
