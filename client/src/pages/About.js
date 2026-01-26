@@ -224,44 +224,19 @@ function About() {
 
   return (
     <section id="about" className="about-game">
-      {/* Terminal Window - Fixed, always centered */}
-      <div className="terminal-window terminal-window--game">
-            <div className="terminal-header">
-              <div className="terminal-buttons">
-                <span className="terminal-button close"></span>
-                <span className="terminal-button minimize"></span>
-                <span className="terminal-button maximize"></span>
+      {/* Content Display - Top Left */}
+      <div className="content-display">
+        <div className="content-lines">
+          {terminalLinesRef.current.map((lineData, index) => {
+            return (
+              <div key={index} className={`content-line ${lineData.type}`}>
+                {lineData.text}
+                {lineData.boldText && <strong>{lineData.boldText}</strong>}
               </div>
-              <div className="terminal-title">ellen@life:~/ellen-life</div>
-              <div className="terminal-tabs">
-                <div className="terminal-tab active">
-                  <span className="tab-icon">⚡</span>
-                  <span>terminal</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="terminal-body">
-              <div className="line-numbers">
-                {terminalLinesRef.current.map((_, index) => (
-                  <div key={index} className="line-number">{index + 1}</div>
-                ))}
-              </div>
-
-              <div className="terminal-content">
-                <pre>
-                  {terminalLinesRef.current.map((lineData, index) => {
-                    return (
-                      <div key={index} className={`terminal-line ${lineData.type}`}>
-                        {lineData.text}
-                        {lineData.boldText && <strong>{lineData.boldText}</strong>}
-                      </div>
-                    );
-                  })}
-                </pre>
-              </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
+      </div>
 
       {/* Game World - Static, full screen */}
       <div className="game-world-container">
@@ -294,27 +269,14 @@ function About() {
         </div>
       </div>
 
-      {/* Image Terminal - Slides in from right when milestone has image */}
+      {/* Image Display - Slides in from right when milestone has image */}
       {nearestMilestone && nearestMilestone.image && (
-        <div className="image-terminal-container">
-          <div className="terminal-window terminal-window--image">
-            <div className="terminal-header">
-              <div className="terminal-buttons">
-                <span className="terminal-button close"></span>
-                <span className="terminal-button minimize"></span>
-                <span className="terminal-button maximize"></span>
-              </div>
-              <div className="terminal-title">ellen@images:~/{nearestMilestone.year}</div>
-            </div>
-
-            <div className="terminal-body terminal-body--image">
-              <img
-                src={nearestMilestone.image}
-                alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
-                className="milestone-image"
-              />
-            </div>
-          </div>
+        <div className="image-display">
+          <img
+            src={nearestMilestone.image}
+            alt={`${nearestMilestone.year} - ${nearestMilestone.location}`}
+            className="milestone-image"
+          />
         </div>
       )}
     </section>
