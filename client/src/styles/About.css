@@ -24,7 +24,7 @@
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   z-index: 200;
-  margin-top: -80px;
+  margin-top: -150px;
   animation: fadeInTerminal 0.3s ease-out;
 }
 
@@ -327,21 +327,6 @@
   border-radius: 0 0 4px 4px;
   border: 2px solid #3D2616;
   border-top: none;
-}
-
-/* Subtle background grid */
-.about-game::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(78, 201, 176, 0.03) 79px, rgba(78, 201, 176, 0.03) 80px),
-    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(78, 201, 176, 0.03) 79px, rgba(78, 201, 176, 0.03) 80px);
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* Responsive */
