@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/pages/Projects.css';
 
 function Projects() {
-  const [mountedDrive, setMountedDrive] = useState(null);
 
   const drives = [
     {
@@ -37,10 +37,6 @@ function Projects() {
     }
   ];
 
-  const toggleMount = (driveId) => {
-    setMountedDrive(mountedDrive === driveId ? null : driveId);
-  };
-
   return (
     <div className="projects-page">
       <div className="drives-container">
@@ -51,11 +47,11 @@ function Projects() {
 
         <div className="drives-grid">
           {drives.map((drive) => (
-            <div key={drive.id} className="drive-wrapper">
-              <div
-                className={`hard-drive ${mountedDrive === drive.id ? 'mounted' : ''}`}
-                onClick={() => toggleMount(drive.id)}
-              >
+            <Link
+              key={drive.id}
+              to={`/projects/${drive.id}`}
+              className="hard-drive"
+            >
                 {/* Drive Top Panel */}
                 <div className="drive-top">
                   <div className="drive-screws">
@@ -112,67 +108,9 @@ function Projects() {
 
                 {/* Mount Indicator */}
                 <div className="drive-mount-hint">
-                  {mountedDrive === drive.id ? '▼ MOUNTED' : '▶ CLICK TO MOUNT'}
+                  ▶ CLICK TO MOUNT
                 </div>
-              </div>
-
-              {/* Mounted Contents */}
-              {mountedDrive === drive.id && (
-                <div className="drive-contents">
-                  <div className="contents-header">
-                    <div className="contents-title">📁 {drive.label}</div>
-                    <div className="contents-path">/mnt/{drive.id}/</div>
-                  </div>
-
-                  <div className="contents-body">
-                    <div className="content-section">
-                      <div className="content-file">📄 README.txt</div>
-                      <div className="content-text">
-                        <strong>{drive.name}</strong>
-                        <p>{drive.description}</p>
-                      </div>
-                    </div>
-
-                    <div className="content-section">
-                      <div className="content-file">📄 TECH-STACK.txt</div>
-                      <div className="content-tags">
-                        {drive.techStack.map((tech, idx) => (
-                          <span key={idx} className="tech-tag">{tech}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="content-section">
-                      <div className="content-file">📄 LINKS.txt</div>
-                      <div className="content-links">
-                        {drive.github && (
-                          <a
-                            href={drive.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="content-link"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            → View on GitHub
-                          </a>
-                        )}
-                        {drive.demo && (
-                          <a
-                            href={drive.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="content-link"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            → Live Demo
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

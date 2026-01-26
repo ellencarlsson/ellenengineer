@@ -1,0 +1,600 @@
+.project-detail-page {
+  min-height: 85vh;
+  padding: var(--spacing-xl) var(--spacing-md);
+  animation: fadeIn var(--transition-slow);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120px;
+}
+
+.project-detail-container {
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Back Button */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #3d6b60;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  padding: 8px 16px;
+  border: 2px solid #3d6b60;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.back-button:hover {
+  background: rgba(61, 107, 96, 0.1);
+  transform: translateX(-4px);
+}
+
+/* Mounted Header */
+.mounted-header {
+  background: linear-gradient(135deg, #3d6b60 0%, #2d5550 100%);
+  border: 3px solid #3d6b60;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 12px rgba(61, 107, 96, 0.3);
+}
+
+.mount-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status-led {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 12px currentColor,
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.status-led.green {
+  background: #28ca42;
+  color: #28ca42;
+}
+
+.status-led.blue {
+  background: #569cd6;
+  color: #569cd6;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.status-text {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #f5f0eb;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.mount-info {
+  border-top: 1px solid rgba(245, 240, 235, 0.2);
+  padding-top: 12px;
+}
+
+.mount-path {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: rgba(245, 240, 235, 0.7);
+  margin-bottom: 4px;
+}
+
+.mount-label {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: #f5f0eb;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Specs Card */
+.specs-card {
+  background: linear-gradient(135deg, #d4c4b0 0%, #b5a693 100%);
+  border: 3px solid #8b6f47;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: var(--spacing-lg);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.specs-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(61, 38, 23, 0.2);
+}
+
+.specs-icon {
+  font-size: 48px;
+  filter: grayscale(0.5);
+}
+
+.specs-title {
+  flex: 1;
+}
+
+.brand-name {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #3d2617;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.model-number {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #6b5344;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  padding: 8px 12px;
+  background: rgba(245, 240, 235, 0.5);
+  border-radius: 4px;
+}
+
+.spec-label {
+  color: #6b5344;
+  font-weight: 600;
+}
+
+.spec-value {
+  color: #3d2617;
+  font-weight: 700;
+}
+
+/* Project Preview */
+.project-preview {
+  margin-bottom: var(--spacing-lg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* File System Container */
+.filesystem-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* File Section */
+.file-section {
+  background: rgba(245, 240, 235, 0.9);
+  border: 2px solid #8b6f47;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-header {
+  background: linear-gradient(135deg, #d4c4b0 0%, #b5a693 100%);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #8b6f47;
+}
+
+.file-icon {
+  font-size: 20px;
+}
+
+.file-name {
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3d2617;
+  letter-spacing: 0.5px;
+}
+
+.file-content {
+  padding: 24px;
+}
+
+/* Project Title & Description */
+.project-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #3d2617;
+  margin-bottom: 16px;
+}
+
+.project-description {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  color: #6b5344;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Tech Grid */
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tech-badge {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3d2617;
+  background: #d4c4b0;
+  border: 2px solid #8b6f47;
+  padding: 8px 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Links Container */
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3d6b60;
+  text-decoration: none;
+  padding: 12px 20px;
+  background: rgba(61, 107, 96, 0.1);
+  border: 2px solid #3d6b60;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.project-link:hover {
+  background: rgba(61, 107, 96, 0.2);
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(61, 107, 96, 0.2);
+}
+
+.link-icon {
+  font-size: 18px;
+}
+
+.link-text {
+  flex: 1;
+}
+
+/* System Diagram / Workflow - Corkboard Style */
+.workflow-section {
+  background: linear-gradient(135deg, #c9b5a0 0%, #b19a82 100%);
+  border: 4px solid #8b6f47;
+  box-shadow:
+    inset 0 0 100px rgba(61, 38, 23, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.system-diagram {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+  padding: 20px;
+  position: relative;
+}
+
+/* Add cork texture dots */
+.system-diagram::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(61, 38, 23, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(61, 38, 23, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 40% 50%, rgba(61, 38, 23, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.workflow-step {
+  position: relative;
+}
+
+.step-card {
+  background: linear-gradient(135deg, #f5f0eb 0%, #e5ddd3 100%);
+  border: 2px solid #8b6f47;
+  border-radius: 4px;
+  padding: 16px;
+  position: relative;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+  transform: rotate(-1deg);
+}
+
+.step-card:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.step-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  z-index: 10;
+}
+
+/* Pin on top of card */
+.step-card::before {
+  content: '📌';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  z-index: 1;
+}
+
+/* LED Indicator */
+.step-led-container {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.step-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px currentColor,
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.step-led.blue {
+  background: #569cd6;
+  color: #569cd6;
+}
+
+.step-led.yellow {
+  background: #ffd700;
+  color: #ffd700;
+}
+
+.step-led.green {
+  background: #28ca42;
+  color: #28ca42;
+}
+
+/* Step Number */
+.step-number {
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: #8b6f47;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Step Icon */
+.step-icon {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Step Content */
+.step-content {
+  text-align: center;
+}
+
+.step-title {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #3d2617;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.step-description {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d2617;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.step-details {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  color: #8b6f47;
+  font-style: italic;
+}
+
+/* Vintage Label */
+.step-label {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(61, 38, 23, 0.15);
+  text-align: center;
+}
+
+.label-barcode {
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
+  color: #3d2617;
+  letter-spacing: -1px;
+  opacity: 0.3;
+}
+
+/* Workflow Arrow - Hidden in grid layout */
+.workflow-arrow {
+  display: none;
+}
+
+/* Demo Video */
+.video-container {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.demo-video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Error Container */
+.error-container {
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.error-container h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 32px;
+  color: #3d2617;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .project-detail-page {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    padding-top: 100px;
+  }
+
+  .project-title {
+    font-size: 24px;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mounted-header {
+    padding: 16px;
+  }
+
+  .specs-card {
+    padding: 16px;
+  }
+
+  .specs-icon {
+    font-size: 36px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+  }
+
+  .project-title {
+    font-size: 22px;
+  }
+
+  .file-content {
+    padding: 16px;
+  }
+
+  .tech-grid {
+    gap: 8px;
+  }
+
+  .tech-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .system-diagram {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+    padding: 16px;
+  }
+
+  .step-card {
+    padding: 12px;
+  }
+
+  .step-icon {
+    font-size: 32px;
+  }
+
+  .step-title {
+    font-size: 10px;
+  }
+
+  .step-description {
+    font-size: 12px;
+  }
+
+  .step-details {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 600px) {
+  .system-diagram {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
