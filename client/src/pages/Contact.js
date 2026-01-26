@@ -7,57 +7,36 @@ function Contact() {
       <div className="contact-container">
         <h1 className="page-title">Kontakta mig</h1>
 
-        <div className="code-editor">
-          <div className="editor-header">
-            <div className="editor-tabs">
-              <div className="editor-tab active">
-                <span className="file-icon">📄</span>
-                <span>contact.js</span>
-              </div>
-            </div>
+        <div className="readme-container">
+          <div className="readme-header">
+            <span className="readme-icon">📄</span>
+            <span className="readme-filename">README.md</span>
           </div>
 
-          <div className="code-content">
-            <div className="line-numbers">
-              <div className="line-number">1</div>
-              <div className="line-number">2</div>
-              <div className="line-number">3</div>
-              <div className="line-number">4</div>
-              <div className="line-number">5</div>
-              <div className="line-number">6</div>
-              <div className="line-number">7</div>
-            </div>
+          <div className="readme-content">
+            <h2 className="readme-title">👋 Hej!</h2>
 
-            <div className="code-lines">
-              <div className="code-line">
-                <span className="keyword">const</span>{' '}
-                <span className="variable">contact</span>{' '}
-                <span className="operator">=</span>{' '}
-                <span className="punctuation">{'{'}</span>
-              </div>
-              <div className="code-line indent-1">
-                <span className="property">email</span>
-                <span className="operator">:</span>{' '}
-                <a href="mailto:ellen.carlsson@example.com" className="string">
-                  "ellen.carlsson@example.com"
-                </a>
-                <span className="punctuation">,</span>
-              </div>
-              <div className="code-line indent-1">
-                <span className="property">linkedin</span>
-                <span className="operator">:</span>{' '}
-                <a href="https://linkedin.com/in/ellen-carlsson" target="_blank" rel="noopener noreferrer" className="string">
-                  "linkedin.com/in/ellen-carlsson"
-                </a>
-              </div>
-              <div className="code-line">
-                <span className="punctuation">{'}'}</span>
-                <span className="punctuation">;</span>
-              </div>
-              <div className="code-line"></div>
-              <div className="code-line">
-                <span className="comment">// Hör gärna av dig! 👋</span>
-              </div>
+            <p className="readme-description">
+              Jag är alltid öppen för nya möjligheter och samarbeten. Hör gärna av dig!
+            </p>
+
+            <h3 className="readme-subtitle">📫 Kontakta mig</h3>
+
+            <div className="contact-links">
+              <a href="mailto:ellen.carlsson@example.com" className="contact-link">
+                <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>ellen.carlsson@example.com</span>
+              </a>
+
+              <a href="https://linkedin.com/in/ellen-carlsson" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <svg className="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
         </div>
