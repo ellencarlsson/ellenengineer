@@ -10,16 +10,17 @@ function ProjectDetail() {
       id: 'slr-2024',
       model: 'SEAGATE ST3847',
       label: 'SIGN-LANGUAGE-2024',
-      name: 'Sign Language Recognition',
+      name: 'Sign Talker',
       year: '2024',
       capacity: '847 MB',
       interface: 'SCSI',
       status: 'VERIFIED',
-      description: 'AI-baserad teckenspråksigenkänning med deep learning. Examensarbete som fick pris och stipendium av Science Park och ställdes ut på JTH:s examensmässa.',
-      techStack: ['Python', 'TensorFlow', 'OpenCV', 'Flask', 'NumPy'],
+      description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
+      techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
       image: null,
+      demoVideo: 'https://www.youtube.com/embed/RrvsNtiPFXo',
       hasWorkflow: true,
       workflow: [
         {
@@ -70,8 +71,7 @@ function ProjectDetail() {
           details: 'Text-to-Speech',
           ledColor: 'green'
         }
-      ],
-      demoVideo: null
+      ]
     },
     'portfolio-2026': {
       id: 'portfolio-2026',
@@ -121,21 +121,16 @@ function ProjectDetail() {
             <div className="readme-box">
               <div className="readme-header">
                 <div className="readme-title-section">
-                  <span className="readme-icon">📖</span>
+                  <svg className="readme-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 6.5C10.5 4.5 8 3.5 5 3.5C4 3.5 3 3.7 2 4V18C3 17.5 4 17.5 5 17.5C8 17.5 10.5 18.5 12 20.5C13.5 18.5 16 17.5 19 17.5C20 17.5 21 17.5 22 18V4C21 3.7 20 3.5 19 3.5C16 3.5 13.5 4.5 12 6.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 6.5V20.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                   <span className="readme-label">README</span>
                 </div>
               </div>
               <div className="readme-accent-line"></div>
               <div className="readme-content">
                 <p className="readme-description">{project.description}</p>
-
-                <h2 className="readme-section-title">Tech Stack</h2>
-                <div className="readme-divider"></div>
-                <ul className="readme-tech-list">
-                  {project.techStack.map((tech, idx) => (
-                    <li key={idx} className="readme-tech-item">{tech}</li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
@@ -165,19 +160,23 @@ function ProjectDetail() {
           </div>
         </div>
 
-        {/* DEMO-VIDEO.mp4 */}
+        {/* DEMO */}
         {project.demoVideo && (
           <div className="file-section fullwidth-section">
             <div className="file-header">
               <span className="file-icon">🎬</span>
-              <span className="file-name">DEMO-VIDEO.mp4</span>
+              <span className="file-name">DEMO</span>
             </div>
             <div className="file-content">
               <div className="video-container">
-                <video controls className="demo-video">
-                  <source src={project.demoVideo} type="video/mp4" />
-                  Din webbläsare stödjer inte video.
-                </video>
+                <iframe
+                  className="demo-video"
+                  src={project.demoVideo}
+                  title="Project Demo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </div>
