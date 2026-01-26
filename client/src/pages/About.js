@@ -6,25 +6,84 @@ function About() {
   const [cameraX, setCameraX] = useState(2500);
   const [showInstructions, setShowInstructions] = useState(true);
   const [nearestMilestone, setNearestMilestone] = useState(null);
+  const [leavingMilestone, setLeavingMilestone] = useState(null);
   const keysRef = useRef({});
   const velocityRef = useRef({ x: 0, y: 0 });
   const isJumpingRef = useRef(false);
   const lastMoveTimeRef = useRef(Date.now());
   const initialFadeTimerRef = useRef(null);
+  const previousMilestoneRef = useRef(null);
 
   const milestones = [
-    { year: 2002, position: 500, directory: '2002_born/', location: 'öxnevalla' },
-    { year: 2021, position: 1000, directory: '2021_studies/', location: 'jönköping' },
-    { year: 2024, position: 1500, directory: '2024_projects/', location: 'jönköping' },
-    { year: 2025, position: 2000, directory: '2025_military/', location: 'halmstad' },
-    { year: 2026, position: 2500, directory: '2026_next/', location: '?' }
+    {
+      year: 2002,
+      position: 500,
+      directory: '2002_born/',
+      location: 'öxnevalla',
+      description: 'Född i Öxnevalla'
+    },
+    {
+      year: 2021,
+      position: 1000,
+      directory: '2021_studies/',
+      location: 'jönköping',
+      description: 'Började studera Datateknik vid Jönköping University'
+    },
+    {
+      year: 2024,
+      position: 1500,
+      directory: '2024_projects/',
+      location: 'jönköping',
+      description: 'Utvecklade flera projekt inom mobilutveckling'
+    },
+    {
+      year: 2025,
+      position: 2000,
+      directory: '2025_military/',
+      location: 'halmstad',
+      description: 'Påbörjade 15 månaders värnplikt i Halmstad'
+    },
+    {
+      year: 2026,
+      position: 2500,
+      directory: '2026_next/',
+      location: '?',
+      description: 'Nästa kapitel...'
+    }
   ];
 
   const GROUND_Y = 400;
   const GRAVITY = 0.8;
   const JUMP_FORCE = -15;
   const MOVE_SPEED = 5;
-  // Timeline game
+
+  // Generate terminal lines based on current state
+  const getTerminalLines = () => {
+    const lines = [];
+
+    if (leavingMilestone && !nearestMilestone) {
+      // Leaving a directory
+      lines.push({ type: 'command', text: `~/ellen-life/${leavingMilestone.year}$ cd ..` });
+      lines.push({ type: 'output', text: `~/ellen-life$` });
+    } else if (nearestMilestone) {
+      // Entering and reading a directory
+      lines.push({ type: 'command', text: `~/ellen-life$ cd ${nearestMilestone.year}` });
+      lines.push({ type: 'command', text: `~/ellen-life/${nearestMilestone.year}$ cat README.md` });
+      lines.push({ type: 'output', text: '' });
+      lines.push({ type: 'output', text: `Year: ${nearestMilestone.year}` });
+      lines.push({ type: 'output', text: `Location: ${nearestMilestone.location}` });
+      lines.push({ type: 'output', text: `Description: ${nearestMilestone.description}` });
+      lines.push({ type: 'output', text: '' });
+      lines.push({ type: 'output', text: `~/ellen-life/${nearestMilestone.year}$` });
+    } else {
+      // Base directory
+      lines.push({ type: 'output', text: '~/ellen-life$' });
+    }
+
+    return lines;
+  };
+
+  const terminalLines = getTerminalLines();
 
   // Initial fade out after 3 seconds
   useEffect(() => {
@@ -144,7 +203,14 @@ function About() {
 
       if (closest && closest.distance < 150) {
         setNearestMilestone(closest.milestone);
+        previousMilestoneRef.current = closest.milestone;
       } else {
+        // Leaving a milestone - show cd .. notification
+        if (previousMilestoneRef.current && nearestMilestone) {
+          setLeavingMilestone(previousMilestoneRef.current);
+          setTimeout(() => setLeavingMilestone(null), 2000);
+          previousMilestoneRef.current = null;
+        }
         setNearestMilestone(null);
       }
     }, 1000 / 60);
@@ -159,31 +225,41 @@ function About() {
           <p>navigate --wasd --arrows | jump --space</p>
         </div>
 
-        {/* Terminal Overlay */}
-        {nearestMilestone && (
-          <div className="info-panel">
-            <div className="panel-terminal">
-              <div className="panel-header">
-                <span className="panel-prompt">$</span>
-                <span className="panel-command">cat {nearestMilestone.directory}README.md</span>
-              </div>
-              <div className="panel-content">
-                <div className="panel-line">
-                  <span className="line-key">year</span>
-                  <span className="line-value">{nearestMilestone.year}</span>
-                </div>
-                <div className="panel-line">
-                  <span className="line-key">location</span>
-                  <span className="line-value">{nearestMilestone.location}</span>
-                </div>
-                <div className="panel-line">
-                  <span className="line-key">path</span>
-                  <span className="line-value">~/life/{nearestMilestone.directory}</span>
-                </div>
+        {/* Terminal Window */}
+        <div className="terminal-window-about">
+          <div className="terminal-header">
+            <div className="terminal-buttons">
+              <span className="terminal-button close"></span>
+              <span className="terminal-button minimize"></span>
+              <span className="terminal-button maximize"></span>
+            </div>
+            <div className="terminal-title">ellen@life:~/ellen-life</div>
+            <div className="terminal-tabs">
+              <div className="terminal-tab active">
+                <span className="tab-icon">⚡</span>
+                <span>terminal</span>
               </div>
             </div>
           </div>
-        )}
+
+          <div className="terminal-body">
+            <div className="line-numbers">
+              {terminalLines.map((_, index) => (
+                <div key={index} className="line-number">{index + 1}</div>
+              ))}
+            </div>
+
+            <div className="terminal-content">
+              <pre>
+                {terminalLines.map((line, index) => (
+                  <div key={index} className={`terminal-line ${line.type}`}>
+                    {line.text}
+                  </div>
+                ))}
+              </pre>
+            </div>
+          </div>
+        </div>
 
         <div className="game-world" style={{ transform: `translateX(-${cameraX}px)` }}>
           {/* Ground */}

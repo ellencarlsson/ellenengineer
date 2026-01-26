@@ -56,6 +56,176 @@
   pointer-events: none;
 }
 
+/* Terminal Window - Same as Home */
+.terminal-window-about {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 800px;
+  width: 90%;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  animation: fadeInTerminal 0.3s ease-out;
+}
+
+@keyframes fadeInTerminal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Terminal Header - VS Code Style */
+.terminal-window-about .terminal-header {
+  background: #2d2d2d;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.terminal-window-about .terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-window-about .terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+.terminal-window-about .terminal-button.close {
+  background: #ff5f57;
+}
+
+.terminal-window-about .terminal-button.minimize {
+  background: #ffbd2e;
+}
+
+.terminal-window-about .terminal-button.maximize {
+  background: #28ca42;
+}
+
+.terminal-window-about .terminal-title {
+  color: #999;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  flex: 1;
+  text-align: center;
+  user-select: none;
+}
+
+.terminal-window-about .terminal-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.terminal-window-about .terminal-tab {
+  background: #1e1e1e;
+  color: #ccc;
+  padding: 4px 12px;
+  border-radius: 4px 4px 0 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+}
+
+.terminal-window-about .terminal-tab.active {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.terminal-window-about .tab-icon {
+  font-size: 14px;
+}
+
+/* Terminal Body */
+.terminal-window-about .terminal-body {
+  display: flex;
+  background: #1e1e1e;
+  min-height: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.terminal-window-about .line-numbers {
+  background: #1e1e1e;
+  color: #858585;
+  padding: 20px 8px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid #2d2d2d;
+  min-width: 45px;
+}
+
+.terminal-window-about .line-number {
+  padding: 0 8px;
+}
+
+.terminal-window-about .terminal-content {
+  flex: 1;
+  padding: 20px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #d4d4d4;
+}
+
+.terminal-window-about .terminal-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Terminal Line Styling */
+.terminal-window-about .terminal-line {
+  margin: 0;
+  padding: 0;
+}
+
+.terminal-window-about .terminal-line.command {
+  color: #4ec9b0;
+  font-weight: 500;
+}
+
+.terminal-window-about .terminal-line.output {
+  color: #ce9178;
+}
+
+/* Scrollbar Styling */
+.terminal-window-about .terminal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terminal-window-about .terminal-body::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.terminal-window-about .terminal-body::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+.terminal-window-about .terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #4e4e4e;
+}
+
 .game-world {
   width: 3500px;
   height: 100vh;
@@ -140,106 +310,6 @@
   font-weight: 600;
 }
 
-/* Terminal Overlay - Fullscreen */
-.info-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(2px);
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.panel-terminal {
-  background: rgba(30, 30, 30, 0.98);
-  border: 2px solid #4ec9b0;
-  border-radius: 4px;
-  max-width: 700px;
-  width: 100%;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  box-shadow:
-    0 0 30px rgba(78, 201, 176, 0.4),
-    0 8px 40px rgba(0, 0, 0, 0.8);
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.panel-header {
-  background: #252525;
-  padding: 14px 20px;
-  border-bottom: 1px solid #4ec9b0;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.panel-prompt {
-  color: #569cd6;
-  font-weight: 600;
-}
-
-.panel-command {
-  color: #4ec9b0;
-  flex: 1;
-}
-
-.panel-content {
-  padding: 24px 20px;
-  min-height: 120px;
-}
-
-.panel-line {
-  margin-bottom: 14px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.panel-line:last-child {
-  margin-bottom: 0;
-}
-
-.line-key {
-  color: #ce9178;
-  margin-right: 12px;
-  min-width: 80px;
-  display: inline-block;
-}
-
-.line-key::after {
-  content: ':';
-  margin-left: 0;
-}
-
-.line-value {
-  color: #d4d4d4;
-}
 
 /* Player */
 .player {
@@ -345,17 +415,32 @@
     top: 100px;
   }
 
-  .milestone-sign {
-    padding: 12px 16px;
-    min-width: 100px;
+  .terminal-window-about {
+    width: 95%;
   }
 
-  .milestone-year {
-    font-size: 24px;
+  .terminal-window-about .terminal-body {
+    min-height: 250px;
+    max-height: 350px;
   }
 
-  .milestone-city {
-    font-size: 14px;
+  .terminal-window-about .terminal-content {
+    font-size: 12px;
+    padding: 15px;
+  }
+
+  .terminal-window-about .line-numbers {
+    font-size: 12px;
+    min-width: 35px;
+  }
+
+  .terminal-window-about .terminal-title {
+    font-size: 10px;
+  }
+
+  .terminal-window-about .terminal-tab {
+    font-size: 10px;
+    padding: 4px 8px;
   }
 
   .player {
@@ -371,5 +456,17 @@
   .player-body {
     width: 20px;
     height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-window-about .terminal-content {
+    font-size: 11px;
+    padding: 12px;
+  }
+
+  .terminal-window-about .line-numbers {
+    font-size: 11px;
+    padding: 12px 4px;
   }
 }
