@@ -19,6 +19,7 @@ function ProjectDetail() {
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
+      thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideo: 'https://www.youtube.com/embed/RrvsNtiPFXo',
       hasWorkflow: true,
@@ -280,15 +281,15 @@ function ProjectDetail() {
           </div>
           <div className="file-content">
             <div className="links-container">
-              {project.github && (
+              {project.thesis && (
                 <a
-                  href={project.github}
+                  href={project.thesis}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="project-link github"
+                  className="project-link thesis"
                 >
                   <span className="link-icon">→</span>
-                  <span className="link-text">View on GitHub</span>
+                  <span className="link-text">Thesis Paper</span>
                 </a>
               )}
               {project.demo && (
