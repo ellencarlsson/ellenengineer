@@ -16,7 +16,7 @@ function Projects() {
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      position: { x: 20, y: 25 },
+      position: { x: 20, y: 18 },
       connectedTo: 'portfolio-2026'
     },
     {
@@ -29,7 +29,7 @@ function Projects() {
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
-      position: { x: 60, y: 55 },
+      position: { x: 60, y: 48 },
       connectedTo: 'postschema-2025'
     },
     {
@@ -41,7 +41,7 @@ function Projects() {
       description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering.',
       techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
       github: 'https://github.com/ellencarlsson/postschema',
-      position: { x: 35, y: 75 },
+      position: { x: 35, y: 68 },
       connectedTo: null
     }
   ];
@@ -97,11 +97,6 @@ function Projects() {
               </div>
 
               <div className="node-circle">
-                {/* LED Indicator */}
-                <div className="node-led">
-                  <div className="led-light"></div>
-                </div>
-
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
                   <div className="node-year">{project.year}</div>
