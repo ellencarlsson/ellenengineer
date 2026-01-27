@@ -12,6 +12,10 @@
   --accent-mauve: #b08b8f;
   --accent-burgundy: #8b4a4f;
 
+  /* Orange accent */
+  --accent-orange: #e8823f;
+  --accent-orange-light: #f5a161;
+
   /* Text färger */
   --text-dark: #3d2617;
   --text-medium: #6b5344;
