@@ -31,33 +31,26 @@
   z-index: 1;
 }
 
-/* Back Link - Vintage Button */
+/* Back Link - Subtle Text Link */
 .back-link {
   display: inline-block;
   font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.85rem;
-  color: var(--text-medium);
+  font-size: 0.9rem;
+  color: #8b6f47;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 1.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--background-cream);
-  border: 2px solid var(--primary-brown);
-  border-radius: var(--radius-md);
+  padding: 0.4rem 0.6rem;
   letter-spacing: 0.3px;
-  box-shadow:
-    var(--shadow-sm),
-    inset 0 0 0 2px var(--background-cream),
-    inset 0 0 0 4px rgba(139, 111, 71, 0.15);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  border-bottom: 2px solid transparent;
+  background: transparent;
 }
 
 .back-link:hover {
-  transform: translateX(-4px);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 2px var(--background-cream),
-    inset 0 0 0 4px rgba(139, 111, 71, 0.25);
+  color: #3d2617;
+  transform: translateX(-5px);
+  border-bottom: 2px solid #3d2617;
 }
 
 .status-led {
@@ -114,7 +107,7 @@
 .project-header-title {
   margin-bottom: var(--spacing-lg);
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(139, 111, 71, 0.3);
+  border-bottom: 1px solid #6b5344;
 }
 
 .project-title-row {
@@ -136,8 +129,8 @@
 .project-tagline {
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--text-medium);
+  font-weight: 500;
+  color: #3d2617;
   margin: 0.5rem 0 0 0;
   letter-spacing: 0.3px;
 }
@@ -225,7 +218,7 @@
   align-items: center;
   gap: 8px;
   padding: 1rem 1.25rem 0.75rem;
-  border-bottom: 1px solid rgba(139, 111, 71, 0.15);
+  border-bottom: 1px solid #6b5344;
 }
 
 .about-icon {
@@ -336,7 +329,7 @@
   gap: 12px;
   padding: 1rem 1.5rem;
   background: transparent;
-  border-bottom: 1px solid rgba(139, 111, 71, 0.15);
+  border-bottom: 1px solid #6b5344;
 }
 
 .readme-title-section {
@@ -427,7 +420,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: var(--spacing-md);
-  border-bottom: 1px solid rgba(139, 111, 71, 0.3);
+  border-bottom: 1px solid #6b5344;
 }
 
 .file-icon {
@@ -499,7 +492,7 @@
 
 .workflow-section .file-header {
   padding: 12px 20px;
-  border-bottom: 2px solid var(--primary-brown);
+  border-bottom: 1px solid #6b5344;
   margin-bottom: 20px;
 }
 
