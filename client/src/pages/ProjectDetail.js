@@ -88,6 +88,21 @@ function ProjectDetail() {
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
       image: null
+    },
+    'postschema-2025': {
+      id: 'postschema-2025',
+      model: 'SAMSUNG PS2025',
+      label: 'POSTSCHEMA-2025',
+      name: 'PostSchema',
+      year: '2025',
+      capacity: '1.5 GB',
+      interface: 'SATA',
+      status: 'OPERATIONAL',
+      description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering. Applikationen gör det enkelt för anställda att se sina arbetspass, byta pass med kollegor, och få översikt över sitt arbetsvecka.\n\nProjektet utvecklades med modern webbteknologi och fokuserar på att göra schemaläggning smidig och intuitiv. Genom att använda React för frontend och Node.js med Express för backend, skapades en responsiv och snabb applikation.\n\nMongoDB används som databas för att lagra scheman, användarinformation och passkonfigurationer. Systemet har inbyggd autentisering och möjliggör olika rollnivåer för administratörer och anställda.',
+      techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
+      github: 'https://github.com/ellencarlsson/postschema',
+      demo: null,
+      image: null
     }
   };
 
