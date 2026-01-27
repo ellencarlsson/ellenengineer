@@ -231,7 +231,7 @@ function ProjectDetail() {
         {project.demoVideo && (
           <div className="file-section fullwidth-section">
             <div className="file-header">
-              <span className="file-icon">📺</span>
+              <span className="file-icon">📼</span>
               <span className="file-name">DEMO.broadcast</span>
             </div>
             <div className="file-content">
@@ -265,11 +265,6 @@ function ProjectDetail() {
                 {project.workflow.map((step) => (
                   <div key={step.step} className="workflow-step">
                     <div className="step-card">
-                      {/* LED Indicator */}
-                      <div className="step-led-container">
-                        <div className={`step-led ${step.ledColor}`}></div>
-                      </div>
-
                       {/* Step Number */}
                       <div className="step-number">STEP {step.step}</div>
 
@@ -281,11 +276,6 @@ function ProjectDetail() {
                         <div className="step-title">{step.title}</div>
                         <div className="step-description">{step.description}</div>
                         <div className="step-details">{step.details}</div>
-                      </div>
-
-                      {/* Vintage Label */}
-                      <div className="step-label">
-                        <div className="label-barcode">|| ||| |||| ||| ||</div>
                       </div>
                     </div>
                   </div>
