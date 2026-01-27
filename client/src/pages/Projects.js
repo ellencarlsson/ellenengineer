@@ -60,16 +60,29 @@ function Projects() {
             if (!targetProject) return null;
 
             return (
-              <line
-                key={`line-${project.id}`}
-                className={`connection-line ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'active' : ''}`}
-                data-from={project.id}
-                data-to={project.connectedTo}
-                x1={`${project.position.x}%`}
-                y1={`${project.position.y}%`}
-                x2={`${targetProject.position.x}%`}
-                y2={`${targetProject.position.y}%`}
-              />
+              <g key={`connection-${project.id}`}>
+                <line
+                  className={`connection-line ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'active' : ''}`}
+                  data-from={project.id}
+                  data-to={project.connectedTo}
+                  x1={`${project.position.x}%`}
+                  y1={`${project.position.y}%`}
+                  x2={`${targetProject.position.x}%`}
+                  y2={`${targetProject.position.y}%`}
+                />
+                {/* Data packet */}
+                <circle
+                  className={`data-packet ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'paused' : ''}`}
+                  data-from={project.id}
+                  r="3"
+                >
+                  <animateMotion
+                    dur={`${8 + Math.random() * 4}s`}
+                    repeatCount="indefinite"
+                    path={`M ${project.position.x}% ${project.position.y}% L ${targetProject.position.x}% ${targetProject.position.y}%`}
+                  />
+                </circle>
+              </g>
             );
           })}
         </svg>
@@ -97,6 +110,9 @@ function Projects() {
               </div>
 
               <div className="node-circle">
+                {/* LED Indicator */}
+                <div className="node-led"></div>
+
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
                   <div className="node-year">{project.year}</div>
@@ -105,13 +121,21 @@ function Projects() {
 
               {hoveredNode === project.id && (
                 <div className="node-info-card">
+                  <div className="terminal-header">
+                    <div className="terminal-dots">
+                      <span className="dot"></span>
+                      <span className="dot"></span>
+                      <span className="dot"></span>
+                    </div>
+                    <span className="terminal-title">PROJECT_INFO</span>
+                  </div>
                   <div className="info-card-content">
                     <div className="info-item">
-                      <span className="info-label">platform:</span>
+                      <span className="info-label">&gt; platform:</span>
                       <span className="info-value">{project.platform}</span>
                     </div>
                     <div className="info-item">
-                      <span className="info-label">tech:</span>
+                      <span className="info-label">&gt; tech:</span>
                       <span className="info-value">{project.tech}</span>
                     </div>
                   </div>
