@@ -80,15 +80,16 @@ function CV() {
                   </div>
                 </div>
 
-                {/* Lines before buttons */}
-                <div className="line-before-buttons-1"></div>
-                <div className="line-before-buttons-2"></div>
+                {/* Dashed line before buttons */}
+                <div className="line-before-buttons"></div>
 
                 <div className="action-buttons">
                   <button onClick={handleOpenCV} className="cv-button">
+                    <span className="icon-document"></span>
                     ÖPPNA I NY FLIK
                   </button>
                   <button onClick={handleDownload} className="cv-button">
+                    <span className="icon-floppy"></span>
                     LADDA NER CV
                   </button>
                 </div>
