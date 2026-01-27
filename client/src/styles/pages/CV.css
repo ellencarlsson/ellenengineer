@@ -240,7 +240,7 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 0px;
   align-items: start;
 }
 
@@ -291,6 +291,7 @@
 .photo-column {
   position: relative;
   z-index: 1;
+  margin-top: -30px;
 }
 
 .portrait-photo {

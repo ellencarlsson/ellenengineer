@@ -45,12 +45,12 @@ function CV() {
                 <h2 className="article-headline">ELLEN CARLSSON</h2>
                 <div className="article-subheading">Data Ingenjör</div>
 
-                {/* Line after title */}
-                <div className="line-title"></div>
-
                 <div className="content-grid">
                   {/* Left column - text */}
                   <div className="text-column">
+                    {/* Line after title */}
+                    <div className="line-title"></div>
+
                     <p className="article-text">
                       Dataingenjör med passion för AI och mobilapplikationer. Specialiserad på iOS-utveckling och maskininlärning.
                     </p>
