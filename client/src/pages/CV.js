@@ -52,7 +52,7 @@ function CV() {
                     <div className="line-title"></div>
 
                     <p className="article-text">
-                      Dataingenjör med passion för AI och mobilapplikationer. Specialiserad på iOS-utveckling och maskininlärning.
+                      Dataingenjör som gillar att lösa vardagliga problem med kod. Gör just nu lumpen och är nyfiken på vad som kommer härnäst.
                     </p>
 
                     <div className="line-before-interview"></div>
@@ -62,14 +62,14 @@ function CV() {
                     <div className="interview-qa">
                       <div className="interview-question">Vad gör du på fritiden?</div>
                       <p className="interview-answer">
-                        "Jag gillar att gå på promenader och lyssna på ljudböcker, och baka".
+                        "Promenader med ljudböcker och bakning."
                       </p>
                     </div>
 
                     <div className="interview-qa">
-                      <div className="interview-question">Om du inte hade blivit dataingenjör</div>
+                      <div className="interview-question">Om du inte hade blivit dataingenjör?</div>
                       <p className="interview-answer">
-                        "Då hade jag viljat ha ett eget cafe."
+                        "Ett eget café. Jobba med händerna och möta människor istället för kod."
                       </p>
                     </div>
                   </div>
