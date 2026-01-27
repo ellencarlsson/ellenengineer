@@ -16,21 +16,39 @@ function CV() {
   return (
     <div className="cv-page">
       <div className="cv-container">
-        {/* SQL Query on Background */}
-        <div className="query-text">
-          <div className="query-line">
-            <span className="keyword">SELECT</span> <span className="operator">*</span>
+        {/* SQL Query Annotation */}
+        <div className="query-annotation">
+          <div className="query-header">
+            <span className="query-label">SQL Query</span>
           </div>
-          <div className="query-line">
-            <span className="keyword">FROM</span> <span className="table">engineers</span>
-          </div>
-          <div className="query-line">
-            <span className="keyword">WHERE</span> <span className="column">name</span> <span className="operator">=</span> <span className="string">'Ellen Carlsson'</span><span className="operator">;</span>
+          <div className="query-code">
+            <div className="query-line">
+              <span className="keyword">SELECT</span> <span className="operator">*</span>
+            </div>
+            <div className="query-line">
+              <span className="keyword-secondary">FROM</span> <span className="table">engineers</span>
+            </div>
+            <div className="query-line">
+              <span className="keyword-neutral">WHERE</span> <span className="column">name</span> <span className="operator">=</span> <span className="string">'Ellen Carlsson'</span><span className="operator">;</span>
+            </div>
           </div>
         </div>
 
-        {/* CV Display */}
-        <div className="cv-main">
+        {/* Visual Connection */}
+        <div className="query-connection">
+          <div className="connection-line"></div>
+          <span className="connection-text">Query result → resume.pdf</span>
+          <div className="connection-arrow">↓</div>
+        </div>
+
+        {/* System Feedback */}
+        <div className="system-feedback">
+          <span className="feedback-success">✓ Query executed successfully</span>
+          <span className="feedback-info">1 record loaded</span>
+        </div>
+
+        {/* CV Display Card */}
+        <div className="cv-card">
           <img
             src="/assets/CV-image.png"
             alt="CV - Ellen Carlsson"
@@ -40,10 +58,10 @@ function CV() {
           {/* Action Links */}
           <div className="cv-links">
             <button onClick={handleOpenCV} className="cv-link">
-              → Öppna i ny flik
+              <span className="keyword">→</span> Öppna i ny flik
             </button>
             <button onClick={handleDownload} className="cv-link">
-              → Ladda ner CV
+              <span className="keyword">→</span> Ladda ner CV
             </button>
           </div>
         </div>
