@@ -372,28 +372,30 @@
   }
 }
 
-/* Info Card - Terminal Style */
+/* Info Card - Floating card node style */
 .node-info-card {
   position: absolute;
   top: 50%;
-  left: calc(100% + 20px);
+  left: calc(100% + 30px);
   transform: translateY(-50%);
   background: var(--background-cream);
   border: 2px solid var(--primary-brown);
-  border-radius: 4px;
+  border-radius: 16px;
   min-width: 240px;
+  max-width: 280px;
   box-shadow:
     var(--shadow-lg),
-    inset 0 0 0 1px rgba(61, 38, 23, 0.1);
-  animation: fadeInSlide 0.3s ease-out;
+    inset 0 0 0 3px var(--background-cream),
+    inset 0 0 0 5px rgba(139, 111, 71, 0.2);
+  animation: fadeInFloat 0.4s ease-out, infoCardFloat 4s ease-in-out infinite;
   z-index: 100;
   overflow: hidden;
 }
 
-@keyframes fadeInSlide {
+@keyframes fadeInFloat {
   from {
     opacity: 0;
-    transform: translateY(-50%) translateX(-10px);
+    transform: translateY(-50%) translateX(-15px);
   }
   to {
     opacity: 1;
@@ -401,64 +403,73 @@
   }
 }
 
-/* Terminal Header */
+@keyframes infoCardFloat {
+  0%, 100% {
+    transform: translateY(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateY(-50%) translateY(-8px);
+  }
+}
+
+/* Subtle Header Section */
 .terminal-header {
-  background: linear-gradient(180deg, var(--primary-sand), var(--primary-beige));
-  padding: 0.5rem 0.75rem;
-  border-bottom: 2px solid var(--primary-brown);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  background: transparent;
+  padding: 1rem 1.25rem 0.75rem;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(139, 111, 71, 0.15);
 }
 
 .terminal-dots {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.terminal-dots .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text-light);
-  border: 1px solid var(--primary-brown);
+  display: none;
 }
 
 .terminal-title {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.7rem;
-  color: var(--text-dark);
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  color: var(--text-light);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
 }
 
-
 .info-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.75rem;
-  font-family: 'Courier New', Courier, monospace;
+  padding: 1.25rem 1.5rem;
+}
+
+.info-description {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  margin: 0;
 }
 
 .info-item {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.35rem;
 }
 
 .info-label {
   font-size: 0.7rem;
-  color: var(--text-medium);
-  font-weight: bold;
-  letter-spacing: 0.3px;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: lowercase;
+  font-family: 'Georgia', 'Times New Roman', serif;
 }
 
 .info-value {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--text-dark);
-  font-weight: normal;
-  padding-left: 1rem;
+  font-weight: 400;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.3px;
 }
 
 

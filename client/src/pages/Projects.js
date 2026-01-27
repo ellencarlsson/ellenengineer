@@ -14,6 +14,7 @@ function Projects() {
       platform: 'Apple Watch',
       tech: 'AI',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
+      shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       position: { x: 20, y: 18 },
@@ -26,6 +27,7 @@ function Projects() {
       platform: 'Webbutveckling',
       tech: 'React',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer.',
+      shortDescription: 'Interaktiv portfolio med vintage IT-tema, flytande projekt-noder och kreativa animationer byggt i React.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
@@ -39,6 +41,7 @@ function Projects() {
       platform: 'Web Application',
       tech: 'Full Stack',
       description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering.',
+      shortDescription: 'En full-stack schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv hantering.',
       techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
       github: 'https://github.com/ellencarlsson/postschema',
       position: { x: 35, y: 68 },
@@ -122,22 +125,10 @@ function Projects() {
               {hoveredNode === project.id && (
                 <div className="node-info-card">
                   <div className="terminal-header">
-                    <div className="terminal-dots">
-                      <span className="dot"></span>
-                      <span className="dot"></span>
-                      <span className="dot"></span>
-                    </div>
-                    <span className="terminal-title">PROJECT_INFO</span>
+                    <span className="terminal-title">Project Details</span>
                   </div>
                   <div className="info-card-content">
-                    <div className="info-item">
-                      <span className="info-label">&gt; platform:</span>
-                      <span className="info-value">{project.platform}</span>
-                    </div>
-                    <div className="info-item">
-                      <span className="info-label">&gt; tech:</span>
-                      <span className="info-value">{project.tech}</span>
-                    </div>
+                    <p className="info-description">{project.shortDescription}</p>
                   </div>
                 </div>
               )}
