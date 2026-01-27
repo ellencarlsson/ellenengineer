@@ -55,6 +55,8 @@ function CV() {
                       Dataingenjör med passion för AI och mobilapplikationer. Specialiserad på iOS-utveckling och maskininlärning.
                     </p>
 
+                    <div className="line-before-interview"></div>
+
                     <h3 className="interview-title">EN INTERVJU MED INGENJÖREN</h3>
 
                     <div className="interview-qa">
