@@ -15,103 +15,36 @@ function CV() {
 
   return (
     <div className="cv-page">
-      <div className="newspaper-container">
-        {/* Newspaper Spread */}
-        <div className="newspaper-spread">
-          {/* Center Fold Line */}
-          <div className="center-fold"></div>
-
-          {/* Left Page - Info/Introduction */}
-          <div className="newspaper-page left-page">
-            {/* Top Lines */}
-            <div className="line-top-3"></div>
-            <div className="line-top-4"></div>
-
-            <div className="page-header">
-              <h1 className="newspaper-title">DAGENS INGENJÖR</h1>
-              <div className="line-under-title"></div>
-              <div className="date-with-lines">
-                <div className="date-side-line"></div>
-                <div className="newspaper-date">JANUARY 2026 * VOL.1</div>
-                <div className="date-side-line"></div>
-              </div>
-            </div>
-
-            {/* Lines after header */}
-            <div className="line-header-1"></div>
-
-            <div className="page-content">
-              <div className="article-section">
-                <h2 className="article-headline">ELLEN CARLSSON</h2>
-                <div className="article-subheading">Data Ingenjör</div>
-
-                <div className="content-grid">
-                  {/* Left column - text */}
-                  <div className="text-column">
-                    {/* Line after title */}
-                    <div className="line-title"></div>
-
-                    <p className="article-text">
-                      Dataingenjör som gillar att lösa vardagliga problem med kod. Gör just nu lumpen och är nyfiken på vad som kommer härnäst.
-                    </p>
-
-                    <div className="line-before-interview"></div>
-
-                    <h3 className="interview-title">EN INTERVJU MED INGENJÖREN</h3>
-
-                    <div className="interview-qa">
-                      <div className="interview-question">Vad gör du på fritiden?</div>
-                      <p className="interview-answer">
-                        "Promenader med ljudböcker och bakning."
-                      </p>
-                    </div>
-
-                    <div className="interview-qa">
-                      <div className="interview-question">Om du inte hade blivit dataingenjör?</div>
-                      <p className="interview-answer">
-                        "Ett eget café. Jobba med händerna och möta människor istället för kod."
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right column - photo */}
-                  <div className="photo-column">
-                    <img src="/assets/ellen-photo.jpg" alt="Ellen Carlsson" className="portrait-photo" />
-                  </div>
-                </div>
-
-                {/* Dashed line before buttons */}
-                <div className="line-before-buttons"></div>
-
-                <div className="action-buttons">
-                  <button onClick={handleOpenCV} className="cv-button">
-                    <span className="icon-document"></span>
-                    ÖPPNA I NY FLIK
-                  </button>
-                  <button onClick={handleDownload} className="cv-button">
-                    <span className="icon-floppy"></span>
-                    LADDA NER CV
-                  </button>
-                </div>
-
-                {/* Bottom lines */}
-                <div className="line-bottom-1"></div>
-                <div className="line-bottom-2"></div>
-              </div>
-            </div>
+      <div className="cv-container">
+        {/* SQL Query on Background */}
+        <div className="query-text">
+          <div className="query-line">
+            <span className="keyword">SELECT</span> <span className="operator">*</span>
           </div>
+          <div className="query-line">
+            <span className="keyword">FROM</span> <span className="table">engineers</span>
+          </div>
+          <div className="query-line">
+            <span className="keyword">WHERE</span> <span className="column">name</span> <span className="operator">=</span> <span className="string">'Ellen Carlsson'</span><span className="operator">;</span>
+          </div>
+        </div>
 
-          {/* Right Page - CV Image */}
-          <div className="newspaper-page right-page">
-            <div className="cv-embed">
-              <div className="cv-photo-frame">
-                <img
-                  src="/assets/CV-image.png"
-                  alt="CV - Ellen Carlsson"
-                  className="cv-image"
-                />
-              </div>
-            </div>
+        {/* CV Display */}
+        <div className="cv-main">
+          <img
+            src="/assets/CV-image.png"
+            alt="CV - Ellen Carlsson"
+            className="cv-image-main"
+          />
+
+          {/* Action Links */}
+          <div className="cv-links">
+            <button onClick={handleOpenCV} className="cv-link">
+              → Öppna i ny flik
+            </button>
+            <button onClick={handleDownload} className="cv-link">
+              → Ladda ner CV
+            </button>
           </div>
         </div>
       </div>
