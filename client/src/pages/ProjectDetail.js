@@ -15,6 +15,7 @@ function ProjectDetail() {
       capacity: '847 MB',
       interface: 'SCSI',
       status: 'VERIFIED',
+      ledColor: 'brown',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
@@ -83,6 +84,7 @@ function ProjectDetail() {
       capacity: '2.6 GB',
       interface: 'IDE',
       status: 'OPERATIONAL',
+      ledColor: 'medium',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
@@ -98,6 +100,7 @@ function ProjectDetail() {
       capacity: '1.5 GB',
       interface: 'SATA',
       status: 'OPERATIONAL',
+      ledColor: 'burgundy',
       description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering. Applikationen gör det enkelt för anställda att se sina arbetspass, byta pass med kollegor, och få översikt över sitt arbetsvecka.\n\nProjektet utvecklades med modern webbteknologi och fokuserar på att göra schemaläggning smidig och intuitiv. Genom att använda React för frontend och Node.js med Express för backend, skapades en responsiv och snabb applikation.\n\nMongoDB används som databas för att lagra scheman, användarinformation och passkonfigurationer. Systemet har inbyggd autentisering och möjliggör olika rollnivåer för administratörer och anställda.',
       techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
       github: 'https://github.com/ellencarlsson/postschema',
@@ -156,9 +159,9 @@ function ProjectDetail() {
 
           {/* Right Column - About */}
           <div className="sidebar-column">
-            <div className="about-section">
+            <div className={`about-section led-${project.ledColor}`}>
               <div className="about-header">
-                <span className="about-title">ABOUT</span>
+                <span className="about-title">PROJECT DETAILS</span>
               </div>
               <div className="about-content">
                 <div className="about-item">
@@ -228,8 +231,8 @@ function ProjectDetail() {
         {project.demoVideo && (
           <div className="file-section fullwidth-section">
             <div className="file-header">
-              <span className="file-icon">🎬</span>
-              <span className="file-name">DEMO</span>
+              <span className="file-icon">📺</span>
+              <span className="file-name">DEMO.broadcast</span>
             </div>
             <div className="file-content">
               <div className="video-container">
@@ -241,6 +244,10 @@ function ProjectDetail() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
+                <div className="tv-controls">
+                  <div className="tv-knob"></div>
+                  <div className="tv-knob"></div>
+                </div>
               </div>
             </div>
           </div>
