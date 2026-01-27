@@ -15,6 +15,8 @@ function About() {
   const isJumpingRef = useRef(false);
   const previousMilestoneRef = useRef(null);
   const terminalLinesRef = useRef([]);
+  const playerPosRef = useRef({ x: 130, y: 400 });
+  const nearestMilestoneRef = useRef(null);
 
   // Calculate positions dynamically based on screen width
   const getMilestones = () => {
@@ -199,14 +201,16 @@ function About() {
           isJumpingRef.current = false;
         }
 
-        return { x: newX, y: newY };
+        const newPos = { x: newX, y: newY };
+        playerPosRef.current = newPos;
+        return newPos;
       });
 
       // Check nearest milestone with detection range
       // Player should be "inside" milestone when 50px behind or 50px ahead
       let foundMilestone = null;
       for (const milestone of milestones) {
-        const distanceFromMilestone = playerPos.x - milestone.position;
+        const distanceFromMilestone = playerPosRef.current.x - milestone.position;
         // Check if player is within range: -50 (behind) to +50 (ahead)
         if (distanceFromMilestone >= -50 && distanceFromMilestone <= 50) {
           foundMilestone = milestone;
@@ -215,12 +219,15 @@ function About() {
       }
 
       if (foundMilestone) {
-        setNearestMilestone(foundMilestone);
-        setFadingOutImage(false);
-        previousMilestoneRef.current = foundMilestone;
+        if (nearestMilestoneRef.current !== foundMilestone) {
+          setNearestMilestone(foundMilestone);
+          nearestMilestoneRef.current = foundMilestone;
+          setFadingOutImage(false);
+          previousMilestoneRef.current = foundMilestone;
+        }
       } else {
         // Leaving a milestone - show cd .. notification
-        if (previousMilestoneRef.current && nearestMilestone) {
+        if (previousMilestoneRef.current && nearestMilestoneRef.current) {
           setLeavingMilestone(previousMilestoneRef.current);
           setTimeout(() => setLeavingMilestone(null), 2000);
           // Trigger fade out animation if previous milestone had an image
@@ -232,12 +239,15 @@ function About() {
           }
           previousMilestoneRef.current = null;
         }
-        setNearestMilestone(null);
+        if (nearestMilestoneRef.current !== null) {
+          setNearestMilestone(null);
+          nearestMilestoneRef.current = null;
+        }
       }
     }, 1000 / 60);
 
     return () => clearInterval(gameLoop);
-  }, [playerPos.x, milestones]);
+  }, [milestones]);
 
   return (
     <section id="about" className="about-game">
@@ -268,7 +278,16 @@ function About() {
               className={`milestone ${nearestMilestone === milestone ? 'active' : ''}`}
               style={{ left: `${milestone.position}px` }}
             >
-              <div className="folder-icon">📁</div>
+              <div className="folder-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V8C21 6.89543 20.1046 6 19 6H12L10 4H5C3.89543 4 3 4.89543 3 6V8Z"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"/>
+                </svg>
+              </div>
               <div className="folder-label">/{milestone.year}</div>
             </div>
           ))}
