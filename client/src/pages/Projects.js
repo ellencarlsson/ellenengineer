@@ -62,7 +62,9 @@ function Projects() {
             return (
               <line
                 key={`line-${project.id}`}
-                className="connection-line"
+                className={`connection-line ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'active' : ''}`}
+                data-from={project.id}
+                data-to={project.connectedTo}
                 x1={`${project.position.x}%`}
                 y1={`${project.position.y}%`}
                 x2={`${targetProject.position.x}%`}
@@ -80,13 +82,26 @@ function Projects() {
               style={{
                 left: `${project.position.x}%`,
                 top: `${project.position.y}%`,
-                animationDelay: `${index * 0.5}s`
+                animationDelay: `${index * 0.5}s`,
+                zIndex: 3 - index
               }}
               onMouseEnter={() => setHoveredNode(project.id)}
               onMouseLeave={() => setHoveredNode(null)}
               onClick={() => handleNodeClick(project.id)}
             >
+              {/* Orbiting particles */}
+              <div className="particle-orbit">
+                <div className="particle particle-1"></div>
+                <div className="particle particle-2"></div>
+                <div className="particle particle-3"></div>
+              </div>
+
               <div className="node-circle">
+                {/* LED Indicator */}
+                <div className="node-led">
+                  <div className="led-light"></div>
+                </div>
+
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
                   <div className="node-year">{project.year}</div>
