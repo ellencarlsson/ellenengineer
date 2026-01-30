@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 
 function ProjectDetail() {
   const { projectId } = useParams();
+  const [flippedCards, setFlippedCards] = useState({});
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentSchemaIndex, setCurrentSchemaIndex] = useState(0);
+
+  const handleCardFlip = (cardId) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [cardId]: !prev[cardId]
+    }));
+  };
+
+  const screenshots = [
+    '/assets/postschema-1.png',
+    '/assets/postschema-2.png',
+    '/assets/postschema-3.png',
+    '/assets/postschema-4.png',
+    '/assets/postschema-5.png'
+  ];
+
+  const schemaScreenshots = [
+    '/assets/schema-ea.jpg',
+    '/assets/schema-isac.jpg',
+    '/assets/schema-pluton.jpg'
+  ];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % screenshots.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + screenshots.length) % screenshots.length);
+  };
+
+  const nextSchema = () => {
+    setCurrentSchemaIndex((prev) => (prev + 1) % schemaScreenshots.length);
+  };
+
+  const prevSchema = () => {
+    setCurrentSchemaIndex((prev) => (prev - 1 + schemaScreenshots.length) % schemaScreenshots.length);
+  };
 
   const projects = {
     'slr-2024': {
@@ -16,6 +56,8 @@ function ProjectDetail() {
       interface: 'SCSI',
       status: 'VERIFIED',
       ledColor: 'brown',
+      tagline: 'AI-powered sign language recognition using Apple Watch motion sensors',
+      platforms: ['Apple Watch', 'iPhone'],
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
@@ -85,6 +127,8 @@ function ProjectDetail() {
       interface: 'IDE',
       status: 'OPERATIONAL',
       ledColor: 'medium',
+      tagline: 'Interactive portfolio with vintage IT theme and creative animations',
+      platforms: ['Web'],
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
@@ -101,11 +145,101 @@ function ProjectDetail() {
       interface: 'SATA',
       status: 'OPERATIONAL',
       ledColor: 'burgundy',
-      description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering. Applikationen gör det enkelt för anställda att se sina arbetspass, byta pass med kollegor, och få översikt över sitt arbetsvecka.\n\nProjektet utvecklades med modern webbteknologi och fokuserar på att göra schemaläggning smidig och intuitiv. Genom att använda React för frontend och Node.js med Express för backend, skapades en responsiv och snabb applikation.\n\nMongoDB används som databas för att lagra scheman, användarinformation och passkonfigurationer. Systemet har inbyggd autentisering och möjliggör olika rollnivåer för administratörer och anställda.',
-      techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
+      tagline: 'iOS-app för postpass baserat på soldaters kvalifikationer och stridsvärde.',
+      platforms: ['iPhone'],
+      description: 'Schemaläggning av militära arbetspass är en komplex och tidskrävande manuell process. Ansvariga måste samtidigt hålla reda på vilka soldater som har rätt kvalifikationer för varje typ av post, säkerställa att arbetsrättsliga regler följs (max arbetstid, vilotider, pauser), och försöka fördela belastningen rättvist. Detta blir snabbt överväldigande när man hanterar flera grupper, olika posttyper och många soldater.\n\nPostSchema utvecklades för att automatisera denna process, med kravet att fungera helt offline eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Projektet föddes ur ett intresse för Swift-programmering och iOS-utveckling, kombinerat med behovet av en praktisk lösning på ett verkligt problem. Genom att använda Core Data som lokal databas kan hela systemet – från datalagring till schemaoptimering – köras direkt på enheten utan externa beroenden.\n\nProblemet är bara att mobilen inte kan medtas i fält, därför är en version 2 av PostSchema på gång, som ni kan se här (länk till ett annat projekt som ännu inte finns).',
+      techStack: ['Swift', 'Core Data'],
       github: 'https://github.com/ellencarlsson/postschema',
       demo: null,
-      image: null
+      image: null,
+      hasScoreSystem: true,
+      scoreSystem: {
+        intro: 'Systemet prioriterar utvilade och balanserade soldater. Varje soldat får en score (0-1) baserat på tre faktorer som väger nästan lika:',
+        factors: [
+          {
+            name: 'Rest Time',
+            icon: '💤',
+            title: 'Vila',
+            description: 'Återhämtningstid sedan senaste passet',
+            subtitle: 'Straffar kort vila hårt',
+            details: [
+              'Target: 420 min (7h)',
+              '0 min → 0.0 poäng',
+              '210 min → 0.7 poäng',
+              '420 min → 1.0 poäng',
+              'Mest dynamisk faktor'
+            ]
+          },
+          {
+            name: 'Workload',
+            icon: '⚡',
+            title: 'Belastning',
+            description: 'Total arbetstid det senaste dygnet',
+            subtitle: 'Mild straff tidigt, hård sent',
+            details: [
+              'Max: 960 min (16h/48h)',
+              '0 min → 1.0 poäng',
+              '480 min → 0.75 poäng',
+              '960 min → 0.0 poäng',
+              'Långsiktig rättvisa'
+            ]
+          },
+          {
+            name: 'Consecutive',
+            icon: '🔄',
+            title: 'Konsekutivitet',
+            description: 'Kontinuerlig arbetstid utan paus',
+            subtitle: 'Straffar hårt',
+            details: [
+              'Max: 240 min (4h - LAGKRAV)',
+              '0 min → 1.0 poäng',
+              '120 min → 0.7 poäng',
+              '240 min → 0.0 poäng',
+              'Kräver 1h rast efter 4h'
+            ]
+          }
+        ],
+        conclusion: {
+          formula: 'finalScore = (vila × 0.33) + (belastning × 0.33) + (konsekutivitet × 0.34)',
+          range: '0.0 - 1.0 där 1.0 = perfekt (fullständigt utvilad, minimal belastning)',
+          selection: 'Systemet väljer: Soldat med högst score',
+          rotation: 'Efter tilldelning: Score sjunker → automatisk rotation'
+        },
+        workflow: [
+          {
+            step: 1,
+            icon: '🔍',
+            title: 'FILTRERA',
+            description: 'Sortera bort omöjliga kandidater',
+            details: 'Rätt befattning + Inte upptagen + Följer regler',
+            ledColor: 'blue'
+          },
+          {
+            step: 2,
+            icon: '📊',
+            title: 'POÄNGSÄTT',
+            description: 'Beräkna score för varje kandidat',
+            details: '3 faktorer: Vila 33% + Belastning 33% + Konsekutivitet 34% = Total score (0-1)',
+            ledColor: 'yellow'
+          },
+          {
+            step: 3,
+            icon: '✅',
+            title: 'VÄLJ BÄST',
+            description: 'Sortera och välj högsta poäng',
+            details: 'Soldat med bäst välmående får passet',
+            ledColor: 'green'
+          },
+          {
+            step: 4,
+            icon: '🔧',
+            title: 'OPTIMERA',
+            description: 'Local search efter tilldelning',
+            details: 'Byta soldater mellan pass för bättre total score',
+            ledColor: 'green'
+          }
+        ]
+      }
     }
   };
 
@@ -132,7 +266,7 @@ function ProjectDetail() {
           </Link>
           <div className="project-title-row">
             <h1 className="github-project-name">{project.name}</h1>
-            <p className="project-tagline">AI-powered sign language recognition using Apple Watch motion sensors</p>
+            <p className="project-tagline">{project.tagline}</p>
           </div>
         </div>
 
@@ -153,6 +287,11 @@ function ProjectDetail() {
               <div className="readme-accent-line"></div>
               <div className="readme-content">
                 <p className="readme-description">{project.description}</p>
+                {project.id === 'postschema-2025' && (
+                  <p className="readme-score-info">
+                    <strong>HÖG poäng = BRA kandidat</strong> • Väljer soldaten med högst score för passet • Hög score betyder: utvilad, obelastad, redo att arbeta
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -168,54 +307,38 @@ function ProjectDetail() {
                   <span className="about-label">PLATFORMS:</span>
                 </div>
                 <div className="about-tech-list">
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="6" y="4" width="12" height="14" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 7H18" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 15H18" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="11" r="1" fill="currentColor"/>
-                      <path d="M8 18V20C8 20.5523 8.44772 21 9 21H15C15.5523 21 16 20.5523 16 20V18" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Apple Watch
-                  </div>
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M7 5H17" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M7 19H17" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
-                    </svg>
-                    iPhone
-                  </div>
+                  {project.platforms && project.platforms.map((platform, index) => (
+                    <div key={index} className="about-tech-badge">
+                      <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M7 5H17" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M7 19H17" stroke="currentColor" strokeWidth="1.5"/>
+                        <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
+                      </svg>
+                      {platform}
+                    </div>
+                  ))}
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
                   <span className="about-label">TECH STACK:</span>
                 </div>
                 <div className="about-tech-list">
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6 8C6 8 8 6 12 6C16 6 18 8 18 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M18 16C18 16 16 18 12 18C8 18 6 16 6 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M6 8L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M18 8L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Swift
-                  </div>
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="6" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="6" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="18" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M8 12H10" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M14 12H16" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M12 8V10" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M12 14V16" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Create ML
-                  </div>
+                  {project.techStack && project.techStack.map((tech, index) => (
+                    <div key={index} className="about-tech-badge">
+                      <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="6" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                        <circle cx="12" cy="6" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                        <circle cx="12" cy="18" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                        <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M8 12H10" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M14 12H16" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M12 8V10" stroke="currentColor" strokeWidth="1.5"/>
+                        <path d="M12 14V16" stroke="currentColor" strokeWidth="1.5"/>
+                      </svg>
+                      {tech}
+                    </div>
+                  ))}
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
@@ -280,6 +403,210 @@ function ProjectDetail() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* SCORE-SYSTEM.algo - Score System */}
+        {project.hasScoreSystem && (
+          <div className="file-section score-system-section fullwidth-section">
+            <div className="file-content">
+              {/* RESULTAT Section Header */}
+              <div className="file-header">
+                <span className="file-icon">📱</span>
+                <span className="file-name">RESULTAT</span>
+              </div>
+
+              {/* Multiple iPhones Showcase */}
+              <div className="score-phones-showcase">
+                <div className="phones-container">
+                  {/* Phone 1 - Carousel */}
+                  <div className="phone-mockup phone-carousel">
+                    <div className="phone-device">
+                      <div className="phone-notch"></div>
+                      <div className="phone-screen">
+                        <div className="phone-content carousel-content">
+                          <img
+                            src={screenshots[currentImageIndex]}
+                            alt={`PostSchema screenshot ${currentImageIndex + 1}`}
+                            className="phone-screenshot"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="screenshot-placeholder" style={{display: 'none', fontSize: '40px', textAlign: 'center', color: '#8b6f47', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
+                            📱<br/>
+                            <span style={{fontSize: '14px', fontFamily: 'Courier New', marginTop: '10px'}}>Screenshot {currentImageIndex + 1}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Carousel Navigation */}
+                      <button className="carousel-btn carousel-btn-prev" onClick={prevImage}>‹</button>
+                      <button className="carousel-btn carousel-btn-next" onClick={nextImage}>›</button>
+                      {/* Carousel Dots */}
+                      <div className="carousel-dots">
+                        {screenshots.map((_, index) => (
+                          <button
+                            key={index}
+                            className={`carousel-dot ${index === currentImageIndex ? 'active' : ''}`}
+                            onClick={() => setCurrentImageIndex(index)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Phone 2 - Schema Carousel */}
+                  <div className="phone-mockup phone-carousel">
+                    <div className="phone-device">
+                      <div className="phone-notch"></div>
+                      <div className="phone-screen">
+                        <div className="phone-content carousel-content">
+                          <img
+                            src={schemaScreenshots[currentSchemaIndex]}
+                            alt={`Schema screenshot ${currentSchemaIndex + 1}`}
+                            className="phone-screenshot"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                          />
+                          <div className="screenshot-placeholder" style={{display: 'none', fontSize: '40px', textAlign: 'center', color: '#8b6f47', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%'}}>
+                            📋<br/>
+                            <span style={{fontSize: '14px', fontFamily: 'Courier New', marginTop: '10px'}}>Schema {currentSchemaIndex + 1}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Carousel Navigation */}
+                      <button className="carousel-btn carousel-btn-prev" onClick={prevSchema}>‹</button>
+                      <button className="carousel-btn carousel-btn-next" onClick={nextSchema}>›</button>
+                      {/* Carousel Dots */}
+                      <div className="carousel-dots">
+                        {schemaScreenshots.map((_, index) => (
+                          <button
+                            key={index}
+                            className={`carousel-dot ${index === currentSchemaIndex ? 'active' : ''}`}
+                            onClick={() => setCurrentSchemaIndex(index)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Score Factors Cards */}
+              <div className="score-factors-section">
+                <div className="file-header">
+                  <span className="file-icon">🎯</span>
+                  <span className="file-name">POÄNGSYSTEM</span>
+                </div>
+
+                {/* Intro text */}
+                <p className="score-intro-text">{project.scoreSystem.intro}</p>
+
+                <div className="factors-grid-main">
+                  {project.scoreSystem.factors.map((factor, index) => (
+                    <div
+                      key={index}
+                      className={`factor-card-main ${flippedCards[`factor-${index}`] ? 'flipped' : ''}`}
+                      onClick={() => handleCardFlip(`factor-${index}`)}
+                    >
+                      <div className="factor-card-inner">
+                        {/* Front Side */}
+                        <div className="factor-card-front">
+                          <div className="factor-icon">{factor.icon}</div>
+                          <div className="factor-title">{factor.title}</div>
+                          <div className="factor-description">{factor.description}</div>
+                          <div className="factor-subtitle">{factor.subtitle}</div>
+                          <div className="factor-hint">Klicka för detaljer →</div>
+                        </div>
+
+                        {/* Back Side */}
+                        <div className="factor-card-back">
+                          <div className="factor-back-title">{factor.icon} {factor.title}</div>
+                          <div className="factor-details-list">
+                            {factor.details.map((detail, idx) => (
+                              <div key={idx} className="factor-detail-item">
+                                <span className="detail-bullet">•</span>
+                                <span className="detail-text">{detail}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="factor-hint">Klicka för att stänga ←</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Conclusion */}
+                <div className="score-conclusion">
+                  <h3 className="conclusion-title">Slutpoäng</h3>
+                  <div className="conclusion-formula">{project.scoreSystem.conclusion.formula}</div>
+                  <div className="conclusion-details">
+                    <p><strong>Range:</strong> {project.scoreSystem.conclusion.range}</p>
+                    <p><strong>{project.scoreSystem.conclusion.selection}</strong></p>
+                    <p><strong>{project.scoreSystem.conclusion.rotation}</strong></p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Workflow */}
+              <div className="score-workflow">
+                <div className="file-header">
+                  <span className="file-icon">🔄</span>
+                  <span className="file-name">KOMPLETT WORKFLOW</span>
+                </div>
+                <div className="workflow-flow-horizontal">
+                  {project.scoreSystem.workflow.map((step, index) => (
+                    <React.Fragment key={step.step}>
+                      <div className="workflow-node-container">
+                        <div className={`workflow-node led-${step.ledColor}`}>
+                          <div className="node-led-indicator"></div>
+                          <div className="node-icon">{step.icon}</div>
+                          <div className="node-number">STEG {step.step}</div>
+                          <div className="node-title">{step.title}</div>
+                          <div className="node-description">{step.description}</div>
+                          <div className="node-details">{step.details}</div>
+                        </div>
+                      </div>
+                      {index < project.scoreSystem.workflow.length - 1 && (
+                        <div className="workflow-connector">
+                          <div className="connector-line"></div>
+                          <div className="connector-arrow">→</div>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+
+              {/* Learnings */}
+              <div className="learnings-box">
+                <div className="readme-header">
+                  <div className="readme-title-section">
+                    <span className="readme-icon">💡</span>
+                    <span className="readme-label">LÄRDOMMAR</span>
+                  </div>
+                </div>
+                <div className="readme-accent-line"></div>
+                <div className="readme-content">
+                  <p className="readme-description">
+                    Den största utmaningen var att få till hierarkin mellan plutoner, grupper och soldater, tillsammans med alla regler för olika befattningar och deras specifika begränsningar. Mycket av utvecklingstiden gick till att bygga upp denna grundstruktur innan själva schemaläggningen kunde börja.
+                  </p>
+                  <p className="readme-description">
+                    Ursprungstanken var att plutonchefen skulle kunna skapa scheman för alla grupper med ett klick, men komplexiteten blev överväldigande. I praktiken används appen nu bara av gruppchefer för sina egna grupper, vilket fungerar mycket bättre. En viktig lärdom är att börja enkelt – fokusera på att göra ett riktigt bra system för en nivå istället för att försöka täcka hela organisationshierarkin från början.
+                  </p>
+                  <p className="readme-description">
+                    Att utveckla utan visuell feedback av databasen och poängsystemet var extremt utmanande. Jag kunde bara skriva tester och manuellt granska resultaten för att bedöma om schemaläggningen blev rättvis. En datavisualiseringskomponent hade varit ovärderlig för att kunna debugga och förstå systemets beteende.
+                  </p>
+                  <p className="readme-description">
+                    När komplexiteten växte med olika befattningars unika prioriteringar blev det lockande att fokusera på UI-utveckling istället, eftersom den delen kändes mer hanterbar och gav synliga resultat. Detta är en viktig reflektion om vikten av att ta itu med kärnfunktionaliteten först, även när den känns svårare.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
