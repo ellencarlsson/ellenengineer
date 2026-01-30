@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Hero.css';
+import './Hero.css';
 
 function Hero() {
   const [displayedText, setDisplayedText] = useState('');

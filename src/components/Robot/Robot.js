@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Robot.css';
+import './Robot.css';
 
 function Robot() {
   return (

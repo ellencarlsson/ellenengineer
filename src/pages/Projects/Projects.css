@@ -1,4 +1,4 @@
-@import '../variables.css';
+@import '../../styles/variables.css';
 
 .projects-page {
   min-height: 100vh;

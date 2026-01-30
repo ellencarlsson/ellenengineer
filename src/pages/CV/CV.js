@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/pages/CV.css';
+import './CV.css';
 
 function CV() {
   const handleOpenCV = () => {
