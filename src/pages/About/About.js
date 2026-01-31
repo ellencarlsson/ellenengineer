@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/Hero.css';
-import '../styles/About.css';
-import PlayerAvatar from '../components/PlayerAvatar';
+import '../../components/Hero/Hero.css';
+import './About.css';
+import PlayerAvatar from '../../components/PlayerAvatar/PlayerAvatar';
 
 function About() {
   const [playerPos, setPlayerPos] = useState({ x: 130, y: 400 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import '../styles/pages/ProjectDetail.css';
+import './ProjectDetail.css';
 
 function ProjectDetail() {
   const { projectId } = useParams();

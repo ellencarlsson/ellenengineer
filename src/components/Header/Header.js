@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../styles/Header.css';
+import './Header.css';
 
 function Header() {
   const [isHidden, setIsHidden] = useState(false);

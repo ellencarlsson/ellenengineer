@@ -1,6 +1,6 @@
 import React from 'react';
-import Hero from '../components/Hero';
-import '../styles/pages/Home.css';
+import Hero from '../../components/Hero/Hero';
+import './Home.css';
 
 function Home() {
   return (

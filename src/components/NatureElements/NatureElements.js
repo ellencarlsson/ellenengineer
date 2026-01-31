@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/NatureElements.css';
-import leafSvg from '../assets/svg/leaf.svg';
-import flowerSvg from '../assets/svg/flower.svg';
-import beeSvg from '../assets/svg/bee.svg';
+import './NatureElements.css';
+import leafSvg from '../../assets/svg/leaf.svg';
+import flowerSvg from '../../assets/svg/flower.svg';
+import beeSvg from '../../assets/svg/bee.svg';
 
 function NatureElements() {
   return (
