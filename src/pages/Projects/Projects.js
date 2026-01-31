@@ -17,8 +17,21 @@ function Projects() {
       shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      position: { x: 20, y: 18 },
-      connectedTo: 'portfolio-2026'
+      position: { x: 50, y: 15 },
+      connectedTo: ['postschema-2025', 'portfolio-2026']
+    },
+    {
+      id: 'postschema-2025',
+      name: 'PostSchema',
+      year: '2025',
+      platform: 'iOS',
+      tech: 'Swift',
+      description: 'iOS-app för automatisk schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler.',
+      shortDescription: 'Offline iOS-app som automatiserar militär schemaläggning med kvalifikationsmatchning och belastningsoptimering.',
+      techStack: ['Swift', 'SwiftUI', 'Core Data'],
+      github: 'https://github.com/ellencarlsson/postschema',
+      position: { x: 30, y: 55 },
+      connectedTo: []
     },
     {
       id: 'portfolio-2026',
@@ -31,21 +44,8 @@ function Projects() {
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
-      position: { x: 60, y: 48 },
-      connectedTo: 'postschema-2025'
-    },
-    {
-      id: 'postschema-2025',
-      name: 'PostSchema',
-      year: '2025',
-      platform: 'iOS',
-      tech: 'Swift',
-      description: 'iOS-app för automatisk schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler.',
-      shortDescription: 'Offline iOS-app som automatiserar militär schemaläggning med kvalifikationsmatchning och belastningsoptimering.',
-      techStack: ['Swift', 'SwiftUI', 'Core Data'],
-      github: 'https://github.com/ellencarlsson/postschema',
-      position: { x: 35, y: 68 },
-      connectedTo: null
+      position: { x: 70, y: 55 },
+      connectedTo: []
     }
   ];
 
@@ -58,35 +58,37 @@ function Projects() {
       <div className="projects-network-container">
         <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg">
           {projects.map((project) => {
-            if (!project.connectedTo) return null;
-            const targetProject = projects.find(p => p.id === project.connectedTo);
-            if (!targetProject) return null;
+            if (!project.connectedTo || project.connectedTo.length === 0) return null;
+            return project.connectedTo.map((targetId) => {
+              const targetProject = projects.find(p => p.id === targetId);
+              if (!targetProject) return null;
 
-            return (
-              <g key={`connection-${project.id}`}>
-                <line
-                  className={`connection-line ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'active' : ''}`}
-                  data-from={project.id}
-                  data-to={project.connectedTo}
-                  x1={`${project.position.x}%`}
-                  y1={`${project.position.y}%`}
-                  x2={`${targetProject.position.x}%`}
-                  y2={`${targetProject.position.y}%`}
-                />
-                {/* Data packet */}
-                <circle
-                  className={`data-packet ${hoveredNode === project.id || hoveredNode === project.connectedTo ? 'paused' : ''}`}
-                  data-from={project.id}
-                  r="3"
-                >
-                  <animateMotion
-                    dur={`${8 + Math.random() * 4}s`}
-                    repeatCount="indefinite"
-                    path={`M ${project.position.x}% ${project.position.y}% L ${targetProject.position.x}% ${targetProject.position.y}%`}
+              return (
+                <g key={`connection-${project.id}-${targetId}`}>
+                  <line
+                    className={`connection-line ${hoveredNode === project.id || hoveredNode === targetId ? 'active' : ''}`}
+                    data-from={project.id}
+                    data-to={targetId}
+                    x1={`${project.position.x}%`}
+                    y1={`${project.position.y}%`}
+                    x2={`${targetProject.position.x}%`}
+                    y2={`${targetProject.position.y}%`}
                   />
-                </circle>
-              </g>
-            );
+                  {/* Data packet */}
+                  <circle
+                    className={`data-packet ${hoveredNode === project.id || hoveredNode === targetId ? 'paused' : ''}`}
+                    data-from={project.id}
+                    r="3"
+                  >
+                    <animateMotion
+                      dur={`${8 + Math.random() * 4}s`}
+                      repeatCount="indefinite"
+                      path={`M ${project.position.x}% ${project.position.y}% L ${targetProject.position.x}% ${targetProject.position.y}%`}
+                    />
+                  </circle>
+                </g>
+              );
+            });
           })}
         </svg>
 

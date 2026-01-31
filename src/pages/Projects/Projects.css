@@ -2,29 +2,17 @@
 
 .projects-page {
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  background: transparent;
 }
 
 
-/* Grain/noise texture */
-.projects-page::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
-  pointer-events: none;
-  opacity: 0.4;
-  z-index: 1;
-}
+/* Grain/noise texture - disabled to avoid visible boundary */
 
 .projects-network-container {
   width: 100%;
@@ -203,19 +191,19 @@
 }
 
 .project-node:nth-child(2) .node-circle {
-  border-color: rgba(150, 150, 150, 0.3);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 2px #1e1e1e,
-    inset 0 0 0 4px rgba(150, 150, 150, 0.1);
-}
-
-.project-node:nth-child(3) .node-circle {
   border-color: rgba(196, 120, 90, 0.3);
   box-shadow:
     var(--shadow-md),
     inset 0 0 0 2px #1e1e1e,
     inset 0 0 0 4px rgba(196, 120, 90, 0.1);
+}
+
+.project-node:nth-child(3) .node-circle {
+  border-color: rgba(150, 150, 150, 0.3);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 0 2px #1e1e1e,
+    inset 0 0 0 4px rgba(150, 150, 150, 0.1);
 }
 
 .project-node:nth-child(1):hover .node-circle {
@@ -228,21 +216,21 @@
 }
 
 .project-node:nth-child(2):hover .node-circle {
-  border-color: rgba(150, 150, 150, 0.5);
-  box-shadow:
-    var(--shadow-lg),
-    0 0 20px rgba(150, 150, 150, 0.1),
-    inset 0 0 0 2px #1e1e1e,
-    inset 0 0 0 5px rgba(150, 150, 150, 0.15);
-}
-
-.project-node:nth-child(3):hover .node-circle {
   border-color: rgba(196, 120, 90, 0.5);
   box-shadow:
     var(--shadow-lg),
     0 0 20px rgba(196, 120, 90, 0.15),
     inset 0 0 0 2px #1e1e1e,
     inset 0 0 0 5px rgba(196, 120, 90, 0.15);
+}
+
+.project-node:nth-child(3):hover .node-circle {
+  border-color: rgba(150, 150, 150, 0.5);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 20px rgba(150, 150, 150, 0.1),
+    inset 0 0 0 2px #1e1e1e,
+    inset 0 0 0 5px rgba(150, 150, 150, 0.15);
 }
 
 /* LED Indicator */
@@ -263,11 +251,11 @@
 }
 
 .project-node:nth-child(2) .node-led {
-  background: #999999;
+  background: #c4785a;
 }
 
 .project-node:nth-child(3) .node-led {
-  background: #c4785a;
+  background: #999999;
 }
 
 
@@ -316,13 +304,13 @@
 }
 
 .project-node:nth-child(2) .particle {
-  background: #999999;
-  box-shadow: 0 0 4px rgba(150, 150, 150, 0.4);
+  background: #c4785a;
+  box-shadow: 0 0 4px rgba(196, 120, 90, 0.4);
 }
 
 .project-node:nth-child(3) .particle {
-  background: #c4785a;
-  box-shadow: 0 0 4px rgba(196, 120, 90, 0.4);
+  background: #999999;
+  box-shadow: 0 0 4px rgba(150, 150, 150, 0.4);
 }
 
 .particle-1 {
@@ -468,8 +456,8 @@
 }
 
 
-/* Responsive positioning for info cards on right side */
-.project-node:nth-child(n+2) .node-info-card {
+/* Info card positioning per node */
+.project-node:nth-child(2) .node-info-card {
   left: auto;
   right: calc(100% + 20px);
 }
