@@ -36,7 +36,7 @@
   display: inline-block;
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.9rem;
-  color: #8b6f47;
+  color: #e8823f;
   text-decoration: none;
   font-weight: 400;
   margin-bottom: 1.5rem;
@@ -48,9 +48,9 @@
 }
 
 .back-link:hover {
-  color: #3d2617;
+  color: #f0f0f0;
   transform: translateX(-5px);
-  border-bottom: 2px solid #3d2617;
+  border-bottom: 2px solid #f5a161;
 }
 
 .status-led {
@@ -86,20 +86,20 @@
 .status-text {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #3d2617;
+  color: #f0f0f0;
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .status-divider {
-  color: #8b6f47;
+  color: #e8823f;
   opacity: 0.5;
 }
 
 .mount-label {
   font-family: 'Courier New', monospace;
   font-size: 12px;
-  color: #3d2617;
+  color: #f0f0f0;
   font-weight: 700;
 }
 
@@ -107,7 +107,7 @@
 .project-header-title {
   margin-bottom: var(--spacing-lg);
   padding-bottom: 12px;
-  border-bottom: 1px solid #6b5344;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-title-row {
@@ -130,7 +130,7 @@
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #3d2617;
+  color: #f0f0f0;
   margin: 0.5rem 0 0 0;
   letter-spacing: 0.3px;
 }
@@ -161,14 +161,10 @@
 /* About Section - Vintage Floating Card */
 .about-section {
   padding: 0;
-  background: var(--background-cream);
-  border: 2px solid var(--primary-brown);
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 0 0 3px var(--background-cream),
-    inset 0 0 0 5px rgba(139, 111, 71, 0.2);
-  /* animation: aboutFloat 4.5s ease-in-out infinite; */
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
 }
@@ -189,7 +185,7 @@
   align-items: center;
   gap: 8px;
   padding: 1rem 1.25rem 0.75rem;
-  border-bottom: 1px solid #6b5344;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .about-icon {
@@ -239,7 +235,7 @@
 
 .about-divider {
   height: 1px;
-  background: rgba(139, 111, 71, 0.12);
+  background: rgba(255, 255, 255, 0.12);
   margin: 0.25rem 0;
 }
 
@@ -258,9 +254,9 @@
   font-weight: 400;
   color: var(--text-dark);
   padding: 0.35rem 0.75rem;
-  background: rgba(139, 111, 71, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  border: 1px solid rgba(139, 111, 71, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   letter-spacing: 0.2px;
 }
 
@@ -284,14 +280,11 @@
 
 /* README Box - Vintage Panel */
 .readme-box {
-  border: 2px solid var(--primary-brown);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  background: var(--background-cream);
+  background: #1e1e1e;
   overflow: hidden;
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 0 0 3px var(--background-cream),
-    inset 0 0 0 5px rgba(139, 111, 71, 0.2);
+  box-shadow: var(--shadow-lg);
 }
 
 .readme-header {
@@ -300,7 +293,7 @@
   gap: 12px;
   padding: 1rem 1.5rem;
   background: transparent;
-  border-bottom: 1px solid #6b5344;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .readme-title-section {
@@ -335,7 +328,7 @@
 
 .readme-divider {
   height: 1px;
-  background: rgba(139, 111, 71, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   margin-bottom: 1.25rem;
 }
 
@@ -353,7 +346,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #3d2617;
+  color: #f0f0f0;
   margin: 0 0 16px 0;
 }
 
@@ -366,7 +359,7 @@
 .readme-tech-item {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 16px;
-  color: #3d2617;
+  color: #f0f0f0;
   line-height: 2;
   padding-left: 24px;
   position: relative;
@@ -376,7 +369,7 @@
   content: '\2022';
   position: absolute;
   left: 8px;
-  color: #8b6f47;
+  color: #e8823f;
   font-weight: bold;
 }
 
@@ -391,7 +384,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: var(--spacing-md);
-  border-bottom: 1px solid #6b5344;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Clickable section header */
@@ -487,9 +480,9 @@
   font-weight: 400;
   color: var(--text-dark);
   padding: 0.4rem 1rem;
-  background: rgba(139, 111, 71, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  border: 1px solid rgba(139, 111, 71, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   letter-spacing: 0.2px;
 }
 
@@ -510,23 +503,18 @@
   color: var(--text-dark);
   text-decoration: none;
   padding: 0.75rem 1.25rem;
-  background: var(--background-cream);
-  border: 2px solid var(--primary-brown);
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   letter-spacing: 0.3px;
-  box-shadow:
-    var(--shadow-sm),
-    inset 0 0 0 2px var(--background-cream),
-    inset 0 0 0 4px rgba(139, 111, 71, 0.15);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
 }
 
 .project-link:hover {
   transform: translateX(6px);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 2px var(--background-cream),
-    inset 0 0 0 4px rgba(139, 111, 71, 0.25);
+  border-color: rgba(232, 130, 63, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .link-icon {
@@ -546,7 +534,7 @@
 
 .workflow-section .file-header {
   padding: 12px 20px;
-  border-bottom: 1px solid #6b5344;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 20px;
 }
 
@@ -570,14 +558,12 @@
 }
 
 .step-card {
-  background: linear-gradient(135deg, #f5f0eb 0%, #e5ddd3 100%);
-  border: 2px solid #8b6f47;
+  background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
   padding: 20px 18px;
   position: relative;
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
   transform: rotate(-1deg);
   min-height: 200px;
@@ -589,9 +575,8 @@
 
 .step-card:hover {
   transform: rotate(0deg) translateY(-4px);
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border-color: rgba(232, 130, 63, 0.2);
   z-index: 10;
 }
 
@@ -613,7 +598,7 @@
   font-family: 'Courier New', monospace;
   font-size: 10px;
   font-weight: 700;
-  color: #8b6f47;
+  color: #e8823f;
   letter-spacing: 1.2px;
   margin-bottom: 10px;
   text-align: center;
@@ -635,7 +620,7 @@
   font-family: 'Courier New', monospace;
   font-size: 12px;
   font-weight: 700;
-  color: #3d2617;
+  color: #f0f0f0;
   letter-spacing: 0.6px;
   margin-bottom: 6px;
 }
@@ -644,7 +629,7 @@
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 14px;
   font-weight: 600;
-  color: #3d2617;
+  color: #f0f0f0;
   margin-bottom: 5px;
   line-height: 1.3;
 }
@@ -652,7 +637,7 @@
 .step-details {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #8b6f47;
+  color: #e8823f;
   font-style: italic;
 }
 
@@ -669,25 +654,25 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 40px;
-  background: linear-gradient(135deg, #4a3828 0%, #6b5345 50%, #4a3828 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   border-radius: 20px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
     inset 0 2px 8px rgba(255, 255, 255, 0.1),
     inset 0 -2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 3px #2d1f16,
-    0 0 0 6px rgba(139, 111, 71, 0.3);
+    0 0 0 3px #111111,
+    0 0 0 6px rgba(255, 255, 255, 0.05);
 
-  /* Wood grain texture */
+  /* Subtle texture */
   background-image:
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.03) 2px,
-      rgba(0, 0, 0, 0.03) 4px
+      rgba(255, 255, 255, 0.01) 2px,
+      rgba(255, 255, 255, 0.01) 4px
     ),
-    linear-gradient(135deg, #4a3828 0%, #6b5345 50%, #4a3828 100%);
+    linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
 }
 
 .video-container::before {
@@ -748,7 +733,7 @@
   transform: translateX(-50%);
   width: 200px;
   height: 20px;
-  background: linear-gradient(to bottom, #4a3828, #2d1f16);
+  background: linear-gradient(to bottom, #1a1a1a, #111111);
   border-radius: 0 0 10px 10px;
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.3),
@@ -768,7 +753,7 @@
 .video-container .tv-knob {
   width: 24px;
   height: 24px;
-  background: radial-gradient(circle at 30% 30%, #8b7355, #4a3828);
+  background: radial-gradient(circle at 30% 30%, #444444, #222222);
   border-radius: 50%;
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.4),
@@ -819,7 +804,7 @@
 .error-container h1 {
   font-family: 'Courier New', monospace;
   font-size: 32px;
-  color: #3d2617;
+  color: #f0f0f0;
   margin-bottom: var(--spacing-lg);
 }
 

@@ -1,37 +1,37 @@
-/* Brown & Rose Theme - Inspired by Mason Wong */
+/* Dark Engineer Theme */
 :root {
-  /* Primära färger - Beige & Bruna toner */
-  --primary-beige: #c9b5a0;
-  --primary-sand: #d4c4b0;
-  --primary-brown: #8b6f47;
-  --primary-dark-brown: #3d2617;
+  /* Primary colors - Dark tones */
+  --primary-beige: #1a1a1a;
+  --primary-sand: #252525;
+  --primary-brown: #555555;
+  --primary-dark-brown: #f0f0f0;
 
-  /* Accent färger - Rosa & Bruna */
-  --accent-rose: #e8a5a5;
-  --accent-pink: #d4949d;
-  --accent-mauve: #b08b8f;
-  --accent-burgundy: #8b4a4f;
+  /* Accent colors */
+  --accent-rose: #f5a161;
+  --accent-pink: #c4785a;
+  --accent-mauve: #888888;
+  --accent-burgundy: #e8823f;
 
   /* Orange accent */
   --accent-orange: #e8823f;
   --accent-orange-light: #f5a161;
 
-  /* Text färger */
-  --text-dark: #3d2617;
-  --text-medium: #6b5344;
-  --text-light: #9d8776;
+  /* Text colors */
+  --text-dark: #f0f0f0;
+  --text-medium: #999999;
+  --text-light: #666666;
   --text-white: #ffffff;
 
-  /* Bakgrunder */
-  --background-beige: #c9b5a0; /*b19a82*/
-  --background-light: #e5ddd3;
-  --background-white: #ffffff;
-  --background-cream: #f5f0eb;
+  /* Backgrounds */
+  --background-beige: #0f0f0f;
+  --background-light: #141414;
+  --background-white: #1a1a1a;
+  --background-cream: #1e1e1e;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(61, 38, 23, 0.1);
-  --shadow-md: 0 4px 16px rgba(61, 38, 23, 0.15);
-  --shadow-lg: 0 8px 24px rgba(61, 38, 23, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 
   /* Spacing */
   --spacing-xs: 0.5rem;

@@ -2,7 +2,7 @@
   min-height: 80vh;
   padding: var(--spacing-xl) var(--spacing-md);
   animation: fadeIn var(--transition-slow);
-  background: var(--background-beige);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
