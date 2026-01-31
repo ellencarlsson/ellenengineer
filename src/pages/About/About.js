@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './About.css';
 
 const MILESTONES = [
@@ -38,8 +38,79 @@ const MILESTONES = [
 
 function About() {
   const [active, setActive] = useState(null);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const particlesRef = useRef(null);
+  const timelineRef = useRef(null);
+  const activeRef = useRef(active);
+  const dotRefs = useRef([]);
+  const blobRef = useRef(null);
+  const prevActiveRef = useRef(null);
 
+  useEffect(() => { activeRef.current = active; }, [active]);
+  useEffect(() => { setIsFlipped(false); }, [active]);
+
+  // Energy blob travel animation
+  useEffect(() => {
+    const blob = blobRef.current;
+    const track = timelineRef.current;
+
+    if (!blob || !track) {
+      prevActiveRef.current = active;
+      return;
+    }
+
+    if (active === null) {
+      blob.style.opacity = '0';
+      prevActiveRef.current = active;
+      return;
+    }
+
+    const prev = prevActiveRef.current;
+    const trackRect = track.getBoundingClientRect();
+
+    if (prev !== null && prev !== active && dotRefs.current[prev] && dotRefs.current[active]) {
+      const fromDot = dotRefs.current[prev];
+      const toDot = dotRefs.current[active];
+      const fromX = fromDot.getBoundingClientRect().left + fromDot.getBoundingClientRect().width / 2 - trackRect.left;
+      const toX = toDot.getBoundingClientRect().left + toDot.getBoundingClientRect().width / 2 - trackRect.left;
+
+      blob.style.transition = 'none';
+      blob.style.left = fromX + 'px';
+      blob.style.opacity = '1';
+      void blob.offsetHeight;
+
+      const dist = Math.abs(toX - fromX);
+      const duration = Math.min(0.6, Math.max(0.25, dist / 600));
+      blob.style.transition = `left ${duration}s ease, opacity 0.2s ease ${duration}s`;
+      blob.style.left = toX + 'px';
+      blob.style.opacity = '0';
+    }
+
+    prevActiveRef.current = active;
+  }, [active]);
+
+  // Arrow key navigation
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'ArrowRight') {
+        setActive(prev => {
+          if (prev === null) return 0;
+          return Math.min(prev + 1, MILESTONES.length - 1);
+        });
+      } else if (e.key === 'ArrowLeft') {
+        setActive(prev => {
+          if (prev === null) return MILESTONES.length - 1;
+          if (prev === 0) return null;
+          return prev - 1;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  // Particle effect
   useEffect(() => {
     const container = particlesRef.current;
     if (!container) return;
@@ -71,27 +142,97 @@ function About() {
     return () => particles.forEach(p => p.remove());
   }, []);
 
+  const getClosestMilestone = useCallback((clientX) => {
+    const track = timelineRef.current;
+    if (!track) return null;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const index = Math.round(ratio * (MILESTONES.length - 1));
+    return index;
+  }, []);
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMove = (e) => {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const idx = getClosestMilestone(clientX);
+      if (idx !== null && idx !== activeRef.current) {
+        setActive(idx);
+      }
+    };
+
+    const handleUp = () => setIsDragging(false);
+
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove, { passive: true });
+    window.addEventListener('mouseup', handleUp);
+    window.addEventListener('touchend', handleUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('touchmove', handleMove);
+      window.removeEventListener('mouseup', handleUp);
+      window.removeEventListener('touchend', handleUp);
+    };
+  }, [isDragging, getClosestMilestone]);
+
+  const handleTrackClick = (e) => {
+    if (isDragging) return;
+    if (e.target.closest('.tl-node')) return;
+    const idx = getClosestMilestone(e.clientX);
+    if (idx !== null) setActive(idx);
+  };
+
+  const handleThumbDown = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const m = active !== null ? MILESTONES[active] : null;
+
   return (
     <section id="about" className="about-page">
       <div className="ambient-particles" ref={particlesRef}></div>
-      {/* Content area */}
+
       <div className="about-main">
-        {active !== null ? (
-          <div className="card" key={MILESTONES[active].year}>
-            <div className="card-top">
-              <div className="card-info">
+        {m ? (
+          <div className="flip-scene" key={active}>
+            <div
+              className={`flip-card${isFlipped ? ' flipped' : ''}`}
+              onClick={() => setIsFlipped(f => !f)}
+            >
+              {/* Front */}
+              <div className="flip-front">
                 <div className="card-eyebrow">
-                  <span className="card-chip">{MILESTONES[active].label}</span>
-                  <span className="card-loc">{MILESTONES[active].location}</span>
+                  <span className="card-chip">{m.label}</span>
+                  <span className="card-loc">{m.location}</span>
                 </div>
-                <h1 className="card-year">{MILESTONES[active].year}</h1>
-                <p className="card-desc">{MILESTONES[active].description}</p>
+                <h1 className="card-year">{m.year}</h1>
+                <p className="card-desc">
+                  <span className="card-prompt">&gt; </span>
+                  {m.description}
+                </p>
+                {m.image && (
+                  <p className="flip-hint">[ klicka för att visa bild ]</p>
+                )}
               </div>
-              {MILESTONES[active].image && (
-                <div className="card-photo">
-                  <img src={MILESTONES[active].image} alt={`${MILESTONES[active].year}`} />
-                </div>
-              )}
+
+              {/* Back */}
+              <div className="flip-back">
+                {m.image ? (
+                  <div className="flip-photo">
+                    <img src={m.image} alt={`${m.year}`} />
+                    <div className="flip-photo-overlay" />
+                  </div>
+                ) : (
+                  <div className="flip-back-empty">
+                    <span className="flip-back-year">{m.year}</span>
+                    <span className="flip-back-loc">{m.location}</span>
+                  </div>
+                )}
+                <p className="flip-hint-back">[ klicka för att gå tillbaka ]</p>
+              </div>
             </div>
           </div>
         ) : (
@@ -103,19 +244,34 @@ function About() {
         )}
       </div>
 
-      {/* Timeline bar at bottom */}
+      {/* Timeline */}
       <div className="timeline">
-        <div className="timeline-track">
-          <div className="timeline-line"></div>
-          {MILESTONES.map((m, i) => (
+        <div
+          className="timeline-track"
+          ref={timelineRef}
+          onClick={handleTrackClick}
+        >
+          <div className="timeline-line">
+            <span className="tl-spark" style={{ animationDuration: '2.8s', animationDelay: '0s' }} />
+            <span className="tl-spark" style={{ animationDuration: '3.4s', animationDelay: '-1.2s' }} />
+            <span className="tl-spark" style={{ animationDuration: '2.2s', animationDelay: '-0.6s' }} />
+            <span className="tl-spark" style={{ animationDuration: '4s', animationDelay: '-2.5s' }} />
+          </div>
+          <div className="tl-energy-blob" ref={blobRef} />
+          {MILESTONES.map((ms, i) => (
             <button
-              key={m.year}
+              key={ms.year}
               className={`tl-node ${active === i ? 'active' : ''}`}
               onClick={() => setActive(active === i ? null : i)}
             >
-              <div className="tl-dot"></div>
-              <div className="tl-label">{m.year}</div>
-              <div className="tl-sublabel">{m.label}</div>
+              <div
+                className={`tl-dot${active === i && isDragging ? ' dragging' : ''}`}
+                ref={el => { dotRefs.current[i] = el; }}
+                onMouseDown={active === i ? handleThumbDown : undefined}
+                onTouchStart={active === i ? handleThumbDown : undefined}
+              ></div>
+              <div className="tl-label">{ms.year}</div>
+              <div className="tl-sublabel">{ms.label}</div>
             </button>
           ))}
         </div>
