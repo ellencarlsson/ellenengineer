@@ -52,9 +52,9 @@ function Header() {
 
         <div className="header-right">
           <div className="nav-pill">
-            <a href="/resume.pdf" className="nav-link" target="_blank" rel="noopener noreferrer">
+            <NavLink to="/cv" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               CV
-            </a>
+            </NavLink>
           </div>
           <div className="nav-pill">
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
