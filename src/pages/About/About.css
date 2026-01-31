@@ -86,48 +86,34 @@
   margin: 0;
 }
 
-/* ===== FLIP CARD ===== */
-.flip-scene {
+/* ===== CARD LAYOUT ===== */
+.card-layout {
   width: 100%;
   max-width: 860px;
-  perspective: 1000px;
-  animation: flipSceneIn 0.45s ease-out;
+  animation: cardIn 0.45s ease-out;
 }
 
-@keyframes flipSceneIn {
+.card-layout.has-image {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+@keyframes cardIn {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.flip-card {
+.card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-image {
+  flex: 0 0 280px;
+  width: 280px;
+  max-height: 340px;
   position: relative;
-  width: 100%;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease;
-}
-
-.flip-card.flipped {
-  transform: rotateY(180deg);
-}
-
-/* Front establishes height, back fills it */
-.flip-front {
-  position: relative;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  z-index: 2;
-}
-
-.flip-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: rotateY(180deg);
-  z-index: 1;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
 /* ===== CARD TEXT ===== */
@@ -182,91 +168,111 @@
   color: rgba(60, 180, 100, 0.4);
 }
 
-/* ===== FLIP HINTS ===== */
-.flip-hint {
-  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  font-size: 11px;
-  color: rgba(60, 180, 100, 0.35);
-  margin-top: 20px;
-  letter-spacing: 0.5px;
-}
-
-.flip-hint-back {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  font-size: 11px;
-  color: rgba(60, 180, 100, 0.3);
-  letter-spacing: 0.5px;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* ===== FLIP BACK — PHOTO ===== */
-.flip-photo {
+/* ===== GLITCH IMAGE ===== */
+.glitch-img {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 280px;
   overflow: hidden;
   border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
 }
 
-.flip-photo img {
+.glitch-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
-  filter: grayscale(0.4) brightness(0.8) sepia(0.15);
-  transition: filter 0.3s ease;
+  filter: grayscale(0.35) brightness(0.8) contrast(1.1);
+  animation: glitchShift 8s steps(1) infinite;
 }
 
-.flip-photo:hover img {
-  filter: grayscale(0.1) brightness(0.9) sepia(0.05);
-}
-
-.flip-photo-overlay {
+/* Scanlines overlay */
+.glitch-img::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(10, 10, 10, 0.7) 0%,
-    transparent 40%
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
   );
   pointer-events: none;
+  z-index: 3;
 }
 
-/* ===== FLIP BACK — EMPTY ===== */
-.flip-back-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 280px;
+/* Green tint + vignette overlay */
+.glitch-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%),
+    linear-gradient(to bottom, rgba(60, 180, 100, 0.06) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 4;
 }
 
-.flip-back-year {
-  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  font-size: 110px;
-  font-weight: 700;
-  color: rgba(60, 180, 100, 0.08);
-  line-height: 1;
-  letter-spacing: -5px;
-  user-select: none;
+/* Periodic glitch burst */
+@keyframes glitchShift {
+  0%, 89%, 100% {
+    transform: translate(0);
+    filter: grayscale(0.35) brightness(0.8) contrast(1.1);
+    clip-path: none;
+  }
+  90% {
+    transform: translate(-4px, 1px);
+    filter: grayscale(0.35) brightness(1.2) contrast(1.1) hue-rotate(80deg);
+  }
+  91% {
+    transform: translate(3px, 0);
+    clip-path: inset(15% 0 60% 0);
+    filter: grayscale(0.35) brightness(0.8) contrast(1.1);
+  }
+  92% {
+    transform: translate(-2px, -1px);
+    clip-path: inset(65% 0 10% 0);
+    filter: grayscale(0.35) brightness(0.9) contrast(1.1) hue-rotate(-40deg);
+  }
+  93% {
+    transform: translate(1px, 2px);
+    clip-path: inset(40% 0 30% 0);
+  }
+  94% {
+    transform: translate(0);
+    filter: grayscale(0.35) brightness(0.8) contrast(1.1);
+    clip-path: none;
+  }
 }
 
-.flip-back-loc {
-  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  font-size: 14px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(60, 180, 100, 0.25);
-  margin-top: 12px;
+/* Flickering noise band */
+.card-image::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(60, 180, 100, 0.15);
+  z-index: 5;
+  pointer-events: none;
+  animation: noiseBand 4s steps(1) infinite;
+}
+
+@keyframes noiseBand {
+  0%, 100% { top: 20%; opacity: 0; }
+  15%      { top: 20%; opacity: 0; }
+  16%      { top: 45%; opacity: 1; }
+  18%      { top: 47%; opacity: 0.6; }
+  19%      { top: 47%; opacity: 0; }
+  50%      { top: 70%; opacity: 0; }
+  51%      { top: 15%; opacity: 0.8; }
+  53%      { top: 17%; opacity: 0; }
+  80%      { top: 80%; opacity: 0; }
+  81%      { top: 65%; opacity: 1; }
+  83%      { top: 67%; opacity: 0; }
 }
 
 /* ===== TIMELINE ===== */
@@ -447,24 +453,23 @@
     font-size: 28px;
   }
 
+  .card-layout.has-image {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .card-image {
+    flex: none;
+    width: 100%;
+    max-height: 240px;
+  }
+
   .card-year {
     font-size: 42px;
   }
 
   .card-desc {
     font-size: 13px;
-  }
-
-  .flip-photo {
-    min-height: 200px;
-  }
-
-  .flip-back-empty {
-    min-height: 200px;
-  }
-
-  .flip-back-year {
-    font-size: 80px;
   }
 
   .tl-node.active .tl-dot {

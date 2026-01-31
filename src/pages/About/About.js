@@ -37,8 +37,7 @@ const MILESTONES = [
 ];
 
 function About() {
-  const [active, setActive] = useState(null);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [active, setActive] = useState(MILESTONES.length - 1);
   const [isDragging, setIsDragging] = useState(false);
   const particlesRef = useRef(null);
   const timelineRef = useRef(null);
@@ -48,7 +47,6 @@ function About() {
   const prevActiveRef = useRef(null);
 
   useEffect(() => { activeRef.current = active; }, [active]);
-  useEffect(() => { setIsFlipped(false); }, [active]);
 
   // Energy blob travel animation
   useEffect(() => {
@@ -197,43 +195,25 @@ function About() {
 
       <div className="about-main">
         {m ? (
-          <div className="flip-scene" key={active}>
-            <div
-              className={`flip-card${isFlipped ? ' flipped' : ''}`}
-              onClick={() => setIsFlipped(f => !f)}
-            >
-              {/* Front */}
-              <div className="flip-front">
-                <div className="card-eyebrow">
-                  <span className="card-chip">{m.label}</span>
-                  <span className="card-loc">{m.location}</span>
-                </div>
-                <h1 className="card-year">{m.year}</h1>
-                <p className="card-desc">
-                  <span className="card-prompt">&gt; </span>
-                  {m.description}
-                </p>
-                {m.image && (
-                  <p className="flip-hint">[ klicka för att visa bild ]</p>
-                )}
+          <div className={`card-layout${m.image ? ' has-image' : ''}`} key={active}>
+            <div className="card-text">
+              <div className="card-eyebrow">
+                <span className="card-chip">{m.label}</span>
+                <span className="card-loc">{m.location}</span>
               </div>
-
-              {/* Back */}
-              <div className="flip-back">
-                {m.image ? (
-                  <div className="flip-photo">
-                    <img src={m.image} alt={`${m.year}`} />
-                    <div className="flip-photo-overlay" />
-                  </div>
-                ) : (
-                  <div className="flip-back-empty">
-                    <span className="flip-back-year">{m.year}</span>
-                    <span className="flip-back-loc">{m.location}</span>
-                  </div>
-                )}
-                <p className="flip-hint-back">[ klicka för att gå tillbaka ]</p>
-              </div>
+              <h1 className="card-year">{m.year}</h1>
+              <p className="card-desc">
+                <span className="card-prompt">&gt; </span>
+                {m.description}
+              </p>
             </div>
+            {m.image && (
+              <div className="card-image">
+                <div className="glitch-img">
+                  <img src={m.image} alt={`${m.year}`} />
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="about-idle">
