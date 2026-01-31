@@ -168,7 +168,7 @@
     var(--shadow-lg),
     inset 0 0 0 3px var(--background-cream),
     inset 0 0 0 5px rgba(139, 111, 71, 0.2);
-  animation: aboutFloat 4.5s ease-in-out infinite;
+  /* animation: aboutFloat 4.5s ease-in-out infinite; */
   position: relative;
   overflow: hidden;
 }
@@ -182,36 +182,7 @@
   }
 }
 
-/* LED Indicator on ABOUT card */
-.about-section::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--primary-brown);
-  border: 1px solid var(--primary-dark-brown);
-  opacity: 0.8;
-  z-index: 2;
-}
-
-/* LED color variants */
-.about-section.led-brown::before {
-  background: var(--primary-brown);
-  border-color: var(--primary-dark-brown);
-}
-
-.about-section.led-medium::before {
-  background: var(--text-medium);
-  border-color: var(--text-dark);
-}
-
-.about-section.led-burgundy::before {
-  background: var(--accent-burgundy);
-  border-color: var(--primary-dark-brown);
-}
+/* LED Indicator on ABOUT card - disabled */
 
 .about-header {
   display: flex;
@@ -402,7 +373,7 @@
 }
 
 .readme-tech-item::before {
-  content: '•';
+  content: '\2022';
   position: absolute;
   left: 8px;
   color: #8b6f47;
@@ -423,6 +394,18 @@
   border-bottom: 1px solid #6b5344;
 }
 
+/* Clickable section header */
+.file-header.clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
+  margin-bottom: 0;
+}
+
+.file-header.clickable:hover {
+  opacity: 0.7;
+}
+
 .file-icon {
   font-size: 20px;
 }
@@ -435,8 +418,79 @@
   letter-spacing: 0.8px;
 }
 
+/* Chevron Arrow */
+.section-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--text-medium);
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.section-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* Section Body - Animated collapse/expand */
+.section-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.section-body.expanded {
+  grid-template-rows: 1fr;
+}
+
+.section-body > .section-content {
+  overflow: hidden;
+}
+
+/* Section Content */
+.section-content {
+  padding: 0;
+}
+
+.section-content > *:first-child {
+  margin-top: 1.5rem;
+}
+
+.section-content > *:last-child {
+  margin-bottom: 1.5rem;
+}
+
 .file-content {
   padding: 0;
+}
+
+/* Result Description */
+.result-description {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.2px;
+}
+
+/* Tech Badges (COMPONENTS section) */
+.tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tech-badge {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  padding: 0.4rem 1rem;
+  background: rgba(139, 111, 71, 0.08);
+  border-radius: 8px;
+  border: 1px solid rgba(139, 111, 71, 0.2);
+  letter-spacing: 0.2px;
 }
 
 /* Links Container */
@@ -543,7 +597,7 @@
 
 /* Pin on top of card */
 .step-card::before {
-  content: '📌';
+  content: '\01F4CC';
   position: absolute;
   top: -12px;
   left: 50%;
@@ -769,6 +823,27 @@
   margin-bottom: var(--spacing-lg);
 }
 
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Responsive */
 @media (max-width: 968px) {
   .project-detail-page {
@@ -901,5 +976,16 @@
   .system-diagram {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-badges {
+    gap: 0.5rem;
+  }
+
+  .tech-badge {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
   }
 }
