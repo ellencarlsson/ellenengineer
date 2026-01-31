@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 
 function ProjectDetail() {
   const { projectId } = useParams();
+  const [expandedSections, setExpandedSections] = useState({
+    result: false,
+    architecture: false,
+    components: false,
+    links: false
+  });
+
+  const toggleSection = (sectionId) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
 
   const projects = {
     'slr-2024': {
@@ -16,6 +29,7 @@ function ProjectDetail() {
       interface: 'SCSI',
       status: 'VERIFIED',
       ledColor: 'brown',
+      tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
@@ -23,6 +37,7 @@ function ProjectDetail() {
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideo: 'https://www.youtube.com/embed/RrvsNtiPFXo',
+      resultText: 'Appen kan identifiera handrörelser i realtid via Apple Watch och omvandla dem till talade ord på iPhone. Flera tecken kan utföras i följd för att bygga meningar.',
       hasWorkflow: true,
       workflow: [
         {
@@ -85,11 +100,49 @@ function ProjectDetail() {
       interface: 'IDE',
       status: 'OPERATIONAL',
       ledColor: 'medium',
+      tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
-      image: null
+      image: null,
+      demoVideo: null,
+      resultText: 'Hemsidan är live på ellenengineer.se med en interaktiv terminal-landningssida, nätverksbaserad projektnavigering och detaljerade projektsidor med expanderbara sektioner.',
+      hasWorkflow: true,
+      workflow: [
+        {
+          step: 1,
+          icon: '💻',
+          title: 'TERMINAL HERO',
+          description: 'macOS-terminal med skrivanimation',
+          details: 'React + useState + useEffect',
+          ledColor: 'green'
+        },
+        {
+          step: 2,
+          icon: '🗺️',
+          title: 'REACT ROUTER',
+          description: 'Klient-navigering mellan sidor',
+          details: 'SPA med React Router',
+          ledColor: 'green'
+        },
+        {
+          step: 3,
+          icon: '🕸️',
+          title: 'PROJEKT-NÄTVERK',
+          description: 'Interaktiva noder med SVG-linjer',
+          details: 'Animerade datapaket',
+          ledColor: 'blue'
+        },
+        {
+          step: 4,
+          icon: '📄',
+          title: 'PROJEKTSIDOR',
+          description: 'Expanderbara sektioner med chevrons',
+          details: 'Dynamiskt innehåll per projekt',
+          ledColor: 'green'
+        }
+      ]
     },
     'postschema-2025': {
       id: 'postschema-2025',
@@ -101,11 +154,57 @@ function ProjectDetail() {
       interface: 'SATA',
       status: 'OPERATIONAL',
       ledColor: 'burgundy',
-      description: 'En schemaläggningsapp för PostNord-anställda med fokus på användarupplevelse och effektiv schemahantering. Applikationen gör det enkelt för anställda att se sina arbetspass, byta pass med kollegor, och få översikt över sitt arbetsvecka.\n\nProjektet utvecklades med modern webbteknologi och fokuserar på att göra schemaläggning smidig och intuitiv. Genom att använda React för frontend och Node.js med Express för backend, skapades en responsiv och snabb applikation.\n\nMongoDB används som databas för att lagra scheman, användarinformation och passkonfigurationer. Systemet har inbyggd autentisering och möjliggör olika rollnivåer för administratörer och anställda.',
-      techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
+      tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
+      description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
+      techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
       github: 'https://github.com/ellencarlsson/postschema',
       demo: null,
-      image: null
+      image: null,
+      demoVideo: null,
+      resultText: 'En fullt fungerande offline iOS-app som automatiskt skapar optimerade arbetsscheman. Appen respekterar arbetsrättsliga regler (max 4h utan rast, minst 7h vila, max 32h per 48h) och fördelar pass rättvist med ett poängsystem.',
+      hasWorkflow: true,
+      workflow: [
+        {
+          step: 1,
+          icon: '🏗️',
+          title: 'ORGANISATION',
+          description: 'Pluton → Grupp → Soldat',
+          details: 'Hierarkisk struktur i Core Data',
+          ledColor: 'blue'
+        },
+        {
+          step: 2,
+          icon: '📊',
+          title: 'GRUPPFÖRDELNING',
+          description: 'Tid fördelas proportionellt',
+          details: 'Baserat på kvalificerade soldater',
+          ledColor: 'blue'
+        },
+        {
+          step: 3,
+          icon: '🎯',
+          title: 'GREEDY ASSIGNMENT',
+          description: 'Tilldelar soldater med scoring',
+          details: 'Vila, belastning, kvalifikationer',
+          ledColor: 'yellow'
+        },
+        {
+          step: 4,
+          icon: '🔄',
+          title: 'LOCAL SEARCH',
+          description: 'Optimerar genom att byta passpar',
+          details: 'Förbättrar global lösning',
+          ledColor: 'green'
+        },
+        {
+          step: 5,
+          icon: '✅',
+          title: 'SCHEMA',
+          description: 'Komplett schema med regelefterlevnad',
+          details: 'Max 4h arbete, min 7h vila',
+          ledColor: 'green'
+        }
+      ]
     }
   };
 
@@ -132,7 +231,7 @@ function ProjectDetail() {
           </Link>
           <div className="project-title-row">
             <h1 className="github-project-name">{project.name}</h1>
-            <p className="project-tagline">AI-powered sign language recognition using Apple Watch motion sensors</p>
+            <p className="project-tagline">{project.tagline}</p>
           </div>
         </div>
 
@@ -161,7 +260,7 @@ function ProjectDetail() {
           <div className="sidebar-column">
             <div className={`about-section led-${project.ledColor}`}>
               <div className="about-header">
-                <span className="about-title">PROJECT DETAILS</span>
+                <span className="about-title">PROJEKTDETALJER</span>
               </div>
               <div className="about-content">
                 <div className="about-item">
@@ -227,51 +326,57 @@ function ProjectDetail() {
           </div>
         </div>
 
-        {/* DEMO */}
-        {project.demoVideo && (
-          <div className="file-section fullwidth-section">
-            <div className="file-header">
-              <span className="file-icon">📼</span>
-              <span className="file-name">DEMO.broadcast</span>
-            </div>
-            <div className="file-content">
-              <div className="video-container">
-                <iframe
-                  className="demo-video"
-                  src={project.demoVideo}
-                  title="Project Demo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                <div className="tv-controls">
-                  <div className="tv-knob"></div>
-                  <div className="tv-knob"></div>
+        {/* RESULT */}
+        <div className="file-section fullwidth-section">
+          <div className="file-header clickable" onClick={() => toggleSection('result')}>
+            <span className="file-icon">📼</span>
+            <span className="file-name">RESULT.log</span>
+            <svg className={`section-chevron ${expandedSections.result ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className={`section-body ${expandedSections.result ? 'expanded' : ''}`}>
+            <div className="section-content">
+              {project.resultText && (
+                <p className="result-description">{project.resultText}</p>
+              )}
+              {project.demoVideo && (
+                <div className="video-container">
+                  <iframe
+                    className="demo-video"
+                    src={project.demoVideo}
+                    title="Project Demo"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                  <div className="tv-controls">
+                    <div className="tv-knob"></div>
+                    <div className="tv-knob"></div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
 
-        {/* HOW-IT-WORKS.sys - Full Screen */}
-        {project.hasWorkflow && (
-          <div className="file-section workflow-section fullwidth-section">
-            <div className="file-header">
-              <span className="file-icon">⚙️</span>
-              <span className="file-name">HOW-IT-WORKS.sys</span>
-            </div>
-            <div className="file-content">
+        {/* ARCHITECTURE */}
+        <div className="file-section fullwidth-section">
+          <div className="file-header clickable" onClick={() => toggleSection('architecture')}>
+            <span className="file-icon">⚙️</span>
+            <span className="file-name">ARCHITECTURE.sys</span>
+            <svg className={`section-chevron ${expandedSections.architecture ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className={`section-body ${expandedSections.architecture ? 'expanded' : ''}`}>
+            <div className="section-content">
               <div className="system-diagram">
                 {project.workflow.map((step) => (
                   <div key={step.step} className="workflow-step">
                     <div className="step-card">
-                      {/* Step Number */}
                       <div className="step-number">STEP {step.step}</div>
-
-                      {/* Icon */}
                       <div className="step-icon">{step.icon}</div>
-
-                      {/* Content */}
                       <div className="step-content">
                         <div className="step-title">{step.title}</div>
                         <div className="step-description">{step.description}</div>
@@ -283,38 +388,74 @@ function ProjectDetail() {
               </div>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* LINKS.txt */}
+        {/* COMPONENTS */}
         <div className="file-section fullwidth-section">
-          <div className="file-header">
-            <span className="file-icon">📄</span>
-            <span className="file-name">LINKS.txt</span>
+          <div className="file-header clickable" onClick={() => toggleSection('components')}>
+            <span className="file-icon">🧩</span>
+            <span className="file-name">COMPONENTS.lib</span>
+            <svg className={`section-chevron ${expandedSections.components ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
-          <div className="file-content">
-            <div className="links-container">
-              {project.thesis && (
-                <a
-                  href={project.thesis}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link thesis"
-                >
-                  <span className="link-icon">→</span>
-                  <span className="link-text">Thesis Paper</span>
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link demo"
-                >
-                  <span className="link-icon">→</span>
-                  <span className="link-text">Live Demo</span>
-                </a>
-              )}
+          <div className={`section-body ${expandedSections.components ? 'expanded' : ''}`}>
+            <div className="section-content">
+              <div className="tech-badges">
+                {project.techStack.map((tech, i) => (
+                  <span key={i} className="tech-badge">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* LINKS */}
+        <div className="file-section fullwidth-section">
+          <div className="file-header clickable" onClick={() => toggleSection('links')}>
+            <span className="file-icon">🔗</span>
+            <span className="file-name">LINKS.url</span>
+            <svg className={`section-chevron ${expandedSections.links ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className={`section-body ${expandedSections.links ? 'expanded' : ''}`}>
+            <div className="section-content">
+              <div className="links-container">
+                {project.thesis && (
+                  <a
+                    href={project.thesis}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link thesis"
+                  >
+                    <span className="link-icon">→</span>
+                    <span className="link-text">Thesis Paper</span>
+                  </a>
+                )}
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link demo"
+                  >
+                    <span className="link-icon">→</span>
+                    <span className="link-text">Live Demo</span>
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link github"
+                  >
+                    <span className="link-icon">→</span>
+                    <span className="link-text">GitHub Repository</span>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

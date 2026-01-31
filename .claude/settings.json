@@ -1,0 +1,9 @@
+{
+  "skills": {
+    "create-project": {
+      "type": "prompt",
+      "path": "skills/create-project.md",
+      "description": "Generate a blank project template and insert it into both Projects.js and ProjectDetail.js"
+    }
+  }
+}
