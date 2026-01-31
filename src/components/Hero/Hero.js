@@ -81,40 +81,40 @@ function Hero() {
 
   return (
     <section id="home" className="hero">
-      <div className="terminal-window">
-        <div className="terminal-header">
-          <div className="terminal-buttons">
-            <span className="terminal-button close"></span>
-            <span className="terminal-button minimize"></span>
-            <span className="terminal-button maximize"></span>
+      <div className="hero-terminal">
+        <div className="hero-terminal-header">
+          <div className="hero-terminal-buttons">
+            <span className="hero-terminal-btn hero-btn-close"></span>
+            <span className="hero-terminal-btn hero-btn-minimize"></span>
+            <span className="hero-terminal-btn hero-btn-maximize"></span>
           </div>
-          <div className="terminal-title">EllenEngineer — zsh</div>
+          <div className="hero-terminal-title">EllenEngineer — zsh</div>
         </div>
 
-        <div className="terminal-body">
-          <div className="terminal-content">
+        <div className="hero-terminal-body">
+          <div className="hero-terminal-content">
             <pre>
               {displayedText.split('\n').map((line, index) => {
                 const lineData = terminalLines.find(l => l.text === line.trim());
                 const lineType = lineData ? lineData.type : 'output';
 
                 return (
-                  <div key={index} className={`terminal-line ${lineType}`}>
+                  <div key={index} className={`hero-line ${lineType}`}>
                     {lineType === 'link' ? (
-                      <Link to="/projects" className="terminal-link">{line}</Link>
+                      <Link to="/projects" className="hero-terminal-link">{line}</Link>
                     ) : (
                       line || '\u00A0'
                     )}
                   </div>
                 );
               })}
-              <span className={`cursor ${showCursor ? 'visible' : ''}`}>▋</span>
+              <span className={`hero-cursor ${showCursor ? 'visible' : ''}`}>▋</span>
             </pre>
           </div>
         </div>
 
-        <div className={`terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
-          <span className="hint-key">Enter</span> för att hoppa över animationen
+        <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
+          <span className="hero-hint-key">Enter</span> för att hoppa över animationen
         </div>
       </div>
     </section>
