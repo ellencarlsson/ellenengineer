@@ -25,7 +25,6 @@ function Hero() {
     { type: 'link', text: '→ Klicka här för att se mina projekt' }
   ];
 
-  // Skip animation and show all text
   const skipAnimation = () => {
     const fullText = terminalLines.map(line => line.text).join('\n');
     setDisplayedText(fullText);
@@ -34,7 +33,6 @@ function Hero() {
     setSkippedByUser(true);
   };
 
-  // Listen for Enter key
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'Enter' && !isComplete) {
@@ -90,22 +88,10 @@ function Hero() {
             <span className="terminal-button minimize"></span>
             <span className="terminal-button maximize"></span>
           </div>
-          <div className="terminal-title">ellen@portfolio:~</div>
-          <div className="terminal-tabs">
-            <div className="terminal-tab active">
-              <span className="tab-icon">⚡</span>
-              <span>terminal</span>
-            </div>
-          </div>
+          <div className="terminal-title">EllenEngineer — zsh</div>
         </div>
 
         <div className="terminal-body">
-          <div className="line-numbers">
-            {displayedText.split('\n').map((_, index) => (
-              <div key={index} className="line-number">{index + 1}</div>
-            ))}
-          </div>
-
           <div className="terminal-content">
             <pre>
               {displayedText.split('\n').map((line, index) => {
