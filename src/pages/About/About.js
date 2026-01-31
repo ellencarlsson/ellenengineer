@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../../components/Hero/Hero.css';
 import './About.css';
 import PlayerAvatar from '../../components/PlayerAvatar/PlayerAvatar';
 
