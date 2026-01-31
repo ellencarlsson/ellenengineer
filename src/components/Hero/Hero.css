@@ -9,8 +9,8 @@
   position: relative;
 }
 
-/* Terminal Window - macOS style */
-.terminal-window {
+/* Terminal Window */
+.hero-terminal {
   max-width: 750px;
   width: 100%;
   background: #1e1c1a;
@@ -21,8 +21,8 @@
   margin-top: -80px;
 }
 
-/* Title Bar - macOS style */
-.terminal-header {
+/* Title Bar */
+.hero-terminal-header {
   background: #2d2b29;
   padding: 10px 14px;
   display: flex;
@@ -30,37 +30,36 @@
   position: relative;
 }
 
-.terminal-buttons {
+.hero-terminal-buttons {
   display: flex;
   gap: 8px;
   z-index: 1;
 }
 
-.terminal-button {
+.hero-terminal-btn {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   display: block;
 }
 
-.terminal-button.close {
+.hero-btn-close {
   background: #ff5f57;
 }
 
-.terminal-button.minimize {
+.hero-btn-minimize {
   background: #ffbd2e;
 }
 
-.terminal-button.maximize {
+.hero-btn-maximize {
   background: #28ca42;
 }
 
-.terminal-title {
+.hero-terminal-title {
   color: #aaaaaa;
   font-size: 15px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace !important;
-  letter-spacing: 0.5px !important;
-  text-transform: none !important;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  letter-spacing: 0.5px;
   position: absolute;
   left: 0;
   right: 0;
@@ -70,14 +69,14 @@
 }
 
 /* Terminal Body */
-.terminal-body {
+.hero-terminal-body {
   background: #1e1c1a;
   min-height: 400px;
   max-height: 500px;
   overflow-y: auto;
 }
 
-.terminal-content {
+.hero-terminal-content {
   padding: 16px 20px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
@@ -85,73 +84,73 @@
   color: #f0ebe0;
 }
 
-.terminal-content pre {
+.hero-terminal-content pre {
   margin: 0;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 
-/* Terminal Line Styling */
-.terminal-line {
+/* Line Styling */
+.hero-line {
   margin: 0;
   padding: 0;
 }
 
-.terminal-line.command {
+.hero-line.command {
   color: #e8823f;
   font-weight: 400;
 }
 
-.terminal-line.output {
+.hero-line.output {
   color: #f0ebe0;
 }
 
-.terminal-line.link {
+.hero-line.link {
   color: #f5a161;
 }
 
-.terminal-link {
+.hero-terminal-link {
   color: #f5a161;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.terminal-link:hover {
+.hero-terminal-link:hover {
   color: #e8823f;
   text-decoration: underline;
 }
 
 /* Cursor */
-.cursor {
+.hero-cursor {
   color: #e8823f;
   font-weight: bold;
   opacity: 0;
 }
 
-.cursor.visible {
+.hero-cursor.visible {
   opacity: 1;
 }
 
 /* Scrollbar */
-.terminal-body::-webkit-scrollbar {
+.hero-terminal-body::-webkit-scrollbar {
   width: 8px;
 }
 
-.terminal-body::-webkit-scrollbar-track {
+.hero-terminal-body::-webkit-scrollbar-track {
   background: #1e1c1a;
 }
 
-.terminal-body::-webkit-scrollbar-thumb {
+.hero-terminal-body::-webkit-scrollbar-thumb {
   background: #444240;
   border-radius: 4px;
 }
 
-.terminal-body::-webkit-scrollbar-thumb:hover {
+.hero-terminal-body::-webkit-scrollbar-thumb:hover {
   background: #555351;
 }
 
 /* Terminal Hint */
-.terminal-hint {
+.hero-terminal-hint {
   background: #181716;
   padding: 10px 20px;
   border-top: 1px solid #2d2b29;
@@ -166,16 +165,16 @@
   transition: opacity 0.3s ease-out;
 }
 
-.terminal-hint.hidden {
+.hero-terminal-hint.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.terminal-hint.no-transition {
+.hero-terminal-hint.no-transition {
   transition: none;
 }
 
-.hint-key {
+.hero-hint-key {
   background: #2d2b29;
   color: #d4d2d0;
   padding: 2px 8px;
@@ -213,47 +212,47 @@
     padding: var(--spacing-lg) var(--spacing-sm);
   }
 
-  .terminal-window {
+  .hero-terminal {
     max-width: 100%;
   }
 
-  .terminal-body {
+  .hero-terminal-body {
     min-height: 350px;
     max-height: 450px;
   }
 
-  .terminal-content {
+  .hero-terminal-content {
     font-size: 12px;
     padding: 14px 16px;
   }
 
-  .terminal-title {
+  .hero-terminal-title {
     font-size: 12px;
   }
 
-  .terminal-hint {
+  .hero-terminal-hint {
     font-size: 11px;
     padding: 8px 15px;
   }
 
-  .hint-key {
+  .hero-hint-key {
     padding: 2px 6px;
     font-size: 11px;
   }
 }
 
 @media (max-width: 480px) {
-  .terminal-content {
+  .hero-terminal-content {
     font-size: 11px;
     padding: 12px;
   }
 
-  .terminal-hint {
+  .hero-terminal-hint {
     font-size: 10px;
     padding: 8px 12px;
   }
 
-  .hint-key {
+  .hero-hint-key {
     padding: 2px 5px;
     font-size: 10px;
   }
