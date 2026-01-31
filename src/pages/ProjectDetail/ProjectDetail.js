@@ -330,7 +330,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('result')}>
             <span className="file-icon">📼</span>
-            <span className="file-name">RESULT</span>
+            <span className="file-name">RESULT.log</span>
             <svg className={`section-chevron ${expandedSections.result ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -364,7 +364,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('architecture')}>
             <span className="file-icon">⚙️</span>
-            <span className="file-name">ARCHITECTURE</span>
+            <span className="file-name">ARCHITECTURE.sys</span>
             <svg className={`section-chevron ${expandedSections.architecture ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -394,7 +394,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('components')}>
             <span className="file-icon">🧩</span>
-            <span className="file-name">COMPONENTS</span>
+            <span className="file-name">COMPONENTS.lib</span>
             <svg className={`section-chevron ${expandedSections.components ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -414,7 +414,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('links')}>
             <span className="file-icon">🔗</span>
-            <span className="file-name">LINKS</span>
+            <span className="file-name">LINKS.url</span>
             <svg className={`section-chevron ${expandedSections.links ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
