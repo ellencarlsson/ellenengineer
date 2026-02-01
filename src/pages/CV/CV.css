@@ -66,8 +66,8 @@
 
 /* SQL block (no terminal chrome) */
 .sql-block {
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 15px;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 17px;
   line-height: 1.9;
   min-height: 140px;
 }
@@ -139,15 +139,15 @@
 
 .sql-result-text {
   color: var(--terminal-text-muted);
-  font-size: 14px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  font-family: 'Special Elite', 'Courier New', monospace;
 }
 
 .sql-result-file {
   color: var(--accent-terracotta);
   font-weight: 600;
-  font-size: 14px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  font-family: 'Special Elite', 'Courier New', monospace;
 }
 
 /* Action buttons */
@@ -171,8 +171,8 @@
   gap: 8px;
   padding: 12px 22px;
   border-radius: var(--radius-sm);
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   transition: all var(--transition-fast);
@@ -207,8 +207,8 @@
 
 /* CV image label */
 .cv-image-label {
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 15px;
   font-weight: 600;
   color: var(--terminal-text-muted);
   margin-bottom: 10px;
