@@ -205,7 +205,7 @@
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-medium);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -226,7 +226,7 @@
 
 .about-label {
   font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--text-light);
+  color: var(--text-medium);
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -259,7 +259,7 @@
   gap: 10px;
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--text-dark);
   padding: 0.3rem 0;
   background: transparent;
@@ -271,7 +271,8 @@
 .tech-icon {
   width: 16px;
   height: 16px;
-  color: var(--text-medium);
+  color: var(--text-dark);
+  opacity: 0.5;
   flex-shrink: 0;
 }
 
@@ -316,7 +317,7 @@
 .readme-icon {
   width: 18px;
   height: 18px;
-  color: var(--text-light);
+  color: var(--text-medium);
   flex-shrink: 0;
 }
 
@@ -415,7 +416,7 @@
 }
 
 .file-name {
-  font-family: 'Courier New', monospace;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-dark);
@@ -935,6 +936,20 @@
     transform: translateY(0);
   }
 }
+
+/* Per-project accent colors */
+.accent-terracotta {
+  --project-accent: var(--accent-sage);
+}
+
+.accent-rose {
+  --project-accent: var(--accent-sand);
+}
+
+.accent-sand {
+  --project-accent: var(--accent-rose-warm);
+}
+
 
 /* Responsive */
 @media (max-width: 968px) {
