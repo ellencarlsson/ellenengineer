@@ -36,7 +36,7 @@
   display: inline-block;
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.9rem;
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   text-decoration: none;
   font-weight: 400;
   margin-bottom: 1.5rem;
@@ -50,7 +50,7 @@
 .back-link:hover {
   color: var(--text-dark);
   transform: translateX(-5px);
-  border-bottom: 2px solid var(--accent-orange-light);
+  border-bottom: 2px solid var(--accent-terracotta-light);
 }
 
 .status-led {
@@ -92,7 +92,7 @@
 }
 
 .status-divider {
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
   opacity: 0.5;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .github-project-name {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Special Elite', 'Courier New', monospace;
   font-size: 2.5rem;
   font-weight: 600;
   color: var(--text-dark);
@@ -343,7 +343,7 @@
 }
 
 .readme-section-title {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Special Elite', 'Courier New', monospace;
   font-size: 24px;
   font-weight: 700;
   color: var(--text-dark);
@@ -369,7 +369,7 @@
   content: '\2022';
   position: absolute;
   left: 8px;
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
   font-weight: bold;
 }
 
@@ -513,7 +513,7 @@
 
 .project-link:hover {
   transform: translateX(6px);
-  border-color: rgba(var(--accent-orange-rgb), 0.3);
+  border-color: rgba(var(--accent-terracotta-rgb), 0.3);
   box-shadow: var(--shadow-md);
 }
 
@@ -576,7 +576,7 @@
 .step-card:hover {
   transform: rotate(0deg) translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  border-color: rgba(var(--accent-orange-rgb), 0.2);
+  border-color: rgba(var(--accent-terracotta-rgb), 0.2);
   z-index: 10;
 }
 
@@ -598,7 +598,7 @@
   font-family: 'Courier New', monospace;
   font-size: 10px;
   font-weight: 700;
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   letter-spacing: 1.2px;
   margin-bottom: 10px;
   text-align: center;
@@ -637,7 +637,7 @@
 .step-details {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
   font-style: italic;
 }
 
@@ -716,7 +716,7 @@
   border: none;
   box-shadow:
     inset 0 0 30px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(0, 200, 255, 0.1);
+    0 0 50px rgba(var(--accent-terracotta-rgb), 0.1);
   z-index: 0;
 }
 

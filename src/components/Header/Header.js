@@ -29,15 +29,17 @@ function Header() {
     <header className={`header ${isHidden ? 'header-hidden' : ''}`}>
       <div className="header-container">
         <div className="header-left">
-          <NavLink to="/" className="nav-link">EC</NavLink>
-          <nav className="nav">
-            <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Projekt
-            </NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Om Mig
-            </NavLink>
-          </nav>
+          <div className="header-left-pill">
+            <NavLink to="/" className="nav-link">EC</NavLink>
+            <nav className="nav">
+              <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Projekt
+              </NavLink>
+              <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Om Mig
+              </NavLink>
+            </nav>
+          </div>
         </div>
 
         <div className="header-center">
@@ -51,12 +53,10 @@ function Header() {
         </div>
 
         <div className="header-right">
-          <div className="nav-pill">
+          <div className="header-right-pill">
             <NavLink to="/cv" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               CV
             </NavLink>
-          </div>
-          <div className="nav-pill">
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               Kontakta mig
             </NavLink>

@@ -13,17 +13,17 @@
   --accent-burgundy: #b85c4f;
 
   /* Terracotta accent (primary — commands, links, keywords, interactive) */
-  --accent-orange: #e8723a;
-  --accent-orange-light: #f0955e;
+  --accent-terracotta: #e8723a;
+  --accent-terracotta-light: #f0955e;
 
   /* Dusty rose accent (secondary — decorative, glows, highlights) */
-  --accent-green: #d4847c;
-  --accent-green-muted: #e0a59e;
+  --accent-rose-warm: #d4847c;
+  --accent-rose-light: #e0a59e;
 
   /* RGB channels for opacity variants */
-  --accent-green-rgb: 212, 132, 124;
-  --accent-green-light-rgb: 224, 165, 158;
-  --accent-orange-rgb: 232, 114, 58;
+  --accent-rose-warm-rgb: 212, 132, 124;
+  --accent-rose-light-rgb: 224, 165, 158;
+  --accent-terracotta-rgb: 232, 114, 58;
   --accent-pink-rgb: 196, 99, 90;
 
   /* Sand / gold highlight */

@@ -16,7 +16,7 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle, rgba(var(--accent-green-rgb), 0.04) 1px, transparent 1px);
+    radial-gradient(circle, rgba(var(--accent-rose-warm-rgb), 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
 }
@@ -33,8 +33,8 @@
 .cv-particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(var(--accent-green-rgb), 0.4);
-  box-shadow: 0 0 6px rgba(var(--accent-green-rgb), 0.3);
+  background: rgba(var(--accent-rose-warm-rgb), 0.4);
+  box-shadow: 0 0 6px rgba(var(--accent-rose-warm-rgb), 0.3);
   animation: cvParticleFloat linear infinite;
   opacity: 0;
 }
@@ -93,7 +93,7 @@
 }
 
 .sql-wildcard {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: 700;
 }
 
@@ -112,7 +112,7 @@
 
 /* SQL Cursor */
 .sql-cursor {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: bold;
   opacity: 0;
   margin-left: 2px;
@@ -132,7 +132,7 @@
 }
 
 .sql-result-check {
-  color: var(--accent-green-muted);
+  color: var(--accent-rose-light);
   font-weight: 700;
   font-size: 16px;
 }
@@ -144,7 +144,7 @@
 }
 
 .sql-result-file {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: 600;
   font-size: 14px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
@@ -181,14 +181,14 @@
 }
 
 .cv-button-open {
-  background: rgba(22, 27, 34, 0.6);
+  background: rgba(40, 36, 32, 0.6);
   color: var(--terminal-text);
   border: 1px solid var(--terminal-border);
 }
 
 .cv-button-open:hover {
-  background: rgba(30, 35, 42, 0.8);
-  border-color: var(--accent-orange);
+  background: rgba(48, 43, 38, 0.8);
+  border-color: var(--accent-terracotta);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
@@ -202,7 +202,7 @@
 .cv-button-download:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(var(--accent-orange-rgb), 0.3);
+  box-shadow: 0 4px 16px rgba(var(--accent-terracotta-rgb), 0.3);
 }
 
 /* CV image label */

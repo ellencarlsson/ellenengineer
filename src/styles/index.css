@@ -47,8 +47,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(var(--accent-orange-rgb), 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-orange-rgb), 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(var(--accent-terracotta-rgb), 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-terracotta-rgb), 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 

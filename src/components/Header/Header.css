@@ -16,13 +16,18 @@
   margin: 0 auto;
   padding: 0 var(--spacing-md);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--spacing-md);
 }
 
 /* Left side - Initials + Navigation */
 .header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-left-pill {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -32,7 +37,6 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
 }
 
 .nav {
@@ -65,12 +69,11 @@
 
 /* Center - Title */
 .header-center {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
+  flex-shrink: 0;
 }
 
 .header-title {
@@ -154,16 +157,16 @@
 
 .glitch::before {
   animation: glitch-before 4s infinite;
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
   z-index: -1;
-  text-shadow: 0 0 8px var(--accent-green);
+  text-shadow: 0 0 8px var(--accent-rose-warm);
 }
 
 .glitch::after {
   animation: glitch-after 4s infinite;
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   z-index: -2;
-  text-shadow: 0 0 8px var(--accent-orange);
+  text-shadow: 0 0 8px var(--accent-terracotta);
 }
 
 @keyframes glitch-before {
@@ -257,22 +260,22 @@
 
 /* Right side - CV + Contact */
 .header-right {
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  flex-shrink: 0;
+  justify-content: flex-end;
 }
 
-.nav-pill {
+.header-right-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
   background: rgba(45, 38, 32, 0.85);
   backdrop-filter: blur(10px);
   padding: var(--spacing-xs);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  min-height: 40px;
 }
 
 @media (max-width: 768px) {

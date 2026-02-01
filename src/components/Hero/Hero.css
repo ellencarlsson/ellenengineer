@@ -97,7 +97,7 @@
 }
 
 .hero-line.command {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: 400;
 }
 
@@ -106,23 +106,23 @@
 }
 
 .hero-line.link {
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
 }
 
 .hero-terminal-link {
-  color: var(--accent-green);
+  color: var(--accent-rose-warm);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: var(--accent-green-muted);
+  color: var(--accent-rose-light);
   text-decoration: underline;
 }
 
 /* Cursor */
 .hero-cursor {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: bold;
   opacity: 0;
 }
