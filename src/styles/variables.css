@@ -16,6 +16,16 @@
   --accent-orange: #e8823f;
   --accent-orange-light: #f5a161;
 
+  /* Green accent (About, CV pages) */
+  --accent-green: #3cb464;
+  --accent-green-muted: #9aad8a;
+
+  /* RGB channels for opacity variants */
+  --accent-green-rgb: 60, 180, 100;
+  --accent-green-light-rgb: 140, 230, 160;
+  --accent-orange-rgb: 232, 130, 63;
+  --accent-pink-rgb: 196, 120, 90;
+
   /* Text colors */
   --text-dark: #f0f0f0;
   --text-medium: #999999;
@@ -27,6 +37,27 @@
   --background-light: #141414;
   --background-white: #1a1a1a;
   --background-cream: #1e1e1e;
+
+  /* Terminal / warm-dark theme */
+  --terminal-bg: #1e1c1a;
+  --terminal-bg-dark: #181716;
+  --terminal-header: #2d2b29;
+  --terminal-text: #f0ebe0;
+  --terminal-text-muted: #a39b8d;
+  --terminal-border: #3d372e;
+
+  /* macOS window buttons */
+  --btn-close: #ff5f57;
+  --btn-minimize: #ffbd2e;
+  --btn-maximize: #28ca42;
+
+  /* Status / semantic */
+  --status-success: #28ca42;
+  --status-error: #ff4444;
+  --status-info: #569cd6;
+
+  /* Warm accent */
+  --warm-peach: #e6b89c;
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);

@@ -36,7 +36,7 @@
   display: inline-block;
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.9rem;
-  color: #e8823f;
+  color: var(--accent-orange);
   text-decoration: none;
   font-weight: 400;
   margin-bottom: 1.5rem;
@@ -48,9 +48,9 @@
 }
 
 .back-link:hover {
-  color: #f0f0f0;
+  color: var(--text-dark);
   transform: translateX(-5px);
-  border-bottom: 2px solid #f5a161;
+  border-bottom: 2px solid var(--accent-orange-light);
 }
 
 .status-led {
@@ -65,13 +65,13 @@
 }
 
 .status-led.green {
-  background: #28ca42;
-  color: #28ca42;
+  background: var(--status-success);
+  color: var(--status-success);
 }
 
 .status-led.blue {
-  background: #569cd6;
-  color: #569cd6;
+  background: var(--status-info);
+  color: var(--status-info);
 }
 
 @keyframes pulse {
@@ -86,20 +86,20 @@
 .status-text {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #f0f0f0;
+  color: var(--text-dark);
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .status-divider {
-  color: #e8823f;
+  color: var(--accent-orange);
   opacity: 0.5;
 }
 
 .mount-label {
   font-family: 'Courier New', monospace;
   font-size: 12px;
-  color: #f0f0f0;
+  color: var(--text-dark);
   font-weight: 700;
 }
 
@@ -130,7 +130,7 @@
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #f0f0f0;
+  color: var(--text-dark);
   margin: 0.5rem 0 0 0;
   letter-spacing: 0.3px;
 }
@@ -161,7 +161,7 @@
 /* About Section - Vintage Floating Card */
 .about-section {
   padding: 0;
-  background: #1e1e1e;
+  background: var(--background-cream);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   box-shadow: var(--shadow-lg);
@@ -282,7 +282,7 @@
 .readme-box {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  background: #1e1e1e;
+  background: var(--background-cream);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
@@ -346,7 +346,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #f0f0f0;
+  color: var(--text-dark);
   margin: 0 0 16px 0;
 }
 
@@ -359,7 +359,7 @@
 .readme-tech-item {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 16px;
-  color: #f0f0f0;
+  color: var(--text-dark);
   line-height: 2;
   padding-left: 24px;
   position: relative;
@@ -369,7 +369,7 @@
   content: '\2022';
   position: absolute;
   left: 8px;
-  color: #e8823f;
+  color: var(--accent-orange);
   font-weight: bold;
 }
 
@@ -503,7 +503,7 @@
   color: var(--text-dark);
   text-decoration: none;
   padding: 0.75rem 1.25rem;
-  background: #1e1e1e;
+  background: var(--background-cream);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   letter-spacing: 0.3px;
@@ -513,7 +513,7 @@
 
 .project-link:hover {
   transform: translateX(6px);
-  border-color: rgba(232, 130, 63, 0.3);
+  border-color: rgba(var(--accent-orange-rgb), 0.3);
   box-shadow: var(--shadow-md);
 }
 
@@ -558,7 +558,7 @@
 }
 
 .step-card {
-  background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+  background: linear-gradient(135deg, var(--background-cream) 0%, var(--primary-sand) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
   padding: 20px 18px;
@@ -576,7 +576,7 @@
 .step-card:hover {
   transform: rotate(0deg) translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  border-color: rgba(232, 130, 63, 0.2);
+  border-color: rgba(var(--accent-orange-rgb), 0.2);
   z-index: 10;
 }
 
@@ -598,7 +598,7 @@
   font-family: 'Courier New', monospace;
   font-size: 10px;
   font-weight: 700;
-  color: #e8823f;
+  color: var(--accent-orange);
   letter-spacing: 1.2px;
   margin-bottom: 10px;
   text-align: center;
@@ -620,7 +620,7 @@
   font-family: 'Courier New', monospace;
   font-size: 12px;
   font-weight: 700;
-  color: #f0f0f0;
+  color: var(--text-dark);
   letter-spacing: 0.6px;
   margin-bottom: 6px;
 }
@@ -629,7 +629,7 @@
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 14px;
   font-weight: 600;
-  color: #f0f0f0;
+  color: var(--text-dark);
   margin-bottom: 5px;
   line-height: 1.3;
 }
@@ -637,7 +637,7 @@
 .step-details {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: #e8823f;
+  color: var(--accent-orange);
   font-style: italic;
 }
 
@@ -654,13 +654,13 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 40px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  background: linear-gradient(135deg, var(--primary-beige) 0%, #2a2a2a 50%, var(--primary-beige) 100%);
   border-radius: 20px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
     inset 0 2px 8px rgba(255, 255, 255, 0.1),
     inset 0 -2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 3px #111111,
+    0 0 0 3px var(--background-beige),
     0 0 0 6px rgba(255, 255, 255, 0.05);
 
   /* Subtle texture */
@@ -672,7 +672,7 @@
       rgba(255, 255, 255, 0.01) 2px,
       rgba(255, 255, 255, 0.01) 4px
     ),
-    linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    linear-gradient(135deg, var(--primary-beige) 0%, #2a2a2a 50%, var(--primary-beige) 100%);
 }
 
 .video-container::before {
@@ -682,10 +682,10 @@
   right: 15px;
   width: 12px;
   height: 12px;
-  background: #ff4444;
+  background: var(--status-error);
   border-radius: 50%;
   box-shadow:
-    0 0 10px #ff4444,
+    0 0 10px var(--status-error),
     inset 0 1px 2px rgba(255, 255, 255, 0.5);
   animation: pulse 2s infinite;
   z-index: 2;
@@ -699,7 +699,7 @@
   left: 40px;
   right: 40px;
   bottom: 40px;
-  border: 8px solid #1a1a1a;
+  border: 8px solid var(--primary-beige);
   border-radius: 15px;
   box-shadow:
     inset 0 0 20px rgba(0, 0, 0, 0.8),
@@ -733,7 +733,7 @@
   transform: translateX(-50%);
   width: 200px;
   height: 20px;
-  background: linear-gradient(to bottom, #1a1a1a, #111111);
+  background: linear-gradient(to bottom, var(--primary-beige), var(--background-beige));
   border-radius: 0 0 10px 10px;
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.3),
@@ -804,7 +804,7 @@
 .error-container h1 {
   font-family: 'Courier New', monospace;
   font-size: 32px;
-  color: #f0f0f0;
+  color: var(--text-dark);
   margin-bottom: var(--spacing-lg);
 }
 

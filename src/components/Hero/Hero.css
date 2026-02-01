@@ -13,7 +13,7 @@
 .hero-terminal {
   max-width: 750px;
   width: 100%;
-  background: #1e1c1a;
+  background: var(--terminal-bg);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -23,7 +23,7 @@
 
 /* Title Bar */
 .hero-terminal-header {
-  background: #2d2b29;
+  background: var(--terminal-header);
   padding: 10px 14px;
   display: flex;
   align-items: center;
@@ -44,19 +44,19 @@
 }
 
 .hero-btn-close {
-  background: #ff5f57;
+  background: var(--btn-close);
 }
 
 .hero-btn-minimize {
-  background: #ffbd2e;
+  background: var(--btn-minimize);
 }
 
 .hero-btn-maximize {
-  background: #28ca42;
+  background: var(--btn-maximize);
 }
 
 .hero-terminal-title {
-  color: #aaaaaa;
+  color: var(--text-medium);
   font-size: 15px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   letter-spacing: 0.5px;
@@ -70,7 +70,7 @@
 
 /* Terminal Body */
 .hero-terminal-body {
-  background: #1e1c1a;
+  background: var(--terminal-bg);
   min-height: 400px;
   max-height: 500px;
   overflow-y: auto;
@@ -81,7 +81,7 @@
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
-  color: #f0ebe0;
+  color: var(--terminal-text);
 }
 
 .hero-terminal-content pre {
@@ -97,32 +97,32 @@
 }
 
 .hero-line.command {
-  color: #e8823f;
+  color: var(--accent-orange);
   font-weight: 400;
 }
 
 .hero-line.output {
-  color: #f0ebe0;
+  color: var(--terminal-text);
 }
 
 .hero-line.link {
-  color: #f5a161;
+  color: var(--accent-orange-light);
 }
 
 .hero-terminal-link {
-  color: #f5a161;
+  color: var(--accent-orange-light);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: #e8823f;
+  color: var(--accent-orange);
   text-decoration: underline;
 }
 
 /* Cursor */
 .hero-cursor {
-  color: #e8823f;
+  color: var(--accent-orange);
   font-weight: bold;
   opacity: 0;
 }
@@ -137,7 +137,7 @@
 }
 
 .hero-terminal-body::-webkit-scrollbar-track {
-  background: #1e1c1a;
+  background: var(--terminal-bg);
 }
 
 .hero-terminal-body::-webkit-scrollbar-thumb {
@@ -151,9 +151,9 @@
 
 /* Terminal Hint */
 .hero-terminal-hint {
-  background: #181716;
+  background: var(--terminal-bg-dark);
   padding: 10px 20px;
-  border-top: 1px solid #2d2b29;
+  border-top: 1px solid var(--terminal-header);
   color: #777573;
   font-size: 12px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
@@ -175,7 +175,7 @@
 }
 
 .hero-hint-key {
-  background: #2d2b29;
+  background: var(--terminal-header);
   color: #d4d2d0;
   padding: 2px 8px;
   border-radius: 4px;

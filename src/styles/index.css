@@ -20,7 +20,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: var(--line-height-normal);
-  background: #0f0f0f;
+  background: var(--background-beige);
   color: var(--text-dark);
   min-height: 100vh;
   position: relative;
