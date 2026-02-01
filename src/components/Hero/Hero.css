@@ -11,12 +11,13 @@
 
 /* Terminal Window */
 .hero-terminal {
-  max-width: 750px;
+  max-width: 880px;
   width: 100%;
   background: var(--terminal-bg);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
   animation: fadeInUp 0.8s ease-out;
   margin-top: -80px;
 }
@@ -77,10 +78,10 @@
 }
 
 .hero-terminal-content {
-  padding: 16px 20px;
+  padding: 24px 28px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--terminal-text);
 }
 
@@ -110,14 +111,22 @@
 }
 
 .hero-terminal-link {
-  color: var(--accent-rose-warm);
+  color: var(--accent-terracotta);
   text-decoration: none;
   transition: all 0.2s ease;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(var(--accent-terracotta-rgb), 0.4);
+  border-radius: 4px;
+  background: rgba(var(--accent-terracotta-rgb), 0.08);
 }
 
 .hero-terminal-link:hover {
-  color: var(--accent-rose-light);
-  text-decoration: underline;
+  color: var(--accent-terracotta-light);
+  background: rgba(var(--accent-terracotta-rgb), 0.15);
+  border-color: var(--accent-terracotta);
+  text-decoration: none;
 }
 
 /* Cursor */
