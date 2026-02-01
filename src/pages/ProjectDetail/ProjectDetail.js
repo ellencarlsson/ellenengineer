@@ -21,24 +21,25 @@ const techIcons = {
 const defaultIcon = <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>;
 
 function ArchitectureDiagram({ architecture }) {
-  const { nodes, connections } = architecture;
+  const { nodes, connections, groups } = architecture;
   const maxCol = Math.max(...nodes.map(n => n.col));
   const maxRow = Math.max(...nodes.map(n => n.row));
 
   const nodeWidth = 150;
   const nodeHeight = 50;
-  const gapX = 80;
-  const gapY = 90;
+  const gapX = 120;
+  const gapY = 100;
   const padding = 50;
+  const groupPad = 20;
 
   const svgWidth = (maxCol + 1) * (nodeWidth + gapX) - gapX + padding * 2;
-  const svgHeight = (maxRow + 1) * (nodeHeight + gapY) - gapY + padding * 2;
+  const svgHeight = (maxRow + 1) * (nodeHeight + gapY) - gapY + padding * 2 + (groups ? 30 : 0);
 
   const getNodePos = (id) => {
     const node = nodes.find(n => n.id === id);
     if (!node) return { x: 0, y: 0, cx: 0, cy: 0 };
     const x = padding + node.col * (nodeWidth + gapX);
-    const y = padding + node.row * (nodeHeight + gapY);
+    const y = (groups ? 30 : 0) + padding + node.row * (nodeHeight + gapY);
     return { x, y, cx: x + nodeWidth / 2, cy: y + nodeHeight / 2 };
   };
 
@@ -66,6 +67,36 @@ function ArchitectureDiagram({ architecture }) {
             <polygon points="7 0, 0 2.5, 7 5" fill="rgba(255,255,255,0.5)" />
           </marker>
         </defs>
+
+        {groups && groups.map((group, i) => {
+          const groupNodes = nodes.filter(n => group.nodeIds.includes(n.id));
+          const positions = groupNodes.map(n => getNodePos(n.id));
+          const minX = Math.min(...positions.map(p => p.x)) - groupPad;
+          const minY = Math.min(...positions.map(p => p.y)) - groupPad - 20;
+          const maxX = Math.max(...positions.map(p => p.x)) + nodeWidth + groupPad;
+          const maxY = Math.max(...positions.map(p => p.y)) + nodeHeight + groupPad;
+          return (
+            <g key={`group-${i}`}>
+              <rect
+                x={minX} y={minY}
+                width={maxX - minX} height={maxY - minY}
+                rx="10"
+                fill="none"
+                stroke="rgba(212, 165, 116, 0.2)"
+                strokeWidth="1"
+                strokeDasharray="6 3"
+              />
+              <text
+                x={minX + 10} y={minY + 14}
+                fill="rgba(212, 165, 116, 0.6)"
+                fontSize="11"
+                fontFamily="'Courier New', monospace"
+                fontWeight="600"
+                letterSpacing="1"
+              >{group.label}</text>
+            </g>
+          );
+        })}
 
         {connections.map((conn, i) => {
           const key = `${conn.from}-${conn.to}`;
@@ -99,26 +130,36 @@ function ArchitectureDiagram({ architecture }) {
           const perpY = nx;
 
           if (isBi) {
+            const offset = 12;
             return (
               <g key={i}>
                 <line
-                  x1={startX} y1={startY} x2={endX} y2={endY}
+                  x1={startX - perpX * offset} y1={startY - perpY * offset}
+                  x2={endX - perpX * offset} y2={endY - perpY * offset}
                   stroke="rgba(255,255,255,0.2)"
                   strokeWidth="1"
                   markerEnd="url(#arrow)"
-                  markerStart="url(#arrow-reverse)"
                 />
                 <text
-                  x={midX + perpX * 14} y={midY + perpY * 14 - 2}
+                  x={midX - perpX * (offset + 12)} y={midY - perpY * (offset + 12) - 2}
                   textAnchor="middle" fill="rgba(255,255,255,0.4)"
                   fontSize="9" fontFamily="'Courier New', monospace"
                 >{conn.label}</text>
                 {reverse && (
-                  <text
-                    x={midX - perpX * 14} y={midY - perpY * 14 + 10}
-                    textAnchor="middle" fill="rgba(255,255,255,0.4)"
-                    fontSize="9" fontFamily="'Courier New', monospace"
-                  >{reverse.label}</text>
+                  <>
+                    <line
+                      x1={endX + perpX * offset} y1={endY + perpY * offset}
+                      x2={startX + perpX * offset} y2={startY + perpY * offset}
+                      stroke="rgba(255,255,255,0.2)"
+                      strokeWidth="1"
+                      markerEnd="url(#arrow)"
+                    />
+                    <text
+                      x={midX + perpX * (offset + 12)} y={midY + perpY * (offset + 12) + 10}
+                      textAnchor="middle" fill="rgba(255,255,255,0.4)"
+                      fontSize="9" fontFamily="'Courier New', monospace"
+                    >{reverse.label}</text>
+                  </>
                 )}
               </g>
             );
@@ -152,7 +193,7 @@ function ArchitectureDiagram({ architecture }) {
                 width={nodeWidth} height={nodeHeight}
                 rx="6"
                 fill="rgba(0,0,0,0.4)"
-                stroke="rgba(var(--accent-terracotta-rgb), 0.25)"
+                stroke="rgba(212, 165, 116, 0.25)"
                 strokeWidth="1"
               />
               <text
@@ -160,7 +201,7 @@ function ArchitectureDiagram({ architecture }) {
                 y={y + nodeHeight / 2 + 5}
                 textAnchor="middle"
                 fill="rgba(255,255,255,0.85)"
-                fontSize="13"
+                fontSize="14"
                 fontFamily="'Courier New', monospace"
                 fontWeight="600"
                 letterSpacing="0.5"
@@ -209,19 +250,43 @@ function ProjectDetail() {
       techStack: ['Swift', 'Create ML'],
       architecture: {
         nodes: [
-          { id: 'sensors', label: 'Sensorer', col: 0, row: 0 },
-          { id: 'watch', label: 'Apple Watch', col: 1, row: 0 },
-          { id: 'model', label: 'Create ML', col: 2, row: 0 },
+          // iPhone — UI layer
+          { id: 'iphone-view', label: 'iPhone View', col: 0, row: 0 },
+          // iPhone — Logic layer
+          { id: 'iphone-vm', label: 'ViewModel', col: 0, row: 1 },
+          // iPhone — Services
+          { id: 'tts', label: 'AVSpeech', col: 0, row: 2 },
+          // Bridge (between devices)
           { id: 'wc', label: 'WatchConnectivity', col: 1, row: 1 },
-          { id: 'iphone', label: 'iPhone', col: 2, row: 1 },
-          { id: 'tts', label: 'Text-to-Speech', col: 3, row: 1 },
+          // Watch — UI layer
+          { id: 'watch-view', label: 'Watch View', col: 2, row: 0 },
+          // Watch — Logic layer
+          { id: 'watch-vm', label: 'ViewModel', col: 2, row: 1 },
+          // Watch — Services
+          { id: 'motion', label: 'CMMotionManager', col: 2, row: 2 },
+          { id: 'datahelper', label: 'DataHelper', col: 3, row: 2 },
+          { id: 'mlmodel', label: 'Create ML', col: 3, row: 1 },
         ],
         connections: [
-          { from: 'sensors', to: 'watch', label: 'Gyro + Accel' },
-          { from: 'watch', to: 'model', label: 'Rörelsedata' },
-          { from: 'model', to: 'wc', label: 'Prediction' },
-          { from: 'wc', to: 'iphone', label: 'Överföring' },
-          { from: 'iphone', to: 'tts', label: 'Ord' },
+          // Watch: UI ↔ Logic
+          { from: 'watch-vm', to: 'watch-view', label: 'Detecting or not' },
+          // Watch: Logic → Services (straight down, right, up)
+          { from: 'watch-vm', to: 'motion', label: 'Start/Stop' },
+          { from: 'motion', to: 'datahelper', label: 'Raw data' },
+          { from: 'datahelper', to: 'mlmodel', label: '60 samples' },
+          { from: 'mlmodel', to: 'watch-vm', label: 'Prediction' },
+          // iPhone ↔ WatchConnectivity ↔ Watch (bidirectional)
+          { from: 'iphone-vm', to: 'wc', label: 'Send signal' },
+          { from: 'wc', to: 'iphone-vm', label: 'Detected word' },
+          { from: 'wc', to: 'watch-vm', label: 'Send signal' },
+          { from: 'watch-vm', to: 'wc', label: 'Detected word' },
+          // iPhone: Logic → UI + Services
+          { from: 'iphone-vm', to: 'iphone-view', label: 'Display' },
+          { from: 'iphone-vm', to: 'tts', label: 'Speak' },
+        ],
+        groups: [
+          { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
+          { label: 'IPHONE', nodeIds: ['iphone-view', 'iphone-vm', 'tts'] },
         ]
       },
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
