@@ -51,7 +51,7 @@
 .back-link:hover {
   color: var(--text-dark);
   transform: translateX(-5px);
-  border-bottom: 2px solid var(--accent-terracotta-light);
+  border-bottom: 2px solid transparent;
 }
 
 .status-led {
