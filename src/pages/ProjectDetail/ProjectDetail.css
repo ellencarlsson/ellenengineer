@@ -478,6 +478,26 @@
   letter-spacing: 0.2px;
 }
 
+/* Architecture Diagram */
+.arch-diagram-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.arch-diagram {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.architecture-description {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.7;
+  margin: 0;
+}
+
 /* Pipeline (COMPONENTS section) */
 .pipeline {
   display: grid;
