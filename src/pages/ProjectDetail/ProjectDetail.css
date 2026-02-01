@@ -475,9 +475,9 @@
 
 /* Result Description */
 .result-description {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.95rem;
-  color: var(--text-dark);
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #e8ddd0;
   line-height: 1.7;
   margin: 0 0 1.5rem 0;
   letter-spacing: 0.2px;
@@ -496,9 +496,9 @@
 }
 
 .architecture-description {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.95rem;
-  color: var(--text-dark);
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #e8ddd0;
   line-height: 1.7;
   margin: 0;
 }
@@ -564,9 +564,9 @@
 }
 
 .pipeline-desc {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.85rem;
-  color: var(--text-dark);
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #e8ddd0;
   line-height: 1.5;
   letter-spacing: 0.2px;
 }
@@ -574,7 +574,7 @@
 .pipeline-detail {
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.7rem;
-  color: var(--text-light);
+  color: #c8b8a4;
   letter-spacing: 0.3px;
   margin-top: 2px;
 }
@@ -587,7 +587,7 @@
 }
 
 .tech-badge {
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 0.85rem;
   font-weight: 400;
   color: var(--text-dark);
