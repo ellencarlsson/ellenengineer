@@ -98,40 +98,39 @@
 }
 
 .hero-line.command {
-  color: var(--accent-terracotta);
   font-weight: 400;
 }
 
+.hero-prompt {
+  color: #8b9a6b;
+}
+
+.hero-cmd {
+  color: #d4a574;
+}
+
 .hero-line.output {
-  color: var(--terminal-text);
+  color: #c8b8a4;
 }
 
 .hero-line.link {
-  color: var(--accent-rose-warm);
+  color: #d4847c;
 }
 
 .hero-terminal-link {
-  color: var(--accent-terracotta);
+  color: #d4847c;
   text-decoration: none;
   transition: all 0.2s ease;
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 16px;
-  border: 1px solid rgba(var(--accent-terracotta-rgb), 0.4);
-  border-radius: 4px;
-  background: rgba(var(--accent-terracotta-rgb), 0.08);
 }
 
 .hero-terminal-link:hover {
-  color: var(--accent-terracotta-light);
-  background: rgba(var(--accent-terracotta-rgb), 0.15);
-  border-color: var(--accent-terracotta);
-  text-decoration: none;
+  color: #e0a59e;
+  text-decoration: underline;
 }
 
 /* Cursor */
 .hero-cursor {
-  color: var(--accent-terracotta);
+  color: #c8b8a4;
   font-weight: bold;
   opacity: 0;
 }
