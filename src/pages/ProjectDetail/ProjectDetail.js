@@ -20,6 +20,26 @@ const techIcons = {
 
 const defaultIcon = <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>;
 
+function SvgLabel({ x, y, anchor, fill, fontSize, children }) {
+  const lines = String(children).split('\n');
+  if (lines.length === 1) {
+    return (
+      <text x={x} y={y} textAnchor={anchor} dominantBaseline="middle"
+        fill={fill} fontSize={fontSize} fontFamily="'Courier New', monospace"
+      >{children}</text>
+    );
+  }
+  return (
+    <text x={x} y={y} textAnchor={anchor} dominantBaseline="middle"
+      fill={fill} fontSize={fontSize} fontFamily="'Courier New', monospace"
+    >
+      {lines.map((line, i) => (
+        <tspan key={i} x={x} dy={i === 0 ? 0 : fontSize * 1.2}>{line}</tspan>
+      ))}
+    </text>
+  );
+}
+
 function ArchitectureDiagram({ architecture }) {
   const { nodes, connections, groups } = architecture;
   const maxCol = Math.max(...nodes.map(n => n.col));
@@ -27,7 +47,7 @@ function ArchitectureDiagram({ architecture }) {
 
   const nodeWidth = 480;
   const nodeHeight = 140;
-  const gapX = 200;
+  const gapX = 350;
   const gapY = 180;
   const padding = 80;
   const groupPad = 35;
@@ -133,7 +153,11 @@ function ArchitectureDiagram({ architecture }) {
           const perpY = nx;
 
           if (isBi) {
-            const offset = 20;
+            const isVertical = Math.abs(ny) > Math.abs(nx);
+            const offset = 28;
+            const labelOffset = offset + 50;
+            const anchor1 = isVertical ? (perpX < 0 ? 'start' : 'end') : 'middle';
+            const anchor2 = isVertical ? (perpX < 0 ? 'end' : 'start') : 'middle';
             return (
               <g key={i}>
                 <line
@@ -143,11 +167,10 @@ function ArchitectureDiagram({ architecture }) {
                   strokeWidth="2"
                   markerEnd="url(#arrow)"
                 />
-                <text
-                  x={midX - perpX * (offset + 18)} y={midY - perpY * (offset + 18) - 3}
-                  textAnchor="middle" fill="rgba(255,255,255,0.45)"
-                  fontSize="16" fontFamily="'Courier New', monospace"
-                >{conn.label}</text>
+                <SvgLabel
+                  x={midX - perpX * labelOffset} y={midY - perpY * labelOffset}
+                  anchor={anchor1} fill="rgba(255,255,255,0.45)" fontSize={28}
+                >{conn.label}</SvgLabel>
                 {reverse && (
                   <>
                     <line
@@ -157,11 +180,10 @@ function ArchitectureDiagram({ architecture }) {
                       strokeWidth="2"
                       markerEnd="url(#arrow)"
                     />
-                    <text
-                      x={midX + perpX * (offset + 18)} y={midY + perpY * (offset + 18) + 16}
-                      textAnchor="middle" fill="rgba(255,255,255,0.45)"
-                      fontSize="16" fontFamily="'Courier New', monospace"
-                    >{reverse.label}</text>
+                    <SvgLabel
+                      x={midX + perpX * labelOffset} y={midY + perpY * labelOffset}
+                      anchor={anchor2} fill="rgba(255,255,255,0.45)" fontSize={28}
+                    >{reverse.label}</SvgLabel>
                   </>
                 )}
               </g>
@@ -177,11 +199,11 @@ function ArchitectureDiagram({ architecture }) {
                 markerEnd="url(#arrow)"
               />
               {conn.label && (
-                <text
-                  x={midX + perpX * 18} y={midY + perpY * 18 - 3}
-                  textAnchor="middle" fill="rgba(255,255,255,0.45)"
-                  fontSize="16" fontFamily="'Courier New', monospace"
-                >{conn.label}</text>
+                <SvgLabel
+                  x={midX + perpX * 30} y={midY + perpY * 30}
+                  anchor={Math.abs(perpX) > 0.5 ? (perpX > 0 ? 'start' : 'end') : 'middle'}
+                  fill="rgba(255,255,255,0.45)" fontSize={28}
+                >{conn.label}</SvgLabel>
               )}
             </g>
           );
@@ -275,19 +297,19 @@ function ProjectDetail() {
           // Watch: UI ↔ Logic
           { from: 'watch-vm', to: 'watch-view', label: 'Detecting or not' },
           // Watch: Logic → Services (straight down, right, up)
-          { from: 'watch-vm', to: 'motion', label: 'Start/Stop' },
+          { from: 'watch-vm', to: 'motion', label: 'Start/Stop\ndetecting' },
           { from: 'motion', to: 'datahelper', label: 'Raw data' },
           { from: 'datahelper', to: 'mlmodel', label: '60 samples' },
           { from: 'mlmodel', to: 'watch-vm', label: 'Prediction' },
           // iPhone ↔ WatchConnectivity ↔ Watch (bidirectional)
-          { from: 'iphone-vm', to: 'wc', label: 'Send signal' },
+          { from: 'iphone-vm', to: 'wc', label: 'Send detect\nsignal' },
           { from: 'wc', to: 'iphone-vm', label: 'Detected word' },
-          { from: 'wc', to: 'watch-vm', label: 'Send signal' },
+          { from: 'wc', to: 'watch-vm', label: 'Send detect\nsignal' },
           { from: 'watch-vm', to: 'wc', label: 'Detected word' },
           // iPhone: View ↔ Logic
-          { from: 'iphone-view', to: 'iphone-vm', label: 'Tap to detect' },
-          { from: 'iphone-vm', to: 'iphone-view', label: 'Display' },
-          { from: 'iphone-vm', to: 'tts', label: 'Speak' },
+          { from: 'iphone-view', to: 'iphone-vm', label: 'Tap to\ndetect' },
+          { from: 'iphone-vm', to: 'iphone-view', label: 'Display\nwords' },
+          { from: 'iphone-vm', to: 'tts', label: 'Speak\nwords' },
         ],
         groups: [
           { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
