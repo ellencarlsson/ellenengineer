@@ -5,7 +5,6 @@ function Contact() {
   return (
     <div className="contact-page">
       <div className="contact-container">
-        <h1 className="page-title">Kontakta mig</h1>
 
         <div className="api-header">
           <div className="api-title">API Reference</div>
@@ -17,14 +16,14 @@ function Contact() {
         </div>
 
         <div className="api-endpoints">
-          <a href="mailto:ellen.carlsson@example.com" className="endpoint">
+          <a href="mailto:carlssonellen@live.se" className="endpoint">
             <div className="endpoint-method">GET</div>
             <div className="endpoint-content">
               <div className="endpoint-path">/contact/email</div>
               <div className="endpoint-description">Returns email address for direct communication</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">ellen.carlsson@example.com</span>
+                <span className="response-value">carlssonellen@live.se</span>
               </div>
             </div>
             <div className="endpoint-icon">
@@ -35,14 +34,14 @@ function Contact() {
             </div>
           </a>
 
-          <a href="https://linkedin.com/in/ellen-carlsson" target="_blank" rel="noopener noreferrer" className="endpoint">
+          <a href="https://www.linkedin.com/in/ellen-carlsson-ab04451b4" target="_blank" rel="noopener noreferrer" className="endpoint">
             <div className="endpoint-method">GET</div>
             <div className="endpoint-content">
               <div className="endpoint-path">/contact/linkedin</div>
               <div className="endpoint-description">Returns LinkedIn profile for professional networking</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">linkedin.com/in/ellen-carlsson</span>
+                <span className="response-value">linkedin.com/in/ellen-carlsson-ab04451b4</span>
               </div>
             </div>
             <div className="endpoint-icon">

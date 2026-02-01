@@ -2,6 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Della+Respira&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@font-face {
+  font-family: 'Hacked';
+  src: url('../assets/fonts/Hacked-KerX.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   margin: 0;
@@ -27,7 +37,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Starry background */
+/* Grid background */
 body::before {
   content: '';
   position: fixed;
@@ -38,25 +48,28 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(2px 2px at 60% 70%, white, transparent),
-    radial-gradient(1px 1px at 50% 50%, white, transparent),
-    radial-gradient(1px 1px at 80% 10%, white, transparent),
-    radial-gradient(2px 2px at 90% 60%, white, transparent),
-    radial-gradient(1px 1px at 33% 80%, white, transparent),
-    radial-gradient(1px 1px at 15% 90%, white, transparent),
-    radial-gradient(2px 2px at 70% 40%, white, transparent),
-    radial-gradient(1px 1px at 25% 15%, white, transparent),
-    radial-gradient(1px 1px at 85% 85%, white, transparent),
-    radial-gradient(1px 1px at 45% 25%, white, transparent),
-    radial-gradient(2px 2px at 10% 50%, white, transparent),
-    radial-gradient(1px 1px at 95% 30%, white, transparent),
-    radial-gradient(1px 1px at 5% 65%, white, transparent),
-    radial-gradient(1px 1px at 55% 95%, white, transparent);
-  background-size: 200% 200%;
-  background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%, 100% 0%, 33% 80%, 15% 90%, 70% 40%, 25% 15%, 85% 85%, 45% 25%, 10% 50%, 95% 30%, 5% 65%, 55% 95%;
-  background-repeat: no-repeat;
-  opacity: 0.6;
+    linear-gradient(rgba(var(--accent-terracotta-rgb), 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-terracotta-rgb), 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Scanlines */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
 }
 
 code {

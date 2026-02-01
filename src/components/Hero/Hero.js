@@ -42,6 +42,7 @@ function Hero() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete]);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ function Hero() {
 
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCharIndex, currentLineIndex]);
 
   return (
@@ -98,13 +100,29 @@ function Hero() {
                 const lineData = terminalLines.find(l => l.text === line.trim());
                 const lineType = lineData ? lineData.type : 'output';
 
+                if (lineType === 'link') {
+                  return (
+                    <div key={index} className="hero-line link">
+                      <Link to="/projects" className="hero-terminal-link">{line}</Link>
+                    </div>
+                  );
+                }
+
+                if (lineType === 'command' && line.includes('$')) {
+                  const dollarIndex = line.indexOf('$');
+                  const prompt = line.slice(0, dollarIndex + 1);
+                  const cmd = line.slice(dollarIndex + 1);
+                  return (
+                    <div key={index} className="hero-line command">
+                      <span className="hero-prompt">{prompt}</span>
+                      <span className="hero-cmd">{cmd}</span>
+                    </div>
+                  );
+                }
+
                 return (
                   <div key={index} className={`hero-line ${lineType}`}>
-                    {lineType === 'link' ? (
-                      <Link to="/projects" className="hero-terminal-link">{line}</Link>
-                    ) : (
-                      line || '\u00A0'
-                    )}
+                    {line || '\u00A0'}
                   </div>
                 );
               })}

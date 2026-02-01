@@ -2,6 +2,159 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 
+function ArchitectureDiagram({ architecture }) {
+  const { nodes, connections } = architecture;
+  const maxCol = Math.max(...nodes.map(n => n.col));
+  const maxRow = Math.max(...nodes.map(n => n.row));
+
+  const nodeWidth = 150;
+  const nodeHeight = 50;
+  const gapX = 80;
+  const gapY = 90;
+  const padding = 50;
+
+  const svgWidth = (maxCol + 1) * (nodeWidth + gapX) - gapX + padding * 2;
+  const svgHeight = (maxRow + 1) * (nodeHeight + gapY) - gapY + padding * 2;
+
+  const getNodePos = (id) => {
+    const node = nodes.find(n => n.id === id);
+    if (!node) return { x: 0, y: 0, cx: 0, cy: 0 };
+    const x = padding + node.col * (nodeWidth + gapX);
+    const y = padding + node.row * (nodeHeight + gapY);
+    return { x, y, cx: x + nodeWidth / 2, cy: y + nodeHeight / 2 };
+  };
+
+  // Find bidirectional pairs to merge them
+  const biKeys = new Set();
+  connections.forEach((c, i) => {
+    connections.forEach((d, j) => {
+      if (i < j && c.from === d.to && c.to === d.from) {
+        biKeys.add(`${c.from}-${c.to}`);
+        biKeys.add(`${d.from}-${d.to}`);
+      }
+    });
+  });
+
+  const rendered = new Set();
+
+  return (
+    <div className="arch-diagram-wrapper">
+      <svg className="arch-diagram" viewBox={`0 0 ${svgWidth} ${svgHeight}`} preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <marker id="arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+            <polygon points="0 0, 7 2.5, 0 5" fill="rgba(255,255,255,0.5)" />
+          </marker>
+          <marker id="arrow-reverse" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto">
+            <polygon points="7 0, 0 2.5, 7 5" fill="rgba(255,255,255,0.5)" />
+          </marker>
+        </defs>
+
+        {connections.map((conn, i) => {
+          const key = `${conn.from}-${conn.to}`;
+          const reverseKey = `${conn.to}-${conn.from}`;
+          const isBi = biKeys.has(key);
+
+          // Skip if we already rendered the reverse
+          if (isBi && rendered.has(reverseKey)) return null;
+          rendered.add(key);
+
+          const from = getNodePos(conn.from);
+          const to = getNodePos(conn.to);
+          const reverse = isBi ? connections.find(c => c.from === conn.to && c.to === conn.from) : null;
+
+          const dx = to.cx - from.cx;
+          const dy = to.cy - from.cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const nx = dx / dist;
+          const ny = dy / dist;
+
+          const startX = from.cx + nx * (nodeWidth / 2 + 6);
+          const startY = from.cy + ny * (nodeHeight / 2 + 6);
+          const endX = to.cx - nx * (nodeWidth / 2 + 6);
+          const endY = to.cy - ny * (nodeHeight / 2 + 6);
+
+          const midX = (startX + endX) / 2;
+          const midY = (startY + endY) / 2;
+
+          // Perpendicular offset for label
+          const perpX = -ny;
+          const perpY = nx;
+
+          if (isBi) {
+            return (
+              <g key={i}>
+                <line
+                  x1={startX} y1={startY} x2={endX} y2={endY}
+                  stroke="rgba(255,255,255,0.2)"
+                  strokeWidth="1"
+                  markerEnd="url(#arrow)"
+                  markerStart="url(#arrow-reverse)"
+                />
+                <text
+                  x={midX + perpX * 14} y={midY + perpY * 14 - 2}
+                  textAnchor="middle" fill="rgba(255,255,255,0.4)"
+                  fontSize="9" fontFamily="'Courier New', monospace"
+                >{conn.label}</text>
+                {reverse && (
+                  <text
+                    x={midX - perpX * 14} y={midY - perpY * 14 + 10}
+                    textAnchor="middle" fill="rgba(255,255,255,0.4)"
+                    fontSize="9" fontFamily="'Courier New', monospace"
+                  >{reverse.label}</text>
+                )}
+              </g>
+            );
+          }
+
+          return (
+            <g key={i}>
+              <line
+                x1={startX} y1={startY} x2={endX} y2={endY}
+                stroke="rgba(255,255,255,0.2)"
+                strokeWidth="1"
+                markerEnd="url(#arrow)"
+              />
+              {conn.label && (
+                <text
+                  x={midX + perpX * 12} y={midY + perpY * 12 - 2}
+                  textAnchor="middle" fill="rgba(255,255,255,0.4)"
+                  fontSize="9" fontFamily="'Courier New', monospace"
+                >{conn.label}</text>
+              )}
+            </g>
+          );
+        })}
+
+        {nodes.map((node) => {
+          const { x, y } = getNodePos(node.id);
+          return (
+            <g key={node.id}>
+              <rect
+                x={x} y={y}
+                width={nodeWidth} height={nodeHeight}
+                rx="6"
+                fill="rgba(0,0,0,0.4)"
+                stroke="rgba(var(--accent-terracotta-rgb), 0.25)"
+                strokeWidth="1"
+              />
+              <text
+                x={x + nodeWidth / 2}
+                y={y + nodeHeight / 2 + 5}
+                textAnchor="middle"
+                fill="rgba(255,255,255,0.85)"
+                fontSize="13"
+                fontFamily="'Courier New', monospace"
+                fontWeight="600"
+                letterSpacing="0.5"
+              >{node.label}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function ProjectDetail() {
   const { projectId } = useParams();
   const [expandedSections, setExpandedSections] = useState({
@@ -29,9 +182,27 @@ function ProjectDetail() {
       interface: 'SCSI',
       status: 'VERIFIED',
       ledColor: 'brown',
+      accentColor: 'terracotta',
       tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
       techStack: ['Swift', 'Create ML'],
+      architecture: {
+        nodes: [
+          { id: 'sensors', label: 'Sensorer', col: 0, row: 0 },
+          { id: 'watch', label: 'Apple Watch', col: 1, row: 0 },
+          { id: 'model', label: 'Create ML', col: 2, row: 0 },
+          { id: 'wc', label: 'WatchConnectivity', col: 1, row: 1 },
+          { id: 'iphone', label: 'iPhone', col: 2, row: 1 },
+          { id: 'tts', label: 'Text-to-Speech', col: 3, row: 1 },
+        ],
+        connections: [
+          { from: 'sensors', to: 'watch', label: 'Gyro + Accel' },
+          { from: 'watch', to: 'model', label: 'Rörelsedata' },
+          { from: 'model', to: 'wc', label: 'Prediction' },
+          { from: 'wc', to: 'iphone', label: 'Överföring' },
+          { from: 'iphone', to: 'tts', label: 'Ord' },
+        ]
+      },
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
@@ -100,9 +271,28 @@ function ProjectDetail() {
       interface: 'IDE',
       status: 'OPERATIONAL',
       ledColor: 'medium',
+      accentColor: 'rose',
       tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
+      architecture: {
+        nodes: [
+          { id: 'browser', label: 'Browser', col: 0, row: 0 },
+          { id: 'router', label: 'React Router', col: 1, row: 0 },
+          { id: 'pages', label: 'Pages', col: 2, row: 0 },
+          { id: 'components', label: 'Components', col: 2, row: 1 },
+          { id: 'css', label: 'CSS Modules', col: 3, row: 1 },
+          { id: 'state', label: 'useState', col: 1, row: 1 },
+        ],
+        connections: [
+          { from: 'browser', to: 'router', label: 'URL' },
+          { from: 'router', to: 'pages', label: 'Route match' },
+          { from: 'pages', to: 'components', label: 'Render' },
+          { from: 'components', to: 'css', label: 'Styling' },
+          { from: 'state', to: 'pages', label: 'State' },
+          { from: 'pages', to: 'state', label: 'Updates' },
+        ]
+      },
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
       image: null,
@@ -154,9 +344,27 @@ function ProjectDetail() {
       interface: 'SATA',
       status: 'OPERATIONAL',
       ledColor: 'burgundy',
+      accentColor: 'sand',
       tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
       description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
       techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
+      architecture: {
+        nodes: [
+          { id: 'view', label: 'SwiftUI View', col: 0, row: 0 },
+          { id: 'vm', label: 'ViewModel', col: 1, row: 0 },
+          { id: 'repo', label: 'Repository', col: 2, row: 0 },
+          { id: 'core', label: 'Core Data', col: 3, row: 0 },
+          { id: 'scheduler', label: 'Scheduler', col: 2, row: 1 },
+        ],
+        connections: [
+          { from: 'view', to: 'vm', label: 'Actions' },
+          { from: 'vm', to: 'view', label: 'State' },
+          { from: 'vm', to: 'repo', label: 'Fetch / Save' },
+          { from: 'repo', to: 'core', label: 'Persist' },
+          { from: 'vm', to: 'scheduler', label: 'Generate' },
+          { from: 'scheduler', to: 'repo', label: 'Result' },
+        ]
+      },
       github: 'https://github.com/ellencarlsson/postschema',
       demo: null,
       image: null,
@@ -222,7 +430,7 @@ function ProjectDetail() {
   }
 
   return (
-    <div className="project-detail-page">
+    <div className={`project-detail-page accent-${project.accentColor}`}>
       <div className="project-detail-container">
         {/* Project Title Header - GitHub Style */}
         <div className="project-header-title">
@@ -330,7 +538,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('result')}>
             <span className="file-icon">📼</span>
-            <span className="file-name">RESULT.log</span>
+            <span className="file-name">result.log</span>
             <svg className={`section-chevron ${expandedSections.result ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -364,28 +572,18 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('architecture')}>
             <span className="file-icon">⚙️</span>
-            <span className="file-name">ARCHITECTURE.sys</span>
+            <span className="file-name">architecture.sys</span>
             <svg className={`section-chevron ${expandedSections.architecture ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <div className={`section-body ${expandedSections.architecture ? 'expanded' : ''}`}>
             <div className="section-content">
-              <div className="system-diagram">
-                {project.workflow.map((step) => (
-                  <div key={step.step} className="workflow-step">
-                    <div className="step-card">
-                      <div className="step-number">STEP {step.step}</div>
-                      <div className="step-icon">{step.icon}</div>
-                      <div className="step-content">
-                        <div className="step-title">{step.title}</div>
-                        <div className="step-description">{step.description}</div>
-                        <div className="step-details">{step.details}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {project.architecture ? (
+                <ArchitectureDiagram architecture={project.architecture} />
+              ) : (
+                <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
+              )}
             </div>
           </div>
         </div>
@@ -394,16 +592,25 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('components')}>
             <span className="file-icon">🧩</span>
-            <span className="file-name">COMPONENTS.lib</span>
+            <span className="file-name">components.lib</span>
             <svg className={`section-chevron ${expandedSections.components ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <div className={`section-body ${expandedSections.components ? 'expanded' : ''}`}>
             <div className="section-content">
-              <div className="tech-badges">
-                {project.techStack.map((tech, i) => (
-                  <span key={i} className="tech-badge">{tech}</span>
+              <div className="pipeline">
+                {project.workflow.map((step, i) => (
+                  <div key={step.step} className="pipeline-step">
+                    <div className="pipeline-content">
+                      <span className="pipeline-icon">{step.icon}</span>
+                      <div className="pipeline-text">
+                        <span className="pipeline-title">{step.title}</span>
+                        <span className="pipeline-desc">{step.description}</span>
+                        <span className="pipeline-detail">{step.details}</span>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -414,7 +621,7 @@ function ProjectDetail() {
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('links')}>
             <span className="file-icon">🔗</span>
-            <span className="file-name">LINKS.url</span>
+            <span className="file-name">links.url</span>
             <svg className={`section-chevron ${expandedSections.links ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

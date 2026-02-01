@@ -1,97 +1,81 @@
 .cv-page {
   min-height: 85vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
   background: transparent;
-  animation: fadeIn var(--transition-slow);
-}
-
-.cv-container {
-  max-width: 750px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  margin-top: -60px;
-}
-
-/* SQL Terminal */
-.sql-terminal {
-  width: 100%;
-  background: #1e1c1a;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  animation: fadeInUp 0.8s ease-out;
-}
-
-.sql-terminal-header {
-  background: #2d2b29;
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
+  animation: cvFadeIn var(--transition-slow);
   position: relative;
+  overflow: hidden;
 }
 
-.sql-terminal .terminal-buttons {
-  display: flex;
-  gap: 8px;
-  z-index: 1;
-}
-
-.sql-terminal .terminal-button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: block;
-}
-
-.sql-terminal .terminal-button.close {
-  background: #ff5f57;
-}
-
-.sql-terminal .terminal-button.minimize {
-  background: #ffbd2e;
-}
-
-.sql-terminal .terminal-button.maximize {
-  background: #28ca42;
-}
-
-.sql-terminal-title {
-  color: #aaaaaa;
-  font-size: 15px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  letter-spacing: 0.5px;
+/* Grid background (matches About page) */
+.cv-page::before {
+  content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  text-align: center;
-  user-select: none;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(var(--accent-rose-warm-rgb), 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
   pointer-events: none;
 }
 
-.sql-terminal-body {
-  padding: 20px 24px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 15px;
-  line-height: 1.8;
-  min-height: 160px;
+/* Ambient particles */
+.cv-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
 }
 
-/* SQL Prompt */
-.sql-prompt {
+.cv-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(var(--accent-rose-warm-rgb), 0.4);
+  box-shadow: 0 0 6px rgba(var(--accent-rose-warm-rgb), 0.3);
+  animation: cvParticleFloat linear infinite;
+  opacity: 0;
+}
+
+@keyframes cvParticleFloat {
+  0%   { opacity: 0; transform: translateY(0) translateX(0); }
+  15%  { opacity: 0.7; }
+  85%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-120px) translateX(var(--drift)); }
+}
+
+/* Two-column layout */
+.cv-layout {
+  max-width: 1000px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 60px;
+  gap: var(--spacing-xl);
+  position: relative;
+  z-index: 10;
+}
+
+/* Left column: SQL + buttons */
+.cv-left {
+  flex: 1;
+  min-width: 0;
+}
+
+/* SQL block (no terminal chrome) */
+.sql-block {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.9;
+  min-height: 140px;
 }
 
 .sql-prompt-label {
   color: var(--accent-burgundy);
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .sql-code {
@@ -99,7 +83,7 @@
 }
 
 .sql-line {
-  min-height: 1.8em;
+  min-height: 1.9em;
 }
 
 /* SQL Syntax Highlighting */
@@ -109,30 +93,26 @@
 }
 
 .sql-wildcard {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: 700;
 }
 
-.sql-table,
 .sql-identifier {
   color: var(--accent-mauve);
 }
 
-.sql-operator {
-  color: #f0ebe0;
+.sql-operator,
+.sql-plain {
+  color: var(--terminal-text);
 }
 
 .sql-string {
   color: var(--accent-rose);
 }
 
-.sql-plain {
-  color: #f0ebe0;
-}
-
 /* SQL Cursor */
 .sql-cursor {
-  color: var(--accent-orange);
+  color: var(--accent-terracotta);
   font-weight: bold;
   opacity: 0;
   margin-left: 2px;
@@ -146,155 +126,141 @@
 .sql-result {
   margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px solid #2d2b29;
+  border-top: 1px solid var(--terminal-header);
   opacity: 0;
-  transform: translateY(8px);
-  animation: resultFadeIn 0.5s ease-out forwards;
-}
-
-.sql-result.visible {
-  opacity: 1;
+  animation: cvResultFadeIn 0.5s ease-out forwards;
 }
 
 .sql-result-check {
-  color: #9aad8a;
+  color: var(--accent-rose-light);
   font-weight: 700;
   font-size: 16px;
 }
 
 .sql-result-text {
-  color: #a39b8d;
-  font-size: 14px;
-}
-
-/* Terminal Hint (reuse Hero styles) */
-.sql-terminal .terminal-hint {
-  background: #181716;
-  padding: 10px 20px;
-  border-top: 1px solid #2d2b29;
-  color: #777573;
-  font-size: 12px;
+  color: var(--terminal-text-muted);
+  font-size: 15px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  animation: fadeIn 2s ease-out;
-  transition: opacity 0.3s ease-out;
 }
 
-.sql-terminal .terminal-hint.hidden {
-  opacity: 0;
-  pointer-events: none;
+.sql-result-file {
+  color: var(--accent-rose-warm);
+  font-weight: 600;
+  font-size: 15px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
 }
 
-.sql-terminal .terminal-hint.no-transition {
-  transition: none;
-}
-
-.sql-terminal .hint-key {
-  background: #2d2b29;
-  color: #d4d2d0;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 500;
-  border: 1px solid #444240;
-  box-shadow: 0 2px 0 #1a1918;
-}
-
-/* CV Card */
-.cv-card {
-  width: 100%;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.cv-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.cv-image-wrapper {
-  width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  background: var(--background-cream);
-}
-
-.cv-image {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Action Buttons */
+/* Action buttons */
 .cv-actions {
   display: flex;
-  gap: 16px;
-  margin-top: var(--spacing-md);
-  justify-content: center;
+  gap: 14px;
+  margin-top: var(--spacing-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.cv-actions.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cv-button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
+  gap: 8px;
+  padding: 12px 22px;
   border-radius: var(--radius-sm);
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  font-size: 14px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all var(--transition-fast);
   cursor: pointer;
   border: none;
 }
 
 .cv-button-open {
-  background: rgba(42, 37, 32, 0.6);
-  color: #f0ebe0;
-  border: 1px solid #3d372e;
+  background: rgba(40, 36, 32, 0.6);
+  color: var(--terminal-text);
+  border: 1px solid var(--terminal-border);
 }
 
 .cv-button-open:hover {
-  background: rgba(52, 47, 40, 0.8);
-  border-color: var(--accent-orange);
+  background: rgba(48, 43, 38, 0.8);
+  border-color: var(--accent-terracotta);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .cv-button-download {
   background: var(--accent-burgundy);
-  color: #f0ebe0;
+  color: var(--terminal-text);
   border: 1px solid var(--accent-burgundy);
 }
 
 .cv-button-download:hover {
-  background: #9b5a5f;
+  filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(139, 74, 79, 0.3);
+  box-shadow: 0 4px 16px rgba(var(--accent-terracotta-rgb), 0.3);
+}
+
+/* CV image label */
+.cv-image-label {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--terminal-text-muted);
+  margin-bottom: 10px;
+}
+
+/* Right column: CV image */
+.cv-right {
+  flex: 0 0 380px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.cv-right.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glitch image wrapper */
+.cv-image-wrap {
+  position: relative;
+}
+
+.cv-glitch {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.cv-glitch img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Subtle vignette */
+.cv-glitch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 4;
 }
 
 /* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
+@keyframes cvFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes resultFadeIn {
+@keyframes cvResultFadeIn {
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -306,75 +272,43 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .cv-page {
-    min-height: auto;
-    padding: var(--spacing-lg) var(--spacing-sm);
+@media (max-width: 868px) {
+  .cv-layout {
+    flex-direction: column;
+    gap: var(--spacing-lg);
   }
 
-  .cv-container {
-    margin-top: -30px;
-  }
-
-  .sql-terminal-body {
-    padding: 16px 18px;
-    font-size: 13px;
-    min-height: 140px;
-  }
-
-  .sql-terminal-title {
-    font-size: 12px;
-  }
-
-  .sql-terminal .terminal-hint {
-    font-size: 11px;
-    padding: 8px 15px;
-  }
-
-  .sql-terminal .hint-key {
-    padding: 2px 6px;
-    font-size: 11px;
+  .cv-right {
+    flex: none;
+    width: 100%;
+    max-width: 400px;
   }
 
   .cv-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-
-  .cv-button {
     justify-content: center;
-    padding: 12px 20px;
-    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .sql-terminal-body {
-    padding: 12px 14px;
-    font-size: 12px;
-    min-height: 120px;
+  .cv-page {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .sql-block {
+    font-size: 13px;
   }
 
   .sql-code {
     padding-left: 10px;
   }
 
-  .sql-result-text {
-    font-size: 12px;
-  }
-
-  .sql-terminal .terminal-hint {
-    font-size: 10px;
-    padding: 8px 12px;
-  }
-
-  .sql-terminal .hint-key {
-    padding: 2px 5px;
-    font-size: 10px;
+  .cv-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .cv-button {
+    justify-content: center;
     padding: 11px 16px;
     font-size: 12px;
   }

@@ -1,37 +1,76 @@
-/* Brown & Rose Theme - Inspired by Mason Wong */
+/* Warm Terminal Theme — Terracotta + Dusty Rose + Sand */
 :root {
-  /* Primära färger - Beige & Bruna toner */
-  --primary-beige: #c9b5a0;
-  --primary-sand: #d4c4b0;
-  --primary-brown: #8b6f47;
-  --primary-dark-brown: #3d2617;
+  /* Primary colors - Warm dark tones */
+  --primary-beige: #1e1a18;
+  --primary-sand: #2a2420;
+  --primary-brown: #8c7a6b;
+  --primary-dark-brown: #f0e6d8;
 
-  /* Accent färger - Rosa & Bruna */
-  --accent-rose: #e8a5a5;
-  --accent-pink: #d4949d;
-  --accent-mauve: #b08b8f;
-  --accent-burgundy: #8b4a4f;
+  /* Accent colors */
+  --accent-rose: #d4847c;
+  --accent-pink: #c4635a;
+  --accent-mauve: #a89080;
+  --accent-burgundy: #b85c4f;
 
-  /* Orange accent */
-  --accent-orange: #e8823f;
-  --accent-orange-light: #f5a161;
+  /* Terracotta accent (primary — commands, links, keywords, interactive) */
+  --accent-terracotta: #e8723a;
+  --accent-terracotta-light: #f0955e;
 
-  /* Text färger */
-  --text-dark: #3d2617;
-  --text-medium: #6b5344;
-  --text-light: #9d8776;
-  --text-white: #ffffff;
+  /* Dusty rose accent (secondary — decorative, glows, highlights) */
+  --accent-rose-warm: #d4847c;
+  --accent-rose-light: #e0a59e;
 
-  /* Bakgrunder */
-  --background-beige: #c9b5a0; /*b19a82*/
-  --background-light: #e5ddd3;
-  --background-white: #ffffff;
-  --background-cream: #f5f0eb;
+  /* RGB channels for opacity variants */
+  --accent-rose-warm-rgb: 212, 132, 124;
+  --accent-rose-light-rgb: 224, 165, 158;
+  --accent-terracotta-rgb: 232, 114, 58;
+  --accent-pink-rgb: 196, 99, 90;
+
+  /* Sand / gold highlight */
+  --accent-sand: #d4a574;
+  --accent-sand-rgb: 212, 165, 116;
+
+  /* Sage green accent */
+  --accent-sage: #8a9a7b;
+  --accent-sage-rgb: 138, 154, 123;
+
+  /* Text colors - Warm off-white */
+  --text-dark: #f0e6d8;
+  --text-medium: #a89080;
+  --text-light: #7a6b5e;
+  --text-white: #fff8f0;
+
+  /* Backgrounds - Warm dark */
+  --background-beige: #302b27;
+  --background-light: #38332e;
+  --background-white: #403a34;
+  --background-cream: #47413b;
+
+  /* Terminal / code theme - VS Code dark */
+  --terminal-bg: #1e1e1e;
+  --terminal-bg-dark: #181818;
+  --terminal-header: #2d2d2d;
+  --terminal-text: #d4d4d4;
+  --terminal-text-muted: #808080;
+  --terminal-border: #404040;
+
+  /* macOS window buttons */
+  --btn-close: #ff5f57;
+  --btn-minimize: #febc2e;
+  --btn-maximize: #28c840;
+
+  /* Status / semantic */
+  --status-success: #7ec87e;
+  --status-error: #e05555;
+  --status-info: #d4a574;
+
+  /* Light accent */
+  --warm-peach: #f0955e;
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(61, 38, 23, 0.1);
-  --shadow-md: 0 4px 16px rgba(61, 38, 23, 0.15);
-  --shadow-lg: 0 8px 24px rgba(61, 38, 23, 0.2);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 
   /* Spacing */
   --spacing-xs: 0.5rem;
