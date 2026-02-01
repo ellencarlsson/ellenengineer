@@ -141,7 +141,7 @@
 /* GitHub-Style Layout */
 .github-layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 240px;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
 }
@@ -161,13 +161,15 @@
   margin-bottom: var(--spacing-lg);
 }
 
-/* About Section - Vintage Floating Card */
+/* About Section */
 .about-section {
   padding: 0;
-  background: var(--background-cream);
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   position: relative;
   overflow: hidden;
 }
@@ -187,7 +189,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 1rem 1.25rem 0.75rem;
+  padding: 1rem 1.25rem;
+  min-height: 50px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -216,7 +219,8 @@
 
 .about-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: baseline;
   gap: 0.5rem;
 }
 
@@ -230,15 +234,16 @@
 }
 
 .about-value {
-  font-family: 'Courier New', monospace;
+  font-family: 'Courier New', 'Courier', monospace;
   color: var(--text-dark);
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 .about-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   margin: 0.25rem 0;
 }
 
@@ -252,15 +257,15 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.85rem;
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--text-dark);
-  padding: 0.35rem 0.75rem;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  letter-spacing: 0.2px;
+  padding: 0.3rem 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  letter-spacing: 0.5px;
 }
 
 .tech-icon {
@@ -281,13 +286,15 @@
   display: block;
 }
 
-/* README Box - Vintage Panel */
+/* README Box */
 .readme-box {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  background: var(--background-cream);
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
 }
 
 .readme-header {
@@ -295,6 +302,7 @@
   align-items: center;
   gap: 12px;
   padding: 1rem 1.5rem;
+  min-height: 50px;
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -308,7 +316,7 @@
 .readme-icon {
   width: 18px;
   height: 18px;
-  color: var(--text-medium);
+  color: var(--text-light);
   flex-shrink: 0;
 }
 
@@ -316,7 +324,7 @@
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-medium);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
