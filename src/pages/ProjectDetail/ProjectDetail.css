@@ -794,6 +794,22 @@
   max-height: 400px;
 }
 
+.architecture-text {
+  margin-top: 1.5rem;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: var(--font-size-xs);
+  color: var(--text-medium);
+  line-height: var(--line-height-relaxed);
+}
+
+.architecture-text p {
+  margin: 0 0 1rem 0;
+}
+
+.architecture-text p:last-child {
+  margin-bottom: 0;
+}
+
 .architecture-description {
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 0.82rem;
