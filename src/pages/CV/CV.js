@@ -170,14 +170,15 @@ function CV() {
             {showResult && (
               <div className="sql-result">
                 <span className="sql-result-check">&#10003;</span>
-                <span className="sql-result-text"> 1 record found</span>
+                <span className="sql-result-text"> 1 record found — </span>
+                <span className="sql-result-file">CV-Ellen-Carlsson.pdf</span>
               </div>
             )}
           </div>
 
           <div className={`cv-actions ${showCard ? 'visible' : ''}`}>
             <a
-              href="/assets/CV.pdf"
+              href="/assets/CV-Ellen-Carlsson.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="cv-button cv-button-open"
@@ -190,8 +191,8 @@ function CV() {
               Öppna CV
             </a>
             <a
-              href="/assets/CV.pdf"
-              download="Ellen_Carlsson_CV.pdf"
+              href="/assets/CV-Ellen-Carlsson.pdf"
+              download="CV-Ellen-Carlsson.pdf"
               className="cv-button cv-button-download"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -206,6 +207,7 @@ function CV() {
 
         {/* Right: CV image with glitch effect */}
         <div className={`cv-right ${showCard ? 'visible' : ''}`}>
+
           <div className="cv-image-wrap">
             <div className="cv-glitch">
               <img
