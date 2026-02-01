@@ -494,42 +494,42 @@
   border-bottom-color: rgba(232, 200, 154, 0.5);
 }
 
-/* Components section accent — blue */
+/* Components section accent — rose */
 .comp-icon {
-  color: #7a9ab5;
+  color: var(--accent-rose-warm);
   opacity: 0.6;
 }
 
 .comp-name {
-  color: #7a9ab5;
+  color: var(--accent-rose-warm);
   transition: color 0.2s ease;
 }
 
 .section-components {
-  border-bottom-color: rgba(122, 154, 181, 0.3);
+  border-bottom-color: rgba(212, 132, 124, 0.3);
 }
 
 .section-components .section-chevron {
-  color: #7a9ab5;
+  color: var(--accent-rose-warm);
   opacity: 0.6;
 }
 
 .file-header.clickable:hover .comp-icon {
-  color: #a4c4db;
+  color: #e8a8a0;
   opacity: 1;
 }
 
 .file-header.clickable:hover .comp-name {
-  color: #a4c4db;
+  color: #e8a8a0;
 }
 
 .section-components:hover .section-chevron {
-  color: #a4c4db;
+  color: #e8a8a0;
   opacity: 1;
 }
 
 .section-components:hover {
-  border-bottom-color: rgba(164, 196, 219, 0.5);
+  border-bottom-color: rgba(232, 168, 160, 0.5);
 }
 
 /* Insights section accent — lavender */
@@ -580,42 +580,42 @@
   white-space: pre-line;
 }
 
-/* Links section accent — rose */
+/* Links section accent — blue */
 .links-icon {
-  color: var(--accent-rose-warm);
+  color: #8fa5b8;
   opacity: 0.6;
 }
 
 .links-name {
-  color: var(--accent-rose-warm);
+  color: #8fa5b8;
   transition: color 0.2s ease;
 }
 
 .section-links {
-  border-bottom-color: rgba(212, 132, 124, 0.3);
+  border-bottom-color: rgba(143, 165, 184, 0.3);
 }
 
 .section-links .section-chevron {
-  color: var(--accent-rose-warm);
+  color: #8fa5b8;
   opacity: 0.6;
 }
 
 .file-header.clickable:hover .links-icon {
-  color: #e8a8a0;
+  color: #a8c0d4;
   opacity: 1;
 }
 
 .file-header.clickable:hover .links-name {
-  color: #e8a8a0;
+  color: #a8c0d4;
 }
 
 .section-links:hover .section-chevron {
-  color: #e8a8a0;
+  color: #a8c0d4;
   opacity: 1;
 }
 
 .section-links:hover {
-  border-bottom-color: rgba(232, 168, 160, 0.5);
+  border-bottom-color: rgba(168, 192, 212, 0.5);
 }
 
 /* Chevron Arrow */
@@ -794,6 +794,76 @@
   max-height: 400px;
 }
 
+/* Components */
+.components-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.component-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.component-group-title {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: var(--accent-rose-warm);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(212, 132, 124, 0.2);
+}
+
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.component-card {
+  background: var(--background-card);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.component-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.component-type-badge {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: var(--accent-rose-warm);
+  opacity: 0.5;
+}
+
+.component-name {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.component-responsibility {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #c8b8a4;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
 .architecture-text {
   margin-top: 1.5rem;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
@@ -927,7 +997,7 @@
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.95rem;
   font-weight: 400;
-  color: var(--accent-rose-warm);
+  color: #8fa5b8;
   text-decoration: none;
   padding: 0.25rem 0;
   background: transparent;
@@ -939,7 +1009,7 @@
 }
 
 .project-link:hover {
-  color: var(--accent-rose-light);
+  color: #a8c0d4;
   transform: none;
   border-color: transparent;
   box-shadow: none;

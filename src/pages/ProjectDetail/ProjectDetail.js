@@ -315,7 +315,7 @@ function ProjectDetail() {
           { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
           { label: 'IPHONE', nodeIds: ['iphone-view', 'iphone-vm', 'tts'] },
         ],
-        text: 'Appen är uppbyggd enligt MVVM-mönstret, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
+        subtitle: 'Appen är uppbyggd enligt MVVM-mönstret, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
       },
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
@@ -345,7 +345,30 @@ function ProjectDetail() {
           text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen uppochner. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
         }
       ],
-      insights: 'Den största insikten var hur mycket datainsamlingen påverkar resultatet. I första versionen samlade jag in data på ett sätt som fungerade, men som begränsade modellens förmåga att generalisera. När jag byggde om projektet från grunden fokuserade jag på att samla in mer varierad data, med fler vinklar och hastigheter, vilket gav en betydligt bättre träffsäkerhet.\n\nEn annan lärdom var att hålla allt lokalt på enheten. Genom att köra AI-modellen direkt på Apple Watch istället för att skicka data till en server blev appen snabbare och fungerar utan internetuppkoppling.',
+      insights: [
+        {
+          title: 'Begränsningar',
+          items: [
+            {
+              label: 'Manuell träning',
+              text: 'Att lägga till nya ord kräver manuellt arbete. Träningsdata exporteras som CSV-filer som sedan används för att bygga om modellen. Det finns ingen automatisk pipeline, varje nytt tecken kräver ny träning och en ny modellversion.'
+            },
+            {
+              label: 'Fast fönsterstorlek',
+              text: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Fler samples ger mer precis data, men ökar också latensen, och högre samplingsfrekvens förstärker samma avvägning.'
+            }
+          ]
+        },
+        {
+          title: 'Fortsatt utveckling',
+          items: [
+            {
+              label: 'Fler sensorer',
+              text: 'Med en klocka på varje hand hade modellen kunnat fånga hela teckenspråksrörelser, inte bara ena handens.'
+            }
+          ]
+        }
+      ],
       hasWorkflow: true,
       workflow: [
         {
@@ -395,6 +418,54 @@ function ProjectDetail() {
           description: 'Telefonen säger ordet högt',
           details: 'Text-to-Speech',
           ledColor: 'green'
+        }
+      ],
+      componentsText: 'Varje komponent i appen har en specifik uppgift och tillhör antingen iPhone- eller Apple Watch-sidan. Här är en översikt av de viktigaste delarna och vad de ansvarar för.',
+      components: [
+        {
+          group: 'iPhone',
+          items: [
+            {
+              name: 'IPhoneViewModel',
+              type: 'ViewModel',
+              responsibility: 'Skickar kommandon till klockan och tar emot detekterade ord. Bygger upp en ordlista som sedan kan omvandlas till en mening.'
+            },
+            {
+              name: 'SentenceConverter',
+              type: 'Model',
+              responsibility: 'Tar en lista av detekterade ord och sätter ihop dem till en grammatiskt korrekt svensk mening.'
+            }
+          ]
+        },
+        {
+          group: 'Apple Watch',
+          items: [
+            {
+              name: 'WatchViewModel',
+              type: 'ViewModel',
+              responsibility: 'Tar emot kommandon från telefonen och bestämmer vad klockan ska göra. Skickar tillbaka detekterade ord.'
+            },
+            {
+              name: 'PredictionViewModel',
+              type: 'ViewModel',
+              responsibility: 'Startar sensorerna, samlar in rörelsedata och skickar den vidare till AI-modellen.'
+            },
+            {
+              name: 'TrainingViewModel',
+              type: 'ViewModel',
+              responsibility: 'Samlar in träningsdata för nya tecken och exporterar den som CSV-filer till en träningsserver.'
+            },
+            {
+              name: 'PredictionModel',
+              type: 'Model',
+              responsibility: 'Kör Core ML-modellen som tolkar rörelsedata till ord. Sparar tillstånd mellan prediktioner.'
+            },
+            {
+              name: 'DataHelper',
+              type: 'Helper',
+              responsibility: 'Definierar samplingsfrekvens (50 Hz) och fönsterstorlek (60 samples). Strukturerar rå sensorvärden.'
+            }
+          ]
         }
       ]
     },
@@ -729,14 +800,12 @@ function ProjectDetail() {
             <div className="section-content">
               {project.architecture ? (
                 <>
-                  <ArchitectureDiagram architecture={project.architecture} />
-                  {project.architecture.text && (
-                    <div className="architecture-text">
-                      {project.architecture.text.split('\n\n').map((para, i) => (
-                        <p key={i}>{para}</p>
-                      ))}
-                    </div>
+                  {project.architecture.subtitle && (
+                    project.architecture.subtitle.split('\n\n').map((para, i) => (
+                      <p key={i} className="result-description">{para}</p>
+                    ))
                   )}
+                  <ArchitectureDiagram architecture={project.architecture} />
                 </>
               ) : (
                 <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
@@ -756,20 +825,46 @@ function ProjectDetail() {
           </div>
           <div className={`section-body ${expandedSections.components ? 'expanded' : ''}`}>
             <div className="section-content">
-              <div className="pipeline">
-                {project.workflow.map((step, i) => (
-                  <div key={step.step} className="pipeline-step">
-                    <div className="pipeline-content">
-                      <span className="pipeline-icon">{step.icon}</span>
-                      <div className="pipeline-text">
-                        <span className="pipeline-title">{step.title}</span>
-                        <span className="pipeline-desc">{step.description}</span>
-                        <span className="pipeline-detail">{step.details}</span>
+              {project.components && project.components.length > 0 ? (
+                <>
+                {project.componentsText && (
+                  <p className="result-description">{project.componentsText}</p>
+                )}
+                <div className="components-list">
+                  {project.components.map((group, gi) => (
+                    <div key={gi} className="component-group">
+                      <h4 className="component-group-title">{group.group}</h4>
+                      <div className="component-grid">
+                        {group.items.map((comp, i) => (
+                          <div key={i} className="component-card">
+                            <div className="component-card-header">
+                              <span className="component-name">{comp.name}</span>
+                              <span className="component-type-badge">{comp.type}</span>
+                            </div>
+                            <p className="component-responsibility">{comp.responsibility}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+                </>
+              ) : (
+                <div className="pipeline">
+                  {project.workflow.map((step, i) => (
+                    <div key={step.step} className="pipeline-step">
+                      <div className="pipeline-content">
+                        <span className="pipeline-icon">{step.icon}</span>
+                        <div className="pipeline-text">
+                          <span className="pipeline-title">{step.title}</span>
+                          <span className="pipeline-desc">{step.description}</span>
+                          <span className="pipeline-detail">{step.details}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -786,7 +881,28 @@ function ProjectDetail() {
           </div>
           <div className={`section-body ${expandedSections.insights ? 'expanded' : ''}`}>
             <div className="section-content">
-              <p className="insights-description">{project.insights}</p>
+              {typeof project.insights === 'string' ? (
+                <p className="insights-description">{project.insights}</p>
+              ) : (
+                <div className="components-list">
+                  {project.insights.map((section, si) => (
+                    <div key={si} className="component-group">
+                      <h4 className="component-group-title" style={{color: '#9b8ab8', borderBottomColor: 'rgba(155, 138, 184, 0.2)'}}>{section.title}</h4>
+                      <div className="feature-commits">
+                        {section.items.map((item, i) => (
+                          <div key={i} className="feature-commit">
+                            <div className="feature-commit-dot" style={{borderColor: '#9b8ab8'}}></div>
+                            <div className="feature-commit-content">
+                              <span className="feature-commit-label">{item.label}</span>
+                              <p className="feature-commit-text">{item.text}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
