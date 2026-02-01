@@ -58,12 +58,6 @@ function About() {
       return;
     }
 
-    if (active === null) {
-      blob.style.opacity = '0';
-      prevActiveRef.current = active;
-      return;
-    }
-
     const prev = prevActiveRef.current;
     const trackRect = track.getBoundingClientRect();
 
@@ -92,16 +86,9 @@ function About() {
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === 'ArrowRight') {
-        setActive(prev => {
-          if (prev === null) return 0;
-          return Math.min(prev + 1, MILESTONES.length - 1);
-        });
+        setActive(prev => Math.min(prev + 1, MILESTONES.length - 1));
       } else if (e.key === 'ArrowLeft') {
-        setActive(prev => {
-          if (prev === null) return MILESTONES.length - 1;
-          if (prev === 0) return null;
-          return prev - 1;
-        });
+        setActive(prev => Math.max(prev - 1, 0));
       }
     };
     window.addEventListener('keydown', handleKey);
@@ -187,41 +174,33 @@ function About() {
     setIsDragging(true);
   };
 
-  const m = active !== null ? MILESTONES[active] : null;
+  const m = MILESTONES[active];
 
   return (
     <section id="about" className="about-page">
       <div className="ambient-particles" ref={particlesRef}></div>
 
       <div className="about-main">
-        {m ? (
-          <div className={`card-layout${m.image ? ' has-image' : ''}`} key={active}>
-            <div className="card-text">
-              <div className="card-eyebrow">
-                <span className="card-chip">{m.label}</span>
-                <span className="card-loc">{m.location}</span>
-              </div>
-              <h1 className="card-year">{m.year}</h1>
-              <p className="card-desc">
-                <span className="card-prompt">&gt; </span>
-                {m.description}
-              </p>
+        <div className={`card-layout${m.image ? ' has-image' : ''}`} key={active}>
+          <div className="card-text">
+            <div className="card-eyebrow">
+              <span className="card-chip">{m.label}</span>
+              <span className="card-loc">{m.location}</span>
             </div>
-            {m.image && (
-              <div className="card-image">
-                <div className="glitch-img">
-                  <img src={m.image} alt={`${m.year}`} />
-                </div>
+            <h1 className="card-year">{m.year}</h1>
+            <p className="card-desc">
+              <span className="card-prompt">&gt; </span>
+              {m.description}
+            </p>
+          </div>
+          {m.image && (
+            <div className="card-image">
+              <div className="glitch-img">
+                <img src={m.image} alt={`${m.year}`} />
               </div>
-            )}
-          </div>
-        ) : (
-          <div className="about-idle">
-            <h1 className="about-idle-name">Ellen Carlsson</h1>
-            <p className="about-idle-sub">Dataingenjör</p>
-            <p className="about-idle-hint">Välj en punkt på tidslinjen</p>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Timeline */}
@@ -242,7 +221,7 @@ function About() {
             <button
               key={ms.year}
               className={`tl-node ${active === i ? 'active' : ''}`}
-              onClick={() => setActive(active === i ? null : i)}
+              onClick={() => setActive(i)}
             >
               <div
                 className={`tl-dot${active === i && isDragging ? ' dragging' : ''}`}
