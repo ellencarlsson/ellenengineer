@@ -20,7 +20,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: var(--line-height-normal);
-  background: var(--background-beige);
+  background: #0f0f0f;
   color: var(--text-dark);
   min-height: 100vh;
   position: relative;
@@ -56,7 +56,7 @@ body::before {
   background-size: 200% 200%;
   background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%, 100% 0%, 33% 80%, 15% 90%, 70% 40%, 25% 15%, 85% 85%, 45% 25%, 10% 50%, 95% 30%, 5% 65%, 55% 95%;
   background-repeat: no-repeat;
-  opacity: 0.6;
+  opacity: 0.3;
 }
 
 code {

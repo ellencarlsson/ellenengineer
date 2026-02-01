@@ -1,319 +1,240 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './About.css';
-import PlayerAvatar from '../../components/PlayerAvatar/PlayerAvatar';
+
+const MILESTONES = [
+  {
+    year: 2002, label: 'Uppväxt', location: 'Öxnevalla',
+    description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
+    image: '/images/2002.jpg'
+  },
+  {
+    year: 2021, label: 'Studier', location: 'Jönköping',
+    description: 'Jag flyttade för att studera på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
+    image: '/images/2021.jpg'
+  },
+  {
+    year: 2022, label: 'Programmering', location: 'Jönköping',
+    description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
+  },
+  {
+    year: 2023, label: 'Projekt', location: 'Jönköping',
+    description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor. Hade min praktik på SAAB, Training & Simulation.'
+  },
+  {
+    year: 2024, label: 'Examen', location: 'Jönköping',
+    description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete om teckenspråksigenkänning.',
+    image: '/images/2024.jpg'
+  },
+  {
+    year: 2025, label: 'Värnplikt', location: 'Halmstad',
+    description: 'I mars påbörjade 15 månaders värnplikt på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
+    image: '/images/2025.jpg'
+  },
+  {
+    year: 2026, label: 'Nästa steg', location: '?',
+    description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
+  }
+];
 
 function About() {
-  const [playerPos, setPlayerPos] = useState({ x: 130, y: 400 });
-  const [nearestMilestone, setNearestMilestone] = useState(null);
-  const [leavingMilestone, setLeavingMilestone] = useState(null);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isWalking, setIsWalking] = useState(false);
-  const [fadingOutImage, setFadingOutImage] = useState(false);
-  const keysRef = useRef({});
-  const velocityRef = useRef({ x: 0, y: 0 });
-  const isJumpingRef = useRef(false);
-  const previousMilestoneRef = useRef(null);
-  const terminalLinesRef = useRef([]);
-  const playerPosRef = useRef({ x: 130, y: 400 });
-  const nearestMilestoneRef = useRef(null);
+  const [active, setActive] = useState(MILESTONES.length - 1);
+  const [isDragging, setIsDragging] = useState(false);
+  const particlesRef = useRef(null);
+  const timelineRef = useRef(null);
+  const activeRef = useRef(active);
+  const dotRefs = useRef([]);
+  const blobRef = useRef(null);
+  const prevActiveRef = useRef(null);
 
-  // Calculate positions dynamically based on screen width
-  const getMilestones = () => {
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const leftMargin = 80;
-    const rightMargin = screenWidth * 0.2;
-    const availableWidth = screenWidth - leftMargin - rightMargin;
-    const spacing = availableWidth / 6; // 7 milestones = 6 gaps
+  useEffect(() => { activeRef.current = active; }, [active]);
 
-    return [
-      {
-        year: 2002,
-        position: leftMargin,
-        directory: '2002_born/',
-        location: 'Öxnevalla',
-        description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
-        image: '/images/2002.jpg'
-      },
-      {
-        year: 2021,
-        position: leftMargin + spacing,
-        directory: '2021_studies/',
-        location: 'Jönköping',
-        description: 'Jag flyttade för att studeta på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
-        image: '/images/2021.jpg'
-      },
-      {
-        year: 2022,
-        position: leftMargin + spacing * 2,
-        directory: '2022_programming/',
-        location: 'Jönköping',
-        description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
-      },
-      {
-        year: 2023,
-        position: leftMargin + spacing * 3,
-        directory: '2023_projects/',
-        location: 'Jönköping',
-        description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor. Under tiden jag flyttade till en ny lägenhet, var jag hyresvärd under 2 år, för 2 olika gäster. Hade min praktik på SAAB, Training & Simulation, och arbetade även där som sommarjobbare.'
-      },
-      {
-        year: 2024,
-        position: leftMargin + spacing * 4,
-        directory: '2024_projects/',
-        location: 'Jönköping',
-        description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete, om teckenspråksigenkänning, som ställdes ut bland andra examensarbeterna på JTH:s examensmässa. Efter att ha varit på en "hälsa på dag" hos min bror på Försvarsmakten fick jag ett intresse militären. Därför sökte jag till att göra värnplikten.',
-        image: '/images/2024.jpg'
-      },
-      {
-        year: 2025,
-        position: leftMargin + spacing * 5,
-        directory: '2025_military/',
-        location: 'Halmstad',
-        description: 'I mars påbörjade 15 månaders värnplikt i på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
-        image: '/images/2025.jpg'
-      },
-      {
-        year: 2026,
-        position: leftMargin + spacing * 6,
-        directory: '2026_next/',
-        location: '?',
-        description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
-      }
-    ];
-  };
+  // Energy blob travel animation
+  useEffect(() => {
+    const blob = blobRef.current;
+    const track = timelineRef.current;
 
-  const milestones = getMilestones();
-
-  const GROUND_Y = 400;
-  const GRAVITY = 0.8;
-  const JUMP_FORCE = -15;
-  const MOVE_SPEED = 5;
-
-  // Generate terminal lines based on current state
-  const getTerminalLines = () => {
-    const lines = [];
-
-    if (leavingMilestone && !nearestMilestone) {
-      // Leaving a directory - show full prompt with cd ..
-      lines.push({
-        type: 'command',
-        text: `ellen@ellenengineer:~/${leavingMilestone.directory}$ cd ..`
-      });
-    } else if (nearestMilestone) {
-      // Inside directory - show cat command
-      lines.push({
-        type: 'command',
-        text: `ellen@ellenengineer:~/${nearestMilestone.directory}$ cat README.md`
-      });
-      lines.push({ type: 'output', text: ' ' });
-      // Show year and location info
-      lines.push({
-        type: 'info',
-        text: `Year: `,
-        boldText: nearestMilestone.year
-      });
-      lines.push({
-        type: 'info',
-        text: `Location: `,
-        boldText: nearestMilestone.location
-      });
-      lines.push({ type: 'output', text: ' ' });
-      lines.push({ type: 'output', text: nearestMilestone.description });
-    } else {
-      // Base directory - show idle prompt
-      lines.push({ type: 'command', text: 'ellen@ellenengineer:~$' });
+    if (!blob || !track) {
+      prevActiveRef.current = active;
+      return;
     }
 
-    return lines;
-  };
+    const prev = prevActiveRef.current;
+    const trackRect = track.getBoundingClientRect();
 
-  // Update terminal lines when state changes
+    if (prev !== null && prev !== active && dotRefs.current[prev] && dotRefs.current[active]) {
+      const fromDot = dotRefs.current[prev];
+      const toDot = dotRefs.current[active];
+      const fromX = fromDot.getBoundingClientRect().left + fromDot.getBoundingClientRect().width / 2 - trackRect.left;
+      const toX = toDot.getBoundingClientRect().left + toDot.getBoundingClientRect().width / 2 - trackRect.left;
+
+      blob.style.transition = 'none';
+      blob.style.left = fromX + 'px';
+      blob.style.opacity = '1';
+      void blob.offsetHeight;
+
+      const dist = Math.abs(toX - fromX);
+      const duration = Math.min(0.6, Math.max(0.25, dist / 600));
+      blob.style.transition = `left ${duration}s ease, opacity 0.2s ease ${duration}s`;
+      blob.style.left = toX + 'px';
+      blob.style.opacity = '0';
+    }
+
+    prevActiveRef.current = active;
+  }, [active]);
+
+  // Arrow key navigation
   useEffect(() => {
-    const newLines = getTerminalLines();
-    terminalLinesRef.current = newLines;
-    // Don't use simple text join anymore, we'll render with JSX for bold support
-    setDisplayedText('updated'); // Just trigger re-render
-  }, [nearestMilestone, leavingMilestone]);
-
-  // Handle keyboard input
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      const key = e.key.toLowerCase();
-      keysRef.current[key] = true;
-
-      // Jump on space
-      if ((key === ' ' || key === 'spacebar') && !isJumpingRef.current) {
-        velocityRef.current.y = JUMP_FORCE;
-        isJumpingRef.current = true;
-        e.preventDefault();
+    const handleKey = (e) => {
+      if (e.key === 'ArrowRight') {
+        setActive(prev => Math.min(prev + 1, MILESTONES.length - 1));
+      } else if (e.key === 'ArrowLeft') {
+        setActive(prev => Math.max(prev - 1, 0));
       }
     };
-
-    const handleKeyUp = (e) => {
-      const key = e.key.toLowerCase();
-      keysRef.current[key] = false;
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
   }, []);
 
-  // Game loop
+  // Particle effect
   useEffect(() => {
-    const gameLoop = setInterval(() => {
-      setPlayerPos(prev => {
-        let newX = prev.x;
-        let newY = prev.y;
-        let moving = false;
+    const container = particlesRef.current;
+    if (!container) return;
 
-        // Horizontal movement
-        if (keysRef.current['a'] || keysRef.current['arrowleft']) {
-          newX -= MOVE_SPEED;
-          moving = true;
-        }
-        if (keysRef.current['d'] || keysRef.current['arrowright']) {
-          newX += MOVE_SPEED;
-          moving = true;
-        }
+    const particles = [];
+    const COUNT = 25;
 
-        setIsWalking(moving);
+    for (let i = 0; i < COUNT; i++) {
+      const p = document.createElement('div');
+      p.className = 'ambient-particle';
+      const size = Math.random() * 3 + 1;
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const duration = Math.random() * 8 + 6;
+      const delay = Math.random() * -14;
+      const drift = (Math.random() - 0.5) * 60;
 
-        // Keep player in bounds (within screen width)
-        const screenWidth = window.innerWidth;
-        newX = Math.max(50, Math.min(screenWidth - 50, newX));
+      p.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${x}%; top: ${y}%;
+        --drift: ${drift}px;
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+      `;
+      container.appendChild(p);
+      particles.push(p);
+    }
 
-        // Apply gravity
-        velocityRef.current.y += GRAVITY;
+    return () => particles.forEach(p => p.remove());
+  }, []);
 
-        // Update Y position
-        newY += velocityRef.current.y;
+  const getClosestMilestone = useCallback((clientX) => {
+    const track = timelineRef.current;
+    if (!track) return null;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const index = Math.round(ratio * (MILESTONES.length - 1));
+    return index;
+  }, []);
 
-        // Ground collision
-        if (newY >= GROUND_Y) {
-          newY = GROUND_Y;
-          velocityRef.current.y = 0;
-          isJumpingRef.current = false;
-        }
+  useEffect(() => {
+    if (!isDragging) return;
 
-        const newPos = { x: newX, y: newY };
-        playerPosRef.current = newPos;
-        return newPos;
-      });
-
-      // Check nearest milestone with detection range
-      // Player should be "inside" milestone when 50px behind or 50px ahead
-      let foundMilestone = null;
-      for (const milestone of milestones) {
-        const distanceFromMilestone = playerPosRef.current.x - milestone.position;
-        // Check if player is within range: -50 (behind) to +50 (ahead)
-        if (distanceFromMilestone >= -50 && distanceFromMilestone <= 50) {
-          foundMilestone = milestone;
-          break;
-        }
+    const handleMove = (e) => {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const idx = getClosestMilestone(clientX);
+      if (idx !== null && idx !== activeRef.current) {
+        setActive(idx);
       }
+    };
 
-      if (foundMilestone) {
-        if (nearestMilestoneRef.current !== foundMilestone) {
-          setNearestMilestone(foundMilestone);
-          nearestMilestoneRef.current = foundMilestone;
-          setFadingOutImage(false);
-          previousMilestoneRef.current = foundMilestone;
-        }
-      } else {
-        // Leaving a milestone - show cd .. notification
-        if (previousMilestoneRef.current && nearestMilestoneRef.current) {
-          setLeavingMilestone(previousMilestoneRef.current);
-          setTimeout(() => setLeavingMilestone(null), 2000);
-          // Trigger fade out animation if previous milestone had an image
-          if (previousMilestoneRef.current.image) {
-            setFadingOutImage(true);
-            setTimeout(() => {
-              setFadingOutImage(false);
-            }, 600); // Match animation duration
-          }
-          previousMilestoneRef.current = null;
-        }
-        if (nearestMilestoneRef.current !== null) {
-          setNearestMilestone(null);
-          nearestMilestoneRef.current = null;
-        }
-      }
-    }, 1000 / 60);
+    const handleUp = () => setIsDragging(false);
 
-    return () => clearInterval(gameLoop);
-  }, [milestones]);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('touchmove', handleMove, { passive: true });
+    window.addEventListener('mouseup', handleUp);
+    window.addEventListener('touchend', handleUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('touchmove', handleMove);
+      window.removeEventListener('mouseup', handleUp);
+      window.removeEventListener('touchend', handleUp);
+    };
+  }, [isDragging, getClosestMilestone]);
+
+  const handleTrackClick = (e) => {
+    if (isDragging) return;
+    if (e.target.closest('.tl-node')) return;
+    const idx = getClosestMilestone(e.clientX);
+    if (idx !== null) setActive(idx);
+  };
+
+  const handleThumbDown = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const m = MILESTONES[active];
 
   return (
-    <section id="about" className="about-game">
-      {/* Content Display - Top Left */}
-      <div className="content-display">
-        <div className="content-lines">
-          {terminalLinesRef.current.map((lineData, index) => {
-            return (
-              <div key={index} className={`content-line ${lineData.type}`}>
-                {lineData.text}
-                {lineData.boldText && <strong>{lineData.boldText}</strong>}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <section id="about" className="about-page">
+      <div className="ambient-particles" ref={particlesRef}></div>
 
-      {/* Game World - Static, full screen */}
-      <div className="game-world-container">
-        <div className="game-world">
-          {/* Ground line */}
-          <div className="ground"></div>
-
-          {/* Milestones - Folder icons */}
-          {milestones.map((milestone, index) => (
-            <div
-              key={index}
-              className={`milestone ${nearestMilestone === milestone ? 'active' : ''}`}
-              style={{ left: `${milestone.position}px` }}
-            >
-              <div className="folder-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V8C21 6.89543 20.1046 6 19 6H12L10 4H5C3.89543 4 3 4.89543 3 6V8Z"
-                    fill="currentColor"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div className="folder-label">/{milestone.year}</div>
+      <div className="about-main">
+        <div className={`card-layout${m.image ? ' has-image' : ''}`} key={active}>
+          <div className="card-text">
+            <div className="card-eyebrow">
+              <span className="card-chip">{m.label}</span>
+              <span className="card-loc">{m.location}</span>
             </div>
-          ))}
-
-          {/* Player */}
-          <div
-            className="player"
-            style={{
-              left: `${playerPos.x}px`,
-              bottom: `${41 + (400 - playerPos.y)}px`
-            }}
-          >
-            <PlayerAvatar isWalking={isWalking} />
+            <h1 className="card-year">{m.year}</h1>
+            <p className="card-desc">
+              <span className="card-prompt">&gt; </span>
+              {m.description}
+            </p>
           </div>
+          {m.image && (
+            <div className="card-image">
+              <div className="glitch-img">
+                <img src={m.image} alt={`${m.year}`} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Image Display - Slides in from right when milestone has image */}
-      {((nearestMilestone && nearestMilestone.image) || (fadingOutImage && leavingMilestone && leavingMilestone.image)) && (
-        <div className={`image-display ${fadingOutImage ? 'fade-out' : ''}`}>
-          <img
-            src={nearestMilestone ? nearestMilestone.image : leavingMilestone.image}
-            alt={nearestMilestone ? `${nearestMilestone.year} - ${nearestMilestone.location}` : `${leavingMilestone.year} - ${leavingMilestone.location}`}
-            className="milestone-image"
-          />
+      {/* Timeline */}
+      <div className="timeline">
+        <div
+          className="timeline-track"
+          ref={timelineRef}
+          onClick={handleTrackClick}
+        >
+          <div className="timeline-line">
+            <span className="tl-spark" style={{ animationDuration: '2.8s', animationDelay: '0s' }} />
+            <span className="tl-spark" style={{ animationDuration: '3.4s', animationDelay: '-1.2s' }} />
+            <span className="tl-spark" style={{ animationDuration: '2.2s', animationDelay: '-0.6s' }} />
+            <span className="tl-spark" style={{ animationDuration: '4s', animationDelay: '-2.5s' }} />
+          </div>
+          <div className="tl-energy-blob" ref={blobRef} />
+          {MILESTONES.map((ms, i) => (
+            <button
+              key={ms.year}
+              className={`tl-node ${active === i ? 'active' : ''}`}
+              onClick={() => setActive(i)}
+            >
+              <div
+                className={`tl-dot${active === i && isDragging ? ' dragging' : ''}`}
+                ref={el => { dotRefs.current[i] = el; }}
+                onMouseDown={active === i ? handleThumbDown : undefined}
+                onTouchStart={active === i ? handleThumbDown : undefined}
+              ></div>
+              <div className="tl-label">{ms.year}</div>
+              <div className="tl-sublabel">{ms.label}</div>
+            </button>
+          ))}
         </div>
-      )}
+      </div>
     </section>
   );
 }
