@@ -30,6 +30,10 @@
   --accent-sand: #d4a574;
   --accent-sand-rgb: 212, 165, 116;
 
+  /* Sage green accent */
+  --accent-sage: #8a9a7b;
+  --accent-sage-rgb: 138, 154, 123;
+
   /* Text colors - Warm off-white */
   --text-dark: #f0e6d8;
   --text-medium: #a89080;
