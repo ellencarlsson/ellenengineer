@@ -42,6 +42,7 @@ function Hero() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete]);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ function Hero() {
 
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCharIndex, currentLineIndex]);
 
   return (
