@@ -47,9 +47,9 @@
 .about-main {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 20px 80px 40px;
+  padding: 60px 80px 40px;
   position: relative;
   z-index: 10;
 }
@@ -58,12 +58,11 @@
 .card-layout {
   width: 100%;
   max-width: 860px;
-  animation: cardIn 0.45s ease-out;
 }
 
 .card-layout.has-image {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 48px;
 }
 
@@ -108,7 +107,7 @@
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
   font-size: 12px;
   letter-spacing: 1px;
-  color: rgba(var(--accent-rose-warm-rgb), 0.3);
+  color: rgba(var(--accent-rose-warm-rgb), 0.45);
   text-transform: uppercase;
 }
 
@@ -126,14 +125,17 @@
 .card-desc {
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
+  font-weight: 500;
   line-height: 1.8;
-  color: rgba(var(--accent-rose-warm-rgb), 0.55);
+  color: rgba(var(--accent-rose-warm-rgb), 0.72);
+  text-shadow: 0 0 8px rgba(var(--accent-rose-warm-rgb), 0.12);
   margin: 0;
   max-width: 540px;
+  min-height: 120px;
 }
 
 .card-prompt {
-  color: rgba(var(--accent-rose-warm-rgb), 0.4);
+  color: rgba(var(--accent-rose-warm-rgb), 0.5);
 }
 
 /* ===== GLITCH IMAGE ===== */
@@ -241,6 +243,22 @@
   80%      { top: 80%; opacity: 0; }
   81%      { top: 65%; opacity: 1; }
   83%      { top: 67%; opacity: 0; }
+}
+
+/* ===== ASCII DECORATION ===== */
+.about-ascii {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(var(--accent-rose-warm-rgb), 0.06);
+  white-space: pre;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
 }
 
 /* ===== TIMELINE ===== */
@@ -383,12 +401,12 @@
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
   transition: color 0.3s ease;
 }
 
 .tl-node:hover .tl-label {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .tl-node.active .tl-label {
@@ -399,16 +417,16 @@
   font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
   font-size: 10px;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.30);
   transition: color 0.3s ease;
 }
 
 .tl-node:hover .tl-sublabel {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .tl-node.active .tl-sublabel {
-  color: rgba(var(--accent-rose-warm-rgb), 0.4);
+  color: rgba(var(--accent-rose-warm-rgb), 0.6);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -450,6 +468,10 @@
   }
 
   .tl-sublabel {
+    display: none;
+  }
+
+  .about-ascii {
     display: none;
   }
 }
