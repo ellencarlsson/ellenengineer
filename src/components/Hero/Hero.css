@@ -106,17 +106,17 @@
 }
 
 .hero-line.link {
-  color: var(--accent-orange-light);
+  color: var(--accent-green);
 }
 
 .hero-terminal-link {
-  color: var(--accent-orange-light);
+  color: var(--accent-green);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: var(--accent-orange);
+  color: var(--accent-green-muted);
   text-decoration: underline;
 }
 
@@ -141,12 +141,12 @@
 }
 
 .hero-terminal-body::-webkit-scrollbar-thumb {
-  background: #444240;
+  background: var(--terminal-border);
   border-radius: 4px;
 }
 
 .hero-terminal-body::-webkit-scrollbar-thumb:hover {
-  background: #555351;
+  background: #484f58;
 }
 
 /* Terminal Hint */
@@ -154,7 +154,7 @@
   background: var(--terminal-bg-dark);
   padding: 10px 20px;
   border-top: 1px solid var(--terminal-header);
-  color: #777573;
+  color: var(--text-light);
   font-size: 12px;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   display: flex;
@@ -176,12 +176,12 @@
 
 .hero-hint-key {
   background: var(--terminal-header);
-  color: #d4d2d0;
+  color: var(--terminal-text);
   padding: 2px 8px;
   border-radius: 4px;
   font-weight: 500;
-  border: 1px solid #444240;
-  box-shadow: 0 2px 0 #1a1918;
+  border: 1px solid var(--terminal-border);
+  box-shadow: 0 2px 0 var(--terminal-bg-dark);
 }
 
 /* Animations */

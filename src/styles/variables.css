@@ -1,63 +1,67 @@
-/* Dark Engineer Theme */
+/* Warm Terminal Theme — Terracotta + Dusty Rose + Sand */
 :root {
-  /* Primary colors - Dark tones */
-  --primary-beige: #1a1a1a;
-  --primary-sand: #252525;
-  --primary-brown: #555555;
-  --primary-dark-brown: #f0f0f0;
+  /* Primary colors - Warm dark tones */
+  --primary-beige: #1e1a18;
+  --primary-sand: #2a2420;
+  --primary-brown: #8c7a6b;
+  --primary-dark-brown: #f0e6d8;
 
   /* Accent colors */
-  --accent-rose: #f5a161;
-  --accent-pink: #c4785a;
-  --accent-mauve: #888888;
-  --accent-burgundy: #e8823f;
+  --accent-rose: #d4847c;
+  --accent-pink: #c4635a;
+  --accent-mauve: #a89080;
+  --accent-burgundy: #b85c4f;
 
-  /* Orange accent */
-  --accent-orange: #e8823f;
-  --accent-orange-light: #f5a161;
+  /* Terracotta accent (primary — commands, links, keywords, interactive) */
+  --accent-orange: #e8723a;
+  --accent-orange-light: #f0955e;
 
-  /* Green accent (About, CV pages) */
-  --accent-green: #3cb464;
-  --accent-green-muted: #9aad8a;
+  /* Dusty rose accent (secondary — decorative, glows, highlights) */
+  --accent-green: #d4847c;
+  --accent-green-muted: #e0a59e;
 
   /* RGB channels for opacity variants */
-  --accent-green-rgb: 60, 180, 100;
-  --accent-green-light-rgb: 140, 230, 160;
-  --accent-orange-rgb: 232, 130, 63;
-  --accent-pink-rgb: 196, 120, 90;
+  --accent-green-rgb: 212, 132, 124;
+  --accent-green-light-rgb: 224, 165, 158;
+  --accent-orange-rgb: 232, 114, 58;
+  --accent-pink-rgb: 196, 99, 90;
 
-  /* Text colors */
-  --text-dark: #f0f0f0;
-  --text-medium: #999999;
-  --text-light: #666666;
-  --text-white: #ffffff;
+  /* Sand / gold highlight */
+  --accent-sand: #d4a574;
+  --accent-sand-rgb: 212, 165, 116;
 
-  /* Backgrounds */
-  --background-beige: #0f0f0f;
-  --background-light: #141414;
-  --background-white: #1a1a1a;
-  --background-cream: #1e1e1e;
+  /* Text colors - Warm off-white */
+  --text-dark: #f0e6d8;
+  --text-medium: #a89080;
+  --text-light: #7a6b5e;
+  --text-white: #fff8f0;
 
-  /* Terminal / warm-dark theme */
-  --terminal-bg: #1e1c1a;
-  --terminal-bg-dark: #181716;
-  --terminal-header: #2d2b29;
-  --terminal-text: #f0ebe0;
-  --terminal-text-muted: #a39b8d;
-  --terminal-border: #3d372e;
+  /* Backgrounds - Warm dark */
+  --background-beige: #1a1715;
+  --background-light: #211e1b;
+  --background-white: #282420;
+  --background-cream: #302b26;
+
+  /* Terminal / code theme - Warm tint */
+  --terminal-bg: #1c1917;
+  --terminal-bg-dark: #121010;
+  --terminal-header: #252120;
+  --terminal-text: #f0e6d8;
+  --terminal-text-muted: #8c7a6b;
+  --terminal-border: #3d3530;
 
   /* macOS window buttons */
   --btn-close: #ff5f57;
-  --btn-minimize: #ffbd2e;
-  --btn-maximize: #28ca42;
+  --btn-minimize: #febc2e;
+  --btn-maximize: #28c840;
 
   /* Status / semantic */
-  --status-success: #28ca42;
-  --status-error: #ff4444;
-  --status-info: #569cd6;
+  --status-success: #7ec87e;
+  --status-error: #e05555;
+  --status-info: #d4a574;
 
-  /* Warm accent */
-  --warm-peach: #e6b89c;
+  /* Light accent */
+  --warm-peach: #f0955e;
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);

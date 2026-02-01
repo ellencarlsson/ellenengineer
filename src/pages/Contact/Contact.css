@@ -75,7 +75,7 @@
   display: flex;
   align-items: stretch;
   text-decoration: none;
-  background: rgba(42, 37, 32, 0.6);
+  background: rgba(22, 27, 34, 0.6);
   border: 1px solid var(--terminal-border);
   border-radius: 8px;
   overflow: hidden;
@@ -85,7 +85,7 @@
 }
 
 .endpoint:hover {
-  background: rgba(52, 47, 40, 0.8);
+  background: rgba(30, 35, 42, 0.8);
   border-color: var(--accent-green-muted);
   transform: translateX(4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);

@@ -181,13 +181,13 @@
 }
 
 .cv-button-open {
-  background: rgba(42, 37, 32, 0.6);
+  background: rgba(22, 27, 34, 0.6);
   color: var(--terminal-text);
   border: 1px solid var(--terminal-border);
 }
 
 .cv-button-open:hover {
-  background: rgba(52, 47, 40, 0.8);
+  background: rgba(30, 35, 42, 0.8);
   border-color: var(--accent-orange);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -202,7 +202,7 @@
 .cv-button-download:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(139, 74, 79, 0.3);
+  box-shadow: 0 4px 16px rgba(var(--accent-orange-rgb), 0.3);
 }
 
 /* CV image label */

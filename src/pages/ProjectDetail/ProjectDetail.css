@@ -92,7 +92,7 @@
 }
 
 .status-divider {
-  color: var(--accent-orange);
+  color: var(--accent-green);
   opacity: 0.5;
 }
 
@@ -369,7 +369,7 @@
   content: '\2022';
   position: absolute;
   left: 8px;
-  color: var(--accent-orange);
+  color: var(--accent-green);
   font-weight: bold;
 }
 
@@ -637,7 +637,7 @@
 .step-details {
   font-family: 'Courier New', monospace;
   font-size: 11px;
-  color: var(--accent-orange);
+  color: var(--accent-green);
   font-style: italic;
 }
 
@@ -654,7 +654,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 40px;
-  background: linear-gradient(135deg, var(--primary-beige) 0%, #2a2a2a 50%, var(--primary-beige) 100%);
+  background: linear-gradient(135deg, var(--primary-beige) 0%, var(--primary-sand) 50%, var(--primary-beige) 100%);
   border-radius: 20px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
@@ -672,7 +672,7 @@
       rgba(255, 255, 255, 0.01) 2px,
       rgba(255, 255, 255, 0.01) 4px
     ),
-    linear-gradient(135deg, var(--primary-beige) 0%, #2a2a2a 50%, var(--primary-beige) 100%);
+    linear-gradient(135deg, var(--primary-beige) 0%, var(--primary-sand) 50%, var(--primary-beige) 100%);
 }
 
 .video-container::before {
