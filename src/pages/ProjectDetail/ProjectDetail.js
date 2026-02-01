@@ -271,7 +271,7 @@ function ProjectDetail() {
       ledColor: 'brown',
       accentColor: 'terracotta',
       tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
-      description: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete, och jag fick pris och stipendium av Science Park för det. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
+      description: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
       platforms: ['Apple Watch', 'iPhone'],
       techStack: ['Swift', 'Core ML'],
       architecture: {
@@ -342,11 +342,11 @@ function ProjectDetail() {
         },
         {
           label: 'Haptisk feedback',
-          text: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunderär ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.'
+          text: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunder är ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.'
         },
         {
           label: 'Avsluta en mening',
-          text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen uppochner. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
+          text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen upp och ned. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
         }
       ],
       insights: [
@@ -355,11 +355,11 @@ function ProjectDetail() {
           items: [
             {
               label: 'Manuell träning',
-              text: 'Att lägga till nya ord kräver manuellt arbete. Träningsdata exporteras som CSV-filer som sedan används för att bygga om modellen. Det finns ingen automatisk pipeline, varje nytt tecken kräver ny träning och en ny modellversion.'
+              text: 'Modellen kan inte lära sig nya tecken på egen hand. Varje nytt ord kräver att man samlar in data, tränar om modellen och exporterar en ny version till appen. Det gör att det skalar dåligt och begränsar hur snabbt ordförrådet kan växa.'
             },
             {
               label: 'Fast fönsterstorlek',
-              text: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Fler samples ger mer precis data, men ökar också latensen, och högre samplingsfrekvens förstärker samma avvägning.'
+              text: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Problemet är att modellen inte kan veta vilket tecken som kommer, och därför inte kan anpassa hur länge den lyssnar. Fler samples ger mer precis data men gör appen långsammare, och färre samples gör appen snabbare men tappar detaljer.'
             }
           ]
         },
@@ -368,7 +368,11 @@ function ProjectDetail() {
           items: [
             {
               label: 'Fler sensorer',
-              text: 'Med en klocka på varje hand hade modellen kunnat fånga hela teckenspråksrörelser, inte bara ena handens.'
+              text: 'Apple Watch har bara gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.'
+            },
+            {
+              label: 'Automatisk träningspipeline',
+              text: 'Att träna modellen direkt på enheten skulle ta bort det manuella arbetet och göra det möjligt att lägga till nya tecken utan att bygga om appen. Jag försökte implementera detta men det visade sig inte vara möjligt med Create ML. Med ett annat AI-ramverk hade det kanske gått.'
             }
           ]
         }
@@ -891,11 +895,11 @@ function ProjectDetail() {
                 <div className="components-list">
                   {project.insights.map((section, si) => (
                     <div key={si} className="component-group">
-                      <h4 className="component-group-title" style={{color: '#9b8ab8', borderBottomColor: 'rgba(155, 138, 184, 0.2)'}}>{section.title}</h4>
+                      <h4 className="insights-group-title">{section.title}</h4>
                       <div className="feature-commits">
                         {section.items.map((item, i) => (
                           <div key={i} className="feature-commit">
-                            <div className="feature-commit-dot" style={{borderColor: '#9b8ab8'}}></div>
+                            <div className="feature-commit-dot insights-dot"></div>
                             <div className="feature-commit-content">
                               <span className="feature-commit-label">{item.label}</span>
                               <p className="feature-commit-text">{item.text}</p>

@@ -570,6 +570,21 @@
   border-bottom-color: rgba(186, 168, 212, 0.5);
 }
 
+.insights-group-title {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #9b8ab8;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(155, 138, 184, 0.2);
+}
+
+.insights-dot {
+  border-color: #9b8ab8;
+}
+
 .insights-description {
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 0.82rem;
