@@ -2,6 +2,24 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 
+const techIcons = {
+  'Apple Watch': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="12" height="14" rx="3"/><path d="M6 7H18M6 15H18"/><circle cx="12" cy="11" r="1" fill="currentColor"/><path d="M8 18V20C8 20.55 8.45 21 9 21H15C15.55 21 16 20.55 16 20V18"/></svg>,
+  'iPhone': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="1" width="14" height="22" rx="3"/><path d="M10 1.5h4" strokeWidth="2"/><path d="M9.5 20h5"/></svg>,
+  'iOS': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="1" width="14" height="22" rx="3"/><path d="M10 1.5h4" strokeWidth="2"/><path d="M9.5 20h5"/></svg>,
+  'Web': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+  'Swift': <svg className="tech-icon" viewBox="0 0 56 56" fill="currentColor"><path d="M47.06 36.66l-.004-.004c.066-.224.134-.446.191-.675 2.465-9.821-3.55-21.432-13.731-27.546 4.461 6.048 6.434 13.374 4.681 19.78-.156.571-.344 1.12-.552 1.653-.225-.148-.51-.316-.89-.527 0 0-10.127-6.252-21.103-17.312-.288-.29 5.852 8.777 12.822 16.14-3.284-1.843-12.434-8.5-18.227-13.802.712 1.187 1.558 2.33 2.489 3.43C17.573 23.932 23.882 31.5 31.44 37.314c-5.31 3.25-12.814 3.502-20.285.003a30.646 30.646 0 0 1-5.193-3.098c3.162 5.058 8.033 9.423 13.96 11.97 7.07 3.039 14.1 2.833 19.336.05l-.004.007c.024-.016.055-.032.08-.047.214-.116.428-.234.636-.358 2.516-1.306 7.485-2.63 10.152 2.559.654 1.27 2.041-5.46-3.061-11.74z"/></svg>,
+  'Create ML': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="3" y="3" width="18" height="18" rx="4"/><text x="12" y="15" textAnchor="middle" fill="currentColor" fontSize="8" fontWeight="600" fontFamily="system-ui, sans-serif">ML</text></svg>,
+  'SwiftUI': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 7v10M12 10v7M16 8v9"/></svg>,
+  'Core Data': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>,
+  'MVVM': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="7" height="5" rx="1"/><rect x="15" y="3" width="7" height="5" rx="1"/><rect x="8.5" y="16" width="7" height="5" rx="1"/><path d="M5.5 8v3h13V8M12 11v5"/></svg>,
+  'React': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>,
+  'JavaScript': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><text x="12" y="16" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="700" fontFamily="system-ui, sans-serif">JS</text></svg>,
+  'CSS3': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M7 7h10l-.5 5H9.5l.25 3L12 16l2.25-1"/></svg>,
+  'React Router': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="12" cy="6" r="3"/><path d="M12 9v3M9 15l-1.5 1.5M15 15l1.5 1.5"/></svg>,
+};
+
+const defaultIcon = <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>;
+
 function ArchitectureDiagram({ architecture }) {
   const { nodes, connections } = architecture;
   const maxCol = Math.max(...nodes.map(n => n.col));
@@ -185,6 +203,7 @@ function ProjectDetail() {
       accentColor: 'terracotta',
       tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
+      platforms: ['Apple Watch', 'iPhone'],
       techStack: ['Swift', 'Create ML'],
       architecture: {
         nodes: [
@@ -274,6 +293,7 @@ function ProjectDetail() {
       accentColor: 'rose',
       tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
+      platforms: ['Web'],
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       architecture: {
         nodes: [
@@ -347,6 +367,7 @@ function ProjectDetail() {
       accentColor: 'sand',
       tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
       description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
+      platforms: ['iOS'],
       techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
       architecture: {
         nodes: [
@@ -475,54 +496,24 @@ function ProjectDetail() {
                   <span className="about-label">PLATFORMS:</span>
                 </div>
                 <div className="about-tech-list">
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="6" y="4" width="12" height="14" rx="3" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 7H18" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M6 15H18" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="11" r="1" fill="currentColor"/>
-                      <path d="M8 18V20C8 20.5523 8.44772 21 9 21H15C15.5523 21 16 20.5523 16 20V18" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Apple Watch
-                  </div>
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M7 5H17" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M7 19H17" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
-                    </svg>
-                    iPhone
-                  </div>
+                  {project.platforms.map((platform, i) => (
+                    <div key={i} className="about-tech-badge">
+                      {techIcons[platform] || defaultIcon}
+                      {platform}
+                    </div>
+                  ))}
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
                   <span className="about-label">TECH STACK:</span>
                 </div>
                 <div className="about-tech-list">
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6 8C6 8 8 6 12 6C16 6 18 8 18 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M18 16C18 16 16 18 12 18C8 18 6 16 6 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M6 8L8 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <path d="M18 8L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Swift
-                  </div>
-                  <div className="about-tech-badge">
-                    <svg className="tech-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="6" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="6" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="12" cy="18" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <circle cx="18" cy="12" r="2" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M8 12H10" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M14 12H16" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M12 8V10" stroke="currentColor" strokeWidth="1.5"/>
-                      <path d="M12 14V16" stroke="currentColor" strokeWidth="1.5"/>
-                    </svg>
-                    Create ML
-                  </div>
+                  {project.techStack.map((tech, i) => (
+                    <div key={i} className="about-tech-badge">
+                      {techIcons[tech] || defaultIcon}
+                      {tech}
+                    </div>
+                  ))}
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
@@ -536,9 +527,9 @@ function ProjectDetail() {
 
         {/* RESULT */}
         <div className="file-section fullwidth-section">
-          <div className="file-header clickable" onClick={() => toggleSection('result')}>
-            <span className="file-icon">📼</span>
-            <span className="file-name">result.log</span>
+          <div className="file-header clickable section-result" onClick={() => toggleSection('result')}>
+            <span className="file-icon result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <span className="file-name result-name">result.log</span>
             <svg className={`section-chevron ${expandedSections.result ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -570,9 +561,9 @@ function ProjectDetail() {
 
         {/* ARCHITECTURE */}
         <div className="file-section fullwidth-section">
-          <div className="file-header clickable" onClick={() => toggleSection('architecture')}>
-            <span className="file-icon">⚙️</span>
-            <span className="file-name">architecture.sys</span>
+          <div className="file-header clickable section-architecture" onClick={() => toggleSection('architecture')}>
+            <span className="file-icon arch-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><path d="M8 5h8M5 8v6l7 2M19 8v6l-7 2"/></svg></span>
+            <span className="file-name arch-name">architecture.sys</span>
             <svg className={`section-chevron ${expandedSections.architecture ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -590,9 +581,9 @@ function ProjectDetail() {
 
         {/* COMPONENTS */}
         <div className="file-section fullwidth-section">
-          <div className="file-header clickable" onClick={() => toggleSection('components')}>
-            <span className="file-icon">🧩</span>
-            <span className="file-name">components.lib</span>
+          <div className="file-header clickable section-components" onClick={() => toggleSection('components')}>
+            <span className="file-icon comp-icon"><svg width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M10 38h10v-2c0-2.2 1.8-4 4-4s4 1.8 4 4v2h10V28h-2c-2.2 0-4-1.8-4-4s1.8-4 4-4h2V10H28v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H10v10h2c2.2 0 4 1.8 4 4s-1.8 4-4 4h-2v10z"/></svg></span>
+            <span className="file-name comp-name">components.lib</span>
             <svg className={`section-chevron ${expandedSections.components ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -619,9 +610,9 @@ function ProjectDetail() {
 
         {/* LINKS */}
         <div className="file-section fullwidth-section">
-          <div className="file-header clickable" onClick={() => toggleSection('links')}>
-            <span className="file-icon">🔗</span>
-            <span className="file-name">links.url</span>
+          <div className="file-header clickable section-links" onClick={() => toggleSection('links')}>
+            <span className="file-icon links-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+            <span className="file-name links-name">links.url</span>
             <svg className={`section-chevron ${expandedSections.links ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
