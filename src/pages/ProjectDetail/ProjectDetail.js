@@ -233,7 +233,25 @@ function ProjectDetail() {
         { title: 'Beställa i drive in', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
         { title: 'Dog mode', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
       ],
-      resultText: 'Appen kan identifiera handrörelser i realtid via Apple Watch och omvandla dem till talade ord på iPhone. Flera tecken kan utföras i följd för att bygga meningar.',
+      resultText: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
+      techDetails: [
+        {
+          label: '50 Hz motion sampling',
+          text: 'Klockan har inbyggda sensorer, en accelerometer som mäter hur handen förflyttas och ett gyroskop som mäter hur den vrids. Dessa sensorer fångar de aktuella värdena var 0.02:e sekund, vilket ger en väldigt detaljerad bild av hela rörelsen.'
+        },
+        {
+          label: 'Fixed-window segmentering (60 samples)',
+          text: 'Varje inspelning samlar in exakt 60 data samples och motsvarar ett ord. Den fasta storleken gör att modellen alltid får samma mängd data att jobba med, oavsett vilket tecken som görs.'
+        },
+        {
+          label: 'Haptisk feedback',
+          text: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunderär ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.'
+        },
+        {
+          label: 'Avsluta en mening',
+          text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen uppochner. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
+        }
+      ],
       insights: 'Den största insikten var hur mycket datainsamlingen påverkar resultatet. I första versionen samlade jag in data på ett sätt som fungerade, men som begränsade modellens förmåga att generalisera. När jag byggde om projektet från grunden fokuserade jag på att samla in mer varierad data, med fler vinklar och hastigheter, vilket gav en betydligt bättre träffsäkerhet.\n\nEn annan lärdom var att hålla allt lokalt på enheten. Genom att köra AI-modellen direkt på Apple Watch istället för att skicka data till en server blev appen snabbare och fungerar utan internetuppkoppling.',
       hasWorkflow: true,
       workflow: [
@@ -570,6 +588,32 @@ function ProjectDetail() {
                           </div>
                         )}
                       </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.features && (
+                <div className="feature-commits">
+                  {project.features.map((feature, i) => (
+                    <div key={i} className="feature-commit">
+                      <div className="feature-commit-dot"></div>
+                      <div className="feature-commit-content">
+                        <span className="feature-commit-label">{feature.label}</span>
+                        <p className="feature-commit-text">{feature.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.techDetails && (
+                <div className="feature-commits">
+                  {project.techDetails.map((detail, i) => (
+                    <div key={i} className="feature-commit">
+                      <div className="feature-commit-dot"></div>
+                      <div className="feature-commit-content">
+                        <span className="feature-commit-label">{detail.label}</span>
+                        <p className="feature-commit-text">{detail.text}</p>
                       </div>
                     </div>
                   ))}

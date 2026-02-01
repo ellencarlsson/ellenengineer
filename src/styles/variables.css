@@ -45,6 +45,7 @@
   --background-light: #38332e;
   --background-white: #403a34;
   --background-cream: #47413b;
+  --background-card: rgba(0, 0, 0, 0.15);
 
   /* Terminal / code theme - VS Code dark */
   --terminal-bg: #1e1e1e;

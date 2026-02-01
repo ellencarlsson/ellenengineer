@@ -152,7 +152,7 @@
 /* About Section */
 .about-section {
   padding: 0;
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--background-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -279,7 +279,7 @@
 .readme-box {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--background-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
@@ -674,6 +674,114 @@
   letter-spacing: 0.2px;
 }
 
+/* Feature Commits */
+.feature-commits {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.feature-commit {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+
+.feature-commit:last-child {
+  padding-bottom: 0;
+}
+
+.feature-commit:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: 0;
+  width: 1px;
+  background: rgba(138, 154, 123, 0.3);
+}
+
+.feature-commit-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-sage);
+  background: transparent;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.feature-commit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.feature-commit-label {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.3px;
+}
+
+.feature-commit-text {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.78rem;
+  color: #c8b8a4;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Tech Facts */
+.tech-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tech-fact {
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.tech-fact-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tech-fact-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-medium);
+  flex-shrink: 0;
+}
+
+.tech-fact-label {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.3px;
+}
+
+.tech-fact-text {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #c8b8a4;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
 /* Architecture Diagram */
 .arch-diagram-wrapper {
   width: 100%;
@@ -956,6 +1064,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .video-container {
@@ -964,6 +1073,9 @@
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--background-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .video-item {
@@ -975,7 +1087,7 @@
   display: block;
   font-family: 'Courier New', 'Courier', monospace;
   font-size: 0.75rem;
-  color: var(--text-medium);
+  color: var(--accent-sage);
   padding-bottom: 0.5rem;
   letter-spacing: 0.5px;
 }
@@ -996,7 +1108,7 @@
 .video-overlay {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1005,7 +1117,7 @@
 }
 
 .video-overlay:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .video-overlay:hover .play-icon {
