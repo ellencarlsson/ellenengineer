@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './CV.css';
 
+const SQL_LINES = [
+  { text: 'SELECT cv', type: 'keyword' },
+  { text: 'FROM engineers', type: 'table' },
+  { text: "WHERE name = 'Ellen Carlsson';", type: 'where' },
+];
+
 function CV() {
   const [displayedText, setDisplayedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [showCursor, setShowCursor] = useState(true);
+
   const [queryComplete, setQueryComplete] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [showCard, setShowCard] = useState(false);
-  const [skippedByUser, setSkippedByUser] = useState(false);
-
-  const sqlLines = [
-    { text: 'SELECT *', type: 'keyword' },
-    { text: 'FROM engineers', type: 'table' },
-    { text: "WHERE name = 'Ellen Carlsson';", type: 'where' },
-  ];
 
   const skipAnimation = () => {
-    const fullText = sqlLines.map(line => line.text).join('\n');
+    const fullText = SQL_LINES.map(line => line.text).join('\n');
     setDisplayedText(fullText);
-    setCurrentLineIndex(sqlLines.length);
+    setCurrentLineIndex(SQL_LINES.length);
     setQueryComplete(true);
-    setSkippedByUser(true);
-    setTimeout(() => setShowResult(true), 200);
-    setTimeout(() => setShowCard(true), 500);
+    setShowResult(true);
+    setShowCard(true);
   };
 
   useEffect(() => {
@@ -33,20 +31,13 @@ function CV() {
         skipAnimation();
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [queryComplete]);
 
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-    return () => clearInterval(cursorInterval);
-  }, []);
 
   useEffect(() => {
-    if (currentLineIndex >= sqlLines.length) {
+    if (currentLineIndex >= SQL_LINES.length) {
       if (!queryComplete) {
         setQueryComplete(true);
         setTimeout(() => setShowResult(true), 600);
@@ -55,7 +46,7 @@ function CV() {
       return;
     }
 
-    const currentLine = sqlLines[currentLineIndex];
+    const currentLine = SQL_LINES[currentLineIndex];
     const delay = 70;
 
     if (currentCharIndex < currentLine.text.length) {
@@ -74,7 +65,7 @@ function CV() {
     }
   }, [currentCharIndex, currentLineIndex, queryComplete]);
 
-  const renderSqlLine = (lineText, index) => {
+  const renderSqlLine = (lineText) => {
     if (!lineText) return <span>&nbsp;</span>;
 
     const tokens = [];
@@ -133,84 +124,96 @@ function CV() {
     return tokens;
   };
 
+  const particles = Array.from({ length: 20 }, (_, i) => {
+    const size = 1 + Math.random() * 3;
+    const duration = 6 + Math.random() * 8;
+    const delay = -(Math.random() * duration);
+    const left = Math.random() * 100;
+    const drift = -30 + Math.random() * 60;
+    return (
+      <div
+        key={i}
+        className="cv-particle"
+        style={{
+          width: size,
+          height: size,
+          left: `${left}%`,
+          bottom: `${Math.random() * 40}%`,
+          animationDuration: `${duration}s`,
+          animationDelay: `${delay}s`,
+          '--drift': `${drift}px`,
+        }}
+      />
+    );
+  });
+
   return (
     <section className="cv-page">
-      <div className="cv-container">
-        {/* SQL Terminal */}
-        <div className="sql-terminal">
-          <div className="sql-terminal-header">
-            <div className="terminal-buttons">
-              <span className="terminal-button close"></span>
-              <span className="terminal-button minimize"></span>
-              <span className="terminal-button maximize"></span>
-            </div>
-            <div className="sql-terminal-title">ellen_db — psql</div>
-          </div>
+      <div className="cv-particles">{particles}</div>
 
-          <div className="sql-terminal-body">
-            <div className="sql-prompt">
-              <span className="sql-prompt-label">ellen_db=#</span>
-              <div className="sql-code">
-                {displayedText.split('\n').map((line, index) => (
-                  <div key={index} className="sql-line">
-                    {renderSqlLine(line, index)}
-                  </div>
-                ))}
-                {!queryComplete && (
-                  <span className={`sql-cursor ${showCursor ? 'visible' : ''}`}>|</span>
-                )}
-              </div>
+      <div className="cv-layout">
+        {/* Left: SQL + buttons */}
+        <div className="cv-left">
+          <div className="sql-block">
+            <div className="sql-prompt-label">ellen_db=#</div>
+            <div className="sql-code">
+              {displayedText.split('\n').map((line, index) => (
+                <div key={index} className="sql-line">
+                  {renderSqlLine(line)}
+                </div>
+              ))}
+              {!queryComplete && (
+                <span className="sql-cursor visible">|</span>
+              )}
             </div>
 
             {showResult && (
-              <div className={`sql-result ${showResult ? 'visible' : ''}`}>
+              <div className="sql-result">
                 <span className="sql-result-check">&#10003;</span>
-                <span className="sql-result-text"> Query executed — 1 record found</span>
+                <span className="sql-result-text"> 1 record found</span>
               </div>
             )}
           </div>
 
-          <div className={`terminal-hint ${queryComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
-            <span className="hint-key">Enter</span> för att hoppa över animationen
-          </div>
-        </div>
-
-        {/* CV Card */}
-        <div className={`cv-card ${showCard ? 'visible' : ''}`}>
-          <div className="cv-image-wrapper">
-            <img
-              src="/assets/CV-image.png"
-              alt="CV - Ellen Carlsson"
-              className="cv-image"
-            />
-          </div>
-
-          <div className="cv-actions">
+          <div className={`cv-actions ${showCard ? 'visible' : ''}`}>
             <a
               href="/assets/CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="cv-button cv-button-open"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Öppna i ny flik
+              Öppna CV
             </a>
             <a
               href="/assets/CV.pdf"
               download="Ellen_Carlsson_CV.pdf"
               className="cv-button cv-button-download"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Ladda ner CV
+              Ladda ner
             </a>
+          </div>
+        </div>
+
+        {/* Right: CV image with glitch effect */}
+        <div className={`cv-right ${showCard ? 'visible' : ''}`}>
+          <div className="cv-image-wrap">
+            <div className="cv-glitch">
+              <img
+                src="/assets/CV-image.png"
+                alt="CV - Ellen Carlsson"
+                className="cv-image"
+              />
+            </div>
           </div>
         </div>
       </div>
