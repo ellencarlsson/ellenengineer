@@ -532,6 +532,54 @@
   border-bottom-color: rgba(164, 196, 219, 0.5);
 }
 
+/* Insights section accent — lavender */
+.insights-icon {
+  color: #9b8ab8;
+  opacity: 0.6;
+}
+
+.insights-name {
+  color: #9b8ab8;
+  transition: color 0.2s ease;
+}
+
+.section-insights {
+  border-bottom-color: rgba(155, 138, 184, 0.3);
+}
+
+.section-insights .section-chevron {
+  color: #9b8ab8;
+  opacity: 0.6;
+}
+
+.file-header.clickable:hover .insights-icon {
+  color: #baa8d4;
+  opacity: 1;
+}
+
+.file-header.clickable:hover .insights-name {
+  color: #baa8d4;
+}
+
+.section-insights:hover .section-chevron {
+  color: #baa8d4;
+  opacity: 1;
+}
+
+.section-insights:hover {
+  border-bottom-color: rgba(186, 168, 212, 0.5);
+}
+
+.insights-description {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #e8ddd0;
+  line-height: 1.7;
+  margin: 0;
+  letter-spacing: 0.2px;
+  white-space: pre-line;
+}
+
 /* Links section accent — rose */
 .links-icon {
   color: var(--accent-rose-warm);
@@ -903,152 +951,22 @@
   display: none;
 }
 
-/* Demo Video - Vintage TV Frame */
+/* Demo Video */
 .video-container {
   position: relative;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 40px;
-  background: linear-gradient(135deg, var(--primary-beige) 0%, var(--primary-sand) 50%, var(--primary-beige) 100%);
-  border-radius: 20px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    inset 0 2px 8px rgba(255, 255, 255, 0.1),
-    inset 0 -2px 8px rgba(0, 0, 0, 0.3),
-    0 0 0 3px var(--background-beige),
-    0 0 0 6px rgba(255, 255, 255, 0.05);
-
-  /* Subtle texture */
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.01) 2px,
-      rgba(255, 255, 255, 0.01) 4px
-    ),
-    linear-gradient(135deg, var(--primary-beige) 0%, var(--primary-sand) 50%, var(--primary-beige) 100%);
-}
-
-.video-container::before {
-  content: '';
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 12px;
-  height: 12px;
-  background: var(--status-error);
-  border-radius: 50%;
-  box-shadow:
-    0 0 10px var(--status-error),
-    inset 0 1px 2px rgba(255, 255, 255, 0.5);
-  animation: pulse 2s infinite;
-  z-index: 2;
-}
-
-/* TV Screen Bezel */
-.video-container::after {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
-  border: 8px solid var(--primary-beige);
-  border-radius: 15px;
-  box-shadow:
-    inset 0 0 20px rgba(0, 0, 0, 0.8),
-    inset 0 4px 8px rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .demo-video {
-  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: 10px;
   border: none;
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(var(--accent-terracotta-rgb), 0.1);
-  z-index: 0;
-}
-
-/* TV Stand - Only on video section */
-.file-content:has(.video-container) {
-  position: relative;
-}
-
-.file-content:has(.video-container)::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 20px;
-  background: linear-gradient(to bottom, var(--primary-beige), var(--background-beige));
-  border-radius: 0 0 10px 10px;
-  box-shadow:
-    0 5px 15px rgba(0, 0, 0, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* Control Knobs */
-.video-container .tv-controls {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  display: flex;
-  gap: 15px;
-  z-index: 2;
-}
-
-.video-container .tv-knob {
-  width: 24px;
-  height: 24px;
-  background: radial-gradient(circle at 30% 30%, #444444, #222222);
-  border-radius: 50%;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.4),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  position: relative;
-}
-
-.video-container .tv-knob::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 1px;
-}
-
-/* Screen scanlines effect */
-.demo-video::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.05) 0px,
-    rgba(0, 0, 0, 0.05) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-  pointer-events: none;
-  z-index: 1;
-  border-radius: 10px;
-  opacity: 0.3;
+  display: block;
 }
 
 /* Error Container */

@@ -8,7 +8,7 @@ const techIcons = {
   'iOS': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="1" width="14" height="22" rx="3"/><path d="M10 1.5h4" strokeWidth="2"/><path d="M9.5 20h5"/></svg>,
   'Web': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
   'Swift': <svg className="tech-icon" viewBox="0 0 56 56" fill="currentColor"><path d="M47.06 36.66l-.004-.004c.066-.224.134-.446.191-.675 2.465-9.821-3.55-21.432-13.731-27.546 4.461 6.048 6.434 13.374 4.681 19.78-.156.571-.344 1.12-.552 1.653-.225-.148-.51-.316-.89-.527 0 0-10.127-6.252-21.103-17.312-.288-.29 5.852 8.777 12.822 16.14-3.284-1.843-12.434-8.5-18.227-13.802.712 1.187 1.558 2.33 2.489 3.43C17.573 23.932 23.882 31.5 31.44 37.314c-5.31 3.25-12.814 3.502-20.285.003a30.646 30.646 0 0 1-5.193-3.098c3.162 5.058 8.033 9.423 13.96 11.97 7.07 3.039 14.1 2.833 19.336.05l-.004.007c.024-.016.055-.032.08-.047.214-.116.428-.234.636-.358 2.516-1.306 7.485-2.63 10.152 2.559.654 1.27 2.041-5.46-3.061-11.74z"/></svg>,
-  'Create ML': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="3" y="3" width="18" height="18" rx="4"/><text x="12" y="15" textAnchor="middle" fill="currentColor" fontSize="8" fontWeight="600" fontFamily="system-ui, sans-serif">ML</text></svg>,
+  'Create ML': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"><rect x="3" y="3" width="18" height="18" rx="4"/><text x="12" y="15" textAnchor="middle" fill="currentColor" fontSize="8" fontWeight="400" fontFamily="system-ui, sans-serif">ML</text></svg>,
   'SwiftUI': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 7v10M12 10v7M16 8v9"/></svg>,
   'Core Data': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>,
   'MVVM': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="7" height="5" rx="1"/><rect x="15" y="3" width="7" height="5" rx="1"/><rect x="8.5" y="16" width="7" height="5" rx="1"/><path d="M5.5 8v3h13V8M12 11v5"/></svg>,
@@ -179,6 +179,7 @@ function ProjectDetail() {
     result: false,
     architecture: false,
     components: false,
+    insights: false,
     links: false
   });
 
@@ -190,19 +191,19 @@ function ProjectDetail() {
   };
 
   const projects = {
-    'slr-2024': {
-      id: 'slr-2024',
+    'signtalker': {
+      id: 'signtalker',
       model: 'SEAGATE ST3847',
       label: 'SIGN-LANGUAGE-2024',
       name: 'Sign Talker',
-      year: '2024',
+      year: '2024 – 2025',
       capacity: '847 MB',
       interface: 'SCSI',
       status: 'VERIFIED',
       ledColor: 'brown',
       accentColor: 'terracotta',
       tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
-      description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
+      description: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete, och jag fick pris och stipendium av Science Park för det. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
       platforms: ['Apple Watch', 'iPhone'],
       techStack: ['Swift', 'Create ML'],
       architecture: {
@@ -228,6 +229,7 @@ function ProjectDetail() {
       image: null,
       demoVideo: 'https://www.youtube.com/embed/RrvsNtiPFXo',
       resultText: 'Appen kan identifiera handrörelser i realtid via Apple Watch och omvandla dem till talade ord på iPhone. Flera tecken kan utföras i följd för att bygga meningar.',
+      insights: 'Den största insikten var hur mycket datainsamlingen påverkar resultatet. I första versionen samlade jag in data på ett sätt som fungerade, men som begränsade modellens förmåga att generalisera. När jag byggde om projektet från grunden fokuserade jag på att samla in mer varierad data, med fler vinklar och hastigheter, vilket gav en betydligt bättre träffsäkerhet.\n\nEn annan lärdom var att hålla allt lokalt på enheten. Genom att köra AI-modellen direkt på Apple Watch istället för att skicka data till en server blev appen snabbare och fungerar utan internetuppkoppling.',
       hasWorkflow: true,
       workflow: [
         {
@@ -318,6 +320,7 @@ function ProjectDetail() {
       image: null,
       demoVideo: null,
       resultText: 'Hemsidan är live på ellenengineer.se med en interaktiv terminal-landningssida, nätverksbaserad projektnavigering och detaljerade projektsidor med expanderbara sektioner.',
+      insights: 'Det här projektet blev mitt labb för att testa idéer. Varje ny teknik jag ville prova byggde jag in i portfolion istället för att göra ett separat testprojekt. Det tvingade mig att förstå saker på riktigt, för allting behövde fungera ihop.\n\nJag lärde mig också hur mycket design spelar roll. Kod som fungerar tekniskt men ser tråkig ut ger inget intryck. Att hitta balansen mellan kreativitet och användbarhet var en av de svåraste delarna.',
       hasWorkflow: true,
       workflow: [
         {
@@ -391,6 +394,7 @@ function ProjectDetail() {
       image: null,
       demoVideo: null,
       resultText: 'En fullt fungerande offline iOS-app som automatiskt skapar optimerade arbetsscheman. Appen respekterar arbetsrättsliga regler (max 4h utan rast, minst 7h vila, max 32h per 48h) och fördelar pass rättvist med ett poängsystem.',
+      insights: 'Den största utmaningen var att bygga en schemaläggare som respekterar alla regler samtidigt. Det räcker inte att bara hitta en lösning som fungerar, den måste också vara rättvis. Jag upptäckte att en enkel tilldelning ofta gav ojämn fördelning, så jag la till ett optimeringssteg som testar byten mellan soldater för att jämna ut belastningen.\n\nAtt bygga appen helt offline var ett medvetet val. I militära miljöer kan man inte räkna med internet, så allt måste fungera lokalt. Det begränsade valen av teknik men tvingade fram en robust lösning.',
       hasWorkflow: true,
       workflow: [
         {
@@ -549,10 +553,6 @@ function ProjectDetail() {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
-                  <div className="tv-controls">
-                    <div className="tv-knob"></div>
-                    <div className="tv-knob"></div>
-                  </div>
                 </div>
               )}
             </div>
@@ -607,6 +607,24 @@ function ProjectDetail() {
             </div>
           </div>
         </div>
+
+        {/* INSIGHTS */}
+        {project.insights && (
+        <div className="file-section fullwidth-section">
+          <div className="file-header clickable section-insights" onClick={() => toggleSection('insights')}>
+            <span className="file-icon insights-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
+            <span className="file-name insights-name">insights.dev</span>
+            <svg className={`section-chevron ${expandedSections.insights ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className={`section-body ${expandedSections.insights ? 'expanded' : ''}`}>
+            <div className="section-content">
+              <p className="insights-description">{project.insights}</p>
+            </div>
+          </div>
+        </div>
+        )}
 
         {/* LINKS */}
         <div className="file-section fullwidth-section">

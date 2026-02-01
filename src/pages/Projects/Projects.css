@@ -50,8 +50,8 @@
   transition: all 0.3s ease;
 }
 
-.connection-line.active[data-from="slr-2024"],
-.connection-line.active[data-to="slr-2024"] {
+.connection-line.active[data-from="signtalker"],
+.connection-line.active[data-to="signtalker"] {
   stroke: var(--accent-sage);
 }
 
@@ -78,7 +78,7 @@
   filter: drop-shadow(0 0 2px rgba(var(--accent-sand-rgb), 0.5));
 }
 
-.data-packet[data-from="slr-2024"] {
+.data-packet[data-from="signtalker"] {
   fill: var(--accent-sage);
   filter: drop-shadow(0 0 2px rgba(var(--accent-sage-rgb), 0.5));
 }
