@@ -417,6 +417,9 @@
 
 .file-icon {
   font-size: 20px;
+  color: var(--text-medium);
+  display: flex;
+  align-items: center;
 }
 
 .file-name {
@@ -425,6 +428,44 @@
   font-weight: 600;
   color: var(--text-medium);
   letter-spacing: 0.8px;
+}
+
+/* Result section accent */
+.result-icon {
+  color: var(--accent-sage);
+  opacity: 0.6;
+}
+
+.result-name {
+  color: var(--accent-sage);
+  transition: color 0.2s ease;
+}
+
+.section-result {
+  border-bottom-color: rgba(138, 154, 123, 0.3);
+}
+
+.section-result .section-chevron {
+  color: var(--accent-sage);
+  opacity: 0.6;
+}
+
+.file-header.clickable:hover .result-icon {
+  color: #b8d4a0;
+  opacity: 1;
+}
+
+.file-header.clickable:hover .result-name {
+  color: #b8d4a0;
+}
+
+.section-result:hover .section-chevron {
+  color: #b8d4a0;
+  opacity: 1;
+}
+
+.section-result:hover {
+  border-bottom-color: rgba(184, 212, 160, 0.5);
 }
 
 /* Chevron Arrow */

@@ -536,9 +536,9 @@ function ProjectDetail() {
 
         {/* RESULT */}
         <div className="file-section fullwidth-section">
-          <div className="file-header clickable" onClick={() => toggleSection('result')}>
-            <span className="file-icon">📼</span>
-            <span className="file-name">result.log</span>
+          <div className="file-header clickable section-result" onClick={() => toggleSection('result')}>
+            <span className="file-icon result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <span className="file-name result-name">result.log</span>
             <svg className={`section-chevron ${expandedSections.result ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -571,7 +571,7 @@ function ProjectDetail() {
         {/* ARCHITECTURE */}
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('architecture')}>
-            <span className="file-icon">⚙️</span>
+            <span className="file-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="16" y="2" width="6" height="6" rx="1"/><rect x="9" y="16" width="6" height="6" rx="1"/><path d="M8 5h8M5 8v6l7 2M19 8v6l-7 2"/></svg></span>
             <span className="file-name">architecture.sys</span>
             <svg className={`section-chevron ${expandedSections.architecture ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -591,7 +591,7 @@ function ProjectDetail() {
         {/* COMPONENTS */}
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('components')}>
-            <span className="file-icon">🧩</span>
+            <span className="file-icon"><svg width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M10 38h10v-2c0-2.2 1.8-4 4-4s4 1.8 4 4v2h10V28h-2c-2.2 0-4-1.8-4-4s1.8-4 4-4h2V10H28v2c0 2.2-1.8 4-4 4s-4-1.8-4-4v-2H10v10h2c2.2 0 4 1.8 4 4s-1.8 4-4 4h-2v10z"/></svg></span>
             <span className="file-name">components.lib</span>
             <svg className={`section-chevron ${expandedSections.components ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -620,7 +620,7 @@ function ProjectDetail() {
         {/* LINKS */}
         <div className="file-section fullwidth-section">
           <div className="file-header clickable" onClick={() => toggleSection('links')}>
-            <span className="file-icon">🔗</span>
+            <span className="file-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
             <span className="file-name">links.url</span>
             <svg className={`section-chevron ${expandedSections.links ? 'rotated' : ''}`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
