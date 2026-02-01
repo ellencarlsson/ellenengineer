@@ -478,6 +478,82 @@
   letter-spacing: 0.2px;
 }
 
+/* Pipeline (COMPONENTS section) */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+}
+
+.pipeline-step {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pipeline-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.pipeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-terracotta);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.pipeline-line {
+  display: none;
+}
+
+.pipeline-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.pipeline-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pipeline-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pipeline-title {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
+}
+
+.pipeline-desc {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+
+.pipeline-detail {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+}
+
 /* Tech Badges (COMPONENTS section) */
 .tech-badges {
   display: flex;

@@ -32,6 +32,7 @@ function ProjectDetail() {
       tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI. Genom att läsa av klockans rörelsesensorer kan applikationen känna igen specifika rörelsemönster och koppla dem till betydelse.\n\nNär en rörelse utförs skickas datan till en tränad AI-modell som försöker avgöra vilket ord som menas. Resultatet skickas sedan vidare till en iPhone, där det visas och kan läsas upp som tal. Flera rörelser kan utföras i följd, vilket gör det möjligt att bygga hela meningar.\n\nProjektet började som ett examensarbete, men efter examen valde jag att göra om det från grunden. Jag hade upptäckt många sätt att utveckla det bättre på och ville utforska dessa möjligheter vidare. Bland annat sättet som data samlades in på var en av grejerna jag insåg kunde göras mycket bättre.\n\nProjektet är ett experiment om hur teknik och AI kan användas för att lösa problem som teckenspråkstalande personer upplever i vardagen.',
       techStack: ['Swift', 'Create ML'],
+      architecture: null,
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
@@ -103,6 +104,7 @@ function ProjectDetail() {
       tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
+      architecture: null,
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
       image: null,
@@ -157,6 +159,7 @@ function ProjectDetail() {
       tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
       description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
       techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
+      architecture: null,
       github: 'https://github.com/ellencarlsson/postschema',
       demo: null,
       image: null,
@@ -371,21 +374,11 @@ function ProjectDetail() {
           </div>
           <div className={`section-body ${expandedSections.architecture ? 'expanded' : ''}`}>
             <div className="section-content">
-              <div className="system-diagram">
-                {project.workflow.map((step) => (
-                  <div key={step.step} className="workflow-step">
-                    <div className="step-card">
-                      <div className="step-number">STEP {step.step}</div>
-                      <div className="step-icon">{step.icon}</div>
-                      <div className="step-content">
-                        <div className="step-title">{step.title}</div>
-                        <div className="step-description">{step.description}</div>
-                        <div className="step-details">{step.details}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {project.architecture ? (
+                <p className="architecture-description">{project.architecture}</p>
+              ) : (
+                <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
+              )}
             </div>
           </div>
         </div>
@@ -401,9 +394,18 @@ function ProjectDetail() {
           </div>
           <div className={`section-body ${expandedSections.components ? 'expanded' : ''}`}>
             <div className="section-content">
-              <div className="tech-badges">
-                {project.techStack.map((tech, i) => (
-                  <span key={i} className="tech-badge">{tech}</span>
+              <div className="pipeline">
+                {project.workflow.map((step, i) => (
+                  <div key={step.step} className="pipeline-step">
+                    <div className="pipeline-content">
+                      <span className="pipeline-icon">{step.icon}</span>
+                      <div className="pipeline-text">
+                        <span className="pipeline-title">{step.title}</span>
+                        <span className="pipeline-desc">{step.description}</span>
+                        <span className="pipeline-detail">{step.details}</span>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
