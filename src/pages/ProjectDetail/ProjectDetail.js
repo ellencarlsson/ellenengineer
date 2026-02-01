@@ -25,22 +25,23 @@ function ArchitectureDiagram({ architecture }) {
   const maxCol = Math.max(...nodes.map(n => n.col));
   const maxRow = Math.max(...nodes.map(n => n.row));
 
-  const nodeWidth = 150;
-  const nodeHeight = 50;
-  const gapX = 120;
-  const gapY = 100;
-  const padding = 50;
-  const groupPad = 20;
+  const nodeWidth = 480;
+  const nodeHeight = 140;
+  const gapX = 200;
+  const gapY = 180;
+  const padding = 80;
+  const groupPad = 35;
 
   const svgWidth = (maxCol + 1) * (nodeWidth + gapX) - gapX + padding * 2;
   const svgHeight = (maxRow + 1) * (nodeHeight + gapY) - gapY + padding * 2 + (groups ? 30 : 0);
 
   const getNodePos = (id) => {
     const node = nodes.find(n => n.id === id);
-    if (!node) return { x: 0, y: 0, cx: 0, cy: 0 };
+    if (!node) return { x: 0, y: 0, cx: 0, cy: 0, w: nodeWidth };
     const x = padding + node.col * (nodeWidth + gapX);
     const y = (groups ? 30 : 0) + padding + node.row * (nodeHeight + gapY);
-    return { x, y, cx: x + nodeWidth / 2, cy: y + nodeHeight / 2 };
+    const w = node.colSpan ? nodeWidth * node.colSpan + gapX * (node.colSpan - 1) : nodeWidth;
+    return { x, y, cx: x + w / 2, cy: y + nodeHeight / 2, w };
   };
 
   // Find bidirectional pairs to merge them
@@ -60,11 +61,11 @@ function ArchitectureDiagram({ architecture }) {
     <div className="arch-diagram-wrapper">
       <svg className="arch-diagram" viewBox={`0 0 ${svgWidth} ${svgHeight}`} preserveAspectRatio="xMidYMid meet">
         <defs>
-          <marker id="arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" fill="rgba(255,255,255,0.5)" />
+          <marker id="arrow" markerWidth="14" markerHeight="10" refX="14" refY="5" orient="auto">
+            <polygon points="0 0, 14 5, 0 10" fill="rgba(255,255,255,0.5)" />
           </marker>
-          <marker id="arrow-reverse" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto">
-            <polygon points="7 0, 0 2.5, 7 5" fill="rgba(255,255,255,0.5)" />
+          <marker id="arrow-reverse" markerWidth="14" markerHeight="10" refX="0" refY="5" orient="auto">
+            <polygon points="14 0, 0 5, 14 10" fill="rgba(255,255,255,0.5)" />
           </marker>
         </defs>
 
@@ -72,7 +73,7 @@ function ArchitectureDiagram({ architecture }) {
           const groupNodes = nodes.filter(n => group.nodeIds.includes(n.id));
           const positions = groupNodes.map(n => getNodePos(n.id));
           const minX = Math.min(...positions.map(p => p.x)) - groupPad;
-          const minY = Math.min(...positions.map(p => p.y)) - groupPad - 20;
+          const minY = Math.min(...positions.map(p => p.y)) - groupPad - 60;
           const maxX = Math.max(...positions.map(p => p.x)) + nodeWidth + groupPad;
           const maxY = Math.max(...positions.map(p => p.y)) + nodeHeight + groupPad;
           return (
@@ -82,17 +83,17 @@ function ArchitectureDiagram({ architecture }) {
                 width={maxX - minX} height={maxY - minY}
                 rx="10"
                 fill="none"
-                stroke="rgba(212, 165, 116, 0.2)"
-                strokeWidth="1"
-                strokeDasharray="6 3"
+                stroke="rgba(212, 165, 116, 0.4)"
+                strokeWidth="2"
+                strokeDasharray="8 4"
               />
               <text
-                x={minX + 10} y={minY + 14}
+                x={minX + 15} y={minY + 38}
                 fill="rgba(212, 165, 116, 0.6)"
-                fontSize="11"
+                fontSize="30"
                 fontFamily="'Courier New', monospace"
                 fontWeight="600"
-                letterSpacing="1"
+                letterSpacing="2"
               >{group.label}</text>
             </g>
           );
@@ -117,10 +118,12 @@ function ArchitectureDiagram({ architecture }) {
           const nx = dx / dist;
           const ny = dy / dist;
 
-          const startX = from.cx + nx * (nodeWidth / 2 + 6);
-          const startY = from.cy + ny * (nodeHeight / 2 + 6);
-          const endX = to.cx - nx * (nodeWidth / 2 + 6);
-          const endY = to.cy - ny * (nodeHeight / 2 + 6);
+          const fromHalfW = (from.w || nodeWidth) / 2;
+          const toHalfW = (to.w || nodeWidth) / 2;
+          const startX = from.cx + nx * (fromHalfW + 8);
+          const startY = from.cy + ny * (nodeHeight / 2 + 8);
+          const endX = to.cx - nx * (toHalfW + 8);
+          const endY = to.cy - ny * (nodeHeight / 2 + 8);
 
           const midX = (startX + endX) / 2;
           const midY = (startY + endY) / 2;
@@ -130,34 +133,34 @@ function ArchitectureDiagram({ architecture }) {
           const perpY = nx;
 
           if (isBi) {
-            const offset = 12;
+            const offset = 20;
             return (
               <g key={i}>
                 <line
                   x1={startX - perpX * offset} y1={startY - perpY * offset}
                   x2={endX - perpX * offset} y2={endY - perpY * offset}
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="1"
+                  stroke="rgba(255,255,255,0.25)"
+                  strokeWidth="2"
                   markerEnd="url(#arrow)"
                 />
                 <text
-                  x={midX - perpX * (offset + 12)} y={midY - perpY * (offset + 12) - 2}
-                  textAnchor="middle" fill="rgba(255,255,255,0.4)"
-                  fontSize="9" fontFamily="'Courier New', monospace"
+                  x={midX - perpX * (offset + 18)} y={midY - perpY * (offset + 18) - 3}
+                  textAnchor="middle" fill="rgba(255,255,255,0.45)"
+                  fontSize="16" fontFamily="'Courier New', monospace"
                 >{conn.label}</text>
                 {reverse && (
                   <>
                     <line
                       x1={endX + perpX * offset} y1={endY + perpY * offset}
                       x2={startX + perpX * offset} y2={startY + perpY * offset}
-                      stroke="rgba(255,255,255,0.2)"
-                      strokeWidth="1"
+                      stroke="rgba(255,255,255,0.25)"
+                      strokeWidth="2"
                       markerEnd="url(#arrow)"
                     />
                     <text
-                      x={midX + perpX * (offset + 12)} y={midY + perpY * (offset + 12) + 10}
-                      textAnchor="middle" fill="rgba(255,255,255,0.4)"
-                      fontSize="9" fontFamily="'Courier New', monospace"
+                      x={midX + perpX * (offset + 18)} y={midY + perpY * (offset + 18) + 16}
+                      textAnchor="middle" fill="rgba(255,255,255,0.45)"
+                      fontSize="16" fontFamily="'Courier New', monospace"
                     >{reverse.label}</text>
                   </>
                 )}
@@ -169,15 +172,15 @@ function ArchitectureDiagram({ architecture }) {
             <g key={i}>
               <line
                 x1={startX} y1={startY} x2={endX} y2={endY}
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth="1"
+                stroke="rgba(255,255,255,0.25)"
+                strokeWidth="2"
                 markerEnd="url(#arrow)"
               />
               {conn.label && (
                 <text
-                  x={midX + perpX * 12} y={midY + perpY * 12 - 2}
-                  textAnchor="middle" fill="rgba(255,255,255,0.4)"
-                  fontSize="9" fontFamily="'Courier New', monospace"
+                  x={midX + perpX * 18} y={midY + perpY * 18 - 3}
+                  textAnchor="middle" fill="rgba(255,255,255,0.45)"
+                  fontSize="16" fontFamily="'Courier New', monospace"
                 >{conn.label}</text>
               )}
             </g>
@@ -186,24 +189,25 @@ function ArchitectureDiagram({ architecture }) {
 
         {nodes.map((node) => {
           const { x, y } = getNodePos(node.id);
+          const w = node.colSpan ? nodeWidth * node.colSpan + gapX * (node.colSpan - 1) : nodeWidth;
           return (
             <g key={node.id}>
               <rect
                 x={x} y={y}
-                width={nodeWidth} height={nodeHeight}
-                rx="6"
+                width={w} height={nodeHeight}
+                rx="10"
                 fill="rgba(0,0,0,0.4)"
                 stroke="rgba(212, 165, 116, 0.25)"
-                strokeWidth="1"
+                strokeWidth="2"
               />
               <text
-                x={x + nodeWidth / 2}
-                y={y + nodeHeight / 2 + 5}
+                x={x + w / 2}
+                y={y + nodeHeight / 2 + 7}
                 textAnchor="middle"
                 fill="rgba(255,255,255,0.85)"
-                fontSize="14"
+                fontSize="40"
                 fontFamily="'Courier New', monospace"
-                fontWeight="600"
+                fontWeight="400"
                 letterSpacing="0.5"
               >{node.label}</text>
             </g>
@@ -280,7 +284,8 @@ function ProjectDetail() {
           { from: 'wc', to: 'iphone-vm', label: 'Detected word' },
           { from: 'wc', to: 'watch-vm', label: 'Send signal' },
           { from: 'watch-vm', to: 'wc', label: 'Detected word' },
-          // iPhone: Logic → UI + Services
+          // iPhone: View ↔ Logic
+          { from: 'iphone-view', to: 'iphone-vm', label: 'Tap to detect' },
           { from: 'iphone-vm', to: 'iphone-view', label: 'Display' },
           { from: 'iphone-vm', to: 'tts', label: 'Speak' },
         ],
