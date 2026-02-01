@@ -51,7 +51,8 @@
   max-width: 1000px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 60px;
   gap: var(--spacing-xl);
   position: relative;
   z-index: 10;
@@ -68,6 +69,7 @@
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 15px;
   line-height: 1.9;
+  min-height: 140px;
 }
 
 .sql-prompt-label {
