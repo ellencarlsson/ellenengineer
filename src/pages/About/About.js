@@ -180,12 +180,25 @@ function About() {
     <section id="about" className="about-page">
       <div className="ambient-particles" ref={particlesRef}></div>
 
+      <div className="about-ascii">{`
+        ┌─────────────┐
+   ─────┤   EC-2026    ├─────
+   ─────┤  engineer.h  ├─────
+        └──────┬──────┘
+               │
+          ┌────┴────┐
+          │ ░░░░░░░ │
+          │ ░ DATA ░ │
+          │ ░░░░░░░ │
+          └─────────┘
+      `}</div>
+
       <div className="about-main">
-        <div className={`card-layout${m.image ? ' has-image' : ''}`} key={active}>
+        <div className={`card-layout${m.image ? ' has-image' : ''}`}>
           <div className="card-text">
             <div className="card-eyebrow">
               <span className="card-chip">{m.label}</span>
-              <span className="card-loc">{m.location}</span>
+              <span className="card-loc">&#x1F4CD; {m.location}</span>
             </div>
             <h1 className="card-year">{m.year}</h1>
             <p className="card-desc">
@@ -233,6 +246,9 @@ function About() {
               <div className="tl-sublabel">{ms.label}</div>
             </button>
           ))}
+        </div>
+        <div className="timeline-hint">
+          Använd <span className="timeline-hint-key">◀</span> <span className="timeline-hint-key">▶</span> för att navigera
         </div>
       </div>
     </section>

@@ -1,32 +1,67 @@
-/* Dark Engineer Theme */
+/* Warm Terminal Theme — Terracotta + Dusty Rose + Sand */
 :root {
-  /* Primary colors - Dark tones */
-  --primary-beige: #1a1a1a;
-  --primary-sand: #252525;
-  --primary-brown: #555555;
-  --primary-dark-brown: #f0f0f0;
+  /* Primary colors - Warm dark tones */
+  --primary-beige: #1e1a18;
+  --primary-sand: #2a2420;
+  --primary-brown: #8c7a6b;
+  --primary-dark-brown: #f0e6d8;
 
   /* Accent colors */
-  --accent-rose: #f5a161;
-  --accent-pink: #c4785a;
-  --accent-mauve: #888888;
-  --accent-burgundy: #e8823f;
+  --accent-rose: #d4847c;
+  --accent-pink: #c4635a;
+  --accent-mauve: #a89080;
+  --accent-burgundy: #b85c4f;
 
-  /* Orange accent */
-  --accent-orange: #e8823f;
-  --accent-orange-light: #f5a161;
+  /* Terracotta accent (primary — commands, links, keywords, interactive) */
+  --accent-terracotta: #e8723a;
+  --accent-terracotta-light: #f0955e;
 
-  /* Text colors */
-  --text-dark: #f0f0f0;
-  --text-medium: #999999;
-  --text-light: #666666;
-  --text-white: #ffffff;
+  /* Dusty rose accent (secondary — decorative, glows, highlights) */
+  --accent-rose-warm: #d4847c;
+  --accent-rose-light: #e0a59e;
 
-  /* Backgrounds */
-  --background-beige: #0f0f0f;
-  --background-light: #141414;
-  --background-white: #1a1a1a;
-  --background-cream: #1e1e1e;
+  /* RGB channels for opacity variants */
+  --accent-rose-warm-rgb: 212, 132, 124;
+  --accent-rose-light-rgb: 224, 165, 158;
+  --accent-terracotta-rgb: 232, 114, 58;
+  --accent-pink-rgb: 196, 99, 90;
+
+  /* Sand / gold highlight */
+  --accent-sand: #d4a574;
+  --accent-sand-rgb: 212, 165, 116;
+
+  /* Text colors - Warm off-white */
+  --text-dark: #f0e6d8;
+  --text-medium: #a89080;
+  --text-light: #7a6b5e;
+  --text-white: #fff8f0;
+
+  /* Backgrounds - Warm dark */
+  --background-beige: #272320;
+  --background-light: #2e2a26;
+  --background-white: #35302b;
+  --background-cream: #3c3631;
+
+  /* Terminal / code theme - VS Code dark */
+  --terminal-bg: #1e1e1e;
+  --terminal-bg-dark: #181818;
+  --terminal-header: #2d2d2d;
+  --terminal-text: #d4d4d4;
+  --terminal-text-muted: #808080;
+  --terminal-border: #404040;
+
+  /* macOS window buttons */
+  --btn-close: #ff5f57;
+  --btn-minimize: #febc2e;
+  --btn-maximize: #28c840;
+
+  /* Status / semantic */
+  --status-success: #7ec87e;
+  --status-error: #e05555;
+  --status-info: #d4a574;
+
+  /* Light accent */
+  --warm-peach: #f0955e;
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);

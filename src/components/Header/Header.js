@@ -29,34 +29,34 @@ function Header() {
     <header className={`header ${isHidden ? 'header-hidden' : ''}`}>
       <div className="header-container">
         <div className="header-left">
-          <NavLink to="/" className="nav-link">EC</NavLink>
-          <nav className="nav">
-            <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Projekt
-            </NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Om Mig
-            </NavLink>
-          </nav>
+          <div className="header-left-pill">
+            <NavLink to="/" className="nav-link">EC</NavLink>
+            <nav className="nav">
+              <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Projekt
+              </NavLink>
+              <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                Om Mig
+              </NavLink>
+            </nav>
+          </div>
         </div>
 
         <div className="header-center">
           <div className="header-title">
-            <h1 className="name-first">Ellen</h1>
+            <h1 className="name-first glitch" data-text="Ellen">Ellen</h1>
             <div className="title-row">
-              <p className="header-subtitle">Engineer </p>
-              <h1 className="name-last">Carlsson</h1>
+              <p className="header-subtitle glitch" data-text="Engineer">Engineer</p>
+              <h1 className="name-last glitch" data-text="Carlsson">Carlsson</h1>
             </div>
           </div>
         </div>
 
         <div className="header-right">
-          <div className="nav-pill">
+          <div className="header-right-pill">
             <NavLink to="/cv" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               CV
             </NavLink>
-          </div>
-          <div className="nav-pill">
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               Kontakta mig
             </NavLink>

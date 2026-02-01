@@ -155,7 +155,7 @@ function CV() {
         {/* Left: SQL + buttons */}
         <div className="cv-left">
           <div className="sql-block">
-            <div className="sql-prompt-label">ellen_db=#</div>
+            <div className="sql-prompt-label">ellen=#</div>
             <div className="sql-code">
               {displayedText.split('\n').map((line, index) => (
                 <div key={index} className="sql-line">
