@@ -169,7 +169,7 @@ function ArchitectureDiagram({ architecture }) {
                 />
                 <SvgLabel
                   x={midX - perpX * labelOffset} y={midY - perpY * labelOffset}
-                  anchor={anchor1} fill="rgba(255,255,255,0.45)" fontSize={28}
+                  anchor={anchor1} fill="rgba(255,255,255,0.7)" fontSize={28}
                 >{conn.label}</SvgLabel>
                 {reverse && (
                   <>
@@ -182,7 +182,7 @@ function ArchitectureDiagram({ architecture }) {
                     />
                     <SvgLabel
                       x={midX + perpX * labelOffset} y={midY + perpY * labelOffset}
-                      anchor={anchor2} fill="rgba(255,255,255,0.45)" fontSize={28}
+                      anchor={anchor2} fill="rgba(255,255,255,0.7)" fontSize={28}
                     >{reverse.label}</SvgLabel>
                   </>
                 )}
@@ -202,7 +202,7 @@ function ArchitectureDiagram({ architecture }) {
                 <SvgLabel
                   x={midX + perpX * 30} y={midY + perpY * 30}
                   anchor={Math.abs(perpX) > 0.5 ? (perpX > 0 ? 'start' : 'end') : 'middle'}
-                  fill="rgba(255,255,255,0.45)" fontSize={28}
+                  fill="rgba(255,255,255,0.7)" fontSize={28}
                 >{conn.label}</SvgLabel>
               )}
             </g>
@@ -322,9 +322,9 @@ function ProjectDetail() {
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideos: [
-        { title: 'Introduktion', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
-        { title: 'Beställa i drive in', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
-        { title: 'Dog mode', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Presentation', description: 'Introduktion till projektet och hur appen fungerar', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Drive in', description: 'Beställer mat på McDonald\'s med hjälp av klockan', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Dog mode', description: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
       ],
       resultText: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
       techDetails: [
@@ -761,6 +761,7 @@ function ProjectDetail() {
                         )}
                       </div>
                       </div>
+                      {video.description && <span className="video-description">{video.description}</span>}
                     </div>
                   ))}
                 </div>
