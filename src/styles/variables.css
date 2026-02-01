@@ -37,10 +37,10 @@
   --text-white: #fff8f0;
 
   /* Backgrounds - Warm dark */
-  --background-beige: #272320;
-  --background-light: #2e2a26;
-  --background-white: #35302b;
-  --background-cream: #3c3631;
+  --background-beige: #302b27;
+  --background-light: #38332e;
+  --background-white: #403a34;
+  --background-cream: #47413b;
 
   /* Terminal / code theme - VS Code dark */
   --terminal-bg: #1e1e1e;

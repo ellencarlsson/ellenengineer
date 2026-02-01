@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
+const SCATTER_POSITIONS = [
+  { x: 25, y: 30 },
+  { x: 65, y: 25 },
+  { x: 45, y: 60 },
+  { x: 20, y: 70 },
+  { x: 75, y: 65 },
+  { x: 50, y: 35 },
+  { x: 35, y: 85 },
+  { x: 80, y: 40 },
+];
+
 function Projects() {
   const navigate = useNavigate();
   const [hoveredNode, setHoveredNode] = useState(null);
@@ -17,7 +28,6 @@ function Projects() {
       shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      position: { x: 50, y: 15 },
       connectedTo: ['postschema-2025', 'portfolio-2026']
     },
     {
@@ -30,8 +40,7 @@ function Projects() {
       shortDescription: 'Offline iOS-app som automatiserar militär schemaläggning med kvalifikationsmatchning och belastningsoptimering.',
       techStack: ['Swift', 'SwiftUI', 'Core Data'],
       github: 'https://github.com/ellencarlsson/postschema',
-      position: { x: 30, y: 55 },
-      connectedTo: []
+      connectedTo: ['portfolio-2026']
     },
     {
       id: 'portfolio-2026',
@@ -44,7 +53,6 @@ function Projects() {
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
-      position: { x: 70, y: 55 },
       connectedTo: []
     }
   ];
@@ -57,11 +65,14 @@ function Projects() {
     <div className="projects-page">
       <div className="projects-network-container">
         <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             if (!project.connectedTo || project.connectedTo.length === 0) return null;
+            const pos = SCATTER_POSITIONS[index];
             return project.connectedTo.map((targetId) => {
-              const targetProject = projects.find(p => p.id === targetId);
+              const targetIndex = projects.findIndex(p => p.id === targetId);
+              const targetProject = projects[targetIndex];
               if (!targetProject) return null;
+              const targetPos = SCATTER_POSITIONS[targetIndex];
 
               return (
                 <g key={`connection-${project.id}-${targetId}`}>
@@ -69,10 +80,10 @@ function Projects() {
                     className={`connection-line ${hoveredNode === project.id || hoveredNode === targetId ? 'active' : ''}`}
                     data-from={project.id}
                     data-to={targetId}
-                    x1={`${project.position.x}%`}
-                    y1={`${project.position.y}%`}
-                    x2={`${targetProject.position.x}%`}
-                    y2={`${targetProject.position.y}%`}
+                    x1={`${pos.x}%`}
+                    y1={`${pos.y}%`}
+                    x2={`${targetPos.x}%`}
+                    y2={`${targetPos.y}%`}
                   />
                   {/* Data packet */}
                   <circle
@@ -83,7 +94,7 @@ function Projects() {
                     <animateMotion
                       dur={`${8 + Math.random() * 4}s`}
                       repeatCount="indefinite"
-                      path={`M ${project.position.x}% ${project.position.y}% L ${targetProject.position.x}% ${targetProject.position.y}%`}
+                      path={`M ${pos.x}% ${pos.y}% L ${targetPos.x}% ${targetPos.y}%`}
                     />
                   </circle>
                 </g>
@@ -93,13 +104,15 @@ function Projects() {
         </svg>
 
         <div className="nodes-container">
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const pos = SCATTER_POSITIONS[index];
+            return (
             <div
               key={project.id}
               className="project-node"
               style={{
-                left: `${project.position.x}%`,
-                top: `${project.position.y}%`,
+                left: `${pos.x}%`,
+                top: `${pos.y}%`,
                 animationDelay: `${index * 0.5}s`,
                 zIndex: 3 - index
               }}
@@ -120,6 +133,7 @@ function Projects() {
 
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
+                  <div className="node-tag">{project.platform}</div>
                   <div className="node-year">{project.year}</div>
                 </div>
               </div>
@@ -135,7 +149,8 @@ function Projects() {
                 </div>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
