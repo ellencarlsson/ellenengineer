@@ -175,6 +175,7 @@ function ArchitectureDiagram({ architecture }) {
 
 function ProjectDetail() {
   const { projectId } = useParams();
+  const [playingVideos, setPlayingVideos] = useState({});
   const [expandedSections, setExpandedSections] = useState({
     result: false,
     architecture: false,
@@ -227,7 +228,11 @@ function ProjectDetail() {
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
-      demoVideo: 'https://www.youtube.com/embed/RrvsNtiPFXo',
+      demoVideos: [
+        { title: 'Introduktion', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Beställa i drive in', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Dog mode', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+      ],
       resultText: 'Appen kan identifiera handrörelser i realtid via Apple Watch och omvandla dem till talade ord på iPhone. Flera tecken kan utföras i följd för att bygga meningar.',
       insights: 'Den största insikten var hur mycket datainsamlingen påverkar resultatet. I första versionen samlade jag in data på ett sätt som fungerade, men som begränsade modellens förmåga att generalisera. När jag byggde om projektet från grunden fokuserade jag på att samla in mer varierad data, med fler vinklar och hastigheter, vilket gav en betydligt bättre träffsäkerhet.\n\nEn annan lärdom var att hålla allt lokalt på enheten. Genom att köra AI-modellen direkt på Apple Watch istället för att skicka data till en server blev appen snabbare och fungerar utan internetuppkoppling.',
       hasWorkflow: true,
@@ -543,16 +548,31 @@ function ProjectDetail() {
               {project.resultText && (
                 <p className="result-description">{project.resultText}</p>
               )}
-              {project.demoVideo && (
-                <div className="video-container">
-                  <iframe
-                    className="demo-video"
-                    src={project.demoVideo}
-                    title="Project Demo"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+              {project.demoVideos && (
+                <div className="video-grid">
+                  {project.demoVideos.map((video, i) => (
+                    <div key={i} className="video-item">
+                      <span className="video-title">{video.title}</span>
+                      <div className="video-container">
+                      <div className="video-wrapper">
+                        {playingVideos[i] ? (
+                          <iframe
+                            className="demo-video"
+                            src={`${video.url}?autoplay=1`}
+                            title={video.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          ></iframe>
+                        ) : (
+                          <div className="video-overlay" onClick={() => setPlayingVideos(prev => ({ ...prev, [i]: true }))}>
+                            <svg className="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                          </div>
+                        )}
+                      </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
