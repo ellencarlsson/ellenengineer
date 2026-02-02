@@ -263,7 +263,7 @@ function ProjectDetail() {
       id: 'signtalker',
       model: 'SEAGATE ST3847',
       label: 'SIGN-LANGUAGE-2024',
-      name: 'Sign Talker',
+      name: 'SignTalker',
       year: '2024 – 2025',
       capacity: '847 MB',
       interface: 'SCSI',
