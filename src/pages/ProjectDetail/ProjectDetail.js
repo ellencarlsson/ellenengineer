@@ -588,7 +588,34 @@ function ProjectDetail() {
       demo: null,
       image: null,
       demoVideo: null,
-      resultText: 'En fullt fungerande offline iOS-app som automatiskt skapar optimerade arbetsscheman. Appen respekterar arbetsrättsliga regler (max 4h utan rast, minst 7h vila, max 32h per 48h) och fördelar pass rättvist med ett poängsystem.',
+      resultText: 'Man väljer tidsperiod, vilka plutoner som ska delta och vilka poster som ska täckas. Appen genererar ett schema där varje pass har rätt soldat med rätt kvalifikation, ingen jobbar för länge i sträck, och belastningen fördelas jämnt. Efteråt kan man trycka på ett pass för att se detaljer, byta soldat eller justera tiden.',
+      resultImages: [
+        { title: 'Skapa schema', src: '/images/postschema/SkapaSchema.jpeg' },
+        { title: 'Genererat schema', src: '/images/postschema/SchemaEA.jpeg' },
+        { title: 'Passinformation', src: '/images/postschema/Passinformation.jpeg' },
+      ],
+      techDetails: [
+        {
+          label: 'Tvåfas-algoritm',
+          text: 'Schemaläggaren arbetar i två steg. Först går en greedy-tilldelning igenom varje pass och väljer den bästa kandidaten baserat på kvalifikationer, vilotid och belastning. Sedan körs en lokal sökning som testar byten mellan soldater i olika pass — om ett byte ger bättre totalpoäng genomförs det.'
+        },
+        {
+          label: 'Poängsystem',
+          text: 'Varje kandidat poängsätts med fyra komponenter som viktas lika: nöjdhet, vilotid sedan senaste pass, total arbetsbelastning och sammanhängande minuter. Den med högst totalpoäng tilldelas passet. Samma poängsystem används i optimeringsfasen för att avgöra om ett byte är värt att göra.'
+        },
+        {
+          label: 'Arbetsregler',
+          text: 'Tre hårda regler som aldrig får brytas: max 4 timmar sammanhängande arbete, minst 1 timmes rast efter max sammanhängande arbete, och max 32 timmars arbete per 48-timmarsperiod. Kandidater som bryter mot någon regel filtreras bort innan poängsättningen.'
+        },
+        {
+          label: 'Grupptidsfördelning',
+          text: 'Tiden fördelas proportionellt mellan grupperna baserat på hur många kvalificerade soldater varje grupp har. En grupp med fler kvalificerade soldater tar en större del av den totala tiden, så att ingen grupp blir oproportionerligt belastad.'
+        },
+        {
+          label: 'Feedback',
+          text: 'Efter varje pass kan soldaten ge tumme upp eller tumme ner. Feedbacken påverkar nöjdhetskomponenten i poängsystemet, så att algoritmen lär sig vilka passtyper och tider som fungerar bättre för varje person.'
+        }
+      ],
       insights: 'Den största utmaningen var att bygga en schemaläggare som respekterar alla regler samtidigt. Det räcker inte att bara hitta en lösning som fungerar, den måste också vara rättvis. Jag upptäckte att en enkel tilldelning ofta gav ojämn fördelning, så jag la till ett optimeringssteg som testar byten mellan soldater för att jämna ut belastningen.\n\nAtt bygga appen helt offline var ett medvetet val. I militära miljöer kan man inte räkna med internet, så allt måste fungera lokalt. Det begränsade valen av teknik men tvingade fram en robust lösning.',
       hasWorkflow: true,
       workflow: [
@@ -762,6 +789,18 @@ function ProjectDetail() {
                       </div>
                       </div>
                       {video.description && <span className="video-description">{video.description}</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.resultImages && (
+                <div className="result-images-row">
+                  {project.resultImages.map((img, i) => (
+                    <div key={i} className="result-image-item">
+                      <span className="result-image-title">{img.title}</span>
+                      <div className="result-image-container">
+                        <img className="result-image" src={img.src} alt={img.title} />
+                      </div>
                     </div>
                   ))}
                 </div>

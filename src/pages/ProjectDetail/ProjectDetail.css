@@ -1205,6 +1205,44 @@
   letter-spacing: 0.2px;
 }
 
+.result-images-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.result-image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 180px;
+}
+
+.result-image-container {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+}
+
+.result-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.result-image-title {
+  display: block;
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-sage);
+  padding-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
 .video-wrapper {
   position: relative;
   width: 100%;
