@@ -1,7 +1,11 @@
+/**
+ * @file Terminal window on the home page with typing animation.
+ */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hero.css';
 
+/** Animated terminal that types out commands and output line by line. */
 function Hero() {
   const [completedLines, setCompletedLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -25,6 +29,7 @@ function Hero() {
     { type: 'link', text: '→ Klicka här för att se mina projekt' }
   ];
 
+  /** Skips the animation and displays all text immediately. */
   const skipAnimation = () => {
     setCompletedLines([...terminalLines]);
     setCurrentLineIndex(terminalLines.length);
@@ -32,6 +37,7 @@ function Hero() {
     setSkippedByUser(true);
   };
 
+  /** Listens for the Enter key to skip the animation. */
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'Enter' && !isComplete) {
@@ -43,6 +49,7 @@ function Hero() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete]);
 
+  /** Blinking cursor that toggles every 530 milliseconds. */
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
@@ -50,6 +57,7 @@ function Hero() {
     return () => clearInterval(cursorInterval);
   }, []);
 
+  /** Types out text character by character with different speeds for commands and output. */
   useEffect(() => {
     if (currentLineIndex >= terminalLines.length) {
       setIsComplete(true);

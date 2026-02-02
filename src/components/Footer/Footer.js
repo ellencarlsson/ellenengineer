@@ -1,7 +1,11 @@
+/**
+ * @file Footer with navigation links and contact info.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
+/** Footer displayed on all pages. */
 function Footer() {
   return (
     <footer className="footer">

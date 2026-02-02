@@ -44,8 +44,8 @@ useEffect(() => {
 const getNodePosition = (col, row) => {
 ```
 
-## Regler
-- Beskriv **vad** funktionen gör, inte **hur**
-- `@param` och `@returns` på funktioner med parametrar
-- useEffect behöver bara en beskrivande rad
-- Skriv på svenska
+## Rules
+- Describe **what** the function does, not **how**
+- `@param` and `@returns` on functions with parameters
+- useEffect only needs a single descriptive line
+- Write all comments in English
