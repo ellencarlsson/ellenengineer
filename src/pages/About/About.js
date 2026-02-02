@@ -198,7 +198,7 @@ function About() {
           <div className="card-text">
             <div className="card-eyebrow">
               <span className="card-chip">{m.label}</span>
-              <span className="card-loc">&#x1F4CD; {m.location}</span>
+              <span className="card-loc">{m.location}</span>
             </div>
             <h1 className="card-year">{m.year}</h1>
             <p className="card-desc">

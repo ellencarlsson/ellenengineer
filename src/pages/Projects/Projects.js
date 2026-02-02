@@ -19,7 +19,7 @@ function Projects() {
 
   const projects = [
     {
-      id: 'slr-2024',
+      id: 'signtalker',
       name: 'SignTalker',
       year: '2024',
       platform: 'Apple Watch',
