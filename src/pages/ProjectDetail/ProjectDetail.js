@@ -489,7 +489,7 @@ function ProjectDetail() {
       ledColor: 'medium',
       accentColor: 'rose',
       tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
-      description: 'Jag ville ha en egen hemsida, någonstans att samla och visa upp vad jag gör för något, och för att det helt enkelt är kul att bygga något eget. Jag valde att bygga sidan med ett terminal-tema och interaktiva element, där besökaren kan utforska mina projekt och min bakgrund.\n\nDet som gör sidan unik är att den i sig själv är ett projekt. Den visar inte bara vad jag har gjort, utan hur jag tänker och bygger saker. Designen är genomtänkt för att vara enkel att använda samtidigt som den ger en känsla av att det ligger riktig ingenjörskunskap bakom.',
+      description: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
       platforms: ['Web'],
       techStack: ['React', 'JavaScript'],
       architecture: {
@@ -505,11 +505,11 @@ function ProjectDetail() {
         subtitle: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.'
       },
       github: 'https://github.com/ellencarlsson/ellenengineer',
-      demo: 'https://ellenengineer.se',
+      demo: null,
       image: null,
       demoVideo: null,
       resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
-      insights: 'Portfolion blev mitt labb för att testa idéer. Istället för att göra separata testprojekt byggde jag in varje ny teknik direkt i hemsidan. Det tvingade mig att förstå saker på riktigt, för allting behövde fungera ihop.\n\nStörsta lärdomen var hur mycket design spelar roll. Kod som fungerar tekniskt men ser tråkig ut ger inget intryck. Att hitta balansen mellan kreativitet och användbarhet var en av de svåraste delarna.\n\nHela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det är samma sak som att använda vilken annan teknik som helst för att jobba smartare.',
+      insights: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.\n\nDet kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.\n\nHela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det kräver att man har en bra överblick över projektet och kan ge tydliga instruktioner för att det ska bli rätt.',
       componentsText: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
       components: [
         {
