@@ -523,7 +523,30 @@ function ProjectDetail() {
       image: null,
       demoVideo: null,
       resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
-      insights: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.\n\nDet kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.\n\nHela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det kräver att man har en bra överblick över projektet och kan ge tydliga instruktioner för att det ska bli rätt.',
+      insights: [
+        {
+          title: 'Kreativitet',
+          items: [
+            {
+              label: 'Interaktiva teman',
+              text: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.'
+            },
+            {
+              label: 'Balans mellan kreativitet och tydlighet',
+              text: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.'
+            }
+          ]
+        },
+        {
+          title: 'Verktyg',
+          items: [
+            {
+              label: 'Claude som AI-verktyg',
+              text: 'Hela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det kräver att man har en bra överblick över projektet och kan ge tydliga instruktioner för att det ska bli rätt.'
+            }
+          ]
+        }
+      ],
       componentsText: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
       components: [
         {
