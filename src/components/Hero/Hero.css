@@ -106,25 +106,25 @@
 }
 
 .hero-cmd {
-  color: #d4a574;
+  color: #d8cdbf;
 }
 
 .hero-line.output {
-  color: #c8b8a4;
+  color: #d8cdbf;
 }
 
 .hero-line.link {
-  color: #d4847c;
+  color: #c8b8a4;
 }
 
 .hero-terminal-link {
-  color: #d4847c;
+  color: #c8b8a4;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: #e0a59e;
+  color: #e0d0bc;
   text-decoration: underline;
 }
 
