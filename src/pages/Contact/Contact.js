@@ -1,6 +1,10 @@
+/**
+ * @file Contact page with API theme displaying email and LinkedIn.
+ */
 import React from 'react';
 import './Contact.css';
 
+/** Contact page styled as API documentation with endpoints. */
 function Contact() {
   return (
     <div className="contact-page">

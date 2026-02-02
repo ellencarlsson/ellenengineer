@@ -1,6 +1,10 @@
+/**
+ * @file About page with interactive timeline and milestones.
+ */
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './About.css';
 
+/** Milestones displayed on the timeline. */
 const MILESTONES = [
   {
     year: 2002, label: 'Uppväxt', location: 'Öxnevalla',
@@ -36,6 +40,7 @@ const MILESTONES = [
   }
 ];
 
+/** About page with timeline, particle effects, and draggable navigation. */
 function About() {
   const [active, setActive] = useState(MILESTONES.length - 1);
   const [isDragging, setIsDragging] = useState(false);
@@ -46,9 +51,10 @@ function About() {
   const blobRef = useRef(null);
   const prevActiveRef = useRef(null);
 
+  /** Keeps activeRef in sync with the current state. */
   useEffect(() => { activeRef.current = active; }, [active]);
 
-  // Energy blob travel animation
+  /** Animates the energy blob along the timeline between milestones. */
   useEffect(() => {
     const blob = blobRef.current;
     const track = timelineRef.current;
@@ -82,7 +88,7 @@ function About() {
     prevActiveRef.current = active;
   }, [active]);
 
-  // Arrow key navigation
+  /** Listens for arrow keys to navigate between milestones. */
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === 'ArrowRight') {
@@ -95,7 +101,7 @@ function About() {
     return () => window.removeEventListener('keydown', handleKey);
   }, []);
 
-  // Particle effect
+  /** Creates floating ambient particles in the background. */
   useEffect(() => {
     const container = particlesRef.current;
     if (!container) return;
@@ -127,6 +133,11 @@ function About() {
     return () => particles.forEach(p => p.remove());
   }, []);
 
+  /**
+   * Calculates which milestone is closest to a given x-position.
+   * @param {number} clientX - The cursor's x-coordinate.
+   * @returns {number|null} Index of the closest milestone.
+   */
   const getClosestMilestone = useCallback((clientX) => {
     const track = timelineRef.current;
     if (!track) return null;
@@ -136,6 +147,7 @@ function About() {
     return index;
   }, []);
 
+  /** Handles mouse and touch drag along the timeline. */
   useEffect(() => {
     if (!isDragging) return;
 
@@ -162,6 +174,7 @@ function About() {
     };
   }, [isDragging, getClosestMilestone]);
 
+  /** Selects the closest milestone when clicking on the timeline. */
   const handleTrackClick = (e) => {
     if (isDragging) return;
     if (e.target.closest('.tl-node')) return;
@@ -169,6 +182,7 @@ function About() {
     if (idx !== null) setActive(idx);
   };
 
+  /** Starts drag mode when the user presses on the active dot. */
   const handleThumbDown = (e) => {
     e.preventDefault();
     setIsDragging(true);

@@ -1,11 +1,16 @@
+/**
+ * @file Navigation menu that hides on scroll.
+ */
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css';
 
+/** Navigation menu that hides when the user scrolls past the top. */
 function Header() {
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  /** Hides the header when the user scrolls past 100px. */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;

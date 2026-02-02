@@ -1,7 +1,11 @@
+/**
+ * @file Projects page displaying projects as interactive nodes with connections.
+ */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
+/** Predefined positions for the project nodes in the network. */
 const SCATTER_POSITIONS = [
   { x: 25, y: 30 },
   { x: 65, y: 25 },
@@ -13,6 +17,7 @@ const SCATTER_POSITIONS = [
   { x: 80, y: 40 },
 ];
 
+/** Projects page showing all projects as clickable nodes with SVG connections. */
 function Projects() {
   const navigate = useNavigate();
   const [hoveredNode, setHoveredNode] = useState(null);
@@ -45,6 +50,7 @@ function Projects() {
     }
   ];
 
+  /** Navigates to the project detail page. */
   const handleNodeClick = (projectId) => {
     navigate(`/projects/${projectId}`);
   };

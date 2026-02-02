@@ -1,7 +1,11 @@
+/**
+ * @file Project detail page with expandable sections and architecture diagrams.
+ */
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 
+/** SVG icons mapped to each technology in the tech stack. */
 const techIcons = {
   'Apple Watch': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="12" height="14" rx="3"/><path d="M6 7H18M6 15H18"/><circle cx="12" cy="11" r="1" fill="currentColor"/><path d="M8 18V20C8 20.55 8.45 21 9 21H15C15.55 21 16 20.55 16 20V18"/></svg>,
   'iPhone': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="1" width="14" height="22" rx="3"/><path d="M10 1.5h4" strokeWidth="2"/><path d="M9.5 20h5"/></svg>,
@@ -18,8 +22,10 @@ const techIcons = {
   'React Router': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="12" cy="6" r="3"/><path d="M12 9v3M9 15l-1.5 1.5M15 15l1.5 1.5"/></svg>,
 };
 
+/** Fallback icon displayed when a technology has no dedicated icon. */
 const defaultIcon = <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>;
 
+/** SVG text element that supports multiline labels in the architecture diagram. */
 function SvgLabel({ x, y, anchor, fill, fontSize, children }) {
   const lines = String(children).split('\n');
   if (lines.length === 1) {
@@ -40,6 +46,7 @@ function SvgLabel({ x, y, anchor, fill, fontSize, children }) {
   );
 }
 
+/** Renders an SVG architecture diagram with nodes, connections, and groups. */
 function ArchitectureDiagram({ architecture }) {
   const { nodes, connections, groups } = architecture;
   const maxCol = Math.max(...nodes.map(n => n.col));
@@ -55,6 +62,11 @@ function ArchitectureDiagram({ architecture }) {
   const svgWidth = (maxCol + 1) * (nodeWidth + gapX) - gapX + padding * 2;
   const svgHeight = (maxRow + 1) * (nodeHeight + gapY) - gapY + padding * 2 + (groups ? 30 : 0);
 
+  /**
+   * Calculates the position of a node in the diagram.
+   * @param {string} id - The node ID.
+   * @returns {{x: number, y: number, cx: number, cy: number, w: number}} Position and dimensions.
+   */
   const getNodePos = (id) => {
     const node = nodes.find(n => n.id === id);
     if (!node) return { x: 0, y: 0, cx: 0, cy: 0, w: nodeWidth };
@@ -240,6 +252,7 @@ function ArchitectureDiagram({ architecture }) {
   );
 }
 
+/** Detail page displaying all information about a specific project. */
 function ProjectDetail() {
   const { projectId } = useParams();
   const [playingVideos, setPlayingVideos] = useState({});
@@ -251,6 +264,7 @@ function ProjectDetail() {
     links: false
   });
 
+  /** Expands or collapses a section. */
   const toggleSection = (sectionId) => {
     setExpandedSections(prev => ({
       ...prev,

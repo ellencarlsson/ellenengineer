@@ -1,12 +1,17 @@
+/**
+ * @file CV page with SQL-animated text output and downloadable PDF.
+ */
 import React, { useState, useEffect } from 'react';
 import './CV.css';
 
+/** SQL lines typed out character by character on the page. */
 const SQL_LINES = [
   { text: 'SELECT cv', type: 'keyword' },
   { text: 'FROM engineers', type: 'table' },
   { text: "WHERE name = 'Ellen Carlsson';", type: 'where' },
 ];
 
+/** CV page with SQL query animation, CV image, and download buttons. */
 function CV() {
   const [displayedText, setDisplayedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -16,6 +21,7 @@ function CV() {
   const [showResult, setShowResult] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
+  /** Skips the SQL animation and displays everything immediately. */
   const skipAnimation = () => {
     const fullText = SQL_LINES.map(line => line.text).join('\n');
     setDisplayedText(fullText);
@@ -25,6 +31,7 @@ function CV() {
     setShowCard(true);
   };
 
+  /** Listens for the Enter key to skip the animation. */
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'Enter' && !queryComplete) {
@@ -36,6 +43,7 @@ function CV() {
   }, [queryComplete]);
 
 
+  /** Types out SQL text character by character and shows the result when complete. */
   useEffect(() => {
     if (currentLineIndex >= SQL_LINES.length) {
       if (!queryComplete) {
@@ -65,6 +73,11 @@ function CV() {
     }
   }, [currentCharIndex, currentLineIndex, queryComplete]);
 
+  /**
+   * Renders a SQL line with syntax highlighting.
+   * @param {string} lineText - The text line to render.
+   * @returns {React.ReactElement[]} Color-coded JSX elements.
+   */
   const renderSqlLine = (lineText) => {
     if (!lineText) return <span>&nbsp;</span>;
 
