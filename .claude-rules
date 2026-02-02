@@ -1,0 +1,51 @@
+# Kodstandard - ellenengineer
+
+## Kommentarer (JSDoc)
+
+Alla funktioner och komponenter ska ha JSDoc-kommentarer.
+
+### React-komponent
+```js
+/**
+ * Visar detaljerad projektinformation med expanderbara sektioner.
+ * Hämtar projektdata baserat på URL-parametern.
+ */
+const ProjectDetail = () => {
+```
+
+### Funktion med parametrar
+```js
+/**
+ * Genererar SVG-pilar mellan arkitekturnoder.
+ * @param {Object} from - Startnod med x/y-position
+ * @param {Object} to - Slutnod med x/y-position
+ * @param {string} label - Text som visas på pilen
+ * @returns {JSX.Element} SVG path med label
+ */
+const drawConnection = (from, to, label) => {
+```
+
+### useEffect
+```js
+/**
+ * Scrollar till toppen när projektet byts.
+ */
+useEffect(() => {
+```
+
+### Enkel hjälpfunktion
+```js
+/**
+ * Beräknar nodposition baserat på kolumn och rad.
+ * @param {number} col - Kolumnindex
+ * @param {number} row - Radindex
+ * @returns {{ x: number, y: number }} Pixelposition
+ */
+const getNodePosition = (col, row) => {
+```
+
+## Regler
+- Beskriv **vad** funktionen gör, inte **hur**
+- `@param` och `@returns` på funktioner med parametrar
+- useEffect behöver bara en beskrivande rad
+- Skriv på svenska
