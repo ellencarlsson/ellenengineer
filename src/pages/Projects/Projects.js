@@ -28,18 +28,6 @@ function Projects() {
       shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      connectedTo: ['postschema-2025', 'portfolio-2026']
-    },
-    {
-      id: 'postschema-2025',
-      name: 'PostSchema',
-      year: '2025',
-      platform: 'iOS',
-      tech: 'Swift',
-      description: 'iOS-app för automatisk schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler.',
-      shortDescription: 'Offline iOS-app som automatiserar militär schemaläggning med kvalifikationsmatchning och belastningsoptimering.',
-      techStack: ['Swift', 'SwiftUI', 'Core Data'],
-      github: 'https://github.com/ellencarlsson/postschema',
       connectedTo: ['portfolio-2026']
     },
     {
