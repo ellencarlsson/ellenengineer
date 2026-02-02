@@ -494,28 +494,24 @@ function ProjectDetail() {
       techStack: ['React', 'JavaScript'],
       architecture: {
         nodes: [
-          { id: 'browser', label: 'Browser', col: 0, row: 0 },
+          { id: 'browser', label: 'Client', col: 0, row: 0 },
           { id: 'router', label: 'React Router', col: 1, row: 0 },
-          { id: 'pages', label: 'Pages', col: 2, row: 0 },
-          { id: 'components', label: 'Components', col: 2, row: 1 },
-          { id: 'css', label: 'CSS Modules', col: 3, row: 1 },
-          { id: 'state', label: 'useState', col: 1, row: 1 },
+          { id: 'view', label: 'View', col: 2, row: 0 },
+          { id: 'data', label: 'Static Data Source', col: 3, row: 0 },
         ],
         connections: [
-          { from: 'browser', to: 'router', label: 'URL' },
-          { from: 'router', to: 'pages', label: 'Route match' },
-          { from: 'pages', to: 'components', label: 'Render' },
-          { from: 'components', to: 'css', label: 'Styling' },
-          { from: 'state', to: 'pages', label: 'State' },
-          { from: 'pages', to: 'state', label: 'Updates' },
-        ]
+          { from: 'browser', to: 'router', label: 'Användaren\nnavigerar' },
+          { from: 'router', to: 'view', label: 'Väljer rätt\nsida' },
+          { from: 'view', to: 'data', label: 'Hämtar\ninnehåll' },
+        ],
+        subtitle: 'Sidan är en ren frontend utan backend eller databas. All projektdata ligger samlad i en statisk datafil som fungerar som sidans innehållskälla. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren. Komponenterna är uppdelade i återanvändbara delar så att samma byggstenar kan användas på flera sidor utan att duplicera kod.'
       },
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
       image: null,
       demoVideo: null,
       resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
-      insights: 'Portfolion blev mitt labb för att testa idéer. Istället för att göra separata testprojekt byggde jag in varje ny teknik direkt i hemsidan. Det tvingade mig att förstå saker på riktigt, för allting behövde fungera ihop.\n\nStörsta lärdomen var hur mycket design spelar roll. Kod som fungerar tekniskt men ser tråkig ut ger inget intryck. Att hitta balansen mellan kreativitet och användbarhet var en av de svåraste – och roligaste – delarna.',
+      insights: 'Portfolion blev mitt labb för att testa idéer. Istället för att göra separata testprojekt byggde jag in varje ny teknik direkt i hemsidan. Det tvingade mig att förstå saker på riktigt, för allting behövde fungera ihop.\n\nStörsta lärdomen var hur mycket design spelar roll. Kod som fungerar tekniskt men ser tråkig ut ger inget intryck. Att hitta balansen mellan kreativitet och användbarhet var en av de svåraste delarna.\n\nHela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det är samma sak som att använda vilken annan teknik som helst för att jobba smartare.',
       hasWorkflow: true,
       workflow: [
         {
