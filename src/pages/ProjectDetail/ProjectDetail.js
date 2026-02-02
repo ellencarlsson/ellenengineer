@@ -13,7 +13,7 @@ const techIcons = {
   'Core Data': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>,
   'MVVM': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="7" height="5" rx="1"/><rect x="15" y="3" width="7" height="5" rx="1"/><rect x="8.5" y="16" width="7" height="5" rx="1"/><path d="M5.5 8v3h13V8M12 11v5"/></svg>,
   'React': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>,
-  'JavaScript': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><text x="12" y="16" textAnchor="middle" fill="currentColor" fontSize="10" fontWeight="700" fontFamily="system-ui, sans-serif">JS</text></svg>,
+  'JavaScript': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><text x="12" y="16" textAnchor="middle" fill="currentColor" stroke="none" fontSize="10" fontWeight="700" fontFamily="system-ui, sans-serif">JS</text></svg>,
   'CSS3': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M7 7h10l-.5 5H9.5l.25 3L12 16l2.25-1"/></svg>,
   'React Router': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="12" cy="6" r="3"/><path d="M12 9v3M9 15l-1.5 1.5M15 15l1.5 1.5"/></svg>,
 };
@@ -489,33 +489,50 @@ function ProjectDetail() {
       ledColor: 'medium',
       accentColor: 'rose',
       tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
-      description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer för att visa mitt arbete på ett unikt sätt.',
+      description: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
       platforms: ['Web'],
-      techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
+      techStack: ['React', 'JavaScript'],
       architecture: {
         nodes: [
-          { id: 'browser', label: 'Browser', col: 0, row: 0 },
+          { id: 'browser', label: 'Client', col: 0, row: 0 },
           { id: 'router', label: 'React Router', col: 1, row: 0 },
-          { id: 'pages', label: 'Pages', col: 2, row: 0 },
-          { id: 'components', label: 'Components', col: 2, row: 1 },
-          { id: 'css', label: 'CSS Modules', col: 3, row: 1 },
-          { id: 'state', label: 'useState', col: 1, row: 1 },
+          { id: 'view', label: 'View', col: 2, row: 0 },
         ],
         connections: [
-          { from: 'browser', to: 'router', label: 'URL' },
-          { from: 'router', to: 'pages', label: 'Route match' },
-          { from: 'pages', to: 'components', label: 'Render' },
-          { from: 'components', to: 'css', label: 'Styling' },
-          { from: 'state', to: 'pages', label: 'State' },
-          { from: 'pages', to: 'state', label: 'Updates' },
-        ]
+          { from: 'browser', to: 'router', label: 'Användaren\nnavigerar' },
+          { from: 'router', to: 'view', label: 'Väljer rätt\nsida' },
+        ],
+        subtitle: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.'
       },
       github: 'https://github.com/ellencarlsson/ellenengineer',
-      demo: 'https://ellenengineer.se',
+      demo: null,
       image: null,
       demoVideo: null,
-      resultText: 'Hemsidan är live på ellenengineer.se med en interaktiv terminal-landningssida, nätverksbaserad projektnavigering och detaljerade projektsidor med expanderbara sektioner.',
-      insights: 'Det här projektet blev mitt labb för att testa idéer. Varje ny teknik jag ville prova byggde jag in i portfolion istället för att göra ett separat testprojekt. Det tvingade mig att förstå saker på riktigt, för allting behövde fungera ihop.\n\nJag lärde mig också hur mycket design spelar roll. Kod som fungerar tekniskt men ser tråkig ut ger inget intryck. Att hitta balansen mellan kreativitet och användbarhet var en av de svåraste delarna.',
+      resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
+      insights: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.\n\nDet kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.\n\nHela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det kräver att man har en bra överblick över projektet och kan ge tydliga instruktioner för att det ska bli rätt.',
+      componentsText: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
+      components: [
+        {
+          group: '',
+          items: [
+            {
+              name: 'App',
+              type: 'Entry Point',
+              responsibility: 'Applikationens startpunkt som renderar hela sidan och kopplar ihop alla delar.'
+            },
+            {
+              name: 'React Router',
+              type: 'Router',
+              responsibility: 'Konfigurerar alla routes och kopplar varje URL till rätt sidkomponent. Hanterar navigering utan att sidan laddas om.'
+            },
+            {
+              name: 'Komponentstruktur',
+              type: 'Mönster',
+              responsibility: 'Varje del av sidan är organiserad i en egen mapp där både logik (.js) och styling (.css) bor tillsammans. All projektdata ligger hårdkodad direkt i komponenterna.'
+            }
+          ]
+        }
+      ],
       hasWorkflow: true,
       workflow: [
         {
@@ -772,7 +789,7 @@ function ProjectDetail() {
                 <div className="components-list">
                   {project.components.map((group, gi) => (
                     <div key={gi} className="component-group">
-                      <h4 className="component-group-title">{group.group}</h4>
+                      {group.group && <h4 className="component-group-title">{group.group}</h4>}
                       <div className="component-grid">
                         {group.items.map((comp, i) => (
                           <div key={i} className="component-card">
