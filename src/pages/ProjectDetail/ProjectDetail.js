@@ -563,10 +563,10 @@ function ProjectDetail() {
       status: 'OPERATIONAL',
       ledColor: 'burgundy',
       accentColor: 'sand',
-      tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
-      description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
+      tagline: 'iOS-app för automatisk schemaläggning av militära postpass',
+      description: 'Ett postschema är det schema som bestämmer vilka soldater som ska stå på vilka poster och när. Inom Försvarsmakten görs detta med papper och penna av den som ansvarar för postschemat. Man måste hålla reda på vem som är kvalificerad för vilken post, se till att alla får tillräckligt med vila, och fördela passen rättvist. Ju fler poster som ska täckas, desto svårare blir pusslet.\n\nPostSchema är en app för iPhone som automatiserar hela den processen. Man lägger in sin organisation med plutoner, grupper och soldater, kopplar varje soldat till de poster den är kvalificerad för, och trycker på en knapp. Appen skapar ett komplett schema som följer alla regler och fördelar passen så jämnt som möjligt. Appen fungerar helt utan internet och allt sparas lokalt på telefonen, vilket är viktigt i miljöer där man inte alltid kan räkna med uppkoppling.',
       platforms: ['iOS'],
-      techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
+      techStack: ['Swift', 'Core Data'],
       architecture: {
         nodes: [
           { id: 'view', label: 'SwiftUI View', col: 0, row: 0 },
