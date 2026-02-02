@@ -552,88 +552,6 @@ function ProjectDetail() {
         }
       ]
     },
-    'postschema-2025': {
-      id: 'postschema-2025',
-      model: 'SAMSUNG PS2025',
-      label: 'POSTSCHEMA-2025',
-      name: 'PostSchema',
-      year: '2025',
-      capacity: '1.5 GB',
-      interface: 'SATA',
-      status: 'OPERATIONAL',
-      ledColor: 'burgundy',
-      accentColor: 'sand',
-      tagline: 'iOS-app för automatisk schemaläggning av militära arbetspass',
-      description: 'PostSchema är en iOS-app som automatiserar schemaläggning av militära arbetspass baserat på kvalifikationer och arbetsregler. Appen löser ett komplext problem där ansvariga måste hålla reda på vilka soldater som har rätt kvalifikationer för varje posttyp, säkerställa att arbetsrättsliga regler följs och fördela belastningen rättvist.\n\nAppen är byggd offline-first med Core Data som lokal databas, eftersom tillgång till nätverk inte alltid kan garanteras i militära miljöer. Hela systemet körs direkt på enheten utan externa beroenden.\n\nSchemaläggaren använder en två-fas-algoritm: först en greedy assignment som filtrerar kandidater baserat på kvalifikationer, tillgänglighet och regelefterlevnad, sedan en local search optimization som förbättrar den globala lösningen genom att testa byten mellan passpar.',
-      platforms: ['iOS'],
-      techStack: ['Swift', 'SwiftUI', 'Core Data', 'MVVM'],
-      architecture: {
-        nodes: [
-          { id: 'view', label: 'SwiftUI View', col: 0, row: 0 },
-          { id: 'vm', label: 'ViewModel', col: 1, row: 0 },
-          { id: 'repo', label: 'Repository', col: 2, row: 0 },
-          { id: 'core', label: 'Core Data', col: 3, row: 0 },
-          { id: 'scheduler', label: 'Scheduler', col: 2, row: 1 },
-        ],
-        connections: [
-          { from: 'view', to: 'vm', label: 'Actions' },
-          { from: 'vm', to: 'view', label: 'State' },
-          { from: 'vm', to: 'repo', label: 'Fetch / Save' },
-          { from: 'repo', to: 'core', label: 'Persist' },
-          { from: 'vm', to: 'scheduler', label: 'Generate' },
-          { from: 'scheduler', to: 'repo', label: 'Result' },
-        ]
-      },
-      github: 'https://github.com/ellencarlsson/postschema',
-      demo: null,
-      image: null,
-      demoVideo: null,
-      resultText: 'En fullt fungerande offline iOS-app som automatiskt skapar optimerade arbetsscheman. Appen respekterar arbetsrättsliga regler (max 4h utan rast, minst 7h vila, max 32h per 48h) och fördelar pass rättvist med ett poängsystem.',
-      insights: 'Den största utmaningen var att bygga en schemaläggare som respekterar alla regler samtidigt. Det räcker inte att bara hitta en lösning som fungerar, den måste också vara rättvis. Jag upptäckte att en enkel tilldelning ofta gav ojämn fördelning, så jag la till ett optimeringssteg som testar byten mellan soldater för att jämna ut belastningen.\n\nAtt bygga appen helt offline var ett medvetet val. I militära miljöer kan man inte räkna med internet, så allt måste fungera lokalt. Det begränsade valen av teknik men tvingade fram en robust lösning.',
-      hasWorkflow: true,
-      workflow: [
-        {
-          step: 1,
-          icon: '🏗️',
-          title: 'ORGANISATION',
-          description: 'Pluton → Grupp → Soldat',
-          details: 'Hierarkisk struktur i Core Data',
-          ledColor: 'blue'
-        },
-        {
-          step: 2,
-          icon: '📊',
-          title: 'GRUPPFÖRDELNING',
-          description: 'Tid fördelas proportionellt',
-          details: 'Baserat på kvalificerade soldater',
-          ledColor: 'blue'
-        },
-        {
-          step: 3,
-          icon: '🎯',
-          title: 'GREEDY ASSIGNMENT',
-          description: 'Tilldelar soldater med scoring',
-          details: 'Vila, belastning, kvalifikationer',
-          ledColor: 'yellow'
-        },
-        {
-          step: 4,
-          icon: '🔄',
-          title: 'LOCAL SEARCH',
-          description: 'Optimerar genom att byta passpar',
-          details: 'Förbättrar global lösning',
-          ledColor: 'green'
-        },
-        {
-          step: 5,
-          icon: '✅',
-          title: 'SCHEMA',
-          description: 'Komplett schema med regelefterlevnad',
-          details: 'Max 4h arbete, min 7h vila',
-          ledColor: 'green'
-        }
-      ]
-    }
   };
 
   const project = projects[projectId];
@@ -762,6 +680,18 @@ function ProjectDetail() {
                       </div>
                       </div>
                       {video.description && <span className="video-description">{video.description}</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.resultImages && (
+                <div className="result-images-row">
+                  {project.resultImages.map((img, i) => (
+                    <div key={i} className="result-image-item">
+                      <span className="result-image-title">{img.title}</span>
+                      <div className="result-image-container">
+                        <img className="result-image" src={img.src} alt={img.title} />
+                      </div>
                     </div>
                   ))}
                 </div>

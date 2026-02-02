@@ -60,10 +60,6 @@
   stroke: var(--text-medium);
 }
 
-.connection-line.active[data-from="postschema-2025"],
-.connection-line.active[data-to="postschema-2025"] {
-  stroke: var(--accent-rose-warm);
-}
 
 @keyframes dash {
   to {
@@ -88,10 +84,6 @@
   filter: drop-shadow(0 0 2px rgba(var(--accent-sand-rgb), 0.5));
 }
 
-.data-packet[data-from="postschema-2025"] {
-  fill: var(--accent-rose-warm);
-  filter: drop-shadow(0 0 2px rgba(var(--accent-rose-warm-rgb), 0.5));
-}
 
 .data-packet.paused {
   animation-play-state: paused;
@@ -119,10 +111,6 @@
 
 .project-node:nth-child(2) {
   animation: float 7s ease-in-out infinite;
-}
-
-.project-node:nth-child(3) {
-  animation: float 8s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -171,14 +159,6 @@
 }
 
 .project-node:nth-child(2) .node-circle {
-  border-color: rgba(var(--accent-rose-warm-rgb), 0.45);
-  box-shadow:
-    var(--shadow-md),
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 0 15px rgba(var(--accent-rose-warm-rgb), 0.1);
-}
-
-.project-node:nth-child(3) .node-circle {
   border-color: rgba(var(--accent-sand-rgb), 0.45);
   box-shadow:
     var(--shadow-md),
@@ -195,14 +175,6 @@
 }
 
 .project-node:nth-child(2):hover .node-circle {
-  border-color: rgba(var(--accent-rose-warm-rgb), 0.7);
-  box-shadow:
-    var(--shadow-lg),
-    0 0 25px rgba(var(--accent-rose-warm-rgb), 0.25),
-    0 0 50px rgba(var(--accent-rose-warm-rgb), 0.1);
-}
-
-.project-node:nth-child(3):hover .node-circle {
   border-color: rgba(var(--accent-sand-rgb), 0.7);
   box-shadow:
     var(--shadow-lg),
@@ -228,10 +200,6 @@
 }
 
 .project-node:nth-child(2) .node-led {
-  background: var(--accent-rose-warm);
-}
-
-.project-node:nth-child(3) .node-led {
   background: var(--accent-sand);
 }
 
@@ -290,11 +258,6 @@
 }
 
 .project-node:nth-child(2) .particle {
-  background: var(--accent-rose-warm);
-  box-shadow: 0 0 4px rgba(var(--accent-rose-warm-rgb), 0.4);
-}
-
-.project-node:nth-child(3) .particle {
   background: var(--accent-sand);
   box-shadow: 0 0 4px rgba(var(--accent-sand-rgb), 0.4);
 }
