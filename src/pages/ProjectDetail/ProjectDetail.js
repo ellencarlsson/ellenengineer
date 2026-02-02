@@ -315,7 +315,7 @@ function ProjectDetail() {
           { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
           { label: 'IPHONE', nodeIds: ['iphone-view', 'iphone-vm', 'tts'] },
         ],
-        subtitle: 'Appen är uppbyggd enligt MVVM-mönstret, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
+        subtitle: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
       },
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       demo: null,
@@ -368,7 +368,7 @@ function ProjectDetail() {
           items: [
             {
               label: 'Fler sensorer',
-              text: 'Apple Watch har bara gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.'
+              text: 'Apple Watch har just nu gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.'
             },
             {
               label: 'Automatisk träningspipeline',
@@ -466,7 +466,7 @@ function ProjectDetail() {
             {
               name: 'PredictionModel',
               type: 'Model',
-              responsibility: 'Kör Core ML-modellen som tolkar rörelsedata till ord. Sparar tillstånd mellan prediktioner.'
+              responsibility: 'Kör Core ML-modellen som tolkar rörelsedata till ord.'
             },
             {
               name: 'DataHelper',
