@@ -809,6 +809,87 @@
   max-height: 400px;
 }
 
+.arch-tap-hint {
+  cursor: pointer;
+  position: relative;
+}
+
+.arch-tap-label {
+  display: none;
+}
+
+@media (max-width: 968px) {
+  .arch-tap-label {
+    display: block;
+    text-align: center;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--text-medium);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+}
+
+.arch-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-modal {
+  position: relative;
+  width: 95vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-modal-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-modal-content .arch-diagram-wrapper {
+  min-width: 800px;
+}
+
+.arch-modal-content .arch-diagram {
+  max-height: none;
+  width: 100%;
+  height: auto;
+}
+
 /* Components */
 .components-list {
   display: flex;
