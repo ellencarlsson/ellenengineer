@@ -1,7 +1,7 @@
 /**
  * @file Projects page displaying projects as interactive nodes with connections.
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
@@ -17,10 +17,24 @@ const SCATTER_POSITIONS = [
   { x: 80, y: 40 },
 ];
 
+/** Mobile override: move Portfolio node higher. */
+const MOBILE_POSITIONS = SCATTER_POSITIONS.map((pos, i) =>
+  i === 1 ? { ...pos, y: 17 } : pos
+);
+
 /** Projects page showing all projects as clickable nodes with SVG connections. */
 function Projects() {
   const navigate = useNavigate();
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 480);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const positions = isMobile ? MOBILE_POSITIONS : SCATTER_POSITIONS;
 
   const projects = [
     {
@@ -70,12 +84,12 @@ function Projects() {
         <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg">
           {projects.map((project, index) => {
             if (!project.connectedTo || project.connectedTo.length === 0) return null;
-            const pos = SCATTER_POSITIONS[index];
+            const pos = positions[index];
             return project.connectedTo.map((targetId) => {
               const targetIndex = projects.findIndex(p => p.id === targetId);
               const targetProject = projects[targetIndex];
               if (!targetProject) return null;
-              const targetPos = SCATTER_POSITIONS[targetIndex];
+              const targetPos = positions[targetIndex];
 
               return (
                 <g key={`connection-${project.id}-${targetId}`}>
@@ -108,7 +122,7 @@ function Projects() {
 
         <div className="nodes-container">
           {projects.map((project, index) => {
-            const pos = SCATTER_POSITIONS[index];
+            const pos = positions[index];
             return (
             <div
               key={project.id}
