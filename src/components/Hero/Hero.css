@@ -214,6 +214,12 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .hero-terminal {
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 968px) {
   .hero {
     min-height: auto;
