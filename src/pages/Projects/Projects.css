@@ -307,110 +307,6 @@
   }
 }
 
-/* Info Card - Floating card node style */
-.node-info-card {
-  position: absolute;
-  top: 50%;
-  left: calc(100% + 30px);
-  transform: translateY(-50%);
-  background: rgba(28, 25, 23, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  min-width: 240px;
-  max-width: 280px;
-  box-shadow: var(--shadow-lg);
-  animation: fadeInFloat 0.4s ease-out, infoCardFloat 4s ease-in-out infinite;
-  z-index: 100;
-  overflow: hidden;
-}
-
-@keyframes fadeInFloat {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
-}
-
-@keyframes infoCardFloat {
-  0%, 100% {
-    transform: translateY(-50%) translateY(0px);
-  }
-  50% {
-    transform: translateY(-50%) translateY(-8px);
-  }
-}
-
-/* Subtle Header Section */
-.terminal-header {
-  background: transparent;
-  padding: 1rem 1.25rem 0.75rem;
-  margin: 0;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.terminal-dots {
-  display: none;
-}
-
-.terminal-title {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.7rem;
-  color: var(--text-light);
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: block;
-}
-
-.info-card-content {
-  padding: 1.25rem 1.5rem;
-}
-
-.info-description {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-dark);
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  margin: 0;
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.info-label {
-  font-size: 0.7rem;
-  color: var(--text-light);
-  font-weight: 500;
-  letter-spacing: 0.8px;
-  text-transform: lowercase;
-  font-family: 'Georgia', 'Times New Roman', serif;
-}
-
-.info-value {
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  font-weight: 400;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  letter-spacing: 0.3px;
-}
-
-
-/* Info card positioning per node */
-.project-node:nth-child(2) .node-info-card {
-  left: auto;
-  right: calc(100% + 20px);
-}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -436,10 +332,6 @@
     height: 7px;
     top: 10px;
     right: 10px;
-  }
-
-  .node-info-card {
-    min-width: 200px;
   }
 
   .particle {
@@ -536,16 +428,6 @@
     }
   }
 
-  .node-info-card {
-    position: fixed;
-    top: auto;
-    bottom: 2rem;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    min-width: 280px;
-    max-width: calc(100vw - 2rem);
-  }
 }
 
 @media (max-width: 480px) {

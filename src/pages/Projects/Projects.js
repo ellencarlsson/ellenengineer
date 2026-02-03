@@ -30,7 +30,6 @@ function Projects() {
       platform: 'Apple Watch',
       tech: 'AI',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
-      shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
       connectedTo: ['portfolio-2026']
@@ -42,7 +41,6 @@ function Projects() {
       platform: 'Webbutveckling',
       tech: 'React',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer.',
-      shortDescription: 'Interaktiv portfolio med vintage IT-tema, flytande projekt-noder och kreativa animationer byggt i React.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
@@ -132,16 +130,6 @@ function Projects() {
                 </div>
               </div>
 
-              {hoveredNode === project.id && (
-                <div className="node-info-card">
-                  <div className="terminal-header">
-                    <span className="terminal-title">Project Details</span>
-                  </div>
-                  <div className="info-card-content">
-                    <p className="info-description">{project.shortDescription}</p>
-                  </div>
-                </div>
-              )}
             </div>
             );
           })}
