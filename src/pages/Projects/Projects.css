@@ -416,8 +416,8 @@
   }
 
   .node-circle {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
   }
 
   .node-name {
@@ -470,17 +470,21 @@
 }
 
 @media (max-width: 480px) {
+  .projects-network-container {
+    height: 80vh;
+  }
+
   .node-circle {
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
   }
 
   .node-name {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 
   .node-year {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
   }
 
   .node-led {
