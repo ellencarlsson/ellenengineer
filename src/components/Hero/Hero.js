@@ -107,7 +107,7 @@ function Hero() {
           <div className="hero-terminal-title">EllenEngineer — zsh</div>
         </div>
 
-        <div className="hero-terminal-body">
+        <div className="hero-terminal-body" onClick={() => !isComplete && skipAnimation()}>
           <div className="hero-terminal-content">
             <pre>
               {completedLines.map((line, index) => {
@@ -149,8 +149,10 @@ function Hero() {
           </div>
         </div>
 
-        <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
-          <span className="hero-hint-key">Enter</span> för att hoppa över animationen
+        <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`} onClick={() => !isComplete && skipAnimation()}>
+          <span className="hero-hint-key hint-desktop">Enter</span>
+          <span className="hero-hint-key hint-mobile">Tryck</span>
+          {' '}för att hoppa över animationen
         </div>
       </div>
     </section>

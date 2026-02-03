@@ -180,6 +180,8 @@
 
 .hero-terminal-hint.no-transition {
   transition: none;
+  animation: none;
+  display: none;
 }
 
 .hero-hint-key {
@@ -190,6 +192,20 @@
   font-weight: 500;
   border: 1px solid var(--terminal-border);
   box-shadow: 0 2px 0 var(--terminal-bg-dark);
+}
+
+.hint-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hint-desktop {
+    display: none;
+  }
+
+  .hint-mobile {
+    display: inline;
+  }
 }
 
 /* Animations */
@@ -214,6 +230,12 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .hero-terminal {
+    margin-top: -40px;
+  }
+}
+
 @media (max-width: 968px) {
   .hero {
     min-height: auto;
