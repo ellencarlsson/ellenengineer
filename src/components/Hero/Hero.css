@@ -216,7 +216,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero-terminal {
-    margin-top: 0;
+    margin-top: -40px;
   }
 }
 
