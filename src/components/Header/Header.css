@@ -324,33 +324,43 @@
     gap: 3px;
   }
 
-  /* Hamburger button - terminal prompt style */
+  /* Hamburger button */
   .hamburger {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    gap: 5px;
     background: rgba(28, 25, 23, 0.92);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-pill);
     box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
-    padding: 8px 14px;
+    padding: 10px 12px;
     cursor: pointer;
     z-index: 1001;
     position: absolute;
     right: var(--spacing-sm);
   }
 
-  .hamburger-prompt {
-    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-    font-size: 16px;
-    font-weight: bold;
-    color: #8b9a6b;
-    transition: color 0.3s ease;
+  .hamburger-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-dark);
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
 
-  .hamburger.open .hamburger-prompt {
-    color: var(--accent-rose-warm);
+  .hamburger.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
   /* Mobile menu - terminal window */
