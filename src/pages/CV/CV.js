@@ -189,6 +189,12 @@ function CV() {
             )}
           </div>
 
+          {!queryComplete && (
+            <div className="cv-skip-hint">
+              Tryck <span className="cv-skip-key">Enter</span> för att hoppa över
+            </div>
+          )}
+
           <div className={`cv-actions ${showCard ? 'visible' : ''}`}>
             <a
               href="/assets/CV-Ellen-Carlsson.pdf"
