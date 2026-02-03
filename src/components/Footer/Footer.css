@@ -55,6 +55,22 @@
   font-size: var(--font-size-sm);
 }
 
+.footer-credits {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-top: var(--spacing-xs);
+}
+
+.footer-credits a {
+  color: var(--text-medium);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer-credits a:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
