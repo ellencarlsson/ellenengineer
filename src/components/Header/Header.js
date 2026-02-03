@@ -78,30 +78,38 @@ function Header() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Menu"
         >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
+          <span className="hamburger-prompt">&gt;_</span>
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <nav className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-        <NavLink to="/" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-          Hem
-        </NavLink>
-        <NavLink to="/projects" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-          Projekt
-        </NavLink>
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-          Om Mig
-        </NavLink>
-        <NavLink to="/cv" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-          CV
-        </NavLink>
-        <NavLink to="/contact" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-          Kontakta mig
-        </NavLink>
-      </nav>
+      {/* Mobile menu - terminal window */}
+      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-header">
+          <div className="mobile-menu-dots">
+            <span className="mobile-menu-dot dot-close"></span>
+            <span className="mobile-menu-dot dot-minimize"></span>
+            <span className="mobile-menu-dot dot-maximize"></span>
+          </div>
+          <span className="mobile-menu-title">nav.sh</span>
+        </div>
+        <nav className="mobile-menu-body">
+          <NavLink to="/" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
+            ./hem
+          </NavLink>
+          <NavLink to="/projects" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
+            ./projekt
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
+            ./om-mig
+          </NavLink>
+          <NavLink to="/cv" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
+            ./cv
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
+            ./kontakt
+          </NavLink>
+        </nav>
+      </div>
     </header>
   );
 }
