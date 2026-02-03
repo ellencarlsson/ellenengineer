@@ -258,6 +258,7 @@ function ArchitectureDiagram({ architecture }) {
 function ProjectDetail() {
   const { projectId } = useParams();
   const [playingVideos, setPlayingVideos] = useState({});
+  const [archModalOpen, setArchModalOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({
     result: false,
     architecture: false,
@@ -864,7 +865,10 @@ function ProjectDetail() {
                       <p key={i} className="result-description">{para}</p>
                     ))
                   )}
-                  <ArchitectureDiagram architecture={project.architecture} />
+                  <div className="arch-tap-hint" onClick={() => setArchModalOpen(true)}>
+                    <ArchitectureDiagram architecture={project.architecture} />
+                    <span className="arch-tap-label">Tryck för att förstora</span>
+                  </div>
                 </>
               ) : (
                 <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
@@ -872,6 +876,17 @@ function ProjectDetail() {
             </div>
           </div>
         </div>
+
+        {archModalOpen && project.architecture && (
+          <div className="arch-modal-overlay" onClick={() => setArchModalOpen(false)}>
+            <div className="arch-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="arch-modal-close" onClick={() => setArchModalOpen(false)}>✕</button>
+              <div className="arch-modal-content">
+                <ArchitectureDiagram architecture={project.architecture} />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* COMPONENTS */}
         <div className="file-section fullwidth-section">
