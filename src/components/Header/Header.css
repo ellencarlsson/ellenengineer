@@ -293,6 +293,10 @@
     flex: none;
   }
 
+  .header {
+    padding: var(--spacing-sm) 0 var(--spacing-md);
+  }
+
   .nav-link {
     font-size: var(--font-size-xs);
     padding: var(--spacing-xs) var(--spacing-sm);
