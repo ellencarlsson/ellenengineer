@@ -1423,7 +1423,7 @@
 @media (max-width: 968px) {
   .project-detail-page {
     padding: var(--spacing-lg) 0.25rem;
-    padding-top: 100px;
+    padding-top: 0;
   }
 
   .project-detail-container {
