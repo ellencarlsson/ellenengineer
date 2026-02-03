@@ -20,6 +20,8 @@ const techIcons = {
   'JavaScript': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><text x="12" y="16" textAnchor="middle" fill="currentColor" stroke="none" fontSize="10" fontWeight="700" fontFamily="system-ui, sans-serif">JS</text></svg>,
   'CSS3': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3l1.5 17L12 22l6.5-2L20 3H4z"/><path d="M7 7h10l-.5 5H9.5l.25 3L12 16l2.25-1"/></svg>,
   'React Router': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="12" cy="6" r="3"/><path d="M12 9v3M9 15l-1.5 1.5M15 15l1.5 1.5"/></svg>,
+  'Python': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2c-1.7 0-3 .5-3.5 1.5V6c0 .8.7 1.5 1.5 1.5h4c.8 0 1.5.7 1.5 1.5v1H8.5C6.6 10 5 11.6 5 13.5V16c0 1 .5 1.5 1.5 1.5H9v-2c0-1.1.9-2 2-2h4c1.1 0 2-.9 2-2V6c0-2.2-2.2-4-5-4z"/><path d="M12 22c1.7 0 3-.5 3.5-1.5V18c0-.8-.7-1.5-1.5-1.5h-4c-.8 0-1.5-.7-1.5-1.5v-1h7c1.9 0 3.5-1.6 3.5-3.5V8c0-1-.5-1.5-1.5-1.5H15v2c0 1.1-.9 2-2 2H9c-1.1 0-2 .9-2 2v5.5c0 2.2 2.2 4 5 4z"/><circle cx="9.5" cy="5" r=".7" fill="currentColor"/><circle cx="14.5" cy="19" r=".7" fill="currentColor"/></svg>,
+  'Raspberry Pi': <svg className="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3"/><path d="M3 8h3M3 12h3M3 16h3M18 8h3M18 12h3M18 16h3"/><circle cx="12" cy="12" r="2"/></svg>,
 };
 
 /** Fallback icon displayed when a technology has no dedicated icon. */
@@ -603,6 +605,70 @@ function ProjectDetail() {
           description: 'Expanderbara sektioner med chevrons',
           details: 'Dynamiskt innehåll per projekt',
           ledColor: 'green'
+        }
+      ]
+    },
+    'nordpunkt': {
+      id: 'nordpunkt',
+      model: 'IBM DESKSTAR NP1',
+      label: 'NORDPUNKT-2025',
+      name: 'NordPunkt',
+      year: 'Pågående',
+      capacity: '512 MB',
+      interface: 'GPIO',
+      status: 'IN DEVELOPMENT',
+      ledColor: 'brown',
+      accentColor: 'sand',
+      tagline: 'MGRS-koordinater med Raspberry Pi',
+      description: 'NordPunkt är en applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi. Projektet är under utveckling och mer information kommer snart.',
+      platforms: ['Raspberry Pi'],
+      techStack: ['Python'],
+      architecture: {
+        nodes: [
+          { id: 'gps', label: 'GPS Module', col: 0, row: 0 },
+          { id: 'rpi', label: 'Raspberry Pi', col: 1, row: 0 },
+          { id: 'converter', label: 'MGRS Converter', col: 2, row: 0 },
+        ],
+        connections: [
+          { from: 'gps', to: 'rpi', label: 'Raw\ncoordinates' },
+          { from: 'rpi', to: 'converter', label: 'Convert to\nMGRS' },
+        ],
+        subtitle: 'Mer information om arkitekturen kommer snart.'
+      },
+      github: null,
+      demo: null,
+      image: null,
+      demoVideos: null,
+      resultText: 'Projektet är under utveckling. Mer information kommer snart.',
+      insights: [
+        {
+          title: 'Kommande information',
+          items: [
+            {
+              label: 'Under utveckling',
+              text: 'Det här projektet är fortfarande under utveckling. Mer detaljer och insikter kommer att läggas till när projektet har kommit längre.'
+            }
+          ]
+        }
+      ],
+      hasWorkflow: false,
+      workflow: [],
+      componentsText: 'Mer information om komponenterna kommer snart.',
+      components: [
+        {
+          group: '',
+          items: [
+            {
+              name: 'GPS Module',
+              type: 'Hardware',
+              responsibility: 'Tar emot GPS-signaler och skickar rådata till Raspberry Pi.'
+            },
+            {
+              name: 'MGRS Converter',
+              type: 'Service',
+              responsibility: 'Konverterar GPS-koordinater till MGRS-format.'
+            }
+          ]
         }
       ]
     },

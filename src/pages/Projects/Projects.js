@@ -32,7 +32,7 @@ function Projects() {
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      connectedTo: ['portfolio-2026']
+      connectedTo: ['portfolio-2026', 'nordpunkt']
     },
     {
       id: 'portfolio-2026',
@@ -44,7 +44,18 @@ function Projects() {
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: 'https://github.com/ellencarlsson/ellenengineer',
       demo: 'https://ellenengineer.se',
-      connectedTo: []
+      connectedTo: ['nordpunkt']
+    },
+    {
+      id: 'nordpunkt',
+      name: 'NordPunkt',
+      year: 'Pågående',
+      platform: 'Raspberry Pi',
+      tech: 'Python',
+      description: 'Applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi.',
+      techStack: ['Python'],
+      github: null,
+      connectedTo: ['portfolio-2026']
     }
   ];
 
