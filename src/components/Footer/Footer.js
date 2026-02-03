@@ -31,6 +31,9 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <p>&copy; 2026 Ellen Carlsson. Alla rättigheter reserverade.</p>
+          <p className="footer-credits">
+            Font: <a href="https://hackedfont.com" target="_blank" rel="noopener noreferrer">Hacked</a> av David Libeau (CC BY 4.0)
+          </p>
         </div>
       </div>
     </footer>
