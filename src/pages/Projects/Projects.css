@@ -60,6 +60,11 @@
   stroke: var(--text-medium);
 }
 
+.connection-line.active[data-from="nordpunkt"],
+.connection-line.active[data-to="nordpunkt"] {
+  stroke: var(--accent-terracotta);
+}
+
 
 @keyframes dash {
   to {
@@ -82,6 +87,11 @@
 .data-packet[data-from="portfolio-2026"] {
   fill: var(--accent-sand);
   filter: drop-shadow(0 0 2px rgba(var(--accent-sand-rgb), 0.5));
+}
+
+.data-packet[data-from="nordpunkt"] {
+  fill: var(--accent-terracotta);
+  filter: drop-shadow(0 0 2px rgba(var(--accent-terracotta-rgb), 0.5));
 }
 
 
@@ -111,6 +121,10 @@
 
 .project-node:nth-child(2) {
   animation: float 7s ease-in-out infinite;
+}
+
+.project-node:nth-child(3) {
+  animation: float 8s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -166,6 +180,14 @@
     0 0 15px rgba(var(--accent-sand-rgb), 0.1);
 }
 
+.project-node:nth-child(3) .node-circle {
+  border-color: rgba(var(--accent-terracotta-rgb), 0.45);
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 15px rgba(var(--accent-terracotta-rgb), 0.1);
+}
+
 .project-node:nth-child(1):hover .node-circle {
   border-color: rgba(var(--accent-sage-rgb), 0.7);
   box-shadow:
@@ -180,6 +202,14 @@
     var(--shadow-lg),
     0 0 25px rgba(var(--accent-sand-rgb), 0.25),
     0 0 50px rgba(var(--accent-sand-rgb), 0.1);
+}
+
+.project-node:nth-child(3):hover .node-circle {
+  border-color: rgba(var(--accent-terracotta-rgb), 0.7);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 25px rgba(var(--accent-terracotta-rgb), 0.25),
+    0 0 50px rgba(var(--accent-terracotta-rgb), 0.1);
 }
 
 /* LED Indicator */
@@ -201,6 +231,10 @@
 
 .project-node:nth-child(2) .node-led {
   background: var(--accent-sand);
+}
+
+.project-node:nth-child(3) .node-led {
+  background: var(--accent-terracotta);
 }
 
 
@@ -260,6 +294,11 @@
 .project-node:nth-child(2) .particle {
   background: var(--accent-sand);
   box-shadow: 0 0 4px rgba(var(--accent-sand-rgb), 0.4);
+}
+
+.project-node:nth-child(3) .particle {
+  background: var(--accent-terracotta);
+  box-shadow: 0 0 4px rgba(var(--accent-terracotta-rgb), 0.4);
 }
 
 .particle-1 {
