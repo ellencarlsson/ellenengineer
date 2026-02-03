@@ -7,21 +7,21 @@ import './About.css';
 /** Milestones displayed on the timeline. */
 const MILESTONES = [
   {
-    year: 2002, label: 'Uppväxt', location: 'Öxnevalla',
+    year: 2002, label: 'Intro', location: 'Öxnevalla',
     description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
     image: '/images/2002.jpg'
   },
   {
-    year: 2021, label: 'Studier', location: 'Jönköping',
+    year: 2021, label: 'Började studera', location: 'Jönköping',
     description: 'Jag flyttade för att studera på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
     image: '/images/2021.jpg'
   },
   {
-    year: 2022, label: 'Programmering', location: 'Jönköping',
+    year: 2022, label: 'Första året', location: 'Jönköping',
     description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
   },
   {
-    year: 2023, label: 'Projekt', location: 'Jönköping',
+    year: 2023, label: 'Andra året', location: 'Jönköping',
     description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor. Hade min praktik på SAAB, Training & Simulation.'
   },
   {
