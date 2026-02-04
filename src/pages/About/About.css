@@ -454,27 +454,54 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .about-page {
+    min-height: calc(100dvh - 72px);
+    justify-content: space-between;
+  }
+
   .about-main {
-    padding: 0 24px 0;
+    padding: 0 12px 0;
+    flex: 1;
+  }
+
+  .card-layout {
+    max-width: 100%;
   }
 
   .card-layout.has-image {
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
   }
 
   .card-image {
     flex: none;
     width: 100%;
-    max-height: 240px;
+    max-height: 200px;
+  }
+
+  .card-eyebrow {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .card-chip {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .card-loc {
+    font-size: 10px;
   }
 
   .card-year {
-    font-size: 42px;
+    font-size: 36px;
+    margin-bottom: 12px;
   }
 
   .card-desc {
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.6;
+    min-height: auto;
   }
 
   .tl-node.active .tl-dot {
@@ -483,14 +510,19 @@
   }
 
   .timeline {
-    padding: 0 20px 30px;
+    padding: 0 8px 20px;
+    margin-top: -20px;
   }
 
   .tl-label {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .tl-sublabel {
+    display: none;
+  }
+
+  .timeline-hint {
     display: none;
   }
 
