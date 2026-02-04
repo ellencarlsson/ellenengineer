@@ -614,14 +614,14 @@ function ProjectDetail() {
       model: 'IBM DESKSTAR NP1',
       label: 'NORDPUNKT-2025',
       name: 'NordPunkt',
-      year: 'Pågående',
+      year: 'Under utveckling',
       capacity: '512 MB',
       interface: 'GPIO',
       status: 'IN DEVELOPMENT',
       ledColor: 'brown',
       accentColor: 'sand',
-      tagline: 'En liten enhet som visar din position och hjälper till med schemaläggning',
-      description: 'Ett postschema är ett schema som styr vem som ska posta och när. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop: uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nJag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.\n\nMGRS är det koordinatsystem som används i fält för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+      tagline: 'Raspberry Pi-enhet för MGRS-koordinater och automatisk schemaläggning i fält',
+      description: 'Ett postschema är ett schema som styr vem som ska posta och när. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop: uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i fält för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
       platforms: ['Raspberry Pi'],
       techStack: ['Python'],
       architecture: {
@@ -634,10 +634,12 @@ function ProjectDetail() {
           { id: 'sqlite', label: 'SQLite', col: 1, row: 2 },
         ],
         connections: [
-          { from: 'gps', to: 'rpi', label: 'USB GPS' },
-          { from: 'rpi', to: 'view', label: 'Touchscreen' },
-          { from: 'rpi', to: 'schedule', label: 'Constraints' },
-          { from: 'schedule', to: 'sqlite', label: 'Store' },
+          { from: 'gps', to: 'rpi', label: 'MGRS' },
+          { from: 'view', to: 'rpi', label: 'Sends\ncommands' },
+          { from: 'rpi', to: 'view', label: 'Shows MGRS\n/ Schedule' },
+          { from: 'rpi', to: 'schedule', label: 'Generate\nschedule' },
+          { from: 'schedule', to: 'rpi', label: 'Returns\nschedule' },
+          { from: 'schedule', to: 'sqlite', label: 'Read/Write' },
           { from: 'webadmin', to: 'sqlite', label: 'Read/Write' },
         ],
         subtitle: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.'
@@ -653,20 +655,7 @@ function ProjectDetail() {
           items: [
             {
               label: 'Från iOS till Raspberry Pi',
-              text: 'Första versionen var en iOS-app (PostSchema) som jag byggde för att planera vaktpass. Men eftersom man inte får ta med telefonen ut i fält behövde jag en annan lösning. En Raspberry Pi med pekskärm kan man ta med sig, och den behöver inget internet för att fungera.'
-            },
-            {
-              label: 'Varför MGRS?',
-              text: 'MGRS är det koordinatsystem som Försvarsmakten använder. Genom att lägga till en GPS-mottagare kan enheten visa din position direkt i rätt format, utan att behöva räkna om från vanliga koordinater.'
-            }
-          ]
-        },
-        {
-          title: 'Schemaläggning',
-          items: [
-            {
-              label: 'Regler systemet följer',
-              text: 'Schemageneratorn följer ett antal regler: ingen jobbar två pass samtidigt, varje skift har tillräckligt med folk, förare får ordentlig vila efter långa pass, folk tilldelas roller de är kvalificerade för, och arbetstimmarna fördelas rättvist över gruppen.'
+              text: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.'
             }
           ]
         }
@@ -676,22 +665,42 @@ function ProjectDetail() {
       componentsText: 'Enheten är uppdelad i oberoende moduler som kan utvecklas var för sig.',
       components: [
         {
-          group: '',
+          group: 'GPS',
           items: [
             {
-              name: 'GPS Module',
+              name: 'GPS Receiver',
               type: 'Hardware',
-              responsibility: 'En USB GPS-mottagare fångar upp satellitsignaler och visar positionen på skärmen. Koordinaterna konverteras automatiskt till MGRS-format.'
+              responsibility: 'En USB GPS-mottagare (VK-162) som fångar upp satellitsignaler och ger enhetens position.'
             },
+            {
+              name: 'MGRS Converter',
+              type: 'Service',
+              responsibility: 'Tar emot GPS-koordinater och konverterar dem till MGRS-format som kan användas direkt på en militär karta.'
+            }
+          ]
+        },
+        {
+          group: 'Schedule',
+          items: [
             {
               name: 'Schedule Engine',
               type: 'Service',
-              responsibility: 'Genererar scheman automatiskt utifrån tillgängliga personer, skift som behöver täckas, och ett antal regler. Använder constraint satisfaction för att hitta bästa lösningen.'
+              responsibility: 'Genererar scheman automatiskt utifrån tillgängliga personer och skift som behöver täckas.'
             },
             {
-              name: 'Hardware Layer',
-              type: 'Abstraction',
-              responsibility: 'Hanterar kommunikation med pekskärm, GPS-mottagare och lagring. Gör det möjligt att utveckla och testa utan riktig hårdvara.'
+              name: 'Constraints',
+              type: 'Rules',
+              responsibility: 'Reglerna som schemat måste följa: ingen jobbar dubbla pass, tillräckligt med folk per skift, vilotider efter långa pass, och rättvis fördelning av arbetstimmar.'
+            }
+          ]
+        },
+        {
+          group: 'Databas',
+          items: [
+            {
+              name: 'SQLite',
+              type: 'Database',
+              responsibility: 'Lokal databas som lagrar alla scheman, personer och inställningar direkt på enheten. Kräver inget internet.'
             },
             {
               name: 'Web Admin',

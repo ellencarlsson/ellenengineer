@@ -63,7 +63,7 @@ function Projects() {
     {
       id: 'nordpunkt',
       name: 'NordPunkt',
-      year: 'Pågående',
+      year: 'Under utveckling',
       platform: 'Raspberry Pi',
       tech: 'Python',
       description: 'Applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi.',
