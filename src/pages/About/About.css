@@ -359,12 +359,13 @@
 }
 
 .tl-dot {
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: rgba(var(--accent-rose-warm-rgb), 0.3);
   border: 2px solid rgba(var(--accent-rose-warm-rgb), 0.15);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transform: scale(0.56);
 }
 
 .tl-node:hover .tl-dot {
@@ -374,14 +375,12 @@
 }
 
 .tl-node.active .tl-dot {
-  width: 18px;
-  height: 18px;
   background: rgba(var(--accent-rose-light-rgb), 0.95);
   border-color: rgba(var(--accent-rose-warm-rgb), 0.7);
   box-shadow:
     0 0 10px rgba(var(--accent-rose-warm-rgb), 0.6),
     0 0 24px rgba(var(--accent-rose-warm-rgb), 0.3);
-  transform: none;
+  transform: scale(1);
   cursor: grab;
   touch-action: none;
   animation: dotCharge 2s ease-in-out infinite;
@@ -524,8 +523,7 @@
   }
 
   .tl-node.active .tl-dot {
-    width: 22px;
-    height: 22px;
+    transform: scale(1.2);
   }
 
   .timeline {
