@@ -626,17 +626,21 @@ function ProjectDetail() {
       techStack: ['Python'],
       architecture: {
         nodes: [
-          { id: 'gps', label: 'GPS Receiver', col: 0, row: 0 },
-          { id: 'hal', label: 'Hardware Layer', col: 1, row: 0 },
-          { id: 'mgrs', label: 'MGRS Converter', col: 2, row: 0 },
-          { id: 'schedule', label: 'Schedule Engine', col: 1, row: 1 },
+          { id: 'gps', label: 'GPS', col: 0, row: 0 },
+          { id: 'rpi', label: 'Raspberry Pi', col: 1, row: 0 },
+          { id: 'view', label: 'View', col: 2, row: 0 },
+          { id: 'schedule', label: 'Schedule', col: 1, row: 1 },
+          { id: 'webadmin', label: 'Web Admin', col: 0, row: 2 },
+          { id: 'sqlite', label: 'SQLite', col: 1, row: 2 },
         ],
         connections: [
-          { from: 'gps', to: 'hal', label: 'Satellite\nsignals' },
-          { from: 'hal', to: 'mgrs', label: 'Convert to\nMGRS' },
-          { from: 'hal', to: 'schedule', label: 'Constraints\n& rules' },
+          { from: 'gps', to: 'rpi', label: 'USB GPS' },
+          { from: 'rpi', to: 'view', label: 'Touchscreen' },
+          { from: 'rpi', to: 'schedule', label: 'Constraints' },
+          { from: 'schedule', to: 'sqlite', label: 'Store' },
+          { from: 'webadmin', to: 'sqlite', label: 'Read/Write' },
         ],
-        subtitle: 'GPS-modulen och schemamodulen är oberoende av varandra men delar samma hårdvarulager.'
+        subtitle: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.'
       },
       github: null,
       demo: null,
