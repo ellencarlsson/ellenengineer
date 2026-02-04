@@ -44,6 +44,17 @@
   gap: var(--spacing-xs);
 }
 
+.nav-logo-link {
+  padding: var(--spacing-xs);
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
+  border-radius: 6px;
+}
+
 .nav-link {
   color: var(--text-medium);
   text-decoration: none;

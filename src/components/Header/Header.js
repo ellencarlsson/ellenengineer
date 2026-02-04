@@ -3,6 +3,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
 import './Header.css';
 
 /** Navigation menu that hides when the user scrolls past the top. */
@@ -39,7 +40,7 @@ function Header() {
       <div className="header-container">
         <div className="header-left">
           <div className="header-left-pill">
-            <NavLink to="/" className="nav-link">EC</NavLink>
+            <NavLink to="/" className="nav-link nav-logo-link"><img src={logo} alt="EE" className="nav-logo" /></NavLink>
             <nav className="nav">
               <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                 Projekt
