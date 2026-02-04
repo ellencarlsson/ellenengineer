@@ -34,20 +34,22 @@
 
 .footer-socials {
   display: flex;
-  gap: var(--spacing-sm);
+  flex-direction: column;
+  gap: var(--spacing-xs);
 }
 
-.footer-socials a {
+.footer-social-link {
   color: var(--text-medium);
+  text-decoration: none;
   transition: all var(--transition-normal);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  font-size: var(--font-size-sm);
 }
 
-.footer-socials a:hover {
+.footer-social-link:hover {
   color: var(--text-dark);
-  transform: translateY(-2px);
 }
 
 .footer-bottom {
