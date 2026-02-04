@@ -1,94 +1,37 @@
-# Ellen Engineer - Portfolio Website
+# EllenEngineer
 
-Portfolio website för Ellen Carlsson - Software Engineer
+Personal portfolio website built with React. Each page has its own interactive theme: a typing terminal on the home page, a node network for projects, a draggable timeline for about me, SQL queries for the CV, and API calls for the contact page.
 
-## Tech Stack
+## Live
 
-- **Frontend:** React
-- **Backend:** Node.js + Express
-- **Database:** MongoDB
-- **Hosting:** TBD (GitHub Pages, Vercel, Heroku, etc.)
+[ellenengineer.se](https://ellenengineer.se)
 
-## Project Structure
+## Tech stack
 
-```
-ellenengineer/
-├── client/              # React frontend
-│   ├── public/         # Static files
-│   ├── src/
-│   │   ├── components/ # Reusable React components
-│   │   ├── pages/      # Page components
-│   │   ├── styles/     # CSS files
-│   │   └── utils/      # Utility functions
-│   └── package.json
-├── server/             # Node.js + Express backend
-│   ├── config/        # Configuration files
-│   ├── controllers/   # Route controllers
-│   ├── middleware/    # Custom middleware
-│   ├── models/        # MongoDB models
-│   ├── routes/        # API routes
-│   └── package.json
-└── package.json       # Root package.json for scripts
-```
+- React
+- React Router
+- JavaScript
+- CSS3
 
-## Installation
+## Pages
 
-1. Klona repot:
+- **Home** — Terminal with typing animation
+- **Projects** — Interactive node network with SVG connections
+- **About** — Timeline with draggable navigation and swipe support
+- **CV** — SQL-themed layout with downloadable PDF
+- **Contact** — Styled as API requests
+
+## Run locally
+
 ```bash
 git clone https://github.com/ellencarlsson/ellenengineer.git
 cd ellenengineer
+npm install
+npm start
 ```
 
-2. Installera alla dependencies:
-```bash
-npm run install-all
-```
+Runs on http://localhost:3000
 
-3. Sätt upp environment variables:
-```bash
-cd server
-cp .env.example .env
-# Redigera .env med dina egna värden
-```
+## Author
 
-4. Starta MongoDB lokalt (eller använd MongoDB Atlas)
-
-## Development
-
-Starta både frontend och backend samtidigt:
-```bash
-npm run dev
-```
-
-Eller starta dem separat:
-```bash
-# Terminal 1 - Backend
-npm run server
-
-# Terminal 2 - Frontend
-npm run client
-```
-
-- Frontend körs på: http://localhost:3000
-- Backend API körs på: http://localhost:5000
-
-## Scripts
-
-- `npm run dev` - Starta både client och server
-- `npm run client` - Starta endast frontend
-- `npm run server` - Starta endast backend
-- `npm run install-all` - Installera alla dependencies
-- `npm run build` - Bygg production-version av frontend
-
-## Features (Planerade)
-
-- [ ] Hero/Landing page med introduktion
-- [ ] Portfolio/Projekt-sektion
-- [ ] Om mig-sektion
-- [ ] Kontakt-formulär
-- [ ] Responsiv design
-- [ ] Dark mode
-
-## License
-
-MIT
+Ellen Carlsson
