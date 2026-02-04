@@ -25,8 +25,8 @@ function Footer() {
           <div className="footer-section">
             <h4>Sociala medier</h4>
             <a href="https://github.com/ellencarlsson" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="mailto:your-email@example.com">Email</a>
+            <a href="https://www.linkedin.com/in/ellen-carlsson-ab04451b4" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:carlssonellen@live.se">Email</a>
           </div>
         </div>
         <div className="footer-bottom">

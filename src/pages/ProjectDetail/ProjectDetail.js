@@ -494,8 +494,8 @@ function ProjectDetail() {
         }
       ]
     },
-    'portfolio-2026': {
-      id: 'portfolio-2026',
+    'portfolio': {
+      id: 'portfolio',
       model: 'MAXTOR MX2026',
       label: 'PORTFOLIO-WEBSITE-2026',
       name: 'Portfolio Website',
