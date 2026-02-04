@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+/**
+ * @file Projects page displaying projects as interactive nodes with connections.
+ */
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
+/** Predefined positions for the project nodes in the network. */
 const SCATTER_POSITIONS = [
   { x: 25, y: 30 },
   { x: 65, y: 25 },
@@ -13,9 +17,24 @@ const SCATTER_POSITIONS = [
   { x: 80, y: 40 },
 ];
 
+/** Mobile override: move EllenEngineer node higher. */
+const MOBILE_POSITIONS = SCATTER_POSITIONS.map((pos, i) =>
+  i === 1 ? { ...pos, y: 17 } : pos
+);
+
+/** Projects page showing all projects as clickable nodes with SVG connections. */
 function Projects() {
   const navigate = useNavigate();
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 480);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const positions = isMobile ? MOBILE_POSITIONS : SCATTER_POSITIONS;
 
   const projects = [
     {
@@ -25,26 +44,36 @@ function Projects() {
       platform: 'Apple Watch',
       tech: 'AI',
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
-      shortDescription: 'AI-driven teckenspråksigenkänning som använder Apple Watch för att tolka handrörelser och omvandla dem till tal.',
       techStack: ['Swift', 'Create ML'],
-      github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      connectedTo: ['portfolio-2026']
+      github: null,
+      connectedTo: ['ellenengineer', 'nordpunkt']
     },
     {
-      id: 'portfolio-2026',
-      name: 'Portfolio Website',
+      id: 'ellenengineer',
+      name: 'EllenEngineer',
       year: '2026',
       platform: 'Webbutveckling',
       tech: 'React',
       description: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer.',
-      shortDescription: 'Interaktiv portfolio med vintage IT-tema, flytande projekt-noder och kreativa animationer byggt i React.',
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
-      github: 'https://github.com/ellencarlsson/ellenengineer',
+      github: null,
       demo: 'https://ellenengineer.se',
-      connectedTo: []
+      connectedTo: ['nordpunkt']
+    },
+    {
+      id: 'nordpunkt',
+      name: 'NordPunkt',
+      year: 'Under utveckling',
+      platform: 'Raspberry Pi',
+      tech: 'Python',
+      description: 'Applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi.',
+      techStack: ['Python'],
+      github: null,
+      connectedTo: ['ellenengineer']
     }
   ];
 
+  /** Navigates to the project detail page. */
   const handleNodeClick = (projectId) => {
     navigate(`/projects/${projectId}`);
   };
@@ -55,12 +84,12 @@ function Projects() {
         <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg">
           {projects.map((project, index) => {
             if (!project.connectedTo || project.connectedTo.length === 0) return null;
-            const pos = SCATTER_POSITIONS[index];
+            const pos = positions[index];
             return project.connectedTo.map((targetId) => {
               const targetIndex = projects.findIndex(p => p.id === targetId);
               const targetProject = projects[targetIndex];
               if (!targetProject) return null;
-              const targetPos = SCATTER_POSITIONS[targetIndex];
+              const targetPos = positions[targetIndex];
 
               return (
                 <g key={`connection-${project.id}-${targetId}`}>
@@ -93,7 +122,7 @@ function Projects() {
 
         <div className="nodes-container">
           {projects.map((project, index) => {
-            const pos = SCATTER_POSITIONS[index];
+            const pos = positions[index];
             return (
             <div
               key={project.id}
@@ -126,16 +155,6 @@ function Projects() {
                 </div>
               </div>
 
-              {hoveredNode === project.id && (
-                <div className="node-info-card">
-                  <div className="terminal-header">
-                    <span className="terminal-title">Project Details</span>
-                  </div>
-                  <div className="info-card-content">
-                    <p className="info-description">{project.shortDescription}</p>
-                  </div>
-                </div>
-              )}
             </div>
             );
           })}

@@ -1,3 +1,6 @@
+/**
+ * @file Configures React Router and maps all routes to page components.
+ */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.css';
@@ -10,7 +13,9 @@ import Projects from './pages/Projects/Projects';
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail';
 import Contact from './pages/Contact/Contact';
 import CV from './pages/CV/CV';
+import NotFound from './pages/NotFound/NotFound';
 
+/** Root component that sets up routing and renders Header, pages, and Footer. */
 function App() {
   return (
     <Router>
@@ -24,6 +29,7 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

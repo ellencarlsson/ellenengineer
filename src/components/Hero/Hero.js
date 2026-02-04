@@ -1,9 +1,13 @@
+/**
+ * @file Terminal window on the home page with typing animation.
+ */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Hero.css';
 
+/** Animated terminal that types out commands and output line by line. */
 function Hero() {
-  const [displayedText, setDisplayedText] = useState('');
+  const [completedLines, setCompletedLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
@@ -11,48 +15,49 @@ function Hero() {
   const [skippedByUser, setSkippedByUser] = useState(false);
 
   const terminalLines = [
-    { type: 'command', text: 'ellen@ellenengineer:~$ whoami' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'whoami' },
     { type: 'output', text: 'Ellen Carlsson - Engineer' },
     { type: 'output', text: '' },
-    { type: 'command', text: 'ellen@ellenengineer:~$ cat about.txt' },
-    { type: 'output', text: 'Studerat Datateknik med inriktning mjukvaruutveckling med mobila plattformar' },
-    { type: 'output', text: 'Gillar att se lösningar i vardagsproblem' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cat about.txt' },
+    { type: 'output', text: 'Jag gillar att lösa vardagsproblem med hjälp av teknik.' },
+    { type: 'output', text: 'Jag har gjort denna hemsida för att lägga upp väl valda projekt.' },
     { type: 'output', text: '' },
-    { type: 'command', text: 'ellen@ellenengineer:~$ echo $CURRENT_STATUS' },
-    { type: 'output', text: 'Genomför för närvarande 15 månaders värnplikt, som avslutas sommaren 2026 i Halmstad.' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'echo $CURRENT_STATUS' },
+    { type: 'output', text: 'Just nu är jag på Luftvärnsregementet i Halmstad och kommer vara här till sommaren 2026.' },
     { type: 'output', text: '' },
-    { type: 'command', text: 'ellen@ellenengineer:~$ ./explore_projects.sh' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: './explore_projects.sh' },
     { type: 'link', text: '→ Klicka här för att se mina projekt' }
   ];
 
+  /** Skips the animation and displays all text immediately. */
   const skipAnimation = () => {
-    const fullText = terminalLines.map(line => line.text).join('\n');
-    setDisplayedText(fullText);
+    setCompletedLines([...terminalLines]);
     setCurrentLineIndex(terminalLines.length);
     setIsComplete(true);
     setSkippedByUser(true);
   };
 
+  /** Listens for the Enter key to skip the animation. */
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === 'Enter' && !isComplete) {
         skipAnimation();
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete]);
 
+  /** Blinking cursor that toggles every 530 milliseconds. */
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
     }, 530);
-
     return () => clearInterval(cursorInterval);
   }, []);
 
+  /** Types out text character by character with different speeds for commands and output. */
   useEffect(() => {
     if (currentLineIndex >= terminalLines.length) {
       setIsComplete(true);
@@ -60,26 +65,35 @@ function Hero() {
     }
 
     const currentLine = terminalLines[currentLineIndex];
-    const delay = currentLine.type === 'command' ? 80 : 40;
+    const typingSpeed = currentLine.type === 'command' ? 40 : 15;
 
     if (currentCharIndex < currentLine.text.length) {
       const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + currentLine.text[currentCharIndex]);
         setCurrentCharIndex(prev => prev + 1);
-      }, delay);
-
+      }, typingSpeed);
       return () => clearTimeout(timeout);
     } else {
+      let lineDelay;
+      if (currentLine.type === 'command') {
+        lineDelay = 300;
+      } else if (currentLine.text === '') {
+        lineDelay = 50;
+      } else {
+        lineDelay = 100;
+      }
+
       const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + '\n');
+        setCompletedLines(prev => [...prev, currentLine]);
         setCurrentLineIndex(prev => prev + 1);
         setCurrentCharIndex(0);
-      }, currentLine.type === 'command' ? 200 : 500);
-
+      }, lineDelay);
       return () => clearTimeout(timeout);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCharIndex, currentLineIndex]);
+
+  const currentLine = currentLineIndex < terminalLines.length ? terminalLines[currentLineIndex] : null;
+  const currentTypedText = currentLine ? currentLine.text.slice(0, currentCharIndex) : '';
 
   return (
     <section id="home" className="hero">
@@ -93,46 +107,52 @@ function Hero() {
           <div className="hero-terminal-title">EllenEngineer — zsh</div>
         </div>
 
-        <div className="hero-terminal-body">
+        <div className="hero-terminal-body" onClick={() => !isComplete && skipAnimation()}>
           <div className="hero-terminal-content">
             <pre>
-              {displayedText.split('\n').map((line, index) => {
-                const lineData = terminalLines.find(l => l.text === line.trim());
-                const lineType = lineData ? lineData.type : 'output';
-
-                if (lineType === 'link') {
+              {completedLines.map((line, index) => {
+                if (line.type === 'link') {
                   return (
                     <div key={index} className="hero-line link">
-                      <Link to="/projects" className="hero-terminal-link">{line}</Link>
+                      <Link to="/projects" className="hero-terminal-link">{line.text}</Link>
                     </div>
                   );
                 }
-
-                if (lineType === 'command' && line.includes('$')) {
-                  const dollarIndex = line.indexOf('$');
-                  const prompt = line.slice(0, dollarIndex + 1);
-                  const cmd = line.slice(dollarIndex + 1);
+                if (line.type === 'command') {
                   return (
                     <div key={index} className="hero-line command">
-                      <span className="hero-prompt">{prompt}</span>
-                      <span className="hero-cmd">{cmd}</span>
+                      <span className="hero-prompt">{line.prompt}</span>
+                      <span className="hero-cmd">{line.text}</span>
                     </div>
                   );
                 }
-
                 return (
-                  <div key={index} className={`hero-line ${lineType}`}>
-                    {line || '\u00A0'}
+                  <div key={index} className={`hero-line ${line.type}`}>
+                    {line.text || '\u00A0'}
                   </div>
                 );
               })}
+              {currentLine && (
+                currentLine.type === 'command' ? (
+                  <div className="hero-line command">
+                    <span className="hero-prompt">{currentLine.prompt}</span>
+                    <span className="hero-cmd">{currentTypedText}</span>
+                  </div>
+                ) : (
+                  <div className={`hero-line ${currentLine.type}`}>
+                    {currentTypedText || '\u00A0'}
+                  </div>
+                )
+              )}
               <span className={`hero-cursor ${showCursor ? 'visible' : ''}`}>▋</span>
             </pre>
           </div>
         </div>
 
-        <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`}>
-          <span className="hero-hint-key">Enter</span> för att hoppa över animationen
+        <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`} onClick={() => !isComplete && skipAnimation()}>
+          <span className="hero-hint-key hint-desktop">Enter</span>
+          <span className="hero-hint-key hint-mobile">Tryck</span>
+          {' '}för att hoppa över animationen
         </div>
       </div>
     </section>

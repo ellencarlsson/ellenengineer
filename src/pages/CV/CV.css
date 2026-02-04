@@ -150,6 +150,46 @@
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
 }
 
+/* Skip hint */
+.cv-skip-hint {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--terminal-text-muted);
+  opacity: 0.5;
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+  animation: cvSkipPulse 2s ease-in-out infinite;
+}
+
+.cv-skip-key {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--terminal-text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cv-hint-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .cv-hint-desktop {
+    display: none;
+  }
+
+  .cv-hint-mobile {
+    display: inline;
+  }
+}
+
+@keyframes cvSkipPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.3; }
+}
+
 /* Action buttons */
 .cv-actions {
   display: flex;

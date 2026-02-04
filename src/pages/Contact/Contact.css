@@ -24,7 +24,6 @@
   background-clip: text;
   text-align: center;
   margin-bottom: var(--spacing-lg);
-  animation: fadeInUp var(--transition-slow);
   font-weight: var(--font-weight-bold);
 }
 
@@ -35,7 +34,6 @@
   justify-content: center;
   gap: 12px;
   margin-bottom: var(--spacing-sm);
-  animation: fadeInUp 0.8s ease-out;
 }
 
 .api-title {
@@ -61,7 +59,6 @@
   font-size: 15px;
   color: var(--terminal-text-muted);
   margin-bottom: var(--spacing-xl);
-  animation: fadeInUp 0.9s ease-out;
 }
 
 /* API Endpoints */
@@ -69,7 +66,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: fadeInUp 1s ease-out;
 }
 
 .endpoint {
