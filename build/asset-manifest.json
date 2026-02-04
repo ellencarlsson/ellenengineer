@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2b641b54.css",
+    "main.js": "/static/js/main.7a482d98.js",
+    "static/media/Hacked-KerX.ttf": "/static/media/Hacked-KerX.d981e1d471a16b240218.ttf",
+    "index.html": "/index.html",
+    "static/media/logo.svg": "/static/media/logo.1426f2347b1203871da9c72a861a826c.svg",
+    "main.2b641b54.css.map": "/static/css/main.2b641b54.css.map",
+    "main.7a482d98.js.map": "/static/js/main.7a482d98.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b641b54.css",
+    "static/js/main.7a482d98.js"
+  ]
+}
