@@ -30,6 +30,32 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  /** Locks body scroll while the mobile menu is open. */
+  useEffect(() => {
+    if (isMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+    } else {
+      const top = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      if (top) {
+        window.scrollTo(0, parseInt(top, 10) * -1);
+      }
+    }
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+    };
+  }, [isMenuOpen]);
+
   /** Closes mobile menu on navigation. */
   const handleNavClick = () => {
     setIsMenuOpen(false);
