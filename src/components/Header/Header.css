@@ -92,6 +92,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
+  transform: translateX(-50px);
 }
 
 .header-title h1 {
@@ -312,6 +313,10 @@
   .header-center {
     flex: 1;
     justify-content: center;
+  }
+
+  .header-title {
+    transform: translateX(-20px);
   }
 
   .name-first {
