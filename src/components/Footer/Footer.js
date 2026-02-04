@@ -2,6 +2,7 @@
  * @file Footer with social icons and contact info.
  */
 import React from 'react';
+import packageJson from '../../../package.json';
 import './Footer.css';
 
 /** Footer displayed on all pages. */
@@ -30,6 +31,7 @@ function Footer() {
           <p className="footer-credits">
             Font: <a href="https://hackedfont.com" target="_blank" rel="noopener noreferrer">Hacked</a> av David Libeau (CC BY 4.0)
           </p>
+          <p className="footer-version">v{packageJson.version}</p>
         </div>
       </div>
     </footer>

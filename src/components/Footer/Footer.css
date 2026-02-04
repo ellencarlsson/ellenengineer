@@ -76,6 +76,12 @@
   opacity: 0.8;
 }
 
+.footer-version {
+  font-size: 0.65rem;
+  opacity: 0.3;
+  margin-top: var(--spacing-xs);
+}
+
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
