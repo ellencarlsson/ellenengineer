@@ -1,0 +1,39 @@
+.not-found-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-container {
+  text-align: center;
+}
+
+.not-found-code {
+  display: block;
+  font-family: 'Hacked', 'Cabin Sketch', cursive;
+  font-size: 96px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.08);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.not-found-message {
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+}
+
+.not-found-link {
+  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--accent-sage);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.not-found-link:hover {
+  opacity: 0.7;
+}

@@ -13,6 +13,7 @@ import Projects from './pages/Projects/Projects';
 import ProjectDetail from './pages/ProjectDetail/ProjectDetail';
 import Contact from './pages/Contact/Contact';
 import CV from './pages/CV/CV';
+import NotFound from './pages/NotFound/NotFound';
 
 /** Root component that sets up routing and renders Header, pages, and Footer. */
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
