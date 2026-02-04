@@ -17,7 +17,7 @@ const SCATTER_POSITIONS = [
   { x: 80, y: 40 },
 ];
 
-/** Mobile override: move Portfolio node higher. */
+/** Mobile override: move EllenEngineer node higher. */
 const MOBILE_POSITIONS = SCATTER_POSITIONS.map((pos, i) =>
   i === 1 ? { ...pos, y: 17 } : pos
 );
@@ -46,11 +46,11 @@ function Projects() {
       description: 'SignTalker är ett projekt där jag undersöker hur en Apple Watch kan användas för att tolka handrörelser och omvandla dem till ord med hjälp av AI.',
       techStack: ['Swift', 'Create ML'],
       github: 'https://github.com/ellencarlsson/sign-language-recognition',
-      connectedTo: ['portfolio', 'nordpunkt']
+      connectedTo: ['ellenengineer', 'nordpunkt']
     },
     {
-      id: 'portfolio',
-      name: 'Portfolio Website',
+      id: 'ellenengineer',
+      name: 'EllenEngineer',
       year: '2026',
       platform: 'Webbutveckling',
       tech: 'React',
@@ -69,7 +69,7 @@ function Projects() {
       description: 'Applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi.',
       techStack: ['Python'],
       github: null,
-      connectedTo: ['portfolio']
+      connectedTo: ['ellenengineer']
     }
   ];
 

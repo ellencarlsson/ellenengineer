@@ -55,8 +55,8 @@
   stroke: var(--accent-sage);
 }
 
-.connection-line.active[data-from="portfolio"],
-.connection-line.active[data-to="portfolio"] {
+.connection-line.active[data-from="ellenengineer"],
+.connection-line.active[data-to="ellenengineer"] {
   stroke: var(--text-medium);
 }
 
@@ -84,7 +84,7 @@
   filter: drop-shadow(0 0 2px rgba(var(--accent-sage-rgb), 0.5));
 }
 
-.data-packet[data-from="portfolio"] {
+.data-packet[data-from="ellenengineer"] {
   fill: var(--accent-sand);
   filter: drop-shadow(0 0 2px rgba(var(--accent-sand-rgb), 0.5));
 }
