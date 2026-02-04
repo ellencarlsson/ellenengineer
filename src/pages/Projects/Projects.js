@@ -81,7 +81,7 @@ function Projects() {
   return (
     <div className="projects-page">
       <div className="projects-network-container">
-        <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg">
+        <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
           {projects.map((project, index) => {
             if (!project.connectedTo || project.connectedTo.length === 0) return null;
             const pos = positions[index];
@@ -97,10 +97,10 @@ function Projects() {
                     className={`connection-line ${hoveredNode === project.id || hoveredNode === targetId ? 'active' : ''}`}
                     data-from={project.id}
                     data-to={targetId}
-                    x1={`${pos.x}%`}
-                    y1={`${pos.y}%`}
-                    x2={`${targetPos.x}%`}
-                    y2={`${targetPos.y}%`}
+                    x1={pos.x}
+                    y1={pos.y}
+                    x2={targetPos.x}
+                    y2={targetPos.y}
                   />
                   {/* Data packet */}
                   <circle
@@ -111,7 +111,7 @@ function Projects() {
                     <animateMotion
                       dur={`${8 + Math.random() * 4}s`}
                       repeatCount="indefinite"
-                      path={`M ${pos.x}% ${pos.y}% L ${targetPos.x}% ${targetPos.y}%`}
+                      path={`M ${pos.x} ${pos.y} L ${targetPos.x} ${targetPos.y}`}
                     />
                   </circle>
                 </g>
