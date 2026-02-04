@@ -161,7 +161,7 @@ function CV() {
   });
 
   return (
-    <section className="cv-page">
+    <section className="cv-page" onClick={() => !queryComplete && skipAnimation()}>
       <div className="cv-particles">{particles}</div>
 
       <div className="cv-layout">
@@ -191,7 +191,8 @@ function CV() {
 
           {!queryComplete && (
             <div className="cv-skip-hint">
-              Tryck <span className="cv-skip-key">Enter</span> för att hoppa över
+              <span className="cv-hint-desktop">Tryck <span className="cv-skip-key">Enter</span> för att hoppa över</span>
+              <span className="cv-hint-mobile">Tryck för att hoppa över</span>
             </div>
           )}
 

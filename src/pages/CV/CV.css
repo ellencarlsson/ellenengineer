@@ -171,6 +171,20 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+.cv-hint-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .cv-hint-desktop {
+    display: none;
+  }
+
+  .cv-hint-mobile {
+    display: inline;
+  }
+}
+
 @keyframes cvSkipPulse {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 0.3; }
