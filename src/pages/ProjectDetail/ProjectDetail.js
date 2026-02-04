@@ -339,9 +339,9 @@ function ProjectDetail() {
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideos: [
-        { title: 'Presentation', description: 'Introduktion till projektet och hur appen fungerar', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
-        { title: 'Drive in', description: 'Beställer mat på McDonald\'s med hjälp av klockan', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
-        { title: 'Dog mode', description: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', url: 'https://www.youtube.com/embed/RrvsNtiPFXo' },
+        { title: 'Presentation', description: 'Introduktion till projektet och hur appen fungerar', url: 'https://www.youtube.com/embed/qRDOVvyBVKQ' },
+        { title: 'Drive in', description: 'Beställer mat på McDonald\'s med hjälp av klockan', url: 'https://www.youtube.com/embed/UfcuVqfH8x8' },
+        { title: 'Dog mode', description: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', url: 'https://www.youtube.com/embed/-NRR78CkO18' },
       ],
       resultText: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
       techDetails: [
