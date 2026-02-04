@@ -180,7 +180,7 @@
 .hero-terminal-hint.no-transition {
   transition: none;
   animation: none;
-  display: none;
+  visibility: hidden;
 }
 
 .hero-hint-key {
