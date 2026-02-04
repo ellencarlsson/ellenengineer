@@ -50,6 +50,7 @@ function About() {
   const dotRefs = useRef([]);
   const blobRef = useRef(null);
   const prevActiveRef = useRef(null);
+  const touchStartRef = useRef(null);
 
   /** Keeps activeRef in sync with the current state. */
   useEffect(() => { activeRef.current = active; }, [active]);
@@ -99,6 +100,32 @@ function About() {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  /** Detects horizontal swipe gestures to navigate between milestones on mobile. */
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      touchStartRef.current = e.touches[0].clientX;
+    };
+    const handleTouchEnd = (e) => {
+      if (touchStartRef.current === null) return;
+      const diff = touchStartRef.current - e.changedTouches[0].clientX;
+      const MIN_SWIPE = 50;
+      if (Math.abs(diff) >= MIN_SWIPE) {
+        if (diff > 0) {
+          setActive(prev => Math.min(prev + 1, MILESTONES.length - 1));
+        } else {
+          setActive(prev => Math.max(prev - 1, 0));
+        }
+      }
+      touchStartRef.current = null;
+    };
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
   }, []);
 
   /** Creates floating ambient particles in the background. */
