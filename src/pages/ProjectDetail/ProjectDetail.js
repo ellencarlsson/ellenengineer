@@ -334,7 +334,7 @@ function ProjectDetail() {
         ],
         subtitle: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
       },
-      github: 'https://github.com/ellencarlsson/sign-language-recognition',
+      github: null,
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
@@ -521,7 +521,7 @@ function ProjectDetail() {
         ],
         subtitle: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.'
       },
-      github: 'https://github.com/ellencarlsson/ellenengineer',
+      github: null,
       demo: null,
       image: null,
       demoVideo: null,
@@ -537,15 +537,6 @@ function ProjectDetail() {
             {
               label: 'Balans mellan kreativitet och tydlighet',
               text: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.'
-            }
-          ]
-        },
-        {
-          title: 'Verktyg',
-          items: [
-            {
-              label: 'Claude som AI-verktyg',
-              text: 'Hela sidan är byggd med hjälp av Claude som AI-verktyg. Jag styr projektet, tar besluten, väljer design och bestämmer vad som ska byggas. Claude hjälper mig att skriva koden snabbare. Det kräver att man har en bra överblick över projektet och kan ge tydliga instruktioner för att det ska bli rätt.'
             }
           ]
         }
@@ -1021,7 +1012,7 @@ function ProjectDetail() {
         )}
 
         {/* LINKS */}
-        <div className="file-section fullwidth-section">
+        {(project.thesis || project.demo || project.github) && <div className="file-section fullwidth-section">
           <div className="file-header clickable section-links" onClick={() => toggleSection('links')}>
             <span className="file-icon links-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
             <span className="file-name links-name">links.url</span>
@@ -1068,7 +1059,7 @@ function ProjectDetail() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );
