@@ -494,11 +494,11 @@ function ProjectDetail() {
         }
       ]
     },
-    'portfolio': {
-      id: 'portfolio',
+    'ellenengineer': {
+      id: 'ellenengineer',
       model: 'MAXTOR MX2026',
-      label: 'PORTFOLIO-WEBSITE-2026',
-      name: 'Portfolio Website',
+      label: 'ELLENENGINEER-2026',
+      name: 'EllenEngineer',
       year: '2026',
       capacity: '2.6 GB',
       interface: 'IDE',
