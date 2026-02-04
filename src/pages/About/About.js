@@ -8,35 +8,35 @@ import './About.css';
 const MILESTONES = [
   {
     year: 2002, label: 'Intro', location: 'Öxnevalla',
-    description: 'Här växte jag upp och gick hela min skolgång, med ett stort intresse för djur, särskilt hästar.',
+    description: 'Jag är född och uppvuxen på landet mellan Borås och Varberg, där jag gick hela min skolgång. Jag växte upp med mamma, pappa och min lillebror, omgiven av djur. När jag var mindre red jag mycket och spenderade stor del av tiden med hästar. Idag har vi 3 hästar, 4 får och 1 hund.\n\nUnder gymnasiet visste jag att jag ville plugga vidare, och teknik och data kändes spännande.',
     image: '/images/2002.jpg'
   },
   {
     year: 2021, label: 'Började studera', location: 'Jönköping',
-    description: 'Jag flyttade för att studera på Jönköpings Tekniska Högskola, på programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar.',
+    description: 'Jag flyttade till Jönköping för att studera på Jönköpings Tekniska Högskola, programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar. Jag trivdes direkt och tyckte utbildningen var rolig. Det kändes som att jag hade hamnat rätt.',
     image: '/images/2021.jpg'
   },
   {
     year: 2022, label: 'Första året', location: 'Jönköping',
-    description: 'Under mitt första år av studierna lärde jag mig grundläggande programmering. Det innefattade Objektorienterad programmering samt hur databaser och bl.a SQL fungerar.'
+    description: 'Under första året lärde jag mig grunderna i programmering, bland annat objektorienterad programmering och databaser med SQL. Det var mycket nytt, men det var kul.'
   },
   {
     year: 2023, label: 'Andra året', location: 'Jönköping',
-    description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag lärde mig att göra hela projekt. Det var Android app, iOS app, två webbsidor. Hade min praktik på SAAB, Training & Simulation.'
+    description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag fick göra hela projekt. Det var Android-app, iOS-app och två webbsidor.\n\nJag hade min praktik på SAAB, Training & Simulation. Det var intressant att vara på ett riktigt företag och se hur det gick till i praktiken.'
   },
   {
     year: 2024, label: 'Examen', location: 'Jönköping',
-    description: 'Tog examen som Dataingenjör. Fick pris och stipendie av Science Park för mitt examensarbete om teckenspråksigenkänning.',
+    description: 'Jag tog examen som Dataingenjör och fick pris och stipendium av Science Park för mitt examensarbete om teckenspråksigenkänning.\n\nEfter att ha hälsat på min bror på en hälsa-på-dag i militären kände jag att det kanske var något för mig också. Jag bestämde mig för att testa.',
     image: '/images/2024.jpg'
   },
   {
     year: 2025, label: 'Värnplikt', location: 'Halmstad',
-    description: 'I mars påbörjade 15 månaders värnplikt på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl.',
+    description: 'I mars påbörjade jag 15 månaders värnplikt på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl. Det är kul att vara här och det känns bra att få vara del av något viktigt. Det roligaste är att jobba i grupp och lösa uppgifter gemensamt.',
     image: '/images/2025.jpg'
   },
   {
     year: 2026, label: 'Nästa steg', location: '?',
-    description: 'I mitt nästa kapitel ser jag fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
+    description: 'Värnplikten avslutas sommaren 2026. Vad som händer sen vet jag inte riktigt ännu, inte heller var. Men jag ser fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
   }
 ];
 
@@ -215,10 +215,14 @@ function About() {
               <span className="card-loc">{m.location}</span>
             </div>
             <h1 className="card-year">{m.year}</h1>
-            <p className="card-desc">
-              <span className="card-prompt">&gt; </span>
-              {m.description}
-            </p>
+            <div className="card-desc">
+              {m.description.split('\n\n').map((paragraph, i) => (
+                <p key={i}>
+                  {i === 0 && <span className="card-prompt">&gt; </span>}
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
           {m.image && (
             <div className="card-image">

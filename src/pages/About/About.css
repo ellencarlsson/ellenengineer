@@ -129,6 +129,14 @@
   min-height: 120px;
 }
 
+.card-desc p {
+  margin: 0 0 12px 0;
+}
+
+.card-desc p:last-child {
+  margin-bottom: 0;
+}
+
 .card-prompt {
   color: rgba(var(--accent-rose-warm-rgb), 0.6);
 }
