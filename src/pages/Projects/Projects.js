@@ -1,7 +1,7 @@
 /**
  * @file Projects page displaying projects as interactive nodes with connections.
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
@@ -33,6 +33,8 @@ function Projects() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const svgRef = useRef(null);
 
   const positions = isMobile ? MOBILE_POSITIONS : SCATTER_POSITIONS;
 
@@ -81,7 +83,7 @@ function Projects() {
   return (
     <div className="projects-page">
       <div className="projects-network-container">
-        <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg className="connections-svg" xmlns="http://www.w3.org/2000/svg" ref={svgRef}>
           {projects.map((project, index) => {
             if (!project.connectedTo || project.connectedTo.length === 0) return null;
             const pos = positions[index];
@@ -97,23 +99,11 @@ function Projects() {
                     className={`connection-line ${hoveredNode === project.id || hoveredNode === targetId ? 'active' : ''}`}
                     data-from={project.id}
                     data-to={targetId}
-                    x1={pos.x}
-                    y1={pos.y}
-                    x2={targetPos.x}
-                    y2={targetPos.y}
+                    x1={`${pos.x}%`}
+                    y1={`${pos.y}%`}
+                    x2={`${targetPos.x}%`}
+                    y2={`${targetPos.y}%`}
                   />
-                  {/* Data packet */}
-                  <circle
-                    className={`data-packet ${hoveredNode === project.id || hoveredNode === targetId ? 'paused' : ''}`}
-                    data-from={project.id}
-                    r="3"
-                  >
-                    <animateMotion
-                      dur={`${8 + Math.random() * 4}s`}
-                      repeatCount="indefinite"
-                      path={`M ${pos.x} ${pos.y} L ${targetPos.x} ${targetPos.y}`}
-                    />
-                  </circle>
                 </g>
               );
             });
