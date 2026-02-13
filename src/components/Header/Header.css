@@ -58,14 +58,14 @@
 }
 
 .nav-logo-link {
-  padding: var(--spacing-xs);
+  padding: 2px;
 }
 
 .nav-logo {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: block;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .nav-link {
