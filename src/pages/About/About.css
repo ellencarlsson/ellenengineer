@@ -551,8 +551,17 @@
 
 /* Landscape mobile - smaller text */
 @media (max-height: 500px) and (orientation: landscape) {
+  .about-page {
+    height: 100vh;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
   .about-main {
-    padding: 20px 3rem;
+    flex: 1;
+    padding: 10px 3rem;
+    overflow: hidden;
   }
 
   .card-chip {
@@ -594,7 +603,8 @@
   }
 
   .timeline {
-    padding: 10px 40px 20px;
+    padding: 10px 40px 15px;
+    flex-shrink: 0;
   }
 
   .tl-label {
