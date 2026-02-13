@@ -2,6 +2,7 @@
  * @file CV page with SQL-animated text output and downloadable PDF.
  */
 import React, { useState, useEffect } from 'react';
+import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
 import './CV.css';
 
 /** SQL lines typed out character by character on the page. */
@@ -232,11 +233,10 @@ function CV() {
 
           <div className="cv-image-wrap">
             <div className="cv-glitch">
-              <img
+              <ImageWithSkeleton
                 src="/assets/CV-image.png"
                 alt="CV - Ellen Carlsson"
                 className="cv-image"
-                loading="lazy"
               />
             </div>
           </div>
