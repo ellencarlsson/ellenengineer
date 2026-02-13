@@ -77,13 +77,13 @@ function Contact() {
 
     setBugStatus('sending');
     try {
-      await fetch('https://ellenengineer.com/report-bug.php', {
+      await fetch('/api/report-bug', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           category: bugCategory,
           page: bugPage || null,
-          message: bugDescription
+          description: bugDescription
         })
       });
       setBugStatus('sent');

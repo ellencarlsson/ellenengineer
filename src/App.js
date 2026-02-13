@@ -24,7 +24,7 @@ function App() {
     const oneDay = 24 * 60 * 60 * 1000;
 
     if (!lastNotified || now - parseInt(lastNotified, 10) > oneDay) {
-      fetch('https://ellenengineer.com/notify.php', { method: 'POST' })
+      fetch('/api/notify', { method: 'POST' })
         .catch(() => {});
       localStorage.setItem('lastVisitNotification', now.toString());
     }
