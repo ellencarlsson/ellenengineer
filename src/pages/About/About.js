@@ -194,19 +194,6 @@ function About() {
     <section id="about" className="about-page">
       <div className="ambient-particles" ref={particlesRef}></div>
 
-      <div className="about-ascii">{`
-        ┌─────────────┐
-   ─────┤   EC-2026    ├─────
-   ─────┤  engineer.h  ├─────
-        └──────┬──────┘
-               │
-          ┌────┴────┐
-          │ ░░░░░░░ │
-          │ ░ DATA ░ │
-          │ ░░░░░░░ │
-          └─────────┘
-      `}</div>
-
       <div className="about-main">
         <div className={`card-layout${m.image ? ' has-image' : ''}`}>
           <div className="card-text">
