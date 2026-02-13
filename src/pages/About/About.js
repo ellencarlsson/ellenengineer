@@ -2,46 +2,93 @@
  * @file About page with interactive timeline and milestones.
  */
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
+import { useLanguage } from '../../context/LanguageContext';
 import './About.css';
 
 /** Milestones displayed on the timeline. */
 const MILESTONES = [
   {
-    year: 2002, label: 'Intro', location: 'Öxnevalla',
-    description: 'Jag är född och uppvuxen på landet mellan Borås och Varberg, där jag gick hela min skolgång. Jag växte upp med mamma, pappa och min lillebror, omgiven av djur. När jag var mindre red jag mycket och spenderade stor del av tiden med hästar. Idag har vi 3 hästar, 4 får och 1 hund.\n\nUnder gymnasiet visste jag att jag ville plugga vidare, och teknik och data kändes spännande.',
+    year: 2002,
+    label: { sv: 'Intro', en: 'Intro' },
+    location: 'Öxnevalla',
+    description: {
+      sv: 'Jag är född och uppvuxen på landet mellan Borås och Varberg, där jag gick hela min skolgång. Jag växte upp med mamma, pappa och min lillebror, omgiven av djur. När jag var mindre red jag mycket och spenderade stor del av tiden med hästar. Idag har vi 3 hästar, 4 får och 1 hund.\n\nUnder gymnasiet visste jag att jag ville plugga vidare, och teknik och data kändes spännande.',
+      en: 'I was born and raised in the countryside between Borås and Varberg, where I attended school throughout my childhood. I grew up with my mom, dad, and younger brother, surrounded by animals. When I was younger, I rode horses a lot and spent much of my time with them. Today we have 3 horses, 4 sheep, and 1 dog.\n\nDuring high school, I knew I wanted to continue studying, and technology and computer science felt exciting.'
+    },
     image: '/images/2002.jpg'
   },
   {
-    year: 2021, label: 'Började studera', location: 'Jönköping',
-    description: 'Jag flyttade till Jönköping för att studera på Jönköpings Tekniska Högskola, programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar. Jag trivdes direkt och tyckte utbildningen var rolig. Det kändes som att jag hade hamnat rätt.',
+    year: 2021,
+    label: { sv: 'Började studera', en: 'Started university' },
+    location: 'Jönköping',
+    description: {
+      sv: 'Jag flyttade till Jönköping för att studera på Jönköpings Tekniska Högskola, programmet Datateknik: Mjukvaruutveckling med Mobila Plattformar. Jag trivdes direkt och tyckte utbildningen var rolig. Det kändes som att jag hade hamnat rätt.',
+      en: 'I moved to Jönköping to study at Jönköping University of Technology, in the Computer Engineering: Software Development with Mobile Platforms program. I felt at home right away and found the education enjoyable. It felt like I had ended up in the right place.'
+    },
     image: '/images/2021.jpg'
   },
   {
-    year: 2022, label: 'Första året', location: 'Jönköping',
-    description: 'Under första året lärde jag mig grunderna i programmering, bland annat objektorienterad programmering och databaser med SQL. Det var mycket nytt, men det var kul.'
+    year: 2022,
+    label: { sv: 'Första året', en: 'First year' },
+    location: 'Jönköping',
+    description: {
+      sv: 'Under första året lärde jag mig grunderna i programmering, bland annat objektorienterad programmering och databaser med SQL. Det var mycket nytt, men det var kul.',
+      en: 'During my first year, I learned the fundamentals of programming, including object-oriented programming and databases with SQL. There was a lot of new material, but it was fun.'
+    }
   },
   {
-    year: 2023, label: 'Andra året', location: 'Jönköping',
-    description: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag fick göra hela projekt. Det var Android-app, iOS-app och två webbsidor.\n\nJag hade min praktik på SAAB, Training & Simulation. Det var intressant att vara på ett riktigt företag och se hur det gick till i praktiken.'
+    year: 2023,
+    label: { sv: 'Andra året', en: 'Second year' },
+    location: 'Jönköping',
+    description: {
+      sv: 'Under andra året lärde jag mig hur man satte ihop alla delar, databas och programmering, och jag fick göra hela projekt. Det var Android-app, iOS-app och två webbsidor.\n\nJag hade min praktik på SAAB, Training & Simulation. Det var intressant att vara på ett riktigt företag och se hur det gick till i praktiken.',
+      en: 'During my second year, I learned how to put all the pieces together—databases and programming—and I got to build complete projects. These included an Android app, an iOS app, and two websites.\n\nI did my internship at SAAB, Training & Simulation. It was interesting to be at a real company and see how things worked in practice.'
+    }
   },
   {
-    year: 2024, label: 'Examen', location: 'Jönköping',
-    description: 'Jag tog examen som Dataingenjör och fick pris och stipendium av Science Park för mitt examensarbete om teckenspråksigenkänning.\n\nEfter att ha hälsat på min bror på en hälsa-på-dag i militären kände jag att det kanske var något för mig också. Jag bestämde mig för att testa.',
+    year: 2024,
+    label: { sv: 'Examen', en: 'Graduation' },
+    location: 'Jönköping',
+    description: {
+      sv: 'Jag tog examen som dataingenjör och fick pris och stipendium av Science Park för mitt examensarbete om teckenspråksigenkänning.\n\nEfter att ha hälsat på min bror på en hälsa-på-dag i militären kände jag att det kanske var något för mig också. Jag bestämde mig för att testa.',
+      en: 'I graduated as a computer engineer and received an award and scholarship from Science Park for my thesis on sign language recognition.\n\nAfter visiting my brother on a family day at the military, I felt it might be something for me too. I decided to give it a try.'
+    },
     image: '/images/2024.jpg'
   },
   {
-    year: 2025, label: 'Värnplikt', location: 'Halmstad',
-    description: 'I mars påbörjade jag 15 månaders värnplikt på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl. Det är kul att vara här och det känns bra att få vara del av något viktigt. Det roligaste är att jobba i grupp och lösa uppgifter gemensamt.',
+    year: 2025,
+    label: { sv: 'Värnplikt', en: 'Military service' },
+    location: 'Halmstad',
+    description: {
+      sv: 'I mars påbörjade jag 15 månaders värnplikt på Luftvärnsregementet Lv6 i Halmstad, som Luftvärnsplutonbefäl. Det är kul att vara här och det känns bra att få vara del av något viktigt. Det roligaste är att jobba i grupp och lösa uppgifter gemensamt.',
+      en: 'In March, I began 15 months of military service at the Air Defence Regiment Lv6 in Halmstad, as an Air Defence Platoon Commander. It\'s fun to be here and it feels good to be part of something important. The best part is working as a team and solving tasks together.'
+    },
     image: '/images/2025.jpg'
   },
   {
-    year: 2026, label: 'Nästa steg', location: '?',
-    description: 'Värnplikten avslutas sommaren 2026. Vad som händer sen vet jag inte riktigt ännu, inte heller var. Men jag ser fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
+    year: 2026,
+    label: { sv: 'Nästa steg', en: 'Next step' },
+    location: '?',
+    description: {
+      sv: 'Värnplikten avslutas sommaren 2026. Vad som händer sen vet jag inte riktigt ännu, inte heller var. Men jag ser fram emot att fortsätta min karriär som dataingenjör, gärna med inslag av Försvarsmakten.',
+      en: 'Military service ends in summer 2026. What happens after that, I don\'t really know yet, nor where. But I look forward to continuing my career as a computer engineer, preferably with elements of the Swedish Armed Forces.'
+    }
   }
 ];
 
 /** About page with timeline, particle effects, and draggable navigation. */
 function About() {
+  const { t, language } = useLanguage();
+
+  /** Gets localized text from an object with sv/en keys. */
+  const loc = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
   const [active, setActive] = useState(MILESTONES.length - 1);
   const [isDragging, setIsDragging] = useState(false);
   const particlesRef = useRef(null);
@@ -50,7 +97,6 @@ function About() {
   const dotRefs = useRef([]);
   const blobRef = useRef(null);
   const prevActiveRef = useRef(null);
-  const touchStartRef = useRef(null);
 
   /** Keeps activeRef in sync with the current state. */
   useEffect(() => { activeRef.current = active; }, [active]);
@@ -100,32 +146,6 @@ function About() {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, []);
-
-  /** Detects horizontal swipe gestures to navigate between milestones on mobile. */
-  useEffect(() => {
-    const handleTouchStart = (e) => {
-      touchStartRef.current = e.touches[0].clientX;
-    };
-    const handleTouchEnd = (e) => {
-      if (touchStartRef.current === null) return;
-      const diff = touchStartRef.current - e.changedTouches[0].clientX;
-      const MIN_SWIPE = 50;
-      if (Math.abs(diff) >= MIN_SWIPE) {
-        if (diff > 0) {
-          setActive(prev => Math.min(prev + 1, MILESTONES.length - 1));
-        } else {
-          setActive(prev => Math.max(prev - 1, 0));
-        }
-      }
-      touchStartRef.current = null;
-    };
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
   }, []);
 
   /** Creates floating ambient particles in the background. */
@@ -221,29 +241,16 @@ function About() {
     <section id="about" className="about-page">
       <div className="ambient-particles" ref={particlesRef}></div>
 
-      <div className="about-ascii">{`
-        ┌─────────────┐
-   ─────┤   EC-2026    ├─────
-   ─────┤  engineer.h  ├─────
-        └──────┬──────┘
-               │
-          ┌────┴────┐
-          │ ░░░░░░░ │
-          │ ░ DATA ░ │
-          │ ░░░░░░░ │
-          └─────────┘
-      `}</div>
-
       <div className="about-main">
         <div className={`card-layout${m.image ? ' has-image' : ''}`}>
           <div className="card-text">
             <div className="card-eyebrow">
-              <span className="card-chip">{m.label}</span>
+              <span className="card-chip">{loc(m.label)}</span>
               <span className="card-loc">{m.location}</span>
             </div>
             <h1 className="card-year">{m.year}</h1>
             <div className="card-desc">
-              {m.description.split('\n\n').map((paragraph, i) => (
+              {loc(m.description).split('\n\n').map((paragraph, i) => (
                 <p key={i}>
                   {i === 0 && <span className="card-prompt">&gt; </span>}
                   {paragraph}
@@ -254,7 +261,7 @@ function About() {
           {m.image && (
             <div className="card-image">
               <div className="glitch-img">
-                <img src={m.image} alt={`${m.year}`} />
+                <ImageWithSkeleton src={m.image} alt={`${m.year}`} />
               </div>
             </div>
           )}
@@ -288,12 +295,12 @@ function About() {
                 onTouchStart={active === i ? handleThumbDown : undefined}
               ></div>
               <div className="tl-label">{ms.year}</div>
-              <div className="tl-sublabel">{ms.label}</div>
+              <div className="tl-sublabel">{loc(ms.label)}</div>
             </button>
           ))}
         </div>
         <div className="timeline-hint">
-          Använd <span className="timeline-hint-key">◀</span> <span className="timeline-hint-key">▶</span> för att navigera
+          {t('about.navHint')} <span className="timeline-hint-key">◀</span> <span className="timeline-hint-key">▶</span> {t('about.navHintKeys')}
         </div>
       </div>
     </section>

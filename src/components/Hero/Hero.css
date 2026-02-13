@@ -71,9 +71,9 @@
 /* Terminal Body */
 .hero-terminal-body {
   background: var(--terminal-bg);
-  min-height: 400px;
-  max-height: 500px;
-  overflow-y: auto;
+  min-height: auto;
+  max-height: none;
+  overflow-y: visible;
 }
 
 .hero-terminal-content {
@@ -101,59 +101,41 @@
 }
 
 .hero-prompt {
-  color: #8b9a6b;
+  color: var(--accent-burgundy);
 }
 
 .hero-cmd {
-  color: #d8cdbf;
+  color: var(--text-dark);
 }
 
 .hero-line.output {
-  color: #d8cdbf;
+  color: var(--text-dark);
 }
 
 .hero-line.link {
-  color: #c8b8a4;
+  color: var(--warm-peach);
 }
 
 .hero-terminal-link {
-  color: #c8b8a4;
+  color: var(--warm-peach);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: #e0d0bc;
+  color: var(--warm-peach);
   text-decoration: underline;
 }
 
 /* Cursor */
 .hero-cursor {
-  color: #c8b8a4;
+  color: var(--accent-rose-light);
   font-weight: bold;
   opacity: 0;
 }
 
 .hero-cursor.visible {
   opacity: 1;
-}
-
-/* Scrollbar */
-.hero-terminal-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-.hero-terminal-body::-webkit-scrollbar-track {
-  background: var(--terminal-bg);
-}
-
-.hero-terminal-body::-webkit-scrollbar-thumb {
-  background: var(--terminal-border);
-  border-radius: 4px;
-}
-
-.hero-terminal-body::-webkit-scrollbar-thumb:hover {
-  background: #484f58;
 }
 
 /* Terminal Hint */
@@ -235,8 +217,8 @@
   }
 
   .hero-terminal-body {
-    min-height: 350px;
-    max-height: 450px;
+    min-height: auto;
+    max-height: none;
   }
 
   .hero-terminal-content {
@@ -273,5 +255,35 @@
   .hero-hint-key {
     padding: 2px 5px;
     font-size: 10px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: var(--spacing-sm) var(--spacing-xl);
+  }
+
+  .hero-terminal {
+    margin-top: 0;
+    max-width: 700px;
+  }
+
+  .hero-terminal-body {
+    height: 340px;
+    overflow: hidden;
+  }
+
+  .hero-terminal-content {
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 10px 12px;
+  }
+
+  .hero-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

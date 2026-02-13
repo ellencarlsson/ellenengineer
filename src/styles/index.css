@@ -19,6 +19,12 @@
   box-sizing: border-box;
 }
 
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -28,6 +34,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
   -moz-osx-font-smoothing: grayscale;
   line-height: var(--line-height-normal);
   background: var(--background-beige);

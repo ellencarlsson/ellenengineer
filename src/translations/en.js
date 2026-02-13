@@ -1,0 +1,88 @@
+/**
+ * @file English translations.
+ */
+const en = {
+  nav: {
+    projects: 'Projects',
+    about: 'About',
+    cv: 'CV',
+    contact: 'Contact',
+  },
+  mobile: {
+    home: './home',
+    projects: './projects',
+    about: './about',
+    cv: './cv',
+    contact: './contact',
+  },
+  hero: {
+    whoami: 'whoami',
+    name: 'Ellen Carlsson - Engineer',
+    aboutCmd: 'cat about.txt',
+    aboutLine1: 'I like solving everyday problems with the help of technology.',
+    aboutLine2: 'I made this website to showcase selected projects.',
+    statusCmd: 'echo $CURRENT_STATUS',
+    status: 'Currently I am at the Air Defence Regiment in Halmstad and will be here until summer 2026.',
+    projectsCmd: 'cd projects/',
+    projectsLink: 'Click here to see my projects',
+    aboutPageCmd: 'cd about/',
+    aboutPageLink: 'Click here to learn more about me',
+    contactCmd: 'cd contact/',
+    contactLink: 'Click here to contact me',
+    skipHint: 'to skip the animation',
+    skipKey: 'Enter',
+    skipMobile: 'Tap',
+  },
+  projects: {
+    title: 'Projects',
+    backToProjects: '← Back',
+    details: 'PROJECT DETAILS',
+    platforms: 'PLATFORMS:',
+    techStack: 'TECH STACK:',
+    year: 'YEAR:',
+    close: 'Close',
+    expandHint: 'Tap to enlarge',
+  },
+  about: {
+    navHint: 'Use',
+    navHintKeys: 'to navigate',
+  },
+  contact: {
+    title: 'Contact',
+    copied: 'Copied!',
+    copyEmail: 'Copy email',
+    copyLinkedin: 'Copy LinkedIn',
+    bugCategory: 'Category:',
+    bugPage: 'Page:',
+    bugDescription: 'Description:',
+    bugPlaceholder: 'Describe the problem...',
+    bugSending: 'Sending...',
+    bugSent: 'Sent!',
+    bugSubmit: 'Send report',
+    categories: {
+      design: 'Design',
+      functionality: 'Functionality',
+      performance: 'Performance',
+      other: 'Other',
+    },
+    pages: {
+      home: 'Home',
+      projects: 'Projects',
+      about: 'About',
+      cv: 'CV',
+      contact: 'Contact',
+      other: 'Other',
+    },
+  },
+  cv: {
+    title: 'CV',
+    skipHintDesktop: 'Press',
+    skipKey: 'Enter',
+    skipHintDesktopEnd: 'to skip',
+    skipHintMobile: 'Tap to skip',
+    openCV: 'Open CV',
+    downloadCV: 'Download',
+  },
+};
+
+export default en;

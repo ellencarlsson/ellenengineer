@@ -2,11 +2,20 @@
  * @file Footer with social icons and contact info.
  */
 import React from 'react';
-import packageJson from '../../../package.json';
+import { useLanguage } from '../../context/LanguageContext';
 import './Footer.css';
 
 /** Footer displayed on all pages. */
 function Footer() {
+  const { language } = useLanguage();
+
+  const loc = (value) => {
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -27,11 +36,11 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2026 Ellen Carlsson. Alla rättigheter reserverade.</p>
-          <p className="footer-credits">
-            Font: <a href="https://hackedfont.com" target="_blank" rel="noopener noreferrer">Hacked</a> av David Libeau (CC BY 4.0)
+          <p>&copy; 2026 Ellen Carlsson. {loc({ sv: 'Alla rättigheter reserverade.', en: 'All rights reserved.' })}</p>
+          <p className="footer-meta">
+            Font: <a href="https://hackedfont.com" target="_blank" rel="noopener noreferrer">Hacked</a> {loc({ sv: 'av', en: 'by' })} David Libeau (CC BY 4.0)
           </p>
-          <p className="footer-version">v{packageJson.version}</p>
+          <p className="footer-meta">{loc({ sv: 'Uppdaterad: 13 feb 2026', en: 'Updated: Feb 13, 2026' })}</p>
         </div>
       </div>
     </footer>

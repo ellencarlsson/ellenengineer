@@ -3,6 +3,7 @@
  */
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import './ProjectDetail.css';
 
 /** SVG icons mapped to each technology in the tech stack. */
@@ -50,7 +51,17 @@ function SvgLabel({ x, y, anchor, fill, fontSize, children }) {
 
 /** Renders an SVG architecture diagram with nodes, connections, and groups. */
 function ArchitectureDiagram({ architecture }) {
+  const { language } = useLanguage();
   const { nodes, connections, groups } = architecture;
+
+  /** Gets localized text from an object with sv/en keys. */
+  const loc = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
   const maxCol = Math.max(...nodes.map(n => n.col));
   const maxRow = Math.max(...nodes.map(n => n.row));
 
@@ -184,7 +195,7 @@ function ArchitectureDiagram({ architecture }) {
                 <SvgLabel
                   x={midX - perpX * labelOffset} y={midY - perpY * labelOffset}
                   anchor={anchor1} fill="rgba(255,255,255,0.7)" fontSize={28}
-                >{conn.label}</SvgLabel>
+                >{loc(conn.label)}</SvgLabel>
                 {reverse && (
                   <>
                     <line
@@ -197,7 +208,7 @@ function ArchitectureDiagram({ architecture }) {
                     <SvgLabel
                       x={midX + perpX * labelOffset} y={midY + perpY * labelOffset}
                       anchor={anchor2} fill="rgba(255,255,255,0.7)" fontSize={28}
-                    >{reverse.label}</SvgLabel>
+                    >{loc(reverse.label)}</SvgLabel>
                   </>
                 )}
               </g>
@@ -217,7 +228,7 @@ function ArchitectureDiagram({ architecture }) {
                   x={midX + perpX * 30} y={midY + perpY * 30}
                   anchor={Math.abs(perpX) > 0.5 ? (perpX > 0 ? 'start' : 'end') : 'middle'}
                   fill="rgba(255,255,255,0.7)" fontSize={28}
-                >{conn.label}</SvgLabel>
+                >{loc(conn.label)}</SvgLabel>
               )}
             </g>
           );
@@ -256,6 +267,7 @@ function ArchitectureDiagram({ architecture }) {
 
 /** Detail page displaying all information about a specific project. */
 function ProjectDetail() {
+  const { t, language } = useLanguage();
   const { projectId } = useParams();
   const [playingVideos, setPlayingVideos] = useState({});
   const [archModalOpen, setArchModalOpen] = useState(false);
@@ -266,6 +278,15 @@ function ProjectDetail() {
     insights: false,
     links: false
   });
+
+  /** Gets the localized text from an object with sv/en keys, or returns the value if it's a plain string. */
+  const loc = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
 
   /** Expands or collapses a section. */
   const toggleSection = (sectionId) => {
@@ -287,43 +308,38 @@ function ProjectDetail() {
       status: 'VERIFIED',
       ledColor: 'brown',
       accentColor: 'terracotta',
-      tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
-      description: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
+      tagline: {
+        sv: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
+        en: 'AI-powered sign language recognition using Apple Watch motion sensors'
+      },
+      description: {
+        sv: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
+        en: 'People who use sign language often struggle to communicate with those who don\'t understand it, creating barriers in everyday life—at work, in stores, at the doctor\'s office. SignTalker is an app where you wear a regular Apple Watch on your wrist and make sign language gestures. The watch detects the hand movements and sends them to an AI that has learned what each movement means. The result is sent to an iPhone that speaks the word out loud. You can make multiple signs in a row and build complete sentences. The watch interprets, the phone speaks.\n\nAll you need is an Apple Watch and an iPhone. No camera, no computer, no internet connection. Everything works in real-time, directly on the device. The project started as my thesis. After graduating, I rebuilt it from the ground up to make it even better.'
+      },
       platforms: ['Apple Watch', 'iPhone'],
       techStack: ['Swift', 'Core ML'],
       architecture: {
         nodes: [
-          // iPhone — UI layer
           { id: 'iphone-view', label: 'iPhone View', col: 0, row: 0 },
-          // iPhone — Logic layer
           { id: 'iphone-vm', label: 'ViewModel', col: 0, row: 1 },
-          // iPhone — Services
           { id: 'tts', label: 'AVSpeech', col: 0, row: 2 },
-          // Bridge (between devices)
           { id: 'wc', label: 'WatchConnectivity', col: 1, row: 1 },
-          // Watch — UI layer
           { id: 'watch-view', label: 'Watch View', col: 2, row: 0 },
-          // Watch — Logic layer
           { id: 'watch-vm', label: 'ViewModel', col: 2, row: 1 },
-          // Watch — Services
           { id: 'motion', label: 'CMMotionManager', col: 2, row: 2 },
           { id: 'datahelper', label: 'DataHelper', col: 3, row: 2 },
           { id: 'mlmodel', label: 'Core ML', col: 3, row: 1 },
         ],
         connections: [
-          // Watch: UI ↔ Logic
           { from: 'watch-vm', to: 'watch-view', label: 'Detecting or not' },
-          // Watch: Logic → Services (straight down, right, up)
           { from: 'watch-vm', to: 'motion', label: 'Start/Stop\ndetecting' },
           { from: 'motion', to: 'datahelper', label: 'Raw data' },
           { from: 'datahelper', to: 'mlmodel', label: '60 samples' },
           { from: 'mlmodel', to: 'watch-vm', label: 'Prediction' },
-          // iPhone ↔ WatchConnectivity ↔ Watch (bidirectional)
           { from: 'iphone-vm', to: 'wc', label: 'Send detect\nsignal' },
           { from: 'wc', to: 'iphone-vm', label: 'Detected word' },
           { from: 'wc', to: 'watch-vm', label: 'Send detect\nsignal' },
           { from: 'watch-vm', to: 'wc', label: 'Detected word' },
-          // iPhone: View ↔ Logic
           { from: 'iphone-view', to: 'iphone-vm', label: 'Tap to\ndetect' },
           { from: 'iphone-vm', to: 'iphone-view', label: 'Display\nwords' },
           { from: 'iphone-vm', to: 'tts', label: 'Speak\nwords' },
@@ -332,64 +348,70 @@ function ProjectDetail() {
           { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
           { label: 'IPHONE', nodeIds: ['iphone-view', 'iphone-vm', 'tts'] },
         ],
-        subtitle: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
+        subtitle: {
+          sv: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.',
+          en: 'The app is built using MVVM, where views and logic are kept separate. Both the watch and the phone follow the same structure with their own views and ViewModels. Sharing the same architecture makes it easier for them to communicate with each other and allows testing and development of each part independently.\n\nThe entire AI model runs locally on the watch. The watch collects sensor data and interprets the signs, while the phone serves only as a screen to display results and a remote to start detection. Since all logic already resides on the watch, it could potentially function completely independently in the future.'
+        }
       },
       github: null,
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideos: [
-        { title: 'Presentation', description: 'Introduktion till projektet och hur appen fungerar', url: 'https://www.youtube.com/embed/qRDOVvyBVKQ' },
-        { title: 'Drive in', description: 'Beställer mat på McDonald\'s med hjälp av klockan', url: 'https://www.youtube.com/embed/UfcuVqfH8x8' },
-        { title: 'Dog mode', description: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', url: 'https://www.youtube.com/embed/-NRR78CkO18' },
+        { title: 'Presentation', description: { sv: 'Introduktion till projektet och hur appen fungerar', en: 'Introduction to the project and how the app works' }, url: 'https://www.youtube.com/embed/qRDOVvyBVKQ' },
+        { title: 'Drive in', description: { sv: 'Beställer mat på McDonald\'s med hjälp av klockan', en: 'Ordering food at McDonald\'s using the watch' }, url: 'https://www.youtube.com/embed/UfcuVqfH8x8' },
+        { title: 'Dog mode', description: { sv: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', en: 'Calling the dog using a custom-trained sign linked to a recording of the owner\'s voice' }, url: 'https://www.youtube.com/embed/-NRR78CkO18' },
       ],
-      resultText: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
+      resultText: {
+        sv: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
+        en: 'The user starts recording from the phone, which sends a signal to the watch to begin reading the motion sensors. In addition to regular signs, you can also link custom hand gestures to recordings of your own voice.'
+      },
       techDetails: [
         {
-          label: 'Träningsfas',
-          text: 'Man spelar in samma tecken upprepade gånger med klockan. Sensordata sparas som CSV-filer som sedan manuellt läggs in i Create ML, Apples verktyg för att skapa AI-modeller. Create ML konverterar datan till en färdig Core ML-fil, som är själva AI-modellen som sedan manuellt exporteras till appen. Ju fler inspelningar med olika vinklar och hastigheter, desto bättre blir modellen.'
+          label: { sv: 'Träningsfas', en: 'Training phase' },
+          text: { sv: 'Man spelar in samma tecken upprepade gånger med klockan. Sensordata sparas som CSV-filer som sedan manuellt läggs in i Create ML, Apples verktyg för att skapa AI-modeller. Create ML konverterar datan till en färdig Core ML-fil, som är själva AI-modellen som sedan manuellt exporteras till appen. Ju fler inspelningar med olika vinklar och hastigheter, desto bättre blir modellen.', en: 'You record the same sign repeatedly with the watch. Sensor data is saved as CSV files that are then manually imported into Create ML, Apple\'s tool for creating AI models. Create ML converts the data into a finished Core ML file, which is the actual AI model that is then manually exported to the app. The more recordings with different angles and speeds, the better the model becomes.' }
         },
         {
-          label: '50 Hz motion sampling',
-          text: 'Klockan har inbyggda sensorer, en accelerometer som mäter hur handen förflyttas och ett gyroskop som mäter hur den vrids. Dessa sensorer fångar de aktuella värdena var 0.02:e sekund, vilket ger en väldigt detaljerad bild av hela rörelsen.'
+          label: { sv: '50 Hz motion sampling', en: '50 Hz motion sampling' },
+          text: { sv: 'Klockan har inbyggda sensorer, en accelerometer som mäter hur handen förflyttas och ett gyroskop som mäter hur den vrids. Dessa sensorer fångar de aktuella värdena var 0.02:e sekund, vilket ger en väldigt detaljerad bild av hela rörelsen.', en: 'The watch has built-in sensors—an accelerometer that measures how the hand moves and a gyroscope that measures how it rotates. These sensors capture current values every 0.02 seconds, providing a very detailed picture of the entire movement.' }
         },
         {
-          label: 'Fixed-window segmentering (60 samples)',
-          text: 'Varje inspelning samlar in exakt 60 data samples och motsvarar ett ord. Den fasta storleken gör att modellen alltid får samma mängd data att jobba med, oavsett vilket tecken som görs.'
+          label: { sv: 'Fixed-window segmentering (60 samples)', en: 'Fixed-window segmentation (60 samples)' },
+          text: { sv: 'Varje inspelning samlar in exakt 60 data samples och motsvarar ett ord. Den fasta storleken gör att modellen alltid får samma mängd data att jobba med, oavsett vilket tecken som görs.', en: 'Each recording collects exactly 60 data samples and corresponds to one word. The fixed size ensures the model always receives the same amount of data to work with, regardless of which sign is made.' }
         },
         {
-          label: 'Haptisk feedback',
-          text: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunder är ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.'
+          label: { sv: 'Haptisk feedback', en: 'Haptic feedback' },
+          text: { sv: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunder är ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.', en: 'When the watch has collected 60 data samples after about 1.2 seconds, a sign has been interpreted and the watch vibrates. You then have 1 second to prepare the next sign, and the watch vibrates again to signal that it has started listening for a new movement.' }
         },
         {
-          label: 'Avsluta en mening',
-          text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen upp och ned. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
+          label: { sv: 'Avsluta en mening', en: 'Ending a sentence' },
+          text: { sv: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen upp och ned. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.', en: 'To mark that a sentence is complete, you make a special stop sign by holding your hand upside down. The watch recognizes this as an ending signal, stops listening for more signs, and the finished sentence is heard and displayed on the phone.' }
         }
       ],
       insights: [
         {
-          title: 'Begränsningar',
+          title: { sv: 'Begränsningar', en: 'Limitations' },
           items: [
             {
-              label: 'Manuell träning',
-              text: 'Modellen kan inte lära sig nya tecken på egen hand. Varje nytt ord kräver att man samlar in data, tränar om modellen och exporterar en ny version till appen. Det gör att det skalar dåligt och begränsar hur snabbt ordförrådet kan växa.'
+              label: { sv: 'Manuell träning', en: 'Manual training' },
+              text: { sv: 'Modellen kan inte lära sig nya tecken på egen hand. Varje nytt ord kräver att man samlar in data, tränar om modellen och exporterar en ny version till appen. Det gör att det skalar dåligt och begränsar hur snabbt ordförrådet kan växa.', en: 'The model cannot learn new signs on its own. Each new word requires collecting data, retraining the model, and exporting a new version to the app. This means it scales poorly and limits how quickly the vocabulary can grow.' }
             },
             {
-              label: 'Fast fönsterstorlek',
-              text: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Problemet är att modellen inte kan veta vilket tecken som kommer, och därför inte kan anpassa hur länge den lyssnar. Fler samples ger mer precis data men gör appen långsammare, och färre samples gör appen snabbare men tappar detaljer.'
+              label: { sv: 'Fast fönsterstorlek', en: 'Fixed window size' },
+              text: { sv: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Problemet är att modellen inte kan veta vilket tecken som kommer, och därför inte kan anpassa hur länge den lyssnar. Fler samples ger mer precis data men gör appen långsammare, och färre samples gör appen snabbare men tappar detaljer.', en: 'All inputs to the model must be the same size—60 samples. This means fast signs must be slowed down and slow signs sped up to fit the window. The problem is that the model cannot know which sign is coming and therefore cannot adjust how long it listens. More samples provide more precise data but make the app slower, while fewer samples make the app faster but lose details.' }
             }
           ]
         },
         {
-          title: 'Fortsatt utveckling',
+          title: { sv: 'Fortsatt utveckling', en: 'Future development' },
           items: [
             {
-              label: 'Fler sensorer',
-              text: 'Apple Watch har just nu gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.'
+              label: { sv: 'Fler sensorer', en: 'More sensors' },
+              text: { sv: 'Apple Watch har just nu gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.', en: 'Apple Watch currently has a gyroscope and accelerometer. More sensor types would provide richer data per movement. Additionally, a watch on each hand would allow the model to capture both hands\' movements, providing much more specific patterns and significantly improving accuracy.' }
             },
             {
-              label: 'Automatisk träningspipeline',
-              text: 'Att träna modellen direkt på enheten skulle ta bort det manuella arbetet och göra det möjligt att lägga till nya tecken utan att bygga om appen. Jag försökte implementera detta men det visade sig inte vara möjligt med Create ML. Med ett annat AI-ramverk hade det kanske gått.'
+              label: { sv: 'Automatisk träningspipeline', en: 'Automatic training pipeline' },
+              text: { sv: 'Att träna modellen direkt på enheten skulle ta bort det manuella arbetet och göra det möjligt att lägga till nya tecken utan att bygga om appen. Jag försökte implementera detta men det visade sig inte vara möjligt med Create ML. Med ett annat AI-ramverk hade det kanske gått.', en: 'Training the model directly on the device would eliminate the manual work and make it possible to add new signs without rebuilding the app. I tried to implement this but it turned out not to be possible with Create ML. With a different AI framework, it might have worked.' }
             }
           ]
         }
@@ -400,52 +422,55 @@ function ProjectDetail() {
           step: 1,
           icon: '⌚',
           title: 'SENSOR INPUT',
-          description: 'Apple Watch känner av handrörelser',
-          details: 'Gyroskop + Accelerometer',
+          description: { sv: 'Apple Watch känner av handrörelser', en: 'Apple Watch detects hand movements' },
+          details: { sv: 'Gyroskop + Accelerometer', en: 'Gyroscope + Accelerometer' },
           ledColor: 'blue'
         },
         {
           step: 2,
           icon: '📊',
           title: 'DATA COLLECTION',
-          description: 'Spelar in samma tecken många gånger',
-          details: 'Träningsdata samlas in',
+          description: { sv: 'Spelar in samma tecken många gånger', en: 'Recording the same sign many times' },
+          details: { sv: 'Träningsdata samlas in', en: 'Training data is collected' },
           ledColor: 'blue'
         },
         {
           step: 3,
           icon: '🤖',
           title: 'AI TRAINING',
-          description: 'AI lär sig känna igen varje tecken',
-          details: 'Modellen justeras och optimeras',
+          description: { sv: 'AI lär sig känna igen varje tecken', en: 'AI learns to recognize each sign' },
+          details: { sv: 'Modellen justeras och optimeras', en: 'The model is adjusted and optimized' },
           ledColor: 'yellow'
         },
         {
           step: 4,
           icon: '⌚',
           title: 'LIVE CAPTURE',
-          description: 'Gör ett tecken med klockan',
-          details: 'Real-time rörelseinspelning',
+          description: { sv: 'Gör ett tecken med klockan', en: 'Make a sign with the watch' },
+          details: { sv: 'Real-time rörelseinspelning', en: 'Real-time motion recording' },
           ledColor: 'green'
         },
         {
           step: 5,
           icon: '🤖',
           title: 'AI PREDICTION',
-          description: 'AI identifierar vilket tecken det är',
-          details: 'Returnerar predicted output',
+          description: { sv: 'AI identifierar vilket tecken det är', en: 'AI identifies which sign it is' },
+          details: { sv: 'Returnerar predicted output', en: 'Returns predicted output' },
           ledColor: 'green'
         },
         {
           step: 6,
           icon: '📱',
           title: 'OUTPUT',
-          description: 'Telefonen säger ordet högt',
+          description: { sv: 'Telefonen säger ordet högt', en: 'The phone speaks the word aloud' },
           details: 'Text-to-Speech',
           ledColor: 'green'
         }
       ],
-      componentsText: 'Varje komponent i appen har en specifik uppgift och tillhör antingen iPhone- eller Apple Watch-sidan. Här är en översikt av de viktigaste delarna och vad de ansvarar för.',
+      componentsText: {
+        sv: 'Varje komponent i appen har en specifik uppgift och tillhör antingen iPhone- eller Apple Watch-sidan. Här är en översikt av de viktigaste delarna och vad de ansvarar för.',
+        en: 'Each component in the app has a specific task and belongs to either the iPhone or Apple Watch side. Here is an overview of the most important parts and what they are responsible for.'
+      },
       components: [
         {
           group: 'iPhone',
@@ -453,12 +478,12 @@ function ProjectDetail() {
             {
               name: 'IPhoneViewModel',
               type: 'ViewModel',
-              responsibility: 'Skickar kommandon till klockan och tar emot detekterade ord. Bygger upp en ordlista som sedan kan omvandlas till en mening.'
+              responsibility: { sv: 'Skickar kommandon till klockan och tar emot detekterade ord. Bygger upp en ordlista som sedan kan omvandlas till en mening.', en: 'Sends commands to the watch and receives detected words. Builds up a word list that can then be converted into a sentence.' }
             },
             {
               name: 'SentenceConverter',
               type: 'Model',
-              responsibility: 'Tar en lista av detekterade ord och sätter ihop dem till en grammatiskt korrekt svensk mening.'
+              responsibility: { sv: 'Tar en lista av detekterade ord och sätter ihop dem till en grammatiskt korrekt svensk mening.', en: 'Takes a list of detected words and assembles them into a grammatically correct Swedish sentence.' }
             }
           ]
         },
@@ -468,27 +493,27 @@ function ProjectDetail() {
             {
               name: 'WatchViewModel',
               type: 'ViewModel',
-              responsibility: 'Tar emot kommandon från telefonen och bestämmer vad klockan ska göra. Skickar tillbaka detekterade ord.'
+              responsibility: { sv: 'Tar emot kommandon från telefonen och bestämmer vad klockan ska göra. Skickar tillbaka detekterade ord.', en: 'Receives commands from the phone and decides what the watch should do. Sends back detected words.' }
             },
             {
               name: 'PredictionViewModel',
               type: 'ViewModel',
-              responsibility: 'Startar sensorerna, samlar in rörelsedata och skickar den vidare till AI-modellen.'
+              responsibility: { sv: 'Startar sensorerna, samlar in rörelsedata och skickar den vidare till AI-modellen.', en: 'Starts the sensors, collects motion data, and forwards it to the AI model.' }
             },
             {
               name: 'TrainingViewModel',
               type: 'ViewModel',
-              responsibility: 'Samlar in träningsdata för nya tecken och exporterar den som CSV-filer till en träningsserver.'
+              responsibility: { sv: 'Samlar in träningsdata för nya tecken och exporterar den som CSV-filer till en träningsserver.', en: 'Collects training data for new signs and exports it as CSV files to a training server.' }
             },
             {
               name: 'PredictionModel',
               type: 'Model',
-              responsibility: 'Kör Core ML-modellen som tolkar rörelsedata till ord.'
+              responsibility: { sv: 'Kör Core ML-modellen som tolkar rörelsedata till ord.', en: 'Runs the Core ML model that interprets motion data into words.' }
             },
             {
               name: 'DataHelper',
               type: 'Helper',
-              responsibility: 'Definierar samplingsfrekvens (50 Hz) och fönsterstorlek (60 samples). Strukturerar rå sensorvärden.'
+              responsibility: { sv: 'Definierar samplingsfrekvens (50 Hz) och fönsterstorlek (60 samples). Strukturerar rå sensorvärden.', en: 'Defines sampling frequency (50 Hz) and window size (60 samples). Structures raw sensor values.' }
             }
           ]
         }
@@ -505,8 +530,14 @@ function ProjectDetail() {
       status: 'OPERATIONAL',
       ledColor: 'medium',
       accentColor: 'rose',
-      tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
-      description: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
+      tagline: {
+        sv: 'Portfolio-hemsida med teknisk design',
+        en: 'Portfolio website with technical design'
+      },
+      description: {
+        sv: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.\n\nSidan har integrationer med Telegram-botar som skickar notiser vid besök och buggrapporter.',
+        en: 'I wanted a place to showcase my projects and thought it would be fun to build my own website. The theme is inspired by technology and data, with a terminal as the landing page and interactive elements throughout the site.\n\nEach page is built around its own concept. The landing page is a terminal, the projects page displays all projects as nodes, About me is a timeline with electric inspiration, the CV page uses SQL queries, and Contact me is laid out as API calls.\n\nThe site has integrations with Telegram bots that send notifications on visits and bug reports.'
+      },
       platforms: ['Web'],
       techStack: ['React', 'JavaScript'],
       architecture: {
@@ -514,34 +545,47 @@ function ProjectDetail() {
           { id: 'browser', label: 'Client', col: 0, row: 0 },
           { id: 'router', label: 'React Router', col: 1, row: 0 },
           { id: 'view', label: 'View', col: 2, row: 0 },
+          { id: 'php', label: 'PHP', col: 2, row: 1 },
+          { id: 'telegram', label: 'Telegram Bot', col: 1, row: 1 },
         ],
         connections: [
-          { from: 'browser', to: 'router', label: 'Användaren\nnavigerar' },
-          { from: 'router', to: 'view', label: 'Väljer rätt\nsida' },
+          { from: 'browser', to: 'router', label: { sv: 'Användaren\nnavigerar', en: 'User\nnavigates' } },
+          { from: 'router', to: 'view', label: { sv: 'Väljer rätt\nsida', en: 'Selects correct\npage' } },
+          { from: 'view', to: 'php', label: { sv: 'Besök/\nBuggrapport', en: 'Visit/\nBug report' } },
+          { from: 'php', to: 'telegram', label: { sv: 'Notis', en: 'Notify' } },
         ],
-        subtitle: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.'
+        subtitle: {
+          sv: 'Sidan är en React-frontend med PHP-scripts för notifieringar. Navigeringen sköts av React Router som en SPA, vilket betyder att sidan aldrig laddas om. Vid besök och buggrapporter skickas ett anrop till PHP som vidarebefordrar det till en Telegram-bot.',
+          en: 'The site is a React frontend with PHP scripts for notifications. Navigation is handled by React Router as a SPA, meaning the page never reloads. On visits and bug reports, a call is sent to PHP which forwards it to a Telegram bot.'
+        }
       },
       github: null,
       demo: null,
       image: null,
       demoVideo: null,
-      resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
+      resultText: {
+        sv: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
+        en: 'The site is live and works well on both desktop and mobile. It has a landing page with an animated terminal, an About me section with an interactive timeline, a projects page, and a CV page with a downloadable PDF. The entire site is still under development and I add new things continuously.'
+      },
       insights: [
         {
-          title: 'Kreativitet',
+          title: { sv: 'Kreativitet', en: 'Creativity' },
           items: [
             {
-              label: 'Interaktiva teman',
-              text: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.'
+              label: { sv: 'Interaktiva teman', en: 'Interactive themes' },
+              text: { sv: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.', en: 'The most fun part has been making each page interactive and creative in its own way. Each tab has its own theme—one page can look like a SQL query while another resembles API calls. I wanted it to feel like you discover something new every time you click through, and I think it turned out well.' }
             },
             {
-              label: 'Balans mellan kreativitet och tydlighet',
-              text: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.'
+              label: { sv: 'Balans mellan kreativitet och tydlighet', en: 'Balance between creativity and clarity' },
+              text: { sv: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.', en: 'The tricky part was finding the balance between creativity and clarity. The information should be easy to understand while also being visually appealing and somewhat interactive. It\'s easy to end up with too much of one or the other.' }
             }
           ]
         }
       ],
-      componentsText: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
+      componentsText: {
+        sv: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
+        en: 'Since the site is a pure frontend without a backend, there aren\'t many technical parts to break down. Here are the most important ones.'
+      },
       components: [
         {
           group: '',
@@ -549,17 +593,17 @@ function ProjectDetail() {
             {
               name: 'App',
               type: 'Entry Point',
-              responsibility: 'Applikationens startpunkt som renderar hela sidan och kopplar ihop alla delar.'
+              responsibility: { sv: 'Applikationens startpunkt som renderar hela sidan och kopplar ihop alla delar.', en: 'The application\'s entry point that renders the entire site and connects all parts.' }
             },
             {
               name: 'React Router',
               type: 'Router',
-              responsibility: 'Konfigurerar alla routes och kopplar varje URL till rätt sidkomponent. Hanterar navigering utan att sidan laddas om.'
+              responsibility: { sv: 'Konfigurerar alla routes och kopplar varje URL till rätt sidkomponent. Hanterar navigering utan att sidan laddas om.', en: 'Configures all routes and maps each URL to the correct page component. Handles navigation without reloading the page.' }
             },
             {
-              name: 'Komponentstruktur',
-              type: 'Mönster',
-              responsibility: 'Varje del av sidan är organiserad i en egen mapp där både logik (.js) och styling (.css) bor tillsammans. All projektdata ligger hårdkodad direkt i komponenterna.'
+              name: { sv: 'Komponentstruktur', en: 'Component structure' },
+              type: { sv: 'Mönster', en: 'Pattern' },
+              responsibility: { sv: 'Varje del av sidan är organiserad i en egen mapp där både logik (.js) och styling (.css) bor tillsammans. All projektdata ligger hårdkodad direkt i komponenterna.', en: 'Each part of the site is organized in its own folder where both logic (.js) and styling (.css) live together. All project data is hardcoded directly in the components.' }
             }
           ]
         }
@@ -570,7 +614,7 @@ function ProjectDetail() {
           step: 1,
           icon: '💻',
           title: 'TERMINAL HERO',
-          description: 'macOS-terminal med skrivanimation',
+          description: { sv: 'macOS-terminal med skrivanimation', en: 'macOS terminal with typing animation' },
           details: 'React + useState + useEffect',
           ledColor: 'green'
         },
@@ -578,24 +622,24 @@ function ProjectDetail() {
           step: 2,
           icon: '🗺️',
           title: 'REACT ROUTER',
-          description: 'Klient-navigering mellan sidor',
-          details: 'SPA med React Router',
+          description: { sv: 'Klient-navigering mellan sidor', en: 'Client-side navigation between pages' },
+          details: { sv: 'SPA med React Router', en: 'SPA with React Router' },
           ledColor: 'green'
         },
         {
           step: 3,
           icon: '🕸️',
-          title: 'PROJEKT-NÄTVERK',
-          description: 'Interaktiva noder med SVG-linjer',
-          details: 'Animerade datapaket',
+          title: { sv: 'PROJEKT-NÄTVERK', en: 'PROJECT NETWORK' },
+          description: { sv: 'Interaktiva noder med SVG-linjer', en: 'Interactive nodes with SVG lines' },
+          details: { sv: 'Animerade datapaket', en: 'Animated data packets' },
           ledColor: 'blue'
         },
         {
           step: 4,
           icon: '📄',
-          title: 'PROJEKTSIDOR',
-          description: 'Expanderbara sektioner med chevrons',
-          details: 'Dynamiskt innehåll per projekt',
+          title: { sv: 'PROJEKTSIDOR', en: 'PROJECT PAGES' },
+          description: { sv: 'Expanderbara sektioner med chevrons', en: 'Expandable sections with chevrons' },
+          details: { sv: 'Dynamiskt innehåll per projekt', en: 'Dynamic content per project' },
           ledColor: 'green'
         }
       ]
@@ -605,14 +649,20 @@ function ProjectDetail() {
       model: 'IBM DESKSTAR NP1',
       label: 'NORDPUNKT-2025',
       name: 'NordPunkt',
-      year: 'Under utveckling',
+      year: { sv: 'Under utveckling', en: 'In development' },
       capacity: '512 MB',
       interface: 'GPIO',
       status: 'IN DEVELOPMENT',
       ledColor: 'brown',
       accentColor: 'sand',
-      tagline: 'Raspberry Pi-enhet för MGRS-koordinater och automatisk schemaläggning i fält',
-      description: 'Ett postschema är ett schema som styr vem som ska posta och när. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop: uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i fält för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+      tagline: {
+        sv: 'Raspberry Pi-enhet för automatisk schemaläggning och MGRS inom militären',
+        en: 'Raspberry Pi device for automatic scheduling and MGRS in the military'
+      },
+      description: {
+        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+        en: 'A post schedule is a military schedule that controls who is on post and when in the field. The main problem with doing this manually is making the calculations work out—the task must be covered around the clock while each person needs sleep and rest. Since multiple people must constantly be on duty, it quickly becomes a difficult puzzle to distribute shifts fairly so no one gets overloaded.\n\nTo make this easier, I\'m building a system that calculates the optimal schedule automatically. The system knows all the rules for rest periods, driving times, and staffing, and distributes shifts as fairly as possible.\n\nMGRS is the coordinate system used in the military to specify exact positions on the map. Calculating these manually is time-consuming and difficult to get right when tired or stressed. Therefore, I\'m also implementing a feature on the device that retrieves the MGRS coordinate automatically using GPS.'
+      },
       platforms: ['Raspberry Pi'],
       techStack: ['Python'],
       architecture: {
@@ -626,34 +676,43 @@ function ProjectDetail() {
         ],
         connections: [
           { from: 'gps', to: 'rpi', label: 'MGRS' },
-          { from: 'view', to: 'rpi', label: 'Sends\ncommands' },
-          { from: 'rpi', to: 'view', label: 'Shows MGRS\n/ Schedule' },
-          { from: 'rpi', to: 'schedule', label: 'Generate\nschedule' },
-          { from: 'schedule', to: 'rpi', label: 'Returns\nschedule' },
-          { from: 'schedule', to: 'sqlite', label: 'Read/Write' },
-          { from: 'webadmin', to: 'sqlite', label: 'Read/Write' },
+          { from: 'view', to: 'rpi', label: { sv: 'Skickar\nkommandon', en: 'Sends\ncommands' } },
+          { from: 'rpi', to: 'view', label: { sv: 'Visar MGRS\n/ Schema', en: 'Shows MGRS\n/ Schedule' } },
+          { from: 'rpi', to: 'schedule', label: { sv: 'Generera\nschema', en: 'Generate\nschedule' } },
+          { from: 'schedule', to: 'rpi', label: { sv: 'Returnerar\nschema', en: 'Returns\nschedule' } },
+          { from: 'schedule', to: 'sqlite', label: { sv: 'Läs/Skriv', en: 'Read/Write' } },
+          { from: 'webadmin', to: 'sqlite', label: { sv: 'Läs/Skriv', en: 'Read/Write' } },
         ],
-        subtitle: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.'
+        subtitle: {
+          sv: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.',
+          en: 'Everything runs on a Raspberry Pi with a touchscreen. Web Admin is used from a computer to manage data.'
+        }
       },
       github: null,
       demo: null,
       image: null,
       demoVideos: null,
-      resultText: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
+      resultText: {
+        sv: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
+        en: 'The project is under development. The GPS module can read satellite signals and display the position as MGRS coordinates on the touchscreen. The schedule module can generate schedules based on rules such as no one working double shifts, all shifts having enough people, and work hours being distributed fairly. The device works completely offline without internet.'
+      },
       insights: [
         {
-          title: 'Bakgrund',
+          title: { sv: 'Bakgrund', en: 'Background' },
           items: [
             {
-              label: 'Från iOS till Raspberry Pi',
-              text: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.'
+              label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
+              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So now I\'m rebuilding it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
             }
           ]
         }
       ],
       hasWorkflow: false,
       workflow: [],
-      componentsText: 'Enheten är uppdelad i oberoende moduler som kan utvecklas var för sig.',
+      componentsText: {
+        sv: 'Enheten är uppdelad i oberoende moduler som kan utvecklas var för sig.',
+        en: 'The device is divided into independent modules that can be developed separately.'
+      },
       components: [
         {
           group: 'GPS',
@@ -661,12 +720,12 @@ function ProjectDetail() {
             {
               name: 'GPS Receiver',
               type: 'Hardware',
-              responsibility: 'En USB GPS-mottagare (VK-162) som fångar upp satellitsignaler och ger enhetens position.'
+              responsibility: { sv: 'En USB GPS-mottagare (VK-162) som fångar upp satellitsignaler och ger enhetens position.', en: 'A USB GPS receiver (VK-162) that captures satellite signals and provides the device\'s position.' }
             },
             {
               name: 'MGRS Converter',
               type: 'Service',
-              responsibility: 'Tar emot GPS-koordinater och konverterar dem till MGRS-format som kan användas direkt på en militär karta.'
+              responsibility: { sv: 'Tar emot GPS-koordinater och konverterar dem till MGRS-format som kan användas direkt på en militär karta.', en: 'Receives GPS coordinates and converts them to MGRS format that can be used directly on a military map.' }
             }
           ]
         },
@@ -676,27 +735,27 @@ function ProjectDetail() {
             {
               name: 'Schedule Engine',
               type: 'Service',
-              responsibility: 'Genererar scheman automatiskt utifrån tillgängliga personer och skift som behöver täckas.'
+              responsibility: { sv: 'Genererar scheman automatiskt utifrån tillgängliga personer och skift som behöver täckas.', en: 'Generates schedules automatically based on available personnel and shifts that need to be covered.' }
             },
             {
               name: 'Constraints',
-              type: 'Rules',
-              responsibility: 'Reglerna som schemat måste följa: ingen jobbar dubbla pass, tillräckligt med folk per skift, vilotider efter långa pass, och rättvis fördelning av arbetstimmar.'
+              type: { sv: 'Regler', en: 'Rules' },
+              responsibility: { sv: 'Reglerna som schemat måste följa: ingen jobbar dubbla pass, tillräckligt med folk per skift, vilotider efter långa pass, och rättvis fördelning av arbetstimmar.', en: 'The rules the schedule must follow: no one works double shifts, enough people per shift, rest periods after long shifts, and fair distribution of work hours.' }
             }
           ]
         },
         {
-          group: 'Databas',
+          group: { sv: 'Databas', en: 'Database' },
           items: [
             {
               name: 'SQLite',
               type: 'Database',
-              responsibility: 'Lokal databas som lagrar alla scheman, personer och inställningar direkt på enheten. Kräver inget internet.'
+              responsibility: { sv: 'Lokal databas som lagrar alla scheman, personer och inställningar direkt på enheten. Kräver inget internet.', en: 'Local database that stores all schedules, personnel, and settings directly on the device. Requires no internet.' }
             },
             {
               name: 'Web Admin',
               type: 'Interface',
-              responsibility: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Delar samma databas som enheten.'
+              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Shares the same database as the device.' }
             }
           ]
         }
@@ -723,11 +782,11 @@ function ProjectDetail() {
         {/* Project Title Header - GitHub Style */}
         <div className="project-header-title">
           <Link to="/projects" className="back-link">
-            ← Back
+            {t('projects.backToProjects')}
           </Link>
           <div className="project-title-row">
             <h1 className="github-project-name">{project.name}</h1>
-            <p className="project-tagline">{project.tagline}</p>
+            <p className="project-tagline">{loc(project.tagline)}</p>
           </div>
         </div>
 
@@ -747,7 +806,7 @@ function ProjectDetail() {
               </div>
               <div className="readme-accent-line"></div>
               <div className="readme-content">
-                <p className="readme-description">{project.description}</p>
+                <p className="readme-description">{loc(project.description)}</p>
               </div>
             </div>
           </div>
@@ -756,11 +815,11 @@ function ProjectDetail() {
           <div className="sidebar-column">
             <div className={`about-section led-${project.ledColor}`}>
               <div className="about-header">
-                <span className="about-title">PROJEKTDETALJER</span>
+                <span className="about-title">{t('projects.details')}</span>
               </div>
               <div className="about-content">
                 <div className="about-item">
-                  <span className="about-label">PLATFORMS:</span>
+                  <span className="about-label">{t('projects.platforms')}</span>
                 </div>
                 <div className="about-tech-list">
                   {project.platforms.map((platform, i) => (
@@ -772,7 +831,7 @@ function ProjectDetail() {
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
-                  <span className="about-label">TECH STACK:</span>
+                  <span className="about-label">{t('projects.techStack')}</span>
                 </div>
                 <div className="about-tech-list">
                   {project.techStack.map((tech, i) => (
@@ -784,8 +843,8 @@ function ProjectDetail() {
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
-                  <span className="about-label">YEAR:</span>
-                  <span className="about-value">{project.year}</span>
+                  <span className="about-label">{t('projects.year')}</span>
+                  <span className="about-value">{loc(project.year)}</span>
                 </div>
               </div>
             </div>
@@ -804,7 +863,7 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.result ? 'expanded' : ''}`}>
             <div className="section-content">
               {project.resultText && (
-                <p className="result-description">{project.resultText}</p>
+                <p className="result-description">{loc(project.resultText)}</p>
               )}
               {project.demoVideos && (
                 <div className="video-grid">
@@ -829,7 +888,7 @@ function ProjectDetail() {
                         )}
                       </div>
                       </div>
-                      {video.description && <span className="video-description">{video.description}</span>}
+                      {video.description && <span className="video-description">{loc(video.description)}</span>}
                     </div>
                   ))}
                 </div>
@@ -840,7 +899,7 @@ function ProjectDetail() {
                     <div key={i} className="result-image-item">
                       <span className="result-image-title">{img.title}</span>
                       <div className="result-image-container">
-                        <img className="result-image" src={img.src} alt={img.title} />
+                        <img className="result-image" src={img.src} alt={img.title} loading="lazy" />
                       </div>
                     </div>
                   ))}
@@ -865,13 +924,19 @@ function ProjectDetail() {
                     <div key={i} className="feature-commit">
                       <div className="feature-commit-dot"></div>
                       <div className="feature-commit-content">
-                        <span className="feature-commit-label">{detail.label}</span>
-                        <p className="feature-commit-text">{detail.text}</p>
+                        <span className="feature-commit-label">{loc(detail.label)}</span>
+                        <p className="feature-commit-text">{loc(detail.text)}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('result')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                {t('projects.close')}
+              </button>
             </div>
           </div>
         </div>
@@ -890,18 +955,24 @@ function ProjectDetail() {
               {project.architecture ? (
                 <>
                   {project.architecture.subtitle && (
-                    project.architecture.subtitle.split('\n\n').map((para, i) => (
+                    loc(project.architecture.subtitle).split('\n\n').map((para, i) => (
                       <p key={i} className="result-description">{para}</p>
                     ))
                   )}
                   <div className="arch-tap-hint" onClick={() => setArchModalOpen(true)}>
                     <ArchitectureDiagram architecture={project.architecture} />
-                    <span className="arch-tap-label">Tryck för att förstora</span>
+                    <span className="arch-tap-label">{t('projects.expandHint')}</span>
                   </div>
                 </>
               ) : (
                 <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('architecture')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                {t('projects.close')}
+              </button>
             </div>
           </div>
         </div>
@@ -931,20 +1002,20 @@ function ProjectDetail() {
               {project.components && project.components.length > 0 ? (
                 <>
                 {project.componentsText && (
-                  <p className="result-description">{project.componentsText}</p>
+                  <p className="result-description">{loc(project.componentsText)}</p>
                 )}
                 <div className="components-list">
                   {project.components.map((group, gi) => (
                     <div key={gi} className="component-group">
-                      {group.group && <h4 className="component-group-title">{group.group}</h4>}
+                      {group.group && <h4 className="component-group-title">{loc(group.group)}</h4>}
                       <div className="component-grid">
                         {group.items.map((comp, i) => (
                           <div key={i} className="component-card">
                             <div className="component-card-header">
-                              <span className="component-name">{comp.name}</span>
-                              <span className="component-type-badge">{comp.type}</span>
+                              <span className="component-name">{loc(comp.name)}</span>
+                              <span className="component-type-badge">{loc(comp.type)}</span>
                             </div>
-                            <p className="component-responsibility">{comp.responsibility}</p>
+                            <p className="component-responsibility">{loc(comp.responsibility)}</p>
                           </div>
                         ))}
                       </div>
@@ -959,15 +1030,21 @@ function ProjectDetail() {
                       <div className="pipeline-content">
                         <span className="pipeline-icon">{step.icon}</span>
                         <div className="pipeline-text">
-                          <span className="pipeline-title">{step.title}</span>
-                          <span className="pipeline-desc">{step.description}</span>
-                          <span className="pipeline-detail">{step.details}</span>
+                          <span className="pipeline-title">{loc(step.title)}</span>
+                          <span className="pipeline-desc">{loc(step.description)}</span>
+                          <span className="pipeline-detail">{loc(step.details)}</span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('components')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                {t('projects.close')}
+              </button>
             </div>
           </div>
         </div>
@@ -985,19 +1062,19 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.insights ? 'expanded' : ''}`}>
             <div className="section-content">
               {typeof project.insights === 'string' ? (
-                <p className="insights-description">{project.insights}</p>
+                <p className="insights-description">{loc(project.insights)}</p>
               ) : (
                 <div className="components-list">
                   {project.insights.map((section, si) => (
                     <div key={si} className="component-group">
-                      <h4 className="insights-group-title">{section.title}</h4>
+                      <h4 className="insights-group-title">{loc(section.title)}</h4>
                       <div className="feature-commits">
                         {section.items.map((item, i) => (
                           <div key={i} className="feature-commit">
                             <div className="feature-commit-dot insights-dot"></div>
                             <div className="feature-commit-content">
-                              <span className="feature-commit-label">{item.label}</span>
-                              <p className="feature-commit-text">{item.text}</p>
+                              <span className="feature-commit-label">{loc(item.label)}</span>
+                              <p className="feature-commit-text">{loc(item.text)}</p>
                             </div>
                           </div>
                         ))}
@@ -1006,6 +1083,12 @@ function ProjectDetail() {
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('insights')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                {t('projects.close')}
+              </button>
             </div>
           </div>
         </div>
@@ -1057,6 +1140,12 @@ function ProjectDetail() {
                   </a>
                 )}
               </div>
+              <button className="section-collapse-btn" onClick={() => toggleSection('links')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                {t('projects.close')}
+              </button>
             </div>
           </div>
         </div>}

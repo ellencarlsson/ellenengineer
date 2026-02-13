@@ -1,11 +1,128 @@
 /**
  * @file Contact page with API theme displaying email and LinkedIn.
  */
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import './Contact.css';
+
+const EMAIL = 'carlssonellen@live.se';
+const LINKEDIN = 'linkedin.com/in/ellen-carlsson-ab04451b4';
 
 /** Contact page styled as API documentation with endpoints. */
 function Contact() {
+  const { t } = useLanguage();
+  const BUG_CATEGORIES = [
+    { key: 'design', label: t('contact.categories.design') },
+    { key: 'functionality', label: t('contact.categories.functionality') },
+    { key: 'performance', label: t('contact.categories.performance') },
+    { key: 'other', label: t('contact.categories.other') },
+  ];
+  const PAGES = [
+    { key: 'home', label: t('contact.pages.home') },
+    { key: 'projects', label: t('contact.pages.projects') },
+    { key: 'about', label: t('contact.pages.about') },
+    { key: 'cv', label: t('contact.pages.cv') },
+    { key: 'contact', label: t('contact.pages.contact') },
+    { key: 'other', label: t('contact.pages.other') },
+  ];
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedLinkedin, setCopiedLinkedin] = useState(false);
+  const [bugFormOpen, setBugFormOpen] = useState(false);
+  const [bugFormClosing, setBugFormClosing] = useState(false);
+  const [bugFormOpening, setBugFormOpening] = useState(false);
+  const [bugCategory, setBugCategory] = useState('');
+  const [bugPage, setBugPage] = useState('');
+  const [bugDescription, setBugDescription] = useState('');
+  const [bugStatus, setBugStatus] = useState('idle'); // idle, sending, sent, error
+  const bugFormRef = useRef(null);
+
+  useEffect(() => {
+    if (bugFormOpen && !bugFormClosing && bugFormRef.current) {
+      setTimeout(() => {
+        const formBottom = bugFormRef.current.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+        if (formBottom > windowHeight - 40) {
+          window.scrollBy({ top: formBottom - windowHeight + 80, behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, [bugFormOpen, bugFormClosing]);
+
+  const handleCopy = (text, setCopied) => (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Fallback for mobile/older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+
+    document.body.removeChild(textArea);
+  };
+
+  const handleBugSubmit = async () => {
+    if (!bugCategory || !bugDescription.trim()) return;
+    if (bugCategory === 'Design' && !bugPage) return;
+
+    setBugStatus('sending');
+    try {
+      await fetch('https://ellenengineer.com/report-bug.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: bugCategory,
+          page: bugPage || null,
+          message: bugDescription
+        })
+      });
+      setBugStatus('sent');
+      setTimeout(() => {
+        closeBugForm();
+        setBugStatus('idle');
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to send bug report:', err);
+      setBugStatus('error');
+    }
+  };
+
+  const closeBugForm = () => {
+    setBugFormClosing(true);
+    setTimeout(() => {
+      setBugFormOpen(false);
+      setBugFormClosing(false);
+      setBugCategory('');
+      setBugPage('');
+      setBugDescription('');
+    }, 400);
+  };
+
+  const toggleBugForm = (e) => {
+    e.preventDefault();
+    if (bugFormOpen) {
+      closeBugForm();
+    } else {
+      setBugFormOpening(true);
+      setBugFormOpen(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setBugFormOpening(false);
+        });
+      });
+    }
+  };
+
   return (
     <div className="contact-page">
       <div className="contact-container">
@@ -16,7 +133,7 @@ function Contact() {
         </div>
 
         <div className="api-description">
-          Available endpoints for contact information
+          Available endpoints
         </div>
 
         <div className="api-endpoints">
@@ -27,7 +144,22 @@ function Contact() {
               <div className="endpoint-description">Returns email address for direct communication</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">carlssonellen@live.se</span>
+                <span className="response-value-group">
+                  <span className="response-value">{EMAIL}</span>
+                  <button type="button" className="copy-button" onClick={handleCopy(EMAIL, setCopiedEmail)} title={t('contact.copyEmail')}>
+                  {copiedEmail ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  )}
+                  {copiedEmail && <span className="copy-tooltip">{t('contact.copied')}</span>}
+                </button>
+                </span>
               </div>
             </div>
             <div className="endpoint-icon">
@@ -45,7 +177,20 @@ function Contact() {
               <div className="endpoint-description">Returns LinkedIn profile for professional networking</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">linkedin.com/in/ellen-carlsson-ab04451b4</span>
+                <span className="response-value">{LINKEDIN}</span>
+                <button type="button" className="copy-button" onClick={handleCopy(LINKEDIN, setCopiedLinkedin)} title={t('contact.copyLinkedin')}>
+                  {copiedLinkedin ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  )}
+                  {copiedLinkedin && <span className="copy-tooltip">{t('contact.copied')}</span>}
+                </button>
               </div>
             </div>
             <div className="endpoint-icon">
@@ -54,6 +199,91 @@ function Contact() {
               </svg>
             </div>
           </a>
+
+          <div className={`endpoint endpoint-post ${bugFormOpen ? 'endpoint-expanded' : ''}`}>
+            <div className="endpoint-header" onClick={toggleBugForm}>
+              <div className="endpoint-method endpoint-method-post">POST</div>
+              <div className="endpoint-content">
+                <div className="endpoint-path">/report/bug</div>
+                <div className="endpoint-description">Submit a bug report or feedback about the site</div>
+                <div className="endpoint-response">
+                  <span className="response-label">Body:</span>
+                  <span className="response-value">{"{ category, description }"}</span>
+                </div>
+              </div>
+              <div className="endpoint-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <ellipse cx="12" cy="14" rx="5" ry="6"></ellipse>
+                  <circle cx="12" cy="6" r="3"></circle>
+                  <path d="M9 4L7 2"></path>
+                  <path d="M15 4l2-2"></path>
+                  <path d="M7 11L4 9"></path>
+                  <path d="M17 11l3-2"></path>
+                  <path d="M7 17L4 19"></path>
+                  <path d="M17 17l3 2"></path>
+                </svg>
+              </div>
+            </div>
+
+            {bugFormOpen && (
+              <div className={`bug-form ${bugFormClosing ? 'closing' : ''} ${bugFormOpening ? 'opening' : ''}`} ref={bugFormRef}>
+                <div className="bug-form-field">
+                  <label className="bug-form-label">{t('contact.bugCategory')}</label>
+                  <div className="bug-categories">
+                    {BUG_CATEGORIES.map((cat) => (
+                      <button
+                        key={cat.key}
+                        type="button"
+                        className={`bug-category ${bugCategory === cat.key ? 'selected' : ''}`}
+                        onClick={() => {
+                          setBugCategory(cat.key);
+                          if (cat.key !== 'design') setBugPage('');
+                        }}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {bugCategory === 'design' && (
+                    <div className="bug-subcategories">
+                      <span className="bug-subcategory-label">{t('contact.bugPage')}</span>
+                      {PAGES.map((page) => (
+                        <button
+                          key={page.key}
+                          type="button"
+                          className={`bug-subcategory ${bugPage === page.key ? 'selected' : ''}`}
+                          onClick={() => setBugPage(page.key)}
+                        >
+                          {page.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="bug-form-field">
+                  <label className="bug-form-label">{t('contact.bugDescription')}</label>
+                  <textarea
+                    className="bug-textarea"
+                    placeholder={t('contact.bugPlaceholder')}
+                    value={bugDescription}
+                    onChange={(e) => setBugDescription(e.target.value)}
+                    rows={3}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  className="bug-submit"
+                  onClick={handleBugSubmit}
+                  disabled={!bugCategory || (bugCategory === 'design' && !bugPage) || !bugDescription.trim() || bugStatus === 'sending'}
+                >
+                  {bugStatus === 'sending' ? t('contact.bugSending') : bugStatus === 'sent' ? t('contact.bugSent') : t('contact.bugSubmit')}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

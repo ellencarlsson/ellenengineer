@@ -186,30 +186,6 @@
     0 0 50px rgba(var(--accent-terracotta-rgb), 0.1);
 }
 
-/* LED Indicator */
-.node-led {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-terracotta);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0.8;
-}
-
-.project-node:nth-child(1) .node-led {
-  background: var(--accent-sage);
-}
-
-.project-node:nth-child(2) .node-led {
-  background: var(--accent-sand);
-}
-
-.project-node:nth-child(3) .node-led {
-  background: var(--accent-terracotta);
-}
 
 
 .node-inner {
@@ -254,69 +230,47 @@
 
 .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  top: 50%;
+  left: 50%;
+  width: var(--size, 6px);
+  height: var(--size, 6px);
   border-radius: 50%;
-  opacity: 0.6;
+  opacity: var(--opacity, 0.6);
+  animation: particleOrbit var(--duration, 8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  animation-direction: var(--anim-direction, normal);
 }
 
 .project-node:nth-child(1) .particle {
   background: var(--accent-sage);
-  box-shadow: 0 0 4px rgba(var(--accent-sage-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-sage-rgb), 0.6),
+    0 0 8px rgba(var(--accent-sage-rgb), 0.4),
+    0 0 12px rgba(var(--accent-sage-rgb), 0.2);
 }
 
 .project-node:nth-child(2) .particle {
   background: var(--accent-sand);
-  box-shadow: 0 0 4px rgba(var(--accent-sand-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-sand-rgb), 0.6),
+    0 0 8px rgba(var(--accent-sand-rgb), 0.4),
+    0 0 12px rgba(var(--accent-sand-rgb), 0.2);
 }
 
 .project-node:nth-child(3) .particle {
   background: var(--accent-terracotta);
-  box-shadow: 0 0 4px rgba(var(--accent-terracotta-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-terracotta-rgb), 0.6),
+    0 0 8px rgba(var(--accent-terracotta-rgb), 0.4),
+    0 0 12px rgba(var(--accent-terracotta-rgb), 0.2);
 }
 
-.particle-1 {
-  top: 50%;
-  left: 50%;
-  animation: orbit1 8s linear infinite;
-}
-
-.particle-2 {
-  top: 50%;
-  left: 50%;
-  animation: orbit2 10s linear infinite;
-}
-
-.particle-3 {
-  top: 50%;
-  left: 50%;
-  animation: orbit3 12s linear infinite;
-}
-
-@keyframes orbit1 {
+@keyframes particleOrbit {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(var(--start-angle, 0deg)) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg)));
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit2 {
-  0% {
-    transform: translate(-50%, -50%) rotate(120deg) translateX(120px) rotate(-120deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(480deg) translateX(120px) rotate(-480deg);
-  }
-}
-
-@keyframes orbit3 {
-  0% {
-    transform: translate(-50%, -50%) rotate(240deg) translateX(105px) rotate(-240deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(600deg) translateX(105px) rotate(-600deg);
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle, 0deg) + calc(360deg * var(--direction, 1)))) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg) - calc(360deg * var(--direction, 1))));
   }
 }
 
@@ -339,44 +293,6 @@
     font-size: 0.9rem;
   }
 
-  .node-led {
-    width: 7px;
-    height: 7px;
-    top: 10px;
-    right: 10px;
-  }
-
-  .particle {
-    width: 5px;
-    height: 5px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(95px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(95px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(85px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(85px) rotate(-600deg);
-    }
-  }
 }
 
 @media (max-width: 768px) {
@@ -400,45 +316,6 @@
   .node-year {
     font-size: 0.8rem;
   }
-
-  .node-led {
-    width: 6px;
-    height: 6px;
-    top: 8px;
-    right: 8px;
-  }
-
-  .particle {
-    width: 4px;
-    height: 4px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(70px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(75px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(75px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(65px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(65px) rotate(-600deg);
-    }
-  }
 }
 
 @media (max-width: 480px) {
@@ -459,43 +336,8 @@
     font-size: 0.6rem;
   }
 
-  .node-led {
-    width: 5px;
-    height: 5px;
-    top: 6px;
-    right: 6px;
-  }
-
-  .particle {
-    width: 3px;
-    height: 3px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(55px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(55px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(60px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(60px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(50px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(50px) rotate(-600deg);
-    }
+  .particle-orbit {
+    transform: scale(0.65);
   }
 
   .connection-line {
@@ -504,5 +346,46 @@
 
   .connection-line.active {
     stroke-width: 2.5;
+  }
+}
+
+/* Landscape mobile - 75% node size */
+@media (max-height: 500px) and (orientation: landscape) {
+  .projects-page {
+    padding: 0.5rem 1rem;
+  }
+
+  .projects-network-container {
+    height: 70vh;
+    padding-top: 20px;
+  }
+
+  .node-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .node-inner {
+    padding: 0.5rem;
+  }
+
+  .node-name {
+    font-size: 0.7rem;
+  }
+
+  .node-tag {
+    font-size: 0.5rem;
+  }
+
+  .node-year {
+    font-size: 0.5rem;
+  }
+
+  .particle-orbit {
+    transform: scale(0.6);
+  }
+
+  .connection-line {
+    stroke-width: 1.5;
   }
 }

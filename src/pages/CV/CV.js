@@ -2,6 +2,8 @@
  * @file CV page with SQL-animated text output and downloadable PDF.
  */
 import React, { useState, useEffect } from 'react';
+import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
+import { useLanguage } from '../../context/LanguageContext';
 import './CV.css';
 
 /** SQL lines typed out character by character on the page. */
@@ -13,6 +15,10 @@ const SQL_LINES = [
 
 /** CV page with SQL query animation, CV image, and download buttons. */
 function CV() {
+  const { t, language } = useLanguage();
+  const cvPdf = language === 'sv' ? '/assets/CV-Ellen-Carlsson-SV.pdf' : '/assets/CV-Ellen-Carlsson-EN.pdf';
+  const cvImage = language === 'sv' ? '/assets/CV-image-SV.jpg' : '/assets/CV-image-EN.jpg';
+  const cvFilename = language === 'sv' ? 'CV-Ellen-Carlsson.pdf' : 'CV-Ellen-Carlsson-EN.pdf';
   const [displayedText, setDisplayedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -20,6 +26,7 @@ function CV() {
   const [queryComplete, setQueryComplete] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [showCard, setShowCard] = useState(false);
+  const [skipped, setSkipped] = useState(false);
 
   /** Skips the SQL animation and displays everything immediately. */
   const skipAnimation = () => {
@@ -29,6 +36,7 @@ function CV() {
     setQueryComplete(true);
     setShowResult(true);
     setShowCard(true);
+    setSkipped(true);
   };
 
   /** Listens for the Enter key to skip the animation. */
@@ -181,7 +189,7 @@ function CV() {
             </div>
 
             {showResult && (
-              <div className="sql-result">
+              <div className={`sql-result ${skipped ? 'skipped' : ''}`}>
                 <span className="sql-result-check">&#10003;</span>
                 <span className="sql-result-text"> 1 record found — </span>
                 <span className="sql-result-file">CV-Ellen-Carlsson.pdf</span>
@@ -191,14 +199,14 @@ function CV() {
 
           {!queryComplete && (
             <div className="cv-skip-hint">
-              <span className="cv-hint-desktop">Tryck <span className="cv-skip-key">Enter</span> för att hoppa över</span>
-              <span className="cv-hint-mobile">Tryck för att hoppa över</span>
+              <span className="cv-hint-desktop">{t('cv.skipHintDesktop')} <span className="cv-skip-key">{t('cv.skipKey')}</span> {t('cv.skipHintDesktopEnd')}</span>
+              <span className="cv-hint-mobile">{t('cv.skipHintMobile')}</span>
             </div>
           )}
 
-          <div className={`cv-actions ${showCard ? 'visible' : ''}`}>
+          <div className={`cv-actions ${showCard ? 'visible' : ''} ${skipped ? 'skipped' : ''}`}>
             <a
-              href="/assets/CV-Ellen-Carlsson.pdf"
+              href={cvPdf}
               target="_blank"
               rel="noopener noreferrer"
               className="cv-button cv-button-open"
@@ -208,11 +216,11 @@ function CV() {
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Öppna CV
+              {t('cv.openCV')}
             </a>
             <a
-              href="/assets/CV-Ellen-Carlsson.pdf"
-              download="CV-Ellen-Carlsson.pdf"
+              href={cvPdf}
+              download={cvFilename}
               className="cv-button cv-button-download"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -220,18 +228,18 @@ function CV() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Ladda ner
+              {t('cv.downloadCV')}
             </a>
           </div>
         </div>
 
         {/* Right: CV image with glitch effect */}
-        <div className={`cv-right ${showCard ? 'visible' : ''}`}>
+        <div className={`cv-right ${showCard ? 'visible' : ''} ${skipped ? 'skipped' : ''}`}>
 
           <div className="cv-image-wrap">
             <div className="cv-glitch">
-              <img
-                src="/assets/CV-image.png"
+              <ImageWithSkeleton
+                src={cvImage}
                 alt="CV - Ellen Carlsson"
                 className="cv-image"
               />
