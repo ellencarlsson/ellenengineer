@@ -5,6 +5,28 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
+/** Generate random particle properties for electronic look */
+const generateParticles = (nodeIndex, count = 4) => {
+  const particles = [];
+  for (let i = 0; i < count; i++) {
+    const seed = nodeIndex * 100 + i;
+    const random = (min, max) => {
+      const x = Math.sin(seed * (i + 1) * 9999) * 10000;
+      return min + (x - Math.floor(x)) * (max - min);
+    };
+    particles.push({
+      size: random(3, 6),
+      opacity: random(0.5, 0.8),
+      duration: random(8, 14),
+      startAngle: random(0, 360),
+      radius: random(100, 115),
+      delay: random(0, 6),
+      direction: 1,
+    });
+  }
+  return particles;
+};
+
 /** Predefined positions for the project nodes in the network. */
 const SCATTER_POSITIONS = [
   { x: 25, y: 30 },
@@ -129,15 +151,24 @@ function Projects() {
             >
               {/* Orbiting particles */}
               <div className="particle-orbit">
-                <div className="particle particle-1"></div>
-                <div className="particle particle-2"></div>
-                <div className="particle particle-3"></div>
+                {generateParticles(index, 4).map((p, i) => (
+                  <div
+                    key={i}
+                    className="particle"
+                    style={{
+                      '--size': `${p.size}px`,
+                      '--opacity': p.opacity,
+                      '--duration': `${p.duration}s`,
+                      '--start-angle': `${p.startAngle}deg`,
+                      '--radius': `${p.radius}px`,
+                      '--delay': `-${p.delay}s`,
+                      '--direction': p.direction,
+                    }}
+                  />
+                ))}
               </div>
 
               <div className="node-circle">
-                {/* LED Indicator */}
-                <div className="node-led"></div>
-
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
                   <div className="node-tag">{project.platform}</div>
