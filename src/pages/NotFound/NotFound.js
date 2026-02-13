@@ -3,9 +3,11 @@
  */
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import './NotFound.css';
 
 function NotFound() {
+  const { language } = useLanguage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function NotFound() {
           <p className="not-found-line"><span className="not-found-prompt">$</span> echo $?</p>
           <p className="not-found-line error-code">404</p>
           <p className="not-found-line"><span className="not-found-prompt">$</span> <Link to="/" className="not-found-link">cd /home</Link><span className="not-found-cursor">_</span></p>
-          <p className="not-found-hint">tryck enter</p>
+          <p className="not-found-hint">{language === 'sv' ? 'tryck enter' : 'press enter'}</p>
         </div>
       </div>
     </div>
