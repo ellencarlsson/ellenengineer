@@ -2,10 +2,6 @@
 
 Personal portfolio website built with React. Each page has its own interactive theme: a typing terminal on the home page, a node network for projects, a draggable timeline for about me, SQL queries for the CV, and API calls for the contact page.
 
-## Live
-
-[ellenengineer.se](https://ellenengineer.se)
-
 ## Tech stack
 
 - React
