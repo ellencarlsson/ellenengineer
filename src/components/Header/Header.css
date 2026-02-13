@@ -101,6 +101,11 @@
   flex-shrink: 0;
 }
 
+.header-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header-title {
   display: flex;
   flex-direction: column;

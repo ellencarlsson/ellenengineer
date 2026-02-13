@@ -94,13 +94,15 @@ function Header() {
         </div>
 
         <div className="header-center">
-          <div className="header-title">
-            <h1 className="name-first glitch" data-text="Ellen">Ellen</h1>
-            <div className="title-row">
-              <p className="header-subtitle glitch" data-text="Engineer">Engineer</p>
-              <h1 className="name-last glitch" data-text="Carlsson">Carlsson</h1>
+          <NavLink to="/" className="header-title-link">
+            <div className="header-title">
+              <h1 className="name-first glitch" data-text="Ellen">Ellen</h1>
+              <div className="title-row">
+                <p className="header-subtitle glitch" data-text="Engineer">Engineer</p>
+                <h1 className="name-last glitch" data-text="Carlsson">Carlsson</h1>
+              </div>
             </div>
-          </div>
+          </NavLink>
         </div>
 
         <div className="header-right">
