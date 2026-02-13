@@ -76,9 +76,8 @@
   opacity: 0.8;
 }
 
-.footer-separator {
-  margin: 0 8px;
-  opacity: 0.5;
+.footer-meta + .footer-meta {
+  margin-top: 4px;
 }
 
 /* Intermediate breakpoints */
