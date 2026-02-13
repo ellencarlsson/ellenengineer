@@ -331,7 +331,11 @@
 
 @media (max-width: 480px) {
   .cv-page {
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-sm);
+  }
+
+  .cv-layout {
+    padding-top: 20px;
   }
 
   .sql-block {
