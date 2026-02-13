@@ -254,10 +254,14 @@
 
 .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  top: 50%;
+  left: 50%;
+  width: var(--size, 6px);
+  height: var(--size, 6px);
   border-radius: 50%;
-  opacity: 0.6;
+  opacity: var(--opacity, 0.6);
+  animation: particleOrbit var(--duration, 8s) linear infinite;
+  animation-delay: var(--delay, 0s);
 }
 
 .project-node:nth-child(1) .particle {
@@ -275,48 +279,12 @@
   box-shadow: 0 0 4px rgba(var(--accent-terracotta-rgb), 0.4);
 }
 
-.particle-1 {
-  top: 50%;
-  left: 50%;
-  animation: orbit1 8s linear infinite;
-}
-
-.particle-2 {
-  top: 50%;
-  left: 50%;
-  animation: orbit2 10s linear infinite;
-}
-
-.particle-3 {
-  top: 50%;
-  left: 50%;
-  animation: orbit3 12s linear infinite;
-}
-
-@keyframes orbit1 {
+@keyframes particleOrbit {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(var(--start-angle, 0deg)) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg)));
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg);
-  }
-}
-
-@keyframes orbit2 {
-  0% {
-    transform: translate(-50%, -50%) rotate(120deg) translateX(120px) rotate(-120deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(480deg) translateX(120px) rotate(-480deg);
-  }
-}
-
-@keyframes orbit3 {
-  0% {
-    transform: translate(-50%, -50%) rotate(240deg) translateX(105px) rotate(-240deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(600deg) translateX(105px) rotate(-600deg);
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle, 0deg) + 360deg)) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg) - 360deg));
   }
 }
 
@@ -346,36 +314,13 @@
     right: 10px;
   }
 
+  .particle-orbit {
+    transform: scale(0.8);
+  }
+
   .particle {
     width: 5px;
     height: 5px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(95px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(95px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(85px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(85px) rotate(-600deg);
-    }
   }
 }
 
@@ -408,36 +353,13 @@
     right: 8px;
   }
 
+  .particle-orbit {
+    transform: scale(0.65);
+  }
+
   .particle {
     width: 4px;
     height: 4px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(70px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(70px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(75px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(75px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(65px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(65px) rotate(-600deg);
-    }
   }
 }
 
@@ -466,36 +388,13 @@
     right: 6px;
   }
 
+  .particle-orbit {
+    transform: scale(0.5);
+  }
+
   .particle {
     width: 3px;
     height: 3px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(55px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(55px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(60px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(60px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(50px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(50px) rotate(-600deg);
-    }
   }
 
   .connection-line {
@@ -546,36 +445,13 @@
     right: 6px;
   }
 
+  .particle-orbit {
+    transform: scale(0.5);
+  }
+
   .particle {
     width: 3px;
     height: 3px;
-  }
-
-  @keyframes orbit1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(55px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(55px) rotate(-360deg);
-    }
-  }
-
-  @keyframes orbit2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(58px) rotate(-120deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(58px) rotate(-480deg);
-    }
-  }
-
-  @keyframes orbit3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(52px) rotate(-240deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(52px) rotate(-600deg);
-    }
   }
 
   .connection-line {
