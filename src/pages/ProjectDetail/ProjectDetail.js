@@ -51,7 +51,17 @@ function SvgLabel({ x, y, anchor, fill, fontSize, children }) {
 
 /** Renders an SVG architecture diagram with nodes, connections, and groups. */
 function ArchitectureDiagram({ architecture }) {
+  const { language } = useLanguage();
   const { nodes, connections, groups } = architecture;
+
+  /** Gets localized text from an object with sv/en keys. */
+  const loc = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
   const maxCol = Math.max(...nodes.map(n => n.col));
   const maxRow = Math.max(...nodes.map(n => n.row));
 
@@ -185,7 +195,7 @@ function ArchitectureDiagram({ architecture }) {
                 <SvgLabel
                   x={midX - perpX * labelOffset} y={midY - perpY * labelOffset}
                   anchor={anchor1} fill="rgba(255,255,255,0.7)" fontSize={28}
-                >{conn.label}</SvgLabel>
+                >{loc(conn.label)}</SvgLabel>
                 {reverse && (
                   <>
                     <line
@@ -198,7 +208,7 @@ function ArchitectureDiagram({ architecture }) {
                     <SvgLabel
                       x={midX + perpX * labelOffset} y={midY + perpY * labelOffset}
                       anchor={anchor2} fill="rgba(255,255,255,0.7)" fontSize={28}
-                    >{reverse.label}</SvgLabel>
+                    >{loc(reverse.label)}</SvgLabel>
                   </>
                 )}
               </g>
@@ -218,7 +228,7 @@ function ArchitectureDiagram({ architecture }) {
                   x={midX + perpX * 30} y={midY + perpY * 30}
                   anchor={Math.abs(perpX) > 0.5 ? (perpX > 0 ? 'start' : 'end') : 'middle'}
                   fill="rgba(255,255,255,0.7)" fontSize={28}
-                >{conn.label}</SvgLabel>
+                >{loc(conn.label)}</SvgLabel>
               )}
             </g>
           );
@@ -520,8 +530,14 @@ function ProjectDetail() {
       status: 'OPERATIONAL',
       ledColor: 'medium',
       accentColor: 'rose',
-      tagline: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
-      description: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
+      tagline: {
+        sv: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
+        en: 'Interactive portfolio with terminal theme and creative animations'
+      },
+      description: {
+        sv: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
+        en: 'I wanted a place to showcase my projects and thought it would be fun to build my own website. The theme is inspired by technology and data, with a terminal as the landing page and interactive elements throughout the site.\n\nEach page is built around its own concept. The landing page is a terminal, the projects page displays all projects as nodes, About me is a timeline with electric inspiration, the CV page uses SQL queries, and Contact me is laid out as API calls.'
+      },
       platforms: ['Web'],
       techStack: ['React', 'JavaScript'],
       architecture: {
@@ -531,32 +547,41 @@ function ProjectDetail() {
           { id: 'view', label: 'View', col: 2, row: 0 },
         ],
         connections: [
-          { from: 'browser', to: 'router', label: 'Användaren\nnavigerar' },
-          { from: 'router', to: 'view', label: 'Väljer rätt\nsida' },
+          { from: 'browser', to: 'router', label: { sv: 'Användaren\nnavigerar', en: 'User\nnavigates' } },
+          { from: 'router', to: 'view', label: { sv: 'Väljer rätt\nsida', en: 'Selects correct\npage' } },
         ],
-        subtitle: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.'
+        subtitle: {
+          sv: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.',
+          en: 'The site is a pure frontend without a backend or database. Each component has its data hardcoded directly in it—there is no separate data file. This is sufficient for a portfolio since the content is rarely updated and always by me. It makes the site fast, easy to deploy, and requires no server that costs money or needs maintenance.\n\nNavigation is handled by React Router as a SPA (Single Page Application), meaning the page never reloads when switching views. This provides a faster and smoother experience for visitors.'
+        }
       },
       github: null,
       demo: null,
       image: null,
       demoVideo: null,
-      resultText: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
+      resultText: {
+        sv: 'Sidan är live och fungerar bra på både desktop och mobil. Den har en startsida med en animerad terminal, en Om mig-sektion med en interaktiv tidslinje, en projektsida och en CV-sida med nedladdningsbar PDF. Hela sidan är fortfarande under utveckling och jag lägger till nya saker löpande.',
+        en: 'The site is live and works well on both desktop and mobile. It has a landing page with an animated terminal, an About me section with an interactive timeline, a projects page, and a CV page with a downloadable PDF. The entire site is still under development and I add new things continuously.'
+      },
       insights: [
         {
-          title: 'Kreativitet',
+          title: { sv: 'Kreativitet', en: 'Creativity' },
           items: [
             {
-              label: 'Interaktiva teman',
-              text: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.'
+              label: { sv: 'Interaktiva teman', en: 'Interactive themes' },
+              text: { sv: 'Det roligaste har varit att göra varje sida interaktiv och kreativ på sitt eget sätt. Varje flik har ett eget tema, en sida kan se ut som en SQL-query medan en annan liknar API-anrop. Jag ville att det skulle kännas som att man upptäcker något nytt varje gång man klickar sig vidare, och jag tycker att det blev bra.', en: 'The most fun part has been making each page interactive and creative in its own way. Each tab has its own theme—one page can look like a SQL query while another resembles API calls. I wanted it to feel like you discover something new every time you click through, and I think it turned out well.' }
             },
             {
-              label: 'Balans mellan kreativitet och tydlighet',
-              text: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.'
+              label: { sv: 'Balans mellan kreativitet och tydlighet', en: 'Balance between creativity and clarity' },
+              text: { sv: 'Det kluriga var att hitta balansen mellan kreativitet och tydlighet. Informationen ska vara lätt att förstå samtidigt som det ska vara snyggt och lite interaktivt. Det är lätt att det blir för mycket av det ena eller det andra.', en: 'The tricky part was finding the balance between creativity and clarity. The information should be easy to understand while also being visually appealing and somewhat interactive. It\'s easy to end up with too much of one or the other.' }
             }
           ]
         }
       ],
-      componentsText: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
+      componentsText: {
+        sv: 'Eftersom sidan är en ren frontend utan backend finns det inte så många tekniska delar att bryta ner. Här är de viktigaste.',
+        en: 'Since the site is a pure frontend without a backend, there aren\'t many technical parts to break down. Here are the most important ones.'
+      },
       components: [
         {
           group: '',
@@ -564,17 +589,17 @@ function ProjectDetail() {
             {
               name: 'App',
               type: 'Entry Point',
-              responsibility: 'Applikationens startpunkt som renderar hela sidan och kopplar ihop alla delar.'
+              responsibility: { sv: 'Applikationens startpunkt som renderar hela sidan och kopplar ihop alla delar.', en: 'The application\'s entry point that renders the entire site and connects all parts.' }
             },
             {
               name: 'React Router',
               type: 'Router',
-              responsibility: 'Konfigurerar alla routes och kopplar varje URL till rätt sidkomponent. Hanterar navigering utan att sidan laddas om.'
+              responsibility: { sv: 'Konfigurerar alla routes och kopplar varje URL till rätt sidkomponent. Hanterar navigering utan att sidan laddas om.', en: 'Configures all routes and maps each URL to the correct page component. Handles navigation without reloading the page.' }
             },
             {
-              name: 'Komponentstruktur',
-              type: 'Mönster',
-              responsibility: 'Varje del av sidan är organiserad i en egen mapp där både logik (.js) och styling (.css) bor tillsammans. All projektdata ligger hårdkodad direkt i komponenterna.'
+              name: { sv: 'Komponentstruktur', en: 'Component structure' },
+              type: { sv: 'Mönster', en: 'Pattern' },
+              responsibility: { sv: 'Varje del av sidan är organiserad i en egen mapp där både logik (.js) och styling (.css) bor tillsammans. All projektdata ligger hårdkodad direkt i komponenterna.', en: 'Each part of the site is organized in its own folder where both logic (.js) and styling (.css) live together. All project data is hardcoded directly in the components.' }
             }
           ]
         }
@@ -585,7 +610,7 @@ function ProjectDetail() {
           step: 1,
           icon: '💻',
           title: 'TERMINAL HERO',
-          description: 'macOS-terminal med skrivanimation',
+          description: { sv: 'macOS-terminal med skrivanimation', en: 'macOS terminal with typing animation' },
           details: 'React + useState + useEffect',
           ledColor: 'green'
         },
@@ -593,24 +618,24 @@ function ProjectDetail() {
           step: 2,
           icon: '🗺️',
           title: 'REACT ROUTER',
-          description: 'Klient-navigering mellan sidor',
-          details: 'SPA med React Router',
+          description: { sv: 'Klient-navigering mellan sidor', en: 'Client-side navigation between pages' },
+          details: { sv: 'SPA med React Router', en: 'SPA with React Router' },
           ledColor: 'green'
         },
         {
           step: 3,
           icon: '🕸️',
-          title: 'PROJEKT-NÄTVERK',
-          description: 'Interaktiva noder med SVG-linjer',
-          details: 'Animerade datapaket',
+          title: { sv: 'PROJEKT-NÄTVERK', en: 'PROJECT NETWORK' },
+          description: { sv: 'Interaktiva noder med SVG-linjer', en: 'Interactive nodes with SVG lines' },
+          details: { sv: 'Animerade datapaket', en: 'Animated data packets' },
           ledColor: 'blue'
         },
         {
           step: 4,
           icon: '📄',
-          title: 'PROJEKTSIDOR',
-          description: 'Expanderbara sektioner med chevrons',
-          details: 'Dynamiskt innehåll per projekt',
+          title: { sv: 'PROJEKTSIDOR', en: 'PROJECT PAGES' },
+          description: { sv: 'Expanderbara sektioner med chevrons', en: 'Expandable sections with chevrons' },
+          details: { sv: 'Dynamiskt innehåll per projekt', en: 'Dynamic content per project' },
           ledColor: 'green'
         }
       ]
@@ -968,8 +993,8 @@ function ProjectDetail() {
                         {group.items.map((comp, i) => (
                           <div key={i} className="component-card">
                             <div className="component-card-header">
-                              <span className="component-name">{comp.name}</span>
-                              <span className="component-type-badge">{comp.type}</span>
+                              <span className="component-name">{loc(comp.name)}</span>
+                              <span className="component-type-badge">{loc(comp.type)}</span>
                             </div>
                             <p className="component-responsibility">{loc(comp.responsibility)}</p>
                           </div>
@@ -986,7 +1011,7 @@ function ProjectDetail() {
                       <div className="pipeline-content">
                         <span className="pipeline-icon">{step.icon}</span>
                         <div className="pipeline-text">
-                          <span className="pipeline-title">{step.title}</span>
+                          <span className="pipeline-title">{loc(step.title)}</span>
                           <span className="pipeline-desc">{loc(step.description)}</span>
                           <span className="pipeline-detail">{loc(step.details)}</span>
                         </div>
