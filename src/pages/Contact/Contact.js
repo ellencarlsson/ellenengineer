@@ -1,11 +1,40 @@
 /**
  * @file Contact page with API theme displaying email and LinkedIn.
  */
-import React from 'react';
+import React, { useState } from 'react';
 import './Contact.css';
+
+const EMAIL = 'carlssonellen@live.se';
+const LINKEDIN = 'linkedin.com/in/ellen-carlsson-ab04451b4';
 
 /** Contact page styled as API documentation with endpoints. */
 function Contact() {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedLinkedin, setCopiedLinkedin] = useState(false);
+
+  const handleCopy = (text, setCopied) => (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Fallback for mobile/older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+
+    document.body.removeChild(textArea);
+  };
+
   return (
     <div className="contact-page">
       <div className="contact-container">
@@ -27,7 +56,22 @@ function Contact() {
               <div className="endpoint-description">Returns email address for direct communication</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">carlssonellen@live.se</span>
+                <span className="response-value-group">
+                  <span className="response-value">{EMAIL}</span>
+                  <button type="button" className="copy-button" onClick={handleCopy(EMAIL, setCopiedEmail)} title="Kopiera e-post">
+                  {copiedEmail ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  )}
+                  {copiedEmail && <span className="copy-tooltip">Kopierad!</span>}
+                </button>
+                </span>
               </div>
             </div>
             <div className="endpoint-icon">
@@ -45,7 +89,20 @@ function Contact() {
               <div className="endpoint-description">Returns LinkedIn profile for professional networking</div>
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
-                <span className="response-value">linkedin.com/in/ellen-carlsson-ab04451b4</span>
+                <span className="response-value">{LINKEDIN}</span>
+                <button type="button" className="copy-button" onClick={handleCopy(LINKEDIN, setCopiedLinkedin)} title="Kopiera LinkedIn">
+                  {copiedLinkedin ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  )}
+                  {copiedLinkedin && <span className="copy-tooltip">Kopierad!</span>}
+                </button>
               </div>
             </div>
             <div className="endpoint-icon">
