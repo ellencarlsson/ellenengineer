@@ -1594,6 +1594,30 @@
 
 /* Landscape mobile - smaller body text */
 @media (max-height: 500px) and (orientation: landscape) {
+  .project-detail-container {
+    padding: 0 3rem;
+  }
+
+  .github-layout {
+    grid-template-columns: 1fr 200px;
+    gap: var(--spacing-md);
+  }
+
+  .sidebar-column {
+    order: 0;
+  }
+
+  .project-title-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .project-tagline {
+    max-width: 50%;
+    text-align: right;
+    white-space: normal;
+  }
+
   .readme-description,
   .result-description,
   .architecture-description,
@@ -1601,7 +1625,7 @@
   .feature-commit-text,
   .pipeline-desc,
   .component-responsibility {
-    font-size: 9px;
+    font-size: 8px;
     line-height: 1.4;
   }
 
