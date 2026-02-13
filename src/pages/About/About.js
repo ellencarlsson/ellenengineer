@@ -2,6 +2,7 @@
  * @file About page with interactive timeline and milestones.
  */
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
 import './About.css';
 
 /** Milestones displayed on the timeline. */
@@ -214,7 +215,7 @@ function About() {
           {m.image && (
             <div className="card-image">
               <div className="glitch-img">
-                <img src={m.image} alt={`${m.year}`} loading="lazy" />
+                <ImageWithSkeleton src={m.image} alt={`${m.year}`} />
               </div>
             </div>
           )}
