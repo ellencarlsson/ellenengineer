@@ -1557,3 +1557,25 @@
     padding: 0.3rem 0.75rem;
   }
 }
+
+/* Landscape mobile - smaller body text */
+@media (max-height: 500px) and (orientation: landscape) {
+  .readme-description,
+  .result-description,
+  .architecture-description,
+  .insights-description,
+  .feature-commit-text,
+  .pipeline-desc,
+  .component-responsibility {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .feature-commit-label,
+  .pipeline-title,
+  .component-name,
+  .component-group-title,
+  .insights-group-title {
+    font-size: 9px;
+  }
+}
