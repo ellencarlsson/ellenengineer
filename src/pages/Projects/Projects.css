@@ -293,14 +293,6 @@
     font-size: 0.9rem;
   }
 
-  .particle-orbit {
-    transform: scale(0.8);
-  }
-
-  .particle {
-    width: 5px;
-    height: 5px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -324,15 +316,6 @@
   .node-year {
     font-size: 0.8rem;
   }
-
-  .particle-orbit {
-    transform: scale(0.65);
-  }
-
-  .particle {
-    width: 4px;
-    height: 4px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -354,12 +337,7 @@
   }
 
   .particle-orbit {
-    transform: scale(0.5);
-  }
-
-  .particle {
-    width: 3px;
-    height: 3px;
+    transform: scale(0.65);
   }
 
   .connection-line {
@@ -404,12 +382,7 @@
   }
 
   .particle-orbit {
-    transform: scale(0.5);
-  }
-
-  .particle {
-    width: 3px;
-    height: 3px;
+    transform: scale(0.6);
   }
 
   .connection-line {

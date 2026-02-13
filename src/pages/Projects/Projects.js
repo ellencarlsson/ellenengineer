@@ -19,7 +19,7 @@ const generateParticles = (nodeIndex, count = 4) => {
       opacity: random(0.5, 0.8),
       duration: random(8, 14),
       startAngle: random(0, 360),
-      radius: random(95, 115),
+      radius: random(100, 115),
       delay: random(0, 6),
       direction: 1,
     });
