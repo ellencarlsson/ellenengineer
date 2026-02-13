@@ -15,7 +15,10 @@ const SQL_LINES = [
 
 /** CV page with SQL query animation, CV image, and download buttons. */
 function CV() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const cvPdf = language === 'sv' ? '/assets/CV-Ellen-Carlsson-SV.pdf' : '/assets/CV-Ellen-Carlsson-EN.pdf';
+  const cvImage = language === 'sv' ? '/assets/CV-image-SV.jpg' : '/assets/CV-image-EN.jpg';
+  const cvFilename = language === 'sv' ? 'CV-Ellen-Carlsson.pdf' : 'CV-Ellen-Carlsson-EN.pdf';
   const [displayedText, setDisplayedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -203,7 +206,7 @@ function CV() {
 
           <div className={`cv-actions ${showCard ? 'visible' : ''} ${skipped ? 'skipped' : ''}`}>
             <a
-              href="/assets/CV-Ellen-Carlsson.pdf"
+              href={cvPdf}
               target="_blank"
               rel="noopener noreferrer"
               className="cv-button cv-button-open"
@@ -216,8 +219,8 @@ function CV() {
               {t('cv.openCV')}
             </a>
             <a
-              href="/assets/CV-Ellen-Carlsson.pdf"
-              download="CV-Ellen-Carlsson.pdf"
+              href={cvPdf}
+              download={cvFilename}
               className="cv-button cv-button-download"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -236,7 +239,7 @@ function CV() {
           <div className="cv-image-wrap">
             <div className="cv-glitch">
               <ImageWithSkeleton
-                src="/assets/CV-image.png"
+                src={cvImage}
                 alt="CV - Ellen Carlsson"
                 className="cv-image"
               />
