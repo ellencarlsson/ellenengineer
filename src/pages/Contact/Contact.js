@@ -111,6 +111,33 @@ function Contact() {
               </svg>
             </div>
           </a>
+
+          <a href="mailto:carlssonellen@live.se?subject=Buggrapport%20-%20ellenengineer.se&body=Beskriv%20problemet:%0A%0A" className="endpoint endpoint-post">
+            <div className="endpoint-method endpoint-method-post">POST</div>
+            <div className="endpoint-content">
+              <div className="endpoint-path">/report/bug</div>
+              <div className="endpoint-description">Submit a bug report or feedback about the site</div>
+              <div className="endpoint-response">
+                <span className="response-label">Body:</span>
+                <span className="response-value">{"{ description: string }"}</span>
+              </div>
+            </div>
+            <div className="endpoint-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="8" y="6" width="8" height="14" rx="4"></rect>
+                <path d="M8 10h8"></path>
+                <path d="M8 14h8"></path>
+                <path d="M5 8l3 2"></path>
+                <path d="M19 8l-3 2"></path>
+                <path d="M5 16l3-2"></path>
+                <path d="M19 16l-3-2"></path>
+                <circle cx="10" cy="8" r="1" fill="currentColor"></circle>
+                <circle cx="14" cy="8" r="1" fill="currentColor"></circle>
+                <path d="M10 3v3"></path>
+                <path d="M14 3v3"></path>
+              </svg>
+            </div>
+          </a>
         </div>
       </div>
     </div>

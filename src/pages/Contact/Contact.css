@@ -103,6 +103,26 @@
   height: fit-content;
 }
 
+.endpoint-method-post {
+  background: var(--accent-pink);
+}
+
+.endpoint-post:hover {
+  border-color: var(--accent-pink);
+}
+
+.endpoint-post .endpoint-icon svg {
+  color: var(--accent-pink);
+}
+
+.endpoint-post .response-label {
+  color: var(--accent-pink);
+}
+
+.endpoint-post .response-value {
+  color: var(--accent-rose-light);
+}
+
 .endpoint-content {
   flex: 1;
   min-width: 0;
