@@ -1485,7 +1485,16 @@
   }
 
   .about-section {
-    padding: 10px 12px;
+    padding: 0;
+  }
+
+  .about-header {
+    padding: 12px 18px;
+  }
+
+  .about-content {
+    gap: 0.6rem;
+    padding: 24px 18px;
   }
 
   .about-title {
@@ -1497,17 +1506,17 @@
   }
 
   .about-value {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .about-tech-badge {
-    font-size: 10px;
+    font-size: 12px;
     padding: 5px 0;
   }
 
   .tech-icon {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 
   .github-project-name {
