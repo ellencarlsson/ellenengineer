@@ -28,10 +28,13 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <p>&copy; 2026 Ellen Carlsson. Alla rättigheter reserverade.</p>
-          <p className="footer-credits">
+          <p className="footer-meta">
             Font: <a href="https://hackedfont.com" target="_blank" rel="noopener noreferrer">Hacked</a> av David Libeau (CC BY 4.0)
+            <span className="footer-separator">·</span>
+            Uppdaterad: 13 feb 2026
+            <span className="footer-separator">·</span>
+            v{packageJson.version}
           </p>
-          <p className="footer-version">v{packageJson.version}</p>
         </div>
       </div>
     </footer>

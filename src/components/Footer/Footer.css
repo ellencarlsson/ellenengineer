@@ -60,26 +60,25 @@
   font-size: var(--font-size-sm);
 }
 
-.footer-credits {
+.footer-meta {
   font-size: 0.7rem;
-  opacity: 0.5;
+  opacity: 0.4;
   margin-top: var(--spacing-xs);
 }
 
-.footer-credits a {
+.footer-meta a {
   color: var(--text-medium);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
-.footer-credits a:hover {
+.footer-meta a:hover {
   opacity: 0.8;
 }
 
-.footer-version {
-  font-size: 0.65rem;
-  opacity: 0.3;
-  margin-top: var(--spacing-xs);
+.footer-separator {
+  margin: 0 8px;
+  opacity: 0.5;
 }
 
 /* Intermediate breakpoints */
@@ -130,7 +129,7 @@
     font-size: 12px;
   }
 
-  .footer-credits {
+  .footer-meta {
     font-size: 0.6rem;
   }
 }
@@ -170,11 +169,7 @@
     font-size: 9px;
   }
 
-  .footer-credits {
-    font-size: 8px;
-  }
-
-  .footer-version {
+  .footer-meta {
     font-size: 8px;
   }
 }
