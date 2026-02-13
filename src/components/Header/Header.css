@@ -9,7 +9,7 @@
   display: none;
 }
 
-@media (max-width: 768px), (pointer: coarse) {
+@media (max-width: 850px), (pointer: coarse) {
   .menu-overlay {
     display: block;
     position: fixed;
@@ -47,11 +47,13 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: nowrap;
 }
 
 .nav {
   display: flex;
   gap: var(--spacing-xs);
+  flex-wrap: nowrap;
 }
 
 .nav-logo-link {
@@ -76,6 +78,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 40px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -298,6 +301,7 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: nowrap;
 }
 
 /* Hamburger button - hidden on desktop */
@@ -383,84 +387,8 @@
   }
 }
 
-@media (max-width: 900px) {
-  .nav-link {
-    padding: 5px 10px;
-    font-size: 12px;
-    min-height: 32px;
-  }
 
-  .nav-logo {
-    width: 24px;
-    height: 24px;
-  }
-
-  .header-left-pill,
-  .header-right-pill {
-    padding: 4px;
-    gap: 2px;
-  }
-
-  .header-title {
-    transform: translateX(-18px);
-  }
-
-  .name-first {
-    font-size: 36px;
-    line-height: 58px;
-  }
-
-  .name-last {
-    font-size: 36px;
-    line-height: 40px;
-  }
-
-  .header-subtitle {
-    font-size: 16px;
-    line-height: 19px;
-    margin-left: 45px;
-  }
-
-  .title-row {
-    margin-top: -16px;
-  }
-}
-
-@media (max-width: 820px) {
-  .nav-link {
-    padding: 4px 8px;
-    font-size: 11px;
-    min-height: 28px;
-  }
-
-  .nav-logo {
-    width: 22px;
-    height: 22px;
-  }
-
-  .name-first {
-    font-size: 30px;
-    line-height: 48px;
-  }
-
-  .name-last {
-    font-size: 30px;
-    line-height: 34px;
-  }
-
-  .header-subtitle {
-    font-size: 14px;
-    line-height: 16px;
-    margin-left: 38px;
-  }
-
-  .title-row {
-    margin-top: -14px;
-    gap: 2px;
-  }
-}
-
-@media (max-width: 768px), (pointer: coarse) {
+@media (max-width: 850px), (pointer: coarse) {
   .header-container {
     padding: 0 var(--spacing-sm);
   }
