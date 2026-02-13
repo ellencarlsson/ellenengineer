@@ -9,7 +9,7 @@
   display: none;
 }
 
-@media (max-width: 850px), (pointer: coarse) {
+@media (max-width: 800px) {
   .menu-overlay {
     display: block;
     position: fixed;
@@ -390,7 +390,7 @@
 }
 
 
-@media (max-width: 850px), (pointer: coarse) {
+@media (max-width: 800px) {
   .header-container {
     padding: 0 var(--spacing-sm);
   }
