@@ -257,7 +257,7 @@ function ArchitectureDiagram({ architecture }) {
 
 /** Detail page displaying all information about a specific project. */
 function ProjectDetail() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { projectId } = useParams();
   const [playingVideos, setPlayingVideos] = useState({});
   const [archModalOpen, setArchModalOpen] = useState(false);
@@ -268,6 +268,15 @@ function ProjectDetail() {
     insights: false,
     links: false
   });
+
+  /** Gets the localized text from an object with sv/en keys, or returns the value if it's a plain string. */
+  const loc = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'object' && (value.sv || value.en)) {
+      return value[language] || value.sv || value.en || '';
+    }
+    return value;
+  };
 
   /** Expands or collapses a section. */
   const toggleSection = (sectionId) => {
@@ -289,43 +298,38 @@ function ProjectDetail() {
       status: 'VERIFIED',
       ledColor: 'brown',
       accentColor: 'terracotta',
-      tagline: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
-      description: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
+      tagline: {
+        sv: 'AI-driven teckenspråksigenkänning med Apple Watch rörelsesensorer',
+        en: 'AI-powered sign language recognition using Apple Watch motion sensors'
+      },
+      description: {
+        sv: 'Personer som talar teckenspråk har ofta svårt att kommunicera med människor som inte förstår teckenspråk, vilket skapar en barriär i vardagen, på jobbet, i affären, hos läkaren. SignTalker är en app där man har en vanlig Apple Watch på handleden och gör teckenspråkstecken. Klockan känner av handrörelserna och skickar dem till en AI som har lärt sig vad varje rörelse betyder. Resultatet skickas till en iPhone som säger ordet högt. Man kan göra flera tecken i rad och bygga hela meningar. Klockan tolkar, telefonen pratar.\n\nDet enda man behöver är en Apple Watch och en iPhone. Ingen kamera, ingen dator, ingen internetuppkoppling. Allt fungerar i realtid, direkt på enheten. Projektet började som mitt examensarbete. Efter examen byggde jag om det från grunden för att göra det ännu bättre.',
+        en: 'People who use sign language often struggle to communicate with those who don\'t understand it, creating barriers in everyday life—at work, in stores, at the doctor\'s office. SignTalker is an app where you wear a regular Apple Watch on your wrist and make sign language gestures. The watch detects the hand movements and sends them to an AI that has learned what each movement means. The result is sent to an iPhone that speaks the word out loud. You can make multiple signs in a row and build complete sentences. The watch interprets, the phone speaks.\n\nAll you need is an Apple Watch and an iPhone. No camera, no computer, no internet connection. Everything works in real-time, directly on the device. The project started as my thesis. After graduating, I rebuilt it from the ground up to make it even better.'
+      },
       platforms: ['Apple Watch', 'iPhone'],
       techStack: ['Swift', 'Core ML'],
       architecture: {
         nodes: [
-          // iPhone — UI layer
           { id: 'iphone-view', label: 'iPhone View', col: 0, row: 0 },
-          // iPhone — Logic layer
           { id: 'iphone-vm', label: 'ViewModel', col: 0, row: 1 },
-          // iPhone — Services
           { id: 'tts', label: 'AVSpeech', col: 0, row: 2 },
-          // Bridge (between devices)
           { id: 'wc', label: 'WatchConnectivity', col: 1, row: 1 },
-          // Watch — UI layer
           { id: 'watch-view', label: 'Watch View', col: 2, row: 0 },
-          // Watch — Logic layer
           { id: 'watch-vm', label: 'ViewModel', col: 2, row: 1 },
-          // Watch — Services
           { id: 'motion', label: 'CMMotionManager', col: 2, row: 2 },
           { id: 'datahelper', label: 'DataHelper', col: 3, row: 2 },
           { id: 'mlmodel', label: 'Core ML', col: 3, row: 1 },
         ],
         connections: [
-          // Watch: UI ↔ Logic
           { from: 'watch-vm', to: 'watch-view', label: 'Detecting or not' },
-          // Watch: Logic → Services (straight down, right, up)
           { from: 'watch-vm', to: 'motion', label: 'Start/Stop\ndetecting' },
           { from: 'motion', to: 'datahelper', label: 'Raw data' },
           { from: 'datahelper', to: 'mlmodel', label: '60 samples' },
           { from: 'mlmodel', to: 'watch-vm', label: 'Prediction' },
-          // iPhone ↔ WatchConnectivity ↔ Watch (bidirectional)
           { from: 'iphone-vm', to: 'wc', label: 'Send detect\nsignal' },
           { from: 'wc', to: 'iphone-vm', label: 'Detected word' },
           { from: 'wc', to: 'watch-vm', label: 'Send detect\nsignal' },
           { from: 'watch-vm', to: 'wc', label: 'Detected word' },
-          // iPhone: View ↔ Logic
           { from: 'iphone-view', to: 'iphone-vm', label: 'Tap to\ndetect' },
           { from: 'iphone-vm', to: 'iphone-view', label: 'Display\nwords' },
           { from: 'iphone-vm', to: 'tts', label: 'Speak\nwords' },
@@ -334,64 +338,70 @@ function ProjectDetail() {
           { label: 'APPLE WATCH', nodeIds: ['watch-view', 'watch-vm', 'motion', 'datahelper', 'mlmodel'] },
           { label: 'IPHONE', nodeIds: ['iphone-view', 'iphone-vm', 'tts'] },
         ],
-        subtitle: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.'
+        subtitle: {
+          sv: 'Appen är uppbyggd enligt MVVM, där vyer och logik hålls separata. Både klockan och telefonen följer samma struktur med egna vyer och ViewModels. Att de delar samma arkitektur gör det enklare för dem att kommunicera med varandra, och gör det möjligt att testa och bygga vidare på varje del för sig.\n\nHela AI-modellen körs lokalt på klockan. Det är klockan som samlar in sensordata och tolkar tecknen, telefonen fungerar bara som en skärm för att visa resultatet och en fjärrkontroll för att starta detektionen. Eftersom all logik redan ligger på klockan innebär det att den i framtiden skulle kunna fungera helt självständigt.',
+          en: 'The app is built using MVVM, where views and logic are kept separate. Both the watch and the phone follow the same structure with their own views and ViewModels. Sharing the same architecture makes it easier for them to communicate with each other and allows testing and development of each part independently.\n\nThe entire AI model runs locally on the watch. The watch collects sensor data and interprets the signs, while the phone serves only as a screen to display results and a remote to start detection. Since all logic already resides on the watch, it could potentially function completely independently in the future.'
+        }
       },
       github: null,
       demo: null,
       thesis: 'https://www.diva-portal.org/smash/get/diva2:1880636/FULLTEXT01.pdf',
       image: null,
       demoVideos: [
-        { title: 'Presentation', description: 'Introduktion till projektet och hur appen fungerar', url: 'https://www.youtube.com/embed/qRDOVvyBVKQ' },
-        { title: 'Drive in', description: 'Beställer mat på McDonald\'s med hjälp av klockan', url: 'https://www.youtube.com/embed/UfcuVqfH8x8' },
-        { title: 'Dog mode', description: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', url: 'https://www.youtube.com/embed/-NRR78CkO18' },
+        { title: 'Presentation', description: { sv: 'Introduktion till projektet och hur appen fungerar', en: 'Introduction to the project and how the app works' }, url: 'https://www.youtube.com/embed/qRDOVvyBVKQ' },
+        { title: 'Drive in', description: { sv: 'Beställer mat på McDonald\'s med hjälp av klockan', en: 'Ordering food at McDonald\'s using the watch' }, url: 'https://www.youtube.com/embed/UfcuVqfH8x8' },
+        { title: 'Dog mode', description: { sv: 'Ropar på sin hund med ett egentränat tecken kopplat till en inspelning av ägarens röst', en: 'Calling the dog using a custom-trained sign linked to a recording of the owner\'s voice' }, url: 'https://www.youtube.com/embed/-NRR78CkO18' },
       ],
-      resultText: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
+      resultText: {
+        sv: 'Användaren startar inspelningen från telefonen, som skickar en signal till klockan att börja läsa av rörelsesensorerna. Utöver vanliga tecken kan man även koppla egna handtecken till inspelningar av sin egen röst.',
+        en: 'The user starts recording from the phone, which sends a signal to the watch to begin reading the motion sensors. In addition to regular signs, you can also link custom hand gestures to recordings of your own voice.'
+      },
       techDetails: [
         {
-          label: 'Träningsfas',
-          text: 'Man spelar in samma tecken upprepade gånger med klockan. Sensordata sparas som CSV-filer som sedan manuellt läggs in i Create ML, Apples verktyg för att skapa AI-modeller. Create ML konverterar datan till en färdig Core ML-fil, som är själva AI-modellen som sedan manuellt exporteras till appen. Ju fler inspelningar med olika vinklar och hastigheter, desto bättre blir modellen.'
+          label: { sv: 'Träningsfas', en: 'Training phase' },
+          text: { sv: 'Man spelar in samma tecken upprepade gånger med klockan. Sensordata sparas som CSV-filer som sedan manuellt läggs in i Create ML, Apples verktyg för att skapa AI-modeller. Create ML konverterar datan till en färdig Core ML-fil, som är själva AI-modellen som sedan manuellt exporteras till appen. Ju fler inspelningar med olika vinklar och hastigheter, desto bättre blir modellen.', en: 'You record the same sign repeatedly with the watch. Sensor data is saved as CSV files that are then manually imported into Create ML, Apple\'s tool for creating AI models. Create ML converts the data into a finished Core ML file, which is the actual AI model that is then manually exported to the app. The more recordings with different angles and speeds, the better the model becomes.' }
         },
         {
-          label: '50 Hz motion sampling',
-          text: 'Klockan har inbyggda sensorer, en accelerometer som mäter hur handen förflyttas och ett gyroskop som mäter hur den vrids. Dessa sensorer fångar de aktuella värdena var 0.02:e sekund, vilket ger en väldigt detaljerad bild av hela rörelsen.'
+          label: { sv: '50 Hz motion sampling', en: '50 Hz motion sampling' },
+          text: { sv: 'Klockan har inbyggda sensorer, en accelerometer som mäter hur handen förflyttas och ett gyroskop som mäter hur den vrids. Dessa sensorer fångar de aktuella värdena var 0.02:e sekund, vilket ger en väldigt detaljerad bild av hela rörelsen.', en: 'The watch has built-in sensors—an accelerometer that measures how the hand moves and a gyroscope that measures how it rotates. These sensors capture current values every 0.02 seconds, providing a very detailed picture of the entire movement.' }
         },
         {
-          label: 'Fixed-window segmentering (60 samples)',
-          text: 'Varje inspelning samlar in exakt 60 data samples och motsvarar ett ord. Den fasta storleken gör att modellen alltid får samma mängd data att jobba med, oavsett vilket tecken som görs.'
+          label: { sv: 'Fixed-window segmentering (60 samples)', en: 'Fixed-window segmentation (60 samples)' },
+          text: { sv: 'Varje inspelning samlar in exakt 60 data samples och motsvarar ett ord. Den fasta storleken gör att modellen alltid får samma mängd data att jobba med, oavsett vilket tecken som görs.', en: 'Each recording collects exactly 60 data samples and corresponds to one word. The fixed size ensures the model always receives the same amount of data to work with, regardless of which sign is made.' }
         },
         {
-          label: 'Haptisk feedback',
-          text: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunder är ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.'
+          label: { sv: 'Haptisk feedback', en: 'Haptic feedback' },
+          text: { sv: 'När klockan har samlat in 60 data samples efter ca 1.2 sekunder är ett tecken färdigtolkat och klockan vibrerar. Man har sedan 1 sekund på sig att förbereda nästa tecken, och då vibrerar klockan igen som signal att den börjat lyssna på en ny rörelse.', en: 'When the watch has collected 60 data samples after about 1.2 seconds, a sign has been interpreted and the watch vibrates. You then have 1 second to prepare the next sign, and the watch vibrates again to signal that it has started listening for a new movement.' }
         },
         {
-          label: 'Avsluta en mening',
-          text: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen upp och ned. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.'
+          label: { sv: 'Avsluta en mening', en: 'Ending a sentence' },
+          text: { sv: 'För att markera att en mening är klar gör man ett speciellt stopptecken, man håller handen upp och ned. Klockan känner igen det som en avslutningssignal, slutar lyssna efter fler tecken och den färdiga meningen hörs och syns från telefonen.', en: 'To mark that a sentence is complete, you make a special stop sign by holding your hand upside down. The watch recognizes this as an ending signal, stops listening for more signs, and the finished sentence is heard and displayed on the phone.' }
         }
       ],
       insights: [
         {
-          title: 'Begränsningar',
+          title: { sv: 'Begränsningar', en: 'Limitations' },
           items: [
             {
-              label: 'Manuell träning',
-              text: 'Modellen kan inte lära sig nya tecken på egen hand. Varje nytt ord kräver att man samlar in data, tränar om modellen och exporterar en ny version till appen. Det gör att det skalar dåligt och begränsar hur snabbt ordförrådet kan växa.'
+              label: { sv: 'Manuell träning', en: 'Manual training' },
+              text: { sv: 'Modellen kan inte lära sig nya tecken på egen hand. Varje nytt ord kräver att man samlar in data, tränar om modellen och exporterar en ny version till appen. Det gör att det skalar dåligt och begränsar hur snabbt ordförrådet kan växa.', en: 'The model cannot learn new signs on its own. Each new word requires collecting data, retraining the model, and exporting a new version to the app. This means it scales poorly and limits how quickly the vocabulary can grow.' }
             },
             {
-              label: 'Fast fönsterstorlek',
-              text: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Problemet är att modellen inte kan veta vilket tecken som kommer, och därför inte kan anpassa hur länge den lyssnar. Fler samples ger mer precis data men gör appen långsammare, och färre samples gör appen snabbare men tappar detaljer.'
+              label: { sv: 'Fast fönsterstorlek', en: 'Fixed window size' },
+              text: { sv: 'Alla inputs till modellen måste ha samma storlek, 60 samples. Det innebär att snabba tecken måste göras långsammare och långsamma tecken snabbare för att passa fönstret. Problemet är att modellen inte kan veta vilket tecken som kommer, och därför inte kan anpassa hur länge den lyssnar. Fler samples ger mer precis data men gör appen långsammare, och färre samples gör appen snabbare men tappar detaljer.', en: 'All inputs to the model must be the same size—60 samples. This means fast signs must be slowed down and slow signs sped up to fit the window. The problem is that the model cannot know which sign is coming and therefore cannot adjust how long it listens. More samples provide more precise data but make the app slower, while fewer samples make the app faster but lose details.' }
             }
           ]
         },
         {
-          title: 'Fortsatt utveckling',
+          title: { sv: 'Fortsatt utveckling', en: 'Future development' },
           items: [
             {
-              label: 'Fler sensorer',
-              text: 'Apple Watch har just nu gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.'
+              label: { sv: 'Fler sensorer', en: 'More sensors' },
+              text: { sv: 'Apple Watch har just nu gyroskop och accelerometer. Fler sensortyper hade gett rikare data per rörelse. Dessutom hade en klocka på varje hand gjort att modellen fångar båda händernas rörelser, vilket ger mycket mer specifika mönster och hade förbättrat träffsäkerheten avsevärt.', en: 'Apple Watch currently has a gyroscope and accelerometer. More sensor types would provide richer data per movement. Additionally, a watch on each hand would allow the model to capture both hands\' movements, providing much more specific patterns and significantly improving accuracy.' }
             },
             {
-              label: 'Automatisk träningspipeline',
-              text: 'Att träna modellen direkt på enheten skulle ta bort det manuella arbetet och göra det möjligt att lägga till nya tecken utan att bygga om appen. Jag försökte implementera detta men det visade sig inte vara möjligt med Create ML. Med ett annat AI-ramverk hade det kanske gått.'
+              label: { sv: 'Automatisk träningspipeline', en: 'Automatic training pipeline' },
+              text: { sv: 'Att träna modellen direkt på enheten skulle ta bort det manuella arbetet och göra det möjligt att lägga till nya tecken utan att bygga om appen. Jag försökte implementera detta men det visade sig inte vara möjligt med Create ML. Med ett annat AI-ramverk hade det kanske gått.', en: 'Training the model directly on the device would eliminate the manual work and make it possible to add new signs without rebuilding the app. I tried to implement this but it turned out not to be possible with Create ML. With a different AI framework, it might have worked.' }
             }
           ]
         }
@@ -402,52 +412,55 @@ function ProjectDetail() {
           step: 1,
           icon: '⌚',
           title: 'SENSOR INPUT',
-          description: 'Apple Watch känner av handrörelser',
-          details: 'Gyroskop + Accelerometer',
+          description: { sv: 'Apple Watch känner av handrörelser', en: 'Apple Watch detects hand movements' },
+          details: { sv: 'Gyroskop + Accelerometer', en: 'Gyroscope + Accelerometer' },
           ledColor: 'blue'
         },
         {
           step: 2,
           icon: '📊',
           title: 'DATA COLLECTION',
-          description: 'Spelar in samma tecken många gånger',
-          details: 'Träningsdata samlas in',
+          description: { sv: 'Spelar in samma tecken många gånger', en: 'Recording the same sign many times' },
+          details: { sv: 'Träningsdata samlas in', en: 'Training data is collected' },
           ledColor: 'blue'
         },
         {
           step: 3,
           icon: '🤖',
           title: 'AI TRAINING',
-          description: 'AI lär sig känna igen varje tecken',
-          details: 'Modellen justeras och optimeras',
+          description: { sv: 'AI lär sig känna igen varje tecken', en: 'AI learns to recognize each sign' },
+          details: { sv: 'Modellen justeras och optimeras', en: 'The model is adjusted and optimized' },
           ledColor: 'yellow'
         },
         {
           step: 4,
           icon: '⌚',
           title: 'LIVE CAPTURE',
-          description: 'Gör ett tecken med klockan',
-          details: 'Real-time rörelseinspelning',
+          description: { sv: 'Gör ett tecken med klockan', en: 'Make a sign with the watch' },
+          details: { sv: 'Real-time rörelseinspelning', en: 'Real-time motion recording' },
           ledColor: 'green'
         },
         {
           step: 5,
           icon: '🤖',
           title: 'AI PREDICTION',
-          description: 'AI identifierar vilket tecken det är',
-          details: 'Returnerar predicted output',
+          description: { sv: 'AI identifierar vilket tecken det är', en: 'AI identifies which sign it is' },
+          details: { sv: 'Returnerar predicted output', en: 'Returns predicted output' },
           ledColor: 'green'
         },
         {
           step: 6,
           icon: '📱',
           title: 'OUTPUT',
-          description: 'Telefonen säger ordet högt',
+          description: { sv: 'Telefonen säger ordet högt', en: 'The phone speaks the word aloud' },
           details: 'Text-to-Speech',
           ledColor: 'green'
         }
       ],
-      componentsText: 'Varje komponent i appen har en specifik uppgift och tillhör antingen iPhone- eller Apple Watch-sidan. Här är en översikt av de viktigaste delarna och vad de ansvarar för.',
+      componentsText: {
+        sv: 'Varje komponent i appen har en specifik uppgift och tillhör antingen iPhone- eller Apple Watch-sidan. Här är en översikt av de viktigaste delarna och vad de ansvarar för.',
+        en: 'Each component in the app has a specific task and belongs to either the iPhone or Apple Watch side. Here is an overview of the most important parts and what they are responsible for.'
+      },
       components: [
         {
           group: 'iPhone',
@@ -455,12 +468,12 @@ function ProjectDetail() {
             {
               name: 'IPhoneViewModel',
               type: 'ViewModel',
-              responsibility: 'Skickar kommandon till klockan och tar emot detekterade ord. Bygger upp en ordlista som sedan kan omvandlas till en mening.'
+              responsibility: { sv: 'Skickar kommandon till klockan och tar emot detekterade ord. Bygger upp en ordlista som sedan kan omvandlas till en mening.', en: 'Sends commands to the watch and receives detected words. Builds up a word list that can then be converted into a sentence.' }
             },
             {
               name: 'SentenceConverter',
               type: 'Model',
-              responsibility: 'Tar en lista av detekterade ord och sätter ihop dem till en grammatiskt korrekt svensk mening.'
+              responsibility: { sv: 'Tar en lista av detekterade ord och sätter ihop dem till en grammatiskt korrekt svensk mening.', en: 'Takes a list of detected words and assembles them into a grammatically correct Swedish sentence.' }
             }
           ]
         },
@@ -470,27 +483,27 @@ function ProjectDetail() {
             {
               name: 'WatchViewModel',
               type: 'ViewModel',
-              responsibility: 'Tar emot kommandon från telefonen och bestämmer vad klockan ska göra. Skickar tillbaka detekterade ord.'
+              responsibility: { sv: 'Tar emot kommandon från telefonen och bestämmer vad klockan ska göra. Skickar tillbaka detekterade ord.', en: 'Receives commands from the phone and decides what the watch should do. Sends back detected words.' }
             },
             {
               name: 'PredictionViewModel',
               type: 'ViewModel',
-              responsibility: 'Startar sensorerna, samlar in rörelsedata och skickar den vidare till AI-modellen.'
+              responsibility: { sv: 'Startar sensorerna, samlar in rörelsedata och skickar den vidare till AI-modellen.', en: 'Starts the sensors, collects motion data, and forwards it to the AI model.' }
             },
             {
               name: 'TrainingViewModel',
               type: 'ViewModel',
-              responsibility: 'Samlar in träningsdata för nya tecken och exporterar den som CSV-filer till en träningsserver.'
+              responsibility: { sv: 'Samlar in träningsdata för nya tecken och exporterar den som CSV-filer till en träningsserver.', en: 'Collects training data for new signs and exports it as CSV files to a training server.' }
             },
             {
               name: 'PredictionModel',
               type: 'Model',
-              responsibility: 'Kör Core ML-modellen som tolkar rörelsedata till ord.'
+              responsibility: { sv: 'Kör Core ML-modellen som tolkar rörelsedata till ord.', en: 'Runs the Core ML model that interprets motion data into words.' }
             },
             {
               name: 'DataHelper',
               type: 'Helper',
-              responsibility: 'Definierar samplingsfrekvens (50 Hz) och fönsterstorlek (60 samples). Strukturerar rå sensorvärden.'
+              responsibility: { sv: 'Definierar samplingsfrekvens (50 Hz) och fönsterstorlek (60 samples). Strukturerar rå sensorvärden.', en: 'Defines sampling frequency (50 Hz) and window size (60 samples). Structures raw sensor values.' }
             }
           ]
         }
@@ -729,7 +742,7 @@ function ProjectDetail() {
           </Link>
           <div className="project-title-row">
             <h1 className="github-project-name">{project.name}</h1>
-            <p className="project-tagline">{project.tagline}</p>
+            <p className="project-tagline">{loc(project.tagline)}</p>
           </div>
         </div>
 
@@ -749,7 +762,7 @@ function ProjectDetail() {
               </div>
               <div className="readme-accent-line"></div>
               <div className="readme-content">
-                <p className="readme-description">{project.description}</p>
+                <p className="readme-description">{loc(project.description)}</p>
               </div>
             </div>
           </div>
@@ -806,7 +819,7 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.result ? 'expanded' : ''}`}>
             <div className="section-content">
               {project.resultText && (
-                <p className="result-description">{project.resultText}</p>
+                <p className="result-description">{loc(project.resultText)}</p>
               )}
               {project.demoVideos && (
                 <div className="video-grid">
@@ -831,7 +844,7 @@ function ProjectDetail() {
                         )}
                       </div>
                       </div>
-                      {video.description && <span className="video-description">{video.description}</span>}
+                      {video.description && <span className="video-description">{loc(video.description)}</span>}
                     </div>
                   ))}
                 </div>
@@ -867,8 +880,8 @@ function ProjectDetail() {
                     <div key={i} className="feature-commit">
                       <div className="feature-commit-dot"></div>
                       <div className="feature-commit-content">
-                        <span className="feature-commit-label">{detail.label}</span>
-                        <p className="feature-commit-text">{detail.text}</p>
+                        <span className="feature-commit-label">{loc(detail.label)}</span>
+                        <p className="feature-commit-text">{loc(detail.text)}</p>
                       </div>
                     </div>
                   ))}
@@ -898,7 +911,7 @@ function ProjectDetail() {
               {project.architecture ? (
                 <>
                   {project.architecture.subtitle && (
-                    project.architecture.subtitle.split('\n\n').map((para, i) => (
+                    loc(project.architecture.subtitle).split('\n\n').map((para, i) => (
                       <p key={i} className="result-description">{para}</p>
                     ))
                   )}
@@ -945,7 +958,7 @@ function ProjectDetail() {
               {project.components && project.components.length > 0 ? (
                 <>
                 {project.componentsText && (
-                  <p className="result-description">{project.componentsText}</p>
+                  <p className="result-description">{loc(project.componentsText)}</p>
                 )}
                 <div className="components-list">
                   {project.components.map((group, gi) => (
@@ -958,7 +971,7 @@ function ProjectDetail() {
                               <span className="component-name">{comp.name}</span>
                               <span className="component-type-badge">{comp.type}</span>
                             </div>
-                            <p className="component-responsibility">{comp.responsibility}</p>
+                            <p className="component-responsibility">{loc(comp.responsibility)}</p>
                           </div>
                         ))}
                       </div>
@@ -974,8 +987,8 @@ function ProjectDetail() {
                         <span className="pipeline-icon">{step.icon}</span>
                         <div className="pipeline-text">
                           <span className="pipeline-title">{step.title}</span>
-                          <span className="pipeline-desc">{step.description}</span>
-                          <span className="pipeline-detail">{step.details}</span>
+                          <span className="pipeline-desc">{loc(step.description)}</span>
+                          <span className="pipeline-detail">{loc(step.details)}</span>
                         </div>
                       </div>
                     </div>
@@ -1005,19 +1018,19 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.insights ? 'expanded' : ''}`}>
             <div className="section-content">
               {typeof project.insights === 'string' ? (
-                <p className="insights-description">{project.insights}</p>
+                <p className="insights-description">{loc(project.insights)}</p>
               ) : (
                 <div className="components-list">
                   {project.insights.map((section, si) => (
                     <div key={si} className="component-group">
-                      <h4 className="insights-group-title">{section.title}</h4>
+                      <h4 className="insights-group-title">{loc(section.title)}</h4>
                       <div className="feature-commits">
                         {section.items.map((item, i) => (
                           <div key={i} className="feature-commit">
                             <div className="feature-commit-dot insights-dot"></div>
                             <div className="feature-commit-content">
-                              <span className="feature-commit-label">{item.label}</span>
-                              <p className="feature-commit-text">{item.text}</p>
+                              <span className="feature-commit-label">{loc(item.label)}</span>
+                              <p className="feature-commit-text">{loc(item.text)}</p>
                             </div>
                           </div>
                         ))}
