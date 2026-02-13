@@ -30,6 +30,21 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  /** Closes the menu when device orientation changes. */
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      setIsMenuOpen(false);
+    };
+
+    window.addEventListener('orientationchange', handleOrientationChange);
+    window.addEventListener('resize', handleOrientationChange);
+
+    return () => {
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('resize', handleOrientationChange);
+    };
+  }, []);
+
   /** Locks body scroll while the mobile menu is open. */
   useEffect(() => {
     if (isMenuOpen) {
