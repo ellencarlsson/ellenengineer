@@ -26,12 +26,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Copy server files to build
-        run: |
-          cp server.js build/
-          cp package.json build/
-          cp package-lock.json build/
-
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
