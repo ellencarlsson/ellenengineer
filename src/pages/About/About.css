@@ -552,7 +552,7 @@
 /* Landscape mobile - smaller text */
 @media (max-height: 500px) and (orientation: landscape) {
   .about-main {
-    padding: 20px 40px;
+    padding: 20px 3rem;
   }
 
   .card-chip {
