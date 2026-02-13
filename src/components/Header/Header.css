@@ -410,6 +410,8 @@
     backdrop-filter: blur(10px);
     border-color: rgba(255, 255, 255, 0.15);
     box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    position: relative;
+    z-index: 1000;
   }
 
   .mobile-menu-header {
