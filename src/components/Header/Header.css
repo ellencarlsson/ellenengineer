@@ -491,10 +491,6 @@
 
 /* Landscape mobile - show regular nav instead of hamburger */
 @media (max-height: 500px) and (orientation: landscape) {
-  .header {
-    margin-bottom: var(--spacing-md);
-  }
-
   .header-left,
   .header-right {
     display: flex;
@@ -506,14 +502,14 @@
   }
 
   .nav-link {
-    font-size: 12px;
-    padding: 6px 10px;
-    min-height: 32px;
+    font-size: 13px;
+    padding: 8px 12px;
+    min-height: 36px;
   }
 
   .nav-logo {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 
   .header-center {
