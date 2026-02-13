@@ -110,40 +110,32 @@ function Hero() {
         <div className="hero-terminal-body" onClick={() => !isComplete && skipAnimation()}>
           <div className="hero-terminal-content">
             <pre>
-              {completedLines.map((line, index) => {
+              {terminalLines.map((line, index) => {
+                const isCompleted = index < currentLineIndex;
+                const isCurrent = index === currentLineIndex;
+                const isHidden = index > currentLineIndex;
+
                 if (line.type === 'link') {
                   return (
-                    <div key={index} className="hero-line link">
+                    <div key={index} className="hero-line link" style={isHidden ? { visibility: 'hidden' } : undefined}>
                       <Link to="/projects" className="hero-terminal-link">{line.text}</Link>
                     </div>
                   );
                 }
                 if (line.type === 'command') {
                   return (
-                    <div key={index} className="hero-line command">
+                    <div key={index} className="hero-line command" style={isHidden ? { visibility: 'hidden' } : undefined}>
                       <span className="hero-prompt">{line.prompt}</span>
-                      <span className="hero-cmd">{line.text}</span>
+                      <span className="hero-cmd">{isCompleted ? line.text : (isCurrent ? currentTypedText : line.text)}</span>
                     </div>
                   );
                 }
                 return (
-                  <div key={index} className={`hero-line ${line.type}`}>
-                    {line.text || '\u00A0'}
+                  <div key={index} className={`hero-line ${line.type}`} style={isHidden ? { visibility: 'hidden' } : undefined}>
+                    {isCompleted ? (line.text || '\u00A0') : (isCurrent ? (currentTypedText || '\u00A0') : (line.text || '\u00A0'))}
                   </div>
                 );
               })}
-              {currentLine && (
-                currentLine.type === 'command' ? (
-                  <div className="hero-line command">
-                    <span className="hero-prompt">{currentLine.prompt}</span>
-                    <span className="hero-cmd">{currentTypedText}</span>
-                  </div>
-                ) : (
-                  <div className={`hero-line ${currentLine.type}`}>
-                    {currentTypedText || '\u00A0'}
-                  </div>
-                )
-              )}
               <span className={`hero-cursor ${showCursor ? 'visible' : ''}`}>▋</span>
             </pre>
           </div>

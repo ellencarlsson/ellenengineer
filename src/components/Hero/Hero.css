@@ -71,9 +71,9 @@
 /* Terminal Body */
 .hero-terminal-body {
   background: var(--terminal-bg);
-  min-height: 400px;
-  max-height: 500px;
-  overflow-y: auto;
+  min-height: auto;
+  max-height: none;
+  overflow-y: visible;
 }
 
 .hero-terminal-content {
@@ -136,24 +136,6 @@
 
 .hero-cursor.visible {
   opacity: 1;
-}
-
-/* Scrollbar */
-.hero-terminal-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-.hero-terminal-body::-webkit-scrollbar-track {
-  background: var(--terminal-bg);
-}
-
-.hero-terminal-body::-webkit-scrollbar-thumb {
-  background: var(--terminal-border);
-  border-radius: 4px;
-}
-
-.hero-terminal-body::-webkit-scrollbar-thumb:hover {
-  background: #484f58;
 }
 
 /* Terminal Hint */
@@ -235,8 +217,8 @@
   }
 
   .hero-terminal-body {
-    min-height: 350px;
-    max-height: 450px;
+    min-height: auto;
+    max-height: none;
   }
 
   .hero-terminal-content {
@@ -273,5 +255,23 @@
   .hero-hint-key {
     padding: 2px 5px;
     font-size: 10px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: var(--spacing-sm);
+  }
+
+  .hero-terminal {
+    margin-top: 0;
+  }
+
+  .hero-terminal-content {
+    font-size: 10px;
+    line-height: 1.5;
+    padding: 12px 14px;
   }
 }
