@@ -9,7 +9,7 @@ import './Hero.css';
 /** Animated terminal that types out commands and output line by line. */
 function Hero() {
   const { language, t } = useLanguage();
-  const [completedLines, setCompletedLines] = useState([]);
+  const [, setCompletedLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
