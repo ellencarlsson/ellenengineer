@@ -111,6 +111,9 @@ function Header() {
         </button>
       </div>
 
+      {/* Overlay to close menu when clicking outside */}
+      {isMenuOpen && <div className="menu-overlay" onClick={() => setIsMenuOpen(false)} />}
+
       {/* Mobile menu - terminal window */}
       <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-header">
