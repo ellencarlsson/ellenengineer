@@ -64,7 +64,7 @@ function Contact() {
 
     setBugStatus('sending');
     try {
-      await fetch('/report-bug.php', {
+      await fetch('https://ellenengineer.com/report-bug.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

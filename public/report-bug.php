@@ -33,8 +33,8 @@ if (empty($category) || empty($message)) {
 $BOT_TOKEN = '8270041578:AAFdwf5skP5Brnys5W-_lMJqt1sC3bgHWf8';
 $CHAT_ID = '7993207864';
 
-$pageInfo = $page ? "\nSida: $page" : '';
-$text = "🐛 Buggrapport från ellenengineer.com
+$pageInfo = $page ? " ($page)" : '';
+$text = "🐛 Buggrapport
 
 Kategori: $category$pageInfo
 
