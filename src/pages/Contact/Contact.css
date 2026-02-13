@@ -1,7 +1,6 @@
 .contact-page {
   min-height: 80vh;
   padding: var(--spacing-xl) var(--spacing-md);
-  animation: fadeIn var(--transition-slow);
   background: transparent;
   display: flex;
   align-items: center;
