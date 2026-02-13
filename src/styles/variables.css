@@ -47,13 +47,13 @@
   --background-cream: #47413b;
   --background-card: rgba(0, 0, 0, 0.15);
 
-  /* Terminal / code theme - VS Code dark */
-  --terminal-bg: #1e1e1e;
-  --terminal-bg-dark: #181818;
-  --terminal-header: #2d2d2d;
+  /* Terminal / code theme - warm dark */
+  --terminal-bg: #1c1917;
+  --terminal-bg-dark: #161412;
+  --terminal-header: #2a2624;
   --terminal-text: #d4d4d4;
   --terminal-text-muted: #808080;
-  --terminal-border: #404040;
+  --terminal-border: #3d3836;
 
   /* macOS window buttons */
   --btn-close: #ff5f57;
