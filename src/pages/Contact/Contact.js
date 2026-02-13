@@ -1,16 +1,39 @@
 /**
  * @file Contact page with API theme displaying email and LinkedIn.
  */
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Contact.css';
 
 const EMAIL = 'carlssonellen@live.se';
 const LINKEDIN = 'linkedin.com/in/ellen-carlsson-ab04451b4';
 
 /** Contact page styled as API documentation with endpoints. */
+const BUG_CATEGORIES = ['Design', 'Funktionalitet', 'Prestanda', 'Annat'];
+const PAGES = ['Hem', 'Projekt', 'Om mig', 'CV', 'Kontakt', 'Annat'];
+
 function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedLinkedin, setCopiedLinkedin] = useState(false);
+  const [bugFormOpen, setBugFormOpen] = useState(false);
+  const [bugFormClosing, setBugFormClosing] = useState(false);
+  const [bugFormOpening, setBugFormOpening] = useState(false);
+  const [bugCategory, setBugCategory] = useState('');
+  const [bugPage, setBugPage] = useState('');
+  const [bugDescription, setBugDescription] = useState('');
+  const [bugStatus, setBugStatus] = useState('idle'); // idle, sending, sent, error
+  const bugFormRef = useRef(null);
+
+  useEffect(() => {
+    if (bugFormOpen && !bugFormClosing && bugFormRef.current) {
+      setTimeout(() => {
+        const formBottom = bugFormRef.current.getBoundingClientRect().bottom;
+        const windowHeight = window.innerHeight;
+        if (formBottom > windowHeight - 40) {
+          window.scrollBy({ top: formBottom - windowHeight + 80, behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, [bugFormOpen, bugFormClosing]);
 
   const handleCopy = (text, setCopied) => (e) => {
     e.preventDefault();
@@ -35,6 +58,58 @@ function Contact() {
     document.body.removeChild(textArea);
   };
 
+  const handleBugSubmit = async () => {
+    if (!bugCategory || !bugDescription.trim()) return;
+    if (bugCategory === 'Design' && !bugPage) return;
+
+    setBugStatus('sending');
+    try {
+      await fetch('https://ellenengineer.com/report-bug.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: bugCategory,
+          page: bugPage || null,
+          message: bugDescription
+        })
+      });
+      setBugStatus('sent');
+      setTimeout(() => {
+        closeBugForm();
+        setBugStatus('idle');
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to send bug report:', err);
+      setBugStatus('error');
+    }
+  };
+
+  const closeBugForm = () => {
+    setBugFormClosing(true);
+    setTimeout(() => {
+      setBugFormOpen(false);
+      setBugFormClosing(false);
+      setBugCategory('');
+      setBugPage('');
+      setBugDescription('');
+    }, 400);
+  };
+
+  const toggleBugForm = (e) => {
+    e.preventDefault();
+    if (bugFormOpen) {
+      closeBugForm();
+    } else {
+      setBugFormOpening(true);
+      setBugFormOpen(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setBugFormOpening(false);
+        });
+      });
+    }
+  };
+
   return (
     <div className="contact-page">
       <div className="contact-container">
@@ -45,7 +120,7 @@ function Contact() {
         </div>
 
         <div className="api-description">
-          Available endpoints for contact information
+          Available endpoints
         </div>
 
         <div className="api-endpoints">
@@ -111,6 +186,91 @@ function Contact() {
               </svg>
             </div>
           </a>
+
+          <div className={`endpoint endpoint-post ${bugFormOpen ? 'endpoint-expanded' : ''}`}>
+            <div className="endpoint-header" onClick={toggleBugForm}>
+              <div className="endpoint-method endpoint-method-post">POST</div>
+              <div className="endpoint-content">
+                <div className="endpoint-path">/report/bug</div>
+                <div className="endpoint-description">Submit a bug report or feedback about the site</div>
+                <div className="endpoint-response">
+                  <span className="response-label">Body:</span>
+                  <span className="response-value">{"{ category, description }"}</span>
+                </div>
+              </div>
+              <div className="endpoint-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <ellipse cx="12" cy="14" rx="5" ry="6"></ellipse>
+                  <circle cx="12" cy="6" r="3"></circle>
+                  <path d="M9 4L7 2"></path>
+                  <path d="M15 4l2-2"></path>
+                  <path d="M7 11L4 9"></path>
+                  <path d="M17 11l3-2"></path>
+                  <path d="M7 17L4 19"></path>
+                  <path d="M17 17l3 2"></path>
+                </svg>
+              </div>
+            </div>
+
+            {bugFormOpen && (
+              <div className={`bug-form ${bugFormClosing ? 'closing' : ''} ${bugFormOpening ? 'opening' : ''}`} ref={bugFormRef}>
+                <div className="bug-form-field">
+                  <label className="bug-form-label">Kategori:</label>
+                  <div className="bug-categories">
+                    {BUG_CATEGORIES.map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        className={`bug-category ${bugCategory === cat ? 'selected' : ''}`}
+                        onClick={() => {
+                          setBugCategory(cat);
+                          if (cat !== 'Design') setBugPage('');
+                        }}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+
+                  {bugCategory === 'Design' && (
+                    <div className="bug-subcategories">
+                      <span className="bug-subcategory-label">Sida:</span>
+                      {PAGES.map((page) => (
+                        <button
+                          key={page}
+                          type="button"
+                          className={`bug-subcategory ${bugPage === page ? 'selected' : ''}`}
+                          onClick={() => setBugPage(page)}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="bug-form-field">
+                  <label className="bug-form-label">Beskrivning:</label>
+                  <textarea
+                    className="bug-textarea"
+                    placeholder="Beskriv problemet..."
+                    value={bugDescription}
+                    onChange={(e) => setBugDescription(e.target.value)}
+                    rows={3}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  className="bug-submit"
+                  onClick={handleBugSubmit}
+                  disabled={!bugCategory || (bugCategory === 'Design' && !bugPage) || !bugDescription.trim() || bugStatus === 'sending'}
+                >
+                  {bugStatus === 'sending' ? 'Skickar...' : bugStatus === 'sent' ? 'Skickat!' : 'Skicka rapport'}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
