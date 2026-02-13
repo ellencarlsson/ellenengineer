@@ -456,6 +456,145 @@
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* Intermediate - tighter first, then smaller */
+@media (max-width: 1200px) {
+  .about-main {
+    padding: 50px 60px 35px;
+  }
+
+  .card-layout.has-image {
+    gap: 40px;
+  }
+
+  .card-image {
+    flex: 0 0 250px;
+    width: 250px;
+    max-height: 310px;
+  }
+
+  .glitch-img {
+    max-height: 310px;
+  }
+
+  .card-year {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .about-main {
+    padding: 40px 40px 30px;
+  }
+
+  .card-layout.has-image {
+    gap: 32px;
+  }
+
+  .card-image {
+    flex: 0 0 220px;
+    width: 220px;
+    max-height: 280px;
+  }
+
+  .glitch-img {
+    max-height: 280px;
+  }
+
+  .card-year {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .card-chip {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+
+  .card-loc {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-main {
+    padding: 30px 25px 25px;
+  }
+
+  .card-layout.has-image {
+    gap: 24px;
+  }
+
+  .card-image {
+    flex: 0 0 180px;
+    width: 180px;
+    max-height: 240px;
+  }
+
+  .glitch-img {
+    max-height: 240px;
+  }
+
+  .card-year {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    min-height: 100px;
+  }
+
+  .card-chip {
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .card-loc {
+    font-size: 10px;
+  }
+
+  .card-eyebrow {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 820px) {
+  .about-main {
+    padding: 20px 16px 20px;
+  }
+
+  .card-layout.has-image {
+    gap: 16px;
+  }
+
+  .card-image {
+    flex: 0 0 150px;
+    width: 150px;
+    max-height: 200px;
+  }
+
+  .glitch-img {
+    max-height: 200px;
+  }
+
+  .card-year {
+    font-size: 34px;
+    margin-bottom: 10px;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    min-height: 80px;
+  }
+}
+
 @media (max-width: 768px) {
   .about-page {
     min-height: calc(100dvh - 72px);

@@ -9,7 +9,7 @@
   display: none;
 }
 
-@media (max-width: 768px), (pointer: coarse) {
+@media (max-width: 850px), (pointer: coarse) {
   .menu-overlay {
     display: block;
     position: fixed;
@@ -47,11 +47,13 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: nowrap;
 }
 
 .nav {
   display: flex;
   gap: var(--spacing-xs);
+  flex-wrap: nowrap;
 }
 
 .nav-logo-link {
@@ -76,6 +78,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 40px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -298,6 +301,7 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: nowrap;
 }
 
 /* Hamburger button - hidden on desktop */
@@ -310,7 +314,81 @@
   display: none;
 }
 
-@media (max-width: 768px), (pointer: coarse) {
+/* Intermediate breakpoints - tighter first, then smaller */
+@media (max-width: 1200px) {
+  .nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .header-title {
+    transform: translateX(-40px);
+  }
+
+  .name-first {
+    font-size: 58px;
+    line-height: 95px;
+  }
+
+  .name-last {
+    font-size: 58px;
+    line-height: 62px;
+  }
+
+  .header-subtitle {
+    font-size: 26px;
+    margin-left: 75px;
+  }
+
+  .title-row {
+    margin-top: -30px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 13px;
+    min-height: 36px;
+  }
+
+  .nav-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-left-pill,
+  .header-right-pill {
+    padding: 5px;
+    gap: 3px;
+  }
+
+  .header-title {
+    transform: translateX(-25px);
+  }
+
+  .name-first {
+    font-size: 46px;
+    line-height: 75px;
+  }
+
+  .name-last {
+    font-size: 46px;
+    line-height: 50px;
+  }
+
+  .header-subtitle {
+    font-size: 21px;
+    line-height: 24px;
+    margin-left: 55px;
+  }
+
+  .title-row {
+    margin-top: -22px;
+  }
+}
+
+
+@media (max-width: 850px), (pointer: coarse) {
   .header-container {
     padding: 0 var(--spacing-sm);
   }
