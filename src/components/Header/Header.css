@@ -595,25 +595,39 @@
   }
 
   .mobile-lang-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 20px;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+  }
+
+  .mobile-lang-toggle span {
+    color: var(--text-medium);
+    opacity: 0.4;
+  }
+
+  .mobile-lang-toggle button {
     background: transparent;
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 8px;
-    padding: 16px 20px;
-    width: 100%;
-    text-align: center;
+    padding: 0;
     cursor: pointer;
-    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
+    font-family: inherit;
+    font-size: inherit;
     font-weight: 500;
     color: var(--text-medium);
+    opacity: 0.5;
     transition: all var(--transition-fast);
   }
 
-  .mobile-lang-toggle:hover {
+  .mobile-lang-toggle button:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-lang-toggle button.active {
+    opacity: 1;
     color: var(--accent-terracotta);
-    background: rgba(255, 255, 255, 0.05);
   }
 
   .lang-toggle {
