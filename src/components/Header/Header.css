@@ -9,7 +9,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse) {
   .menu-overlay {
     display: block;
     position: fixed;
@@ -310,7 +310,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse) {
   .header-container {
     padding: 0 var(--spacing-sm);
   }
@@ -488,3 +488,66 @@
     color: var(--accent-rose-warm);
   }
 }
+
+/* Landscape mobile - show regular nav instead of hamburger */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header-left,
+  .header-right {
+    display: flex;
+  }
+
+  .header-left-pill,
+  .header-right-pill {
+    padding: 4px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+
+  .nav-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header-center {
+    display: flex !important;
+    flex: 0 !important;
+  }
+
+  .header-title {
+    transform: none;
+  }
+
+  .name-first {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .name-last {
+    font-size: 28px;
+    line-height: 30px;
+  }
+
+  .header-subtitle {
+    font-size: 12px;
+    line-height: 14px;
+    margin-left: 40px;
+  }
+
+  .title-row {
+    margin-top: -8px;
+    gap: 3px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+}
+
