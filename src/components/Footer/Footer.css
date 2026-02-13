@@ -89,3 +89,39 @@
     gap: var(--spacing-sm);
   }
 }
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .footer {
+    padding: var(--spacing-sm) 4rem var(--spacing-xs);
+  }
+
+  .footer-content {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .footer-info h3 {
+    font-size: 11px;
+  }
+
+  .footer-info p {
+    font-size: 9px;
+  }
+
+  .footer-social-link {
+    font-size: 9px;
+  }
+
+  .footer-bottom {
+    padding-top: var(--spacing-xs);
+    font-size: 9px;
+  }
+
+  .footer-credits {
+    font-size: 8px;
+  }
+
+  .footer-version {
+    font-size: 8px;
+  }
+}
