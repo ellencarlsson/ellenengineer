@@ -1,14 +1,8 @@
 .header {
   background: transparent;
   padding: var(--spacing-sm) 0;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1000;
-  transition: transform 0.3s ease-in-out;
-}
-
-.header-hidden {
-  transform: translateY(-100%);
 }
 
 .header-container {
