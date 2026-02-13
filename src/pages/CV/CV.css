@@ -453,6 +453,7 @@
 
   .cv-actions {
     margin-top: var(--spacing-sm);
+    justify-content: flex-start;
   }
 
   .cv-button {
