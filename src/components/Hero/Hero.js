@@ -20,7 +20,7 @@ function Hero() {
     { type: 'output', text: '' },
     { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cat about.txt' },
     { type: 'output', text: 'Jag gillar att lösa vardagsproblem med hjälp av teknik.' },
-    { type: 'output', text: 'Jag har gjort denna hemsida för att lägga upp väl valda projekt.' },
+    { type: 'output', text: 'Jag har gjort denna hemsida för att lägga upp utvalda projekt.' },
     { type: 'output', text: '' },
     { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'echo $CURRENT_STATUS' },
     { type: 'output', text: 'Just nu är jag på Luftvärnsregementet i Halmstad och kommer vara här till sommaren 2026.' },
