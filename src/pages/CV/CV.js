@@ -234,6 +234,7 @@ function CV() {
                 src="/assets/CV-image.png"
                 alt="CV - Ellen Carlsson"
                 className="cv-image"
+                loading="lazy"
               />
             </div>
           </div>

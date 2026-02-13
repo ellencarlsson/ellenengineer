@@ -227,7 +227,7 @@ function About() {
           {m.image && (
             <div className="card-image">
               <div className="glitch-img">
-                <img src={m.image} alt={`${m.year}`} />
+                <img src={m.image} alt={`${m.year}`} loading="lazy" />
               </div>
             </div>
           )}
