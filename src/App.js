@@ -1,7 +1,7 @@
 /**
  * @file Configures React Router and maps all routes to page components.
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/App.css';
 
@@ -17,6 +17,18 @@ import NotFound from './pages/NotFound/NotFound';
 
 /** Root component that sets up routing and renders Header, pages, and Footer. */
 function App() {
+  useEffect(() => {
+    const lastNotified = localStorage.getItem('lastVisitNotification');
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    if (!lastNotified || now - parseInt(lastNotified, 10) > oneDay) {
+      fetch('https://ellenengineer.com/notify.php', { method: 'POST' })
+        .catch(() => {});
+      localStorage.setItem('lastVisitNotification', now.toString());
+    }
+  }, []);
+
   return (
     <Router>
       <div className="App">
