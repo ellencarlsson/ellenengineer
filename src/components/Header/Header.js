@@ -3,11 +3,13 @@
  */
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import logo from '../../assets/logo.svg';
 import './Header.css';
 
 /** Navigation menu that hides when the user scrolls past the top. */
 function Header() {
+  const { language, setLanguage, t } = useLanguage();
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,10 +86,10 @@ function Header() {
             <NavLink to="/" className="nav-link nav-logo-link"><img src={logo} alt="EE" className="nav-logo" /></NavLink>
             <nav className="nav">
               <NavLink to="/projects" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Projekt
+                {t('nav.projects')}
               </NavLink>
               <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                Om Mig
+                {t('nav.about')}
               </NavLink>
             </nav>
           </div>
@@ -108,11 +110,18 @@ function Header() {
         <div className="header-right">
           <div className="header-right-pill">
             <NavLink to="/cv" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              CV
+              {t('nav.cv')}
             </NavLink>
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-              Kontakta mig
+              {t('nav.contact')}
             </NavLink>
+            <button
+              className="lang-toggle"
+              onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+              aria-label={language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
+            >
+              {language === 'sv' ? 'SE' : 'EN'}
+            </button>
           </div>
         </div>
 
@@ -143,20 +152,27 @@ function Header() {
         </div>
         <nav className="mobile-menu-body">
           <NavLink to="/" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-            ./hem
+            {t('mobile.home')}
           </NavLink>
           <NavLink to="/projects" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-            ./projekt
+            {t('mobile.projects')}
           </NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-            ./om-mig
+            {t('mobile.about')}
           </NavLink>
           <NavLink to="/cv" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-            ./cv
+            {t('mobile.cv')}
           </NavLink>
           <NavLink to="/contact" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
-            ./kontakt
+            {t('mobile.contact')}
           </NavLink>
+          <button
+            className="mobile-lang-toggle"
+            onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+            aria-label={language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
+          >
+            {language === 'sv' ? 'SE' : 'EN'}
+          </button>
         </nav>
       </div>
     </header>

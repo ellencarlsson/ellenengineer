@@ -1,0 +1,88 @@
+/**
+ * @file Swedish translations.
+ */
+const sv = {
+  nav: {
+    projects: 'Projekt',
+    about: 'Om Mig',
+    cv: 'CV',
+    contact: 'Kontakta mig',
+  },
+  mobile: {
+    home: './hem',
+    projects: './projekt',
+    about: './om-mig',
+    cv: './cv',
+    contact: './kontakt',
+  },
+  hero: {
+    whoami: 'whoami',
+    name: 'Ellen Carlsson - Engineer',
+    aboutCmd: 'cat about.txt',
+    aboutLine1: 'Jag gillar att lösa vardagsproblem med hjälp av teknik.',
+    aboutLine2: 'Jag har gjort denna hemsida för att lägga upp utvalda projekt.',
+    statusCmd: 'echo $CURRENT_STATUS',
+    status: 'Just nu är jag på Luftvärnsregementet i Halmstad och kommer vara här till sommaren 2026.',
+    projectsCmd: 'cd projects/',
+    projectsLink: 'Klicka här för att se mina projekt',
+    aboutPageCmd: 'cd about/',
+    aboutPageLink: 'Klicka här för att veta mer om mig',
+    contactCmd: 'cd contact/',
+    contactLink: 'Klicka här för att kontakta mig',
+    skipHint: 'för att hoppa över animationen',
+    skipKey: 'Enter',
+    skipMobile: 'Tryck',
+  },
+  projects: {
+    title: 'Projekt',
+    backToProjects: '← Back',
+    details: 'PROJEKTDETALJER',
+    platforms: 'PLATFORMS:',
+    techStack: 'TECH STACK:',
+    year: 'YEAR:',
+    close: 'Stäng',
+    expandHint: 'Tryck för att förstora',
+  },
+  about: {
+    navHint: 'Använd',
+    navHintKeys: 'för att navigera',
+  },
+  contact: {
+    title: 'Kontakta mig',
+    copied: 'Kopierad!',
+    copyEmail: 'Kopiera e-post',
+    copyLinkedin: 'Kopiera LinkedIn',
+    bugCategory: 'Kategori:',
+    bugPage: 'Sida:',
+    bugDescription: 'Beskrivning:',
+    bugPlaceholder: 'Beskriv problemet...',
+    bugSending: 'Skickar...',
+    bugSent: 'Skickat!',
+    bugSubmit: 'Skicka rapport',
+    categories: {
+      design: 'Design',
+      functionality: 'Funktionalitet',
+      performance: 'Prestanda',
+      other: 'Annat',
+    },
+    pages: {
+      home: 'Hem',
+      projects: 'Projekt',
+      about: 'Om mig',
+      cv: 'CV',
+      contact: 'Kontakt',
+      other: 'Annat',
+    },
+  },
+  cv: {
+    title: 'CV',
+    skipHintDesktop: 'Tryck',
+    skipKey: 'Enter',
+    skipHintDesktopEnd: 'för att hoppa över',
+    skipHintMobile: 'Tryck för att hoppa över',
+    openCV: 'Öppna CV',
+    downloadCV: 'Ladda ner',
+  },
+};
+
+export default sv;

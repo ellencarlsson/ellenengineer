@@ -3,6 +3,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
+import { useLanguage } from '../../context/LanguageContext';
 import './CV.css';
 
 /** SQL lines typed out character by character on the page. */
@@ -14,6 +15,7 @@ const SQL_LINES = [
 
 /** CV page with SQL query animation, CV image, and download buttons. */
 function CV() {
+  const { t } = useLanguage();
   const [displayedText, setDisplayedText] = useState('');
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -194,8 +196,8 @@ function CV() {
 
           {!queryComplete && (
             <div className="cv-skip-hint">
-              <span className="cv-hint-desktop">Tryck <span className="cv-skip-key">Enter</span> för att hoppa över</span>
-              <span className="cv-hint-mobile">Tryck för att hoppa över</span>
+              <span className="cv-hint-desktop">{t('cv.skipHintDesktop')} <span className="cv-skip-key">{t('cv.skipKey')}</span> {t('cv.skipHintDesktopEnd')}</span>
+              <span className="cv-hint-mobile">{t('cv.skipHintMobile')}</span>
             </div>
           )}
 
@@ -211,7 +213,7 @@ function CV() {
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Öppna CV
+              {t('cv.openCV')}
             </a>
             <a
               href="/assets/CV-Ellen-Carlsson.pdf"
@@ -223,7 +225,7 @@ function CV() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Ladda ner
+              {t('cv.downloadCV')}
             </a>
           </div>
         </div>
