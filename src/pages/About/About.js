@@ -27,7 +27,7 @@ const MILESTONES = [
   },
   {
     year: 2024, label: 'Examen', location: 'Jönköping',
-    description: 'Jag tog examen som Dataingenjör och fick pris och stipendium av Science Park för mitt examensarbete om teckenspråksigenkänning.\n\nEfter att ha hälsat på min bror på en hälsa-på-dag i militären kände jag att det kanske var något för mig också. Jag bestämde mig för att testa.',
+    description: 'Jag tog examen som dataingenjör och fick pris och stipendium av Science Park för mitt examensarbete om teckenspråksigenkänning.\n\nEfter att ha hälsat på min bror på en hälsa-på-dag i militären kände jag att det kanske var något för mig också. Jag bestämde mig för att testa.',
     image: '/images/2024.jpg'
   },
   {
@@ -37,7 +37,7 @@ const MILESTONES = [
   },
   {
     year: 2026, label: 'Nästa steg', location: '?',
-    description: 'Värnplikten avslutas sommaren 2026. Vad som händer sen vet jag inte riktigt ännu, inte heller var. Men jag ser fram emot att fortsätta min karriär som Dataingenjör, gärna med inslag av Försvarsmakten.'
+    description: 'Värnplikten avslutas sommaren 2026. Vad som händer sen vet jag inte riktigt ännu, inte heller var. Men jag ser fram emot att fortsätta min karriär som dataingenjör, gärna med inslag av Försvarsmakten.'
   }
 ];
 
