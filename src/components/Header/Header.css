@@ -310,6 +310,156 @@
   display: none;
 }
 
+/* Intermediate breakpoints - tighter first, then smaller */
+@media (max-width: 1200px) {
+  .nav-link {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .header-title {
+    transform: translateX(-40px);
+  }
+
+  .name-first {
+    font-size: 58px;
+    line-height: 95px;
+  }
+
+  .name-last {
+    font-size: 58px;
+    line-height: 62px;
+  }
+
+  .header-subtitle {
+    font-size: 26px;
+    margin-left: 75px;
+  }
+
+  .title-row {
+    margin-top: -30px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 13px;
+    min-height: 36px;
+  }
+
+  .nav-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-left-pill,
+  .header-right-pill {
+    padding: 5px;
+    gap: 3px;
+  }
+
+  .header-title {
+    transform: translateX(-25px);
+  }
+
+  .name-first {
+    font-size: 46px;
+    line-height: 75px;
+  }
+
+  .name-last {
+    font-size: 46px;
+    line-height: 50px;
+  }
+
+  .header-subtitle {
+    font-size: 21px;
+    line-height: 24px;
+    margin-left: 55px;
+  }
+
+  .title-row {
+    margin-top: -22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-link {
+    padding: 5px 10px;
+    font-size: 12px;
+    min-height: 32px;
+  }
+
+  .nav-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header-left-pill,
+  .header-right-pill {
+    padding: 4px;
+    gap: 2px;
+  }
+
+  .header-title {
+    transform: translateX(-18px);
+  }
+
+  .name-first {
+    font-size: 36px;
+    line-height: 58px;
+  }
+
+  .name-last {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .header-subtitle {
+    font-size: 16px;
+    line-height: 19px;
+    margin-left: 45px;
+  }
+
+  .title-row {
+    margin-top: -16px;
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-link {
+    padding: 4px 8px;
+    font-size: 11px;
+    min-height: 28px;
+  }
+
+  .nav-logo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .name-first {
+    font-size: 30px;
+    line-height: 48px;
+  }
+
+  .name-last {
+    font-size: 30px;
+    line-height: 34px;
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    line-height: 16px;
+    margin-left: 38px;
+  }
+
+  .title-row {
+    margin-top: -14px;
+    gap: 2px;
+  }
+}
+
 @media (max-width: 768px), (pointer: coarse) {
   .header-container {
     padding: 0 var(--spacing-sm);

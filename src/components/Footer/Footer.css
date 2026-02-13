@@ -82,6 +82,59 @@
   margin-top: var(--spacing-xs);
 }
 
+/* Intermediate breakpoints */
+@media (max-width: 1050px) {
+  .footer {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-xs);
+  }
+
+  .footer-info h3 {
+    font-size: 15px;
+  }
+
+  .footer-info p {
+    font-size: 12px;
+  }
+
+  .footer-social-link {
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer {
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-xs);
+  }
+
+  .footer-content {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-info h3 {
+    font-size: 14px;
+  }
+
+  .footer-info p {
+    font-size: 11px;
+  }
+
+  .footer-social-link {
+    font-size: 12px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+  }
+
+  .footer-credits {
+    font-size: 0.6rem;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
