@@ -1607,6 +1607,11 @@
     order: 0;
   }
 
+  .project-title-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
   .project-tagline {
     max-width: 50%;
     text-align: right;
