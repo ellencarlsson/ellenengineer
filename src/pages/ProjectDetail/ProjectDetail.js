@@ -531,12 +531,12 @@ function ProjectDetail() {
       ledColor: 'medium',
       accentColor: 'rose',
       tagline: {
-        sv: 'Interaktiv portfolio med terminal-tema och kreativa animationer',
-        en: 'Interactive portfolio with terminal theme and creative animations'
+        sv: 'Portfolio-hemsida med teknisk design',
+        en: 'Portfolio website with technical design'
       },
       description: {
-        sv: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.',
-        en: 'I wanted a place to showcase my projects and thought it would be fun to build my own website. The theme is inspired by technology and data, with a terminal as the landing page and interactive elements throughout the site.\n\nEach page is built around its own concept. The landing page is a terminal, the projects page displays all projects as nodes, About me is a timeline with electric inspiration, the CV page uses SQL queries, and Contact me is laid out as API calls.'
+        sv: 'Jag ville ha någonstans att samla mina projekt och tyckte det var kul att bygga en egen hemsida. Temat är inspirerat av teknik och data, med en terminal som startsida och interaktiva element genom hela sidan.\n\nVarje sida är byggd kring ett eget koncept. Startsidan är en terminal, projektsidan visar alla projekt som noder, Om mig är en tidslinje med elektrisk inspiration, CV-sidan använder SQL-queries, och Kontakta mig är upplagd som API-anrop.\n\nSidan har integrationer med Telegram-botar som skickar notiser vid besök och buggrapporter.',
+        en: 'I wanted a place to showcase my projects and thought it would be fun to build my own website. The theme is inspired by technology and data, with a terminal as the landing page and interactive elements throughout the site.\n\nEach page is built around its own concept. The landing page is a terminal, the projects page displays all projects as nodes, About me is a timeline with electric inspiration, the CV page uses SQL queries, and Contact me is laid out as API calls.\n\nThe site has integrations with Telegram bots that send notifications on visits and bug reports.'
       },
       platforms: ['Web'],
       techStack: ['React', 'JavaScript'],
@@ -545,14 +545,18 @@ function ProjectDetail() {
           { id: 'browser', label: 'Client', col: 0, row: 0 },
           { id: 'router', label: 'React Router', col: 1, row: 0 },
           { id: 'view', label: 'View', col: 2, row: 0 },
+          { id: 'php', label: 'PHP', col: 2, row: 1 },
+          { id: 'telegram', label: 'Telegram Bot', col: 1, row: 1 },
         ],
         connections: [
           { from: 'browser', to: 'router', label: { sv: 'Användaren\nnavigerar', en: 'User\nnavigates' } },
           { from: 'router', to: 'view', label: { sv: 'Väljer rätt\nsida', en: 'Selects correct\npage' } },
+          { from: 'view', to: 'php', label: { sv: 'Besök/\nBuggrapport', en: 'Visit/\nBug report' } },
+          { from: 'php', to: 'telegram', label: { sv: 'Notis', en: 'Notify' } },
         ],
         subtitle: {
-          sv: 'Sidan är en ren frontend utan backend eller databas. Varje komponent har sin data hårdkodad direkt i sig, det finns ingen separat datafil. Det räcker för en portfolio eftersom innehållet uppdateras sällan och alltid av mig. Det gör sidan snabb, enkel att deploya och kräver ingen server som kostar pengar eller behöver underhållas.\n\nNavigeringen sköts av React Router som en SPA (Single Page Application), vilket betyder att sidan aldrig laddas om när man byter vy. Det ger en snabbare och smidigare upplevelse för besökaren.',
-          en: 'The site is a pure frontend without a backend or database. Each component has its data hardcoded directly in it—there is no separate data file. This is sufficient for a portfolio since the content is rarely updated and always by me. It makes the site fast, easy to deploy, and requires no server that costs money or needs maintenance.\n\nNavigation is handled by React Router as a SPA (Single Page Application), meaning the page never reloads when switching views. This provides a faster and smoother experience for visitors.'
+          sv: 'Sidan är en React-frontend med PHP-scripts för notifieringar. Navigeringen sköts av React Router som en SPA, vilket betyder att sidan aldrig laddas om. Vid besök och buggrapporter skickas ett anrop till PHP som vidarebefordrar det till en Telegram-bot.',
+          en: 'The site is a React frontend with PHP scripts for notifications. Navigation is handled by React Router as a SPA, meaning the page never reloads. On visits and bug reports, a call is sent to PHP which forwards it to a Telegram bot.'
         }
       },
       github: null,

@@ -93,8 +93,8 @@ function Projects() {
       platform: { sv: 'Webbutveckling', en: 'Web Development' },
       tech: 'React',
       description: {
-        sv: 'Interaktiv portfolio-hemsida med terminal-tema och 2D game mechanics. Byggt med React och kreativa animationer.',
-        en: 'Interactive portfolio website with terminal theme and 2D game mechanics. Built with React and creative animations.'
+        sv: 'Portfolio-hemsida med teknisk design och Telegram-notiser vid besök och buggrapporter.',
+        en: 'Portfolio website with technical design and Telegram notifications on visits and bug reports.'
       },
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: null,
