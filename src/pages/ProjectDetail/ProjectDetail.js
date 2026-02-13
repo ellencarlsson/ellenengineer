@@ -840,7 +840,7 @@ function ProjectDetail() {
                     <div key={i} className="result-image-item">
                       <span className="result-image-title">{img.title}</span>
                       <div className="result-image-container">
-                        <img className="result-image" src={img.src} alt={img.title} />
+                        <img className="result-image" src={img.src} alt={img.title} loading="lazy" />
                       </div>
                     </div>
                   ))}
