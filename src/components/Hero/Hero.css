@@ -101,35 +101,35 @@
 }
 
 .hero-prompt {
-  color: #8b9a6b;
+  color: var(--accent-burgundy);
 }
 
 .hero-cmd {
-  color: #d8cdbf;
+  color: var(--text-dark);
 }
 
 .hero-line.output {
-  color: #d8cdbf;
+  color: var(--text-dark);
 }
 
 .hero-line.link {
-  color: #c8b8a4;
+  color: var(--warm-peach);
 }
 
 .hero-terminal-link {
-  color: #c8b8a4;
+  color: var(--warm-peach);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .hero-terminal-link:hover {
-  color: #e0d0bc;
+  color: var(--warm-peach);
   text-decoration: underline;
 }
 
 /* Cursor */
 .hero-cursor {
-  color: #c8b8a4;
+  color: var(--accent-rose-light);
   font-weight: bold;
   opacity: 0;
 }
