@@ -5,6 +5,18 @@
   z-index: 1000;
 }
 
+/* Header hidden state - mobile menu dots and title fade out */
+.header-hidden .mobile-menu-header {
+  opacity: 0;
+  max-height: 0;
+  padding: 0 14px;
+  overflow: hidden;
+}
+
+.mobile-menu-header {
+  transition: opacity 0.25s ease, max-height 0.25s ease, padding 0.25s ease;
+}
+
 .menu-overlay {
   display: none;
 }

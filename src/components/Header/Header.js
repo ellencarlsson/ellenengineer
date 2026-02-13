@@ -9,26 +9,18 @@ import './Header.css';
 /** Navigation menu that hides when the user scrolls past the top. */
 function Header() {
   const [isHidden, setIsHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   /** Hides the header when the user scrolls past 100px. */
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY > 100) {
-        setIsHidden(true);
-      } else {
-        setIsHidden(false);
-      }
-
-      setLastScrollY(currentScrollY);
+      setIsHidden(currentScrollY > 100);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   /** Closes the menu when device orientation changes. */
   useEffect(() => {
