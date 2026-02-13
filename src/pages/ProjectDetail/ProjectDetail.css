@@ -1,7 +1,6 @@
 .project-detail-page {
   min-height: 85vh;
   padding: var(--spacing-xl) 0;
-  animation: fadeIn var(--transition-slow);
   padding-top: 30px;
   position: relative;
   overflow: hidden;

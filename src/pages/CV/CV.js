@@ -20,6 +20,7 @@ function CV() {
   const [queryComplete, setQueryComplete] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [showCard, setShowCard] = useState(false);
+  const [skipped, setSkipped] = useState(false);
 
   /** Skips the SQL animation and displays everything immediately. */
   const skipAnimation = () => {
@@ -29,6 +30,7 @@ function CV() {
     setQueryComplete(true);
     setShowResult(true);
     setShowCard(true);
+    setSkipped(true);
   };
 
   /** Listens for the Enter key to skip the animation. */
@@ -181,7 +183,7 @@ function CV() {
             </div>
 
             {showResult && (
-              <div className="sql-result">
+              <div className={`sql-result ${skipped ? 'skipped' : ''}`}>
                 <span className="sql-result-check">&#10003;</span>
                 <span className="sql-result-text"> 1 record found — </span>
                 <span className="sql-result-file">CV-Ellen-Carlsson.pdf</span>
@@ -196,7 +198,7 @@ function CV() {
             </div>
           )}
 
-          <div className={`cv-actions ${showCard ? 'visible' : ''}`}>
+          <div className={`cv-actions ${showCard ? 'visible' : ''} ${skipped ? 'skipped' : ''}`}>
             <a
               href="/assets/CV-Ellen-Carlsson.pdf"
               target="_blank"
@@ -226,7 +228,7 @@ function CV() {
         </div>
 
         {/* Right: CV image with glitch effect */}
-        <div className={`cv-right ${showCard ? 'visible' : ''}`}>
+        <div className={`cv-right ${showCard ? 'visible' : ''} ${skipped ? 'skipped' : ''}`}>
 
           <div className="cv-image-wrap">
             <div className="cv-glitch">

@@ -5,8 +5,7 @@
   justify-content: center;
   padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
   background: transparent;
-  animation: cvFadeIn var(--transition-slow);
-  position: relative;
+    position: relative;
   overflow: hidden;
 }
 
@@ -131,6 +130,11 @@
   animation: cvResultFadeIn 0.5s ease-out forwards;
 }
 
+.sql-result.skipped {
+  animation: none;
+  opacity: 1;
+}
+
 .sql-result-check {
   color: var(--accent-rose-light);
   font-weight: 700;
@@ -205,6 +209,10 @@
   transform: translateY(0);
 }
 
+.cv-actions.skipped {
+  transition: none;
+}
+
 .cv-button {
   display: flex;
   align-items: center;
@@ -265,6 +273,10 @@
 .cv-right.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.cv-right.skipped {
+  transition: none;
 }
 
 /* Glitch image wrapper */
