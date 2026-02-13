@@ -872,6 +872,12 @@ function ProjectDetail() {
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('result')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                Stäng
+              </button>
             </div>
           </div>
         </div>
@@ -902,6 +908,12 @@ function ProjectDetail() {
               ) : (
                 <p className="architecture-description" style={{opacity: 0.5, fontStyle: 'italic'}}>Arkitekturbeskrivning kommer snart.</p>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('architecture')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                Stäng
+              </button>
             </div>
           </div>
         </div>
@@ -968,6 +980,12 @@ function ProjectDetail() {
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('components')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                Stäng
+              </button>
             </div>
           </div>
         </div>
@@ -1006,6 +1024,12 @@ function ProjectDetail() {
                   ))}
                 </div>
               )}
+              <button className="section-collapse-btn" onClick={() => toggleSection('insights')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                Stäng
+              </button>
             </div>
           </div>
         </div>
@@ -1057,6 +1081,12 @@ function ProjectDetail() {
                   </a>
                 )}
               </div>
+              <button className="section-collapse-btn" onClick={() => toggleSection('links')}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 15L12 9L6 15"/>
+                </svg>
+                Stäng
+              </button>
             </div>
           </div>
         </div>}
