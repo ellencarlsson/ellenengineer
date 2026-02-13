@@ -491,6 +491,10 @@
 
 /* Landscape mobile - show regular nav instead of hamburger */
 @media (max-height: 500px) and (orientation: landscape) {
+  .header-container {
+    padding: 0 3rem;
+  }
+
   .header-left,
   .header-right {
     display: flex;
