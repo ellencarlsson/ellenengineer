@@ -1521,7 +1521,7 @@
   }
 
   .about-value {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .about-tech-badge {
@@ -1555,7 +1555,7 @@
   }
 
   .readme-tech-item {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .file-content {
@@ -1586,6 +1586,15 @@
 
   .step-details {
     font-size: 9px;
+  }
+
+  .result-description,
+  .insights-description,
+  .architecture-description,
+  .feature-commit-text,
+  .pipeline-desc,
+  .component-responsibility {
+    font-size: 12px;
   }
 }
 
