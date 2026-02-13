@@ -171,7 +171,7 @@ function Projects() {
             >
               {/* Orbiting particles */}
               <div className="particle-orbit">
-                {generateParticles(index, 4).map((p, i) => (
+                {generateParticles(index, isMobile ? 2 : 4).map((p, i) => (
                   <div
                     key={i}
                     className="particle"
