@@ -3,6 +3,7 @@
  */
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import './ProjectDetail.css';
 
 /** SVG icons mapped to each technology in the tech stack. */
@@ -256,6 +257,7 @@ function ArchitectureDiagram({ architecture }) {
 
 /** Detail page displaying all information about a specific project. */
 function ProjectDetail() {
+  const { t } = useLanguage();
   const { projectId } = useParams();
   const [playingVideos, setPlayingVideos] = useState({});
   const [archModalOpen, setArchModalOpen] = useState(false);
@@ -723,7 +725,7 @@ function ProjectDetail() {
         {/* Project Title Header - GitHub Style */}
         <div className="project-header-title">
           <Link to="/projects" className="back-link">
-            ← Back
+            {t('projects.backToProjects')}
           </Link>
           <div className="project-title-row">
             <h1 className="github-project-name">{project.name}</h1>
@@ -756,11 +758,11 @@ function ProjectDetail() {
           <div className="sidebar-column">
             <div className={`about-section led-${project.ledColor}`}>
               <div className="about-header">
-                <span className="about-title">PROJEKTDETALJER</span>
+                <span className="about-title">{t('projects.details')}</span>
               </div>
               <div className="about-content">
                 <div className="about-item">
-                  <span className="about-label">PLATFORMS:</span>
+                  <span className="about-label">{t('projects.platforms')}</span>
                 </div>
                 <div className="about-tech-list">
                   {project.platforms.map((platform, i) => (
@@ -772,7 +774,7 @@ function ProjectDetail() {
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
-                  <span className="about-label">TECH STACK:</span>
+                  <span className="about-label">{t('projects.techStack')}</span>
                 </div>
                 <div className="about-tech-list">
                   {project.techStack.map((tech, i) => (
@@ -784,7 +786,7 @@ function ProjectDetail() {
                 </div>
                 <div className="about-divider"></div>
                 <div className="about-item">
-                  <span className="about-label">YEAR:</span>
+                  <span className="about-label">{t('projects.year')}</span>
                   <span className="about-value">{project.year}</span>
                 </div>
               </div>
@@ -876,7 +878,7 @@ function ProjectDetail() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 15L12 9L6 15"/>
                 </svg>
-                Stäng
+                {t('projects.close')}
               </button>
             </div>
           </div>
@@ -902,7 +904,7 @@ function ProjectDetail() {
                   )}
                   <div className="arch-tap-hint" onClick={() => setArchModalOpen(true)}>
                     <ArchitectureDiagram architecture={project.architecture} />
-                    <span className="arch-tap-label">Tryck för att förstora</span>
+                    <span className="arch-tap-label">{t('projects.expandHint')}</span>
                   </div>
                 </>
               ) : (
@@ -912,7 +914,7 @@ function ProjectDetail() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 15L12 9L6 15"/>
                 </svg>
-                Stäng
+                {t('projects.close')}
               </button>
             </div>
           </div>
@@ -984,7 +986,7 @@ function ProjectDetail() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 15L12 9L6 15"/>
                 </svg>
-                Stäng
+                {t('projects.close')}
               </button>
             </div>
           </div>
@@ -1028,7 +1030,7 @@ function ProjectDetail() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 15L12 9L6 15"/>
                 </svg>
-                Stäng
+                {t('projects.close')}
               </button>
             </div>
           </div>
@@ -1085,7 +1087,7 @@ function ProjectDetail() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 15L12 9L6 15"/>
                 </svg>
-                Stäng
+                {t('projects.close')}
               </button>
             </div>
           </div>

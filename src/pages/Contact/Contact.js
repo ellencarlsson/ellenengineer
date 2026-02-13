@@ -2,16 +2,29 @@
  * @file Contact page with API theme displaying email and LinkedIn.
  */
 import React, { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import './Contact.css';
 
 const EMAIL = 'carlssonellen@live.se';
 const LINKEDIN = 'linkedin.com/in/ellen-carlsson-ab04451b4';
 
 /** Contact page styled as API documentation with endpoints. */
-const BUG_CATEGORIES = ['Design', 'Funktionalitet', 'Prestanda', 'Annat'];
-const PAGES = ['Hem', 'Projekt', 'Om mig', 'CV', 'Kontakt', 'Annat'];
-
 function Contact() {
+  const { t } = useLanguage();
+  const BUG_CATEGORIES = [
+    { key: 'design', label: t('contact.categories.design') },
+    { key: 'functionality', label: t('contact.categories.functionality') },
+    { key: 'performance', label: t('contact.categories.performance') },
+    { key: 'other', label: t('contact.categories.other') },
+  ];
+  const PAGES = [
+    { key: 'home', label: t('contact.pages.home') },
+    { key: 'projects', label: t('contact.pages.projects') },
+    { key: 'about', label: t('contact.pages.about') },
+    { key: 'cv', label: t('contact.pages.cv') },
+    { key: 'contact', label: t('contact.pages.contact') },
+    { key: 'other', label: t('contact.pages.other') },
+  ];
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedLinkedin, setCopiedLinkedin] = useState(false);
   const [bugFormOpen, setBugFormOpen] = useState(false);
@@ -133,7 +146,7 @@ function Contact() {
                 <span className="response-label">Response:</span>
                 <span className="response-value-group">
                   <span className="response-value">{EMAIL}</span>
-                  <button type="button" className="copy-button" onClick={handleCopy(EMAIL, setCopiedEmail)} title="Kopiera e-post">
+                  <button type="button" className="copy-button" onClick={handleCopy(EMAIL, setCopiedEmail)} title={t('contact.copyEmail')}>
                   {copiedEmail ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -144,7 +157,7 @@ function Contact() {
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
                   )}
-                  {copiedEmail && <span className="copy-tooltip">Kopierad!</span>}
+                  {copiedEmail && <span className="copy-tooltip">{t('contact.copied')}</span>}
                 </button>
                 </span>
               </div>
@@ -165,7 +178,7 @@ function Contact() {
               <div className="endpoint-response">
                 <span className="response-label">Response:</span>
                 <span className="response-value">{LINKEDIN}</span>
-                <button type="button" className="copy-button" onClick={handleCopy(LINKEDIN, setCopiedLinkedin)} title="Kopiera LinkedIn">
+                <button type="button" className="copy-button" onClick={handleCopy(LINKEDIN, setCopiedLinkedin)} title={t('contact.copyLinkedin')}>
                   {copiedLinkedin ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -176,7 +189,7 @@ function Contact() {
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
                   )}
-                  {copiedLinkedin && <span className="copy-tooltip">Kopierad!</span>}
+                  {copiedLinkedin && <span className="copy-tooltip">{t('contact.copied')}</span>}
                 </button>
               </div>
             </div>
@@ -215,34 +228,34 @@ function Contact() {
             {bugFormOpen && (
               <div className={`bug-form ${bugFormClosing ? 'closing' : ''} ${bugFormOpening ? 'opening' : ''}`} ref={bugFormRef}>
                 <div className="bug-form-field">
-                  <label className="bug-form-label">Kategori:</label>
+                  <label className="bug-form-label">{t('contact.bugCategory')}</label>
                   <div className="bug-categories">
                     {BUG_CATEGORIES.map((cat) => (
                       <button
-                        key={cat}
+                        key={cat.key}
                         type="button"
-                        className={`bug-category ${bugCategory === cat ? 'selected' : ''}`}
+                        className={`bug-category ${bugCategory === cat.key ? 'selected' : ''}`}
                         onClick={() => {
-                          setBugCategory(cat);
-                          if (cat !== 'Design') setBugPage('');
+                          setBugCategory(cat.key);
+                          if (cat.key !== 'design') setBugPage('');
                         }}
                       >
-                        {cat}
+                        {cat.label}
                       </button>
                     ))}
                   </div>
 
-                  {bugCategory === 'Design' && (
+                  {bugCategory === 'design' && (
                     <div className="bug-subcategories">
-                      <span className="bug-subcategory-label">Sida:</span>
+                      <span className="bug-subcategory-label">{t('contact.bugPage')}</span>
                       {PAGES.map((page) => (
                         <button
-                          key={page}
+                          key={page.key}
                           type="button"
-                          className={`bug-subcategory ${bugPage === page ? 'selected' : ''}`}
-                          onClick={() => setBugPage(page)}
+                          className={`bug-subcategory ${bugPage === page.key ? 'selected' : ''}`}
+                          onClick={() => setBugPage(page.key)}
                         >
-                          {page}
+                          {page.label}
                         </button>
                       ))}
                     </div>
@@ -250,10 +263,10 @@ function Contact() {
                 </div>
 
                 <div className="bug-form-field">
-                  <label className="bug-form-label">Beskrivning:</label>
+                  <label className="bug-form-label">{t('contact.bugDescription')}</label>
                   <textarea
                     className="bug-textarea"
-                    placeholder="Beskriv problemet..."
+                    placeholder={t('contact.bugPlaceholder')}
                     value={bugDescription}
                     onChange={(e) => setBugDescription(e.target.value)}
                     rows={3}
@@ -264,9 +277,9 @@ function Contact() {
                   type="button"
                   className="bug-submit"
                   onClick={handleBugSubmit}
-                  disabled={!bugCategory || (bugCategory === 'Design' && !bugPage) || !bugDescription.trim() || bugStatus === 'sending'}
+                  disabled={!bugCategory || (bugCategory === 'design' && !bugPage) || !bugDescription.trim() || bugStatus === 'sending'}
                 >
-                  {bugStatus === 'sending' ? 'Skickar...' : bugStatus === 'sent' ? 'Skickat!' : 'Skicka rapport'}
+                  {bugStatus === 'sending' ? t('contact.bugSending') : bugStatus === 'sent' ? t('contact.bugSent') : t('contact.bugSubmit')}
                 </button>
               </div>
             )}

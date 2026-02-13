@@ -3,6 +3,7 @@
  */
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ImageWithSkeleton from '../../components/Skeleton/ImageWithSkeleton';
+import { useLanguage } from '../../context/LanguageContext';
 import './About.css';
 
 /** Milestones displayed on the timeline. */
@@ -43,6 +44,7 @@ const MILESTONES = [
 
 /** About page with timeline, particle effects, and draggable navigation. */
 function About() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(MILESTONES.length - 1);
   const [isDragging, setIsDragging] = useState(false);
   const particlesRef = useRef(null);
@@ -254,7 +256,7 @@ function About() {
           ))}
         </div>
         <div className="timeline-hint">
-          Använd <span className="timeline-hint-key">◀</span> <span className="timeline-hint-key">▶</span> för att navigera
+          {t('about.navHint')} <span className="timeline-hint-key">◀</span> <span className="timeline-hint-key">▶</span> {t('about.navHintKeys')}
         </div>
       </div>
     </section>

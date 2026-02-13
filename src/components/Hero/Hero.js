@@ -1,12 +1,14 @@
 /**
  * @file Terminal window on the home page with typing animation.
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 import './Hero.css';
 
 /** Animated terminal that types out commands and output line by line. */
 function Hero() {
+  const { language, t } = useLanguage();
   const [completedLines, setCompletedLines] = useState([]);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
@@ -14,26 +16,26 @@ function Hero() {
   const [isComplete, setIsComplete] = useState(false);
   const [skippedByUser, setSkippedByUser] = useState(false);
 
-  const terminalLines = [
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'whoami' },
-    { type: 'output', text: 'Ellen Carlsson - Engineer' },
+  const terminalLines = useMemo(() => [
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.whoami') },
+    { type: 'output', text: t('hero.name') },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cat about.txt' },
-    { type: 'output', text: 'Jag gillar att lösa vardagsproblem med hjälp av teknik.' },
-    { type: 'output', text: 'Jag har gjort denna hemsida för att lägga upp utvalda projekt.' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.aboutCmd') },
+    { type: 'output', text: t('hero.aboutLine1') },
+    { type: 'output', text: t('hero.aboutLine2') },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'echo $CURRENT_STATUS' },
-    { type: 'output', text: 'Just nu är jag på Luftvärnsregementet i Halmstad och kommer vara här till sommaren 2026.' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.statusCmd') },
+    { type: 'output', text: t('hero.status') },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd projects/' },
-    { type: 'link', to: '/projects', text: '→ Klicka här för att se mina projekt' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.projectsCmd') },
+    { type: 'link', to: '/projects', text: '→ ' + t('hero.projectsLink') },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd about/' },
-    { type: 'link', to: '/about', text: '→ Klicka här för att veta mer om mig' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.aboutPageCmd') },
+    { type: 'link', to: '/about', text: '→ ' + t('hero.aboutPageLink') },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd contact/' },
-    { type: 'link', to: '/contact', text: '→ Klicka här för att kontakta mig' }
-  ];
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: t('hero.contactCmd') },
+    { type: 'link', to: '/contact', text: '→ ' + t('hero.contactLink') }
+  ], [t]);
 
   /** Skips the animation and displays all text immediately. */
   const skipAnimation = () => {
@@ -62,6 +64,15 @@ function Hero() {
     }, 530);
     return () => clearInterval(cursorInterval);
   }, []);
+
+  /** Resets the animation when language changes. */
+  useEffect(() => {
+    setCompletedLines([]);
+    setCurrentLineIndex(0);
+    setCurrentCharIndex(0);
+    setIsComplete(false);
+    setSkippedByUser(false);
+  }, [language]);
 
   /** Types out text character by character with different speeds for commands and output. */
   useEffect(() => {
@@ -148,9 +159,9 @@ function Hero() {
         </div>
 
         <div className={`hero-terminal-hint ${isComplete ? 'hidden' : ''} ${skippedByUser ? 'no-transition' : ''}`} onClick={() => !isComplete && skipAnimation()}>
-          <span className="hero-hint-key hint-desktop">Enter</span>
-          <span className="hero-hint-key hint-mobile">Tryck</span>
-          {' '}för att hoppa över animationen
+          <span className="hero-hint-key hint-desktop">{t('hero.skipKey')}</span>
+          <span className="hero-hint-key hint-mobile">{t('hero.skipMobile')}</span>
+          {' '}{t('hero.skipHint')}
         </div>
       </div>
     </section>
