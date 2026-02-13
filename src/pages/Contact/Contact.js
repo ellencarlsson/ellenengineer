@@ -9,7 +9,7 @@ const LINKEDIN = 'linkedin.com/in/ellen-carlsson-ab04451b4';
 
 /** Contact page styled as API documentation with endpoints. */
 const BUG_CATEGORIES = ['Design', 'Funktionalitet', 'Prestanda', 'Annat'];
-const PAGES = ['Hem', 'Projekt', 'Om mig', 'CV', 'Kontakt'];
+const PAGES = ['Hem', 'Projekt', 'Om mig', 'CV', 'Kontakt', 'Annat'];
 
 function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
