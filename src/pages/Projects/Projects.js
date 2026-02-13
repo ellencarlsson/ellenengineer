@@ -5,24 +5,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Projects.css';
 
-/** Generate random particle properties for organic look */
-const generateParticles = (nodeIndex, count = 5) => {
-  // Use nodeIndex as seed base for consistent but different patterns per node
+/** Generate random particle properties for electronic look */
+const generateParticles = (nodeIndex, count = 4) => {
   const particles = [];
   for (let i = 0; i < count; i++) {
     const seed = nodeIndex * 100 + i;
-    // Pseudo-random based on seed for consistency across renders
     const random = (min, max) => {
       const x = Math.sin(seed * (i + 1) * 9999) * 10000;
       return min + (x - Math.floor(x)) * (max - min);
     };
     particles.push({
-      size: random(4, 8),
-      opacity: random(0.4, 0.8),
-      duration: random(6, 14),
+      size: random(3, 6),
+      opacity: random(0.5, 0.8),
+      duration: random(8, 14),
       startAngle: random(0, 360),
-      radius: random(85, 125),
-      delay: random(0, 5),
+      radius: random(95, 115),
+      delay: random(0, 6),
+      direction: 1,
     });
   }
   return particles;
@@ -152,7 +151,7 @@ function Projects() {
             >
               {/* Orbiting particles */}
               <div className="particle-orbit">
-                {generateParticles(index, 5).map((p, i) => (
+                {generateParticles(index, 4).map((p, i) => (
                   <div
                     key={i}
                     className="particle"
@@ -163,15 +162,13 @@ function Projects() {
                       '--start-angle': `${p.startAngle}deg`,
                       '--radius': `${p.radius}px`,
                       '--delay': `-${p.delay}s`,
+                      '--direction': p.direction,
                     }}
                   />
                 ))}
               </div>
 
               <div className="node-circle">
-                {/* LED Indicator */}
-                <div className="node-led"></div>
-
                 <div className="node-inner">
                   <div className="node-name">{project.name}</div>
                   <div className="node-tag">{project.platform}</div>

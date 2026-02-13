@@ -186,30 +186,6 @@
     0 0 50px rgba(var(--accent-terracotta-rgb), 0.1);
 }
 
-/* LED Indicator */
-.node-led {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-terracotta);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0.8;
-}
-
-.project-node:nth-child(1) .node-led {
-  background: var(--accent-sage);
-}
-
-.project-node:nth-child(2) .node-led {
-  background: var(--accent-sand);
-}
-
-.project-node:nth-child(3) .node-led {
-  background: var(--accent-terracotta);
-}
 
 
 .node-inner {
@@ -262,21 +238,31 @@
   opacity: var(--opacity, 0.6);
   animation: particleOrbit var(--duration, 8s) linear infinite;
   animation-delay: var(--delay, 0s);
+  animation-direction: var(--anim-direction, normal);
 }
 
 .project-node:nth-child(1) .particle {
   background: var(--accent-sage);
-  box-shadow: 0 0 4px rgba(var(--accent-sage-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-sage-rgb), 0.6),
+    0 0 8px rgba(var(--accent-sage-rgb), 0.4),
+    0 0 12px rgba(var(--accent-sage-rgb), 0.2);
 }
 
 .project-node:nth-child(2) .particle {
   background: var(--accent-sand);
-  box-shadow: 0 0 4px rgba(var(--accent-sand-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-sand-rgb), 0.6),
+    0 0 8px rgba(var(--accent-sand-rgb), 0.4),
+    0 0 12px rgba(var(--accent-sand-rgb), 0.2);
 }
 
 .project-node:nth-child(3) .particle {
   background: var(--accent-terracotta);
-  box-shadow: 0 0 4px rgba(var(--accent-terracotta-rgb), 0.4);
+  box-shadow:
+    0 0 4px rgba(var(--accent-terracotta-rgb), 0.6),
+    0 0 8px rgba(var(--accent-terracotta-rgb), 0.4),
+    0 0 12px rgba(var(--accent-terracotta-rgb), 0.2);
 }
 
 @keyframes particleOrbit {
@@ -284,7 +270,7 @@
     transform: translate(-50%, -50%) rotate(var(--start-angle, 0deg)) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg)));
   }
   100% {
-    transform: translate(-50%, -50%) rotate(calc(var(--start-angle, 0deg) + 360deg)) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg) - 360deg));
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle, 0deg) + calc(360deg * var(--direction, 1)))) translateX(var(--radius, 110px)) rotate(calc(-1 * var(--start-angle, 0deg) - calc(360deg * var(--direction, 1))));
   }
 }
 
@@ -305,13 +291,6 @@
 
   .node-year {
     font-size: 0.9rem;
-  }
-
-  .node-led {
-    width: 7px;
-    height: 7px;
-    top: 10px;
-    right: 10px;
   }
 
   .particle-orbit {
@@ -346,13 +325,6 @@
     font-size: 0.8rem;
   }
 
-  .node-led {
-    width: 6px;
-    height: 6px;
-    top: 8px;
-    right: 8px;
-  }
-
   .particle-orbit {
     transform: scale(0.65);
   }
@@ -379,13 +351,6 @@
 
   .node-year {
     font-size: 0.6rem;
-  }
-
-  .node-led {
-    width: 5px;
-    height: 5px;
-    top: 6px;
-    right: 6px;
   }
 
   .particle-orbit {
@@ -436,13 +401,6 @@
 
   .node-year {
     font-size: 0.5rem;
-  }
-
-  .node-led {
-    width: 5px;
-    height: 5px;
-    top: 6px;
-    right: 6px;
   }
 
   .particle-orbit {
