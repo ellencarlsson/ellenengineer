@@ -77,13 +77,13 @@ function Contact() {
 
     setBugStatus('sending');
     try {
-      await fetch('/api/report-bug', {
+      await fetch('/report-bug.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           category: bugCategory,
           page: bugPage || null,
-          description: bugDescription
+          message: bugDescription
         })
       });
       setBugStatus('sent');
