@@ -166,13 +166,21 @@ function Header() {
           <NavLink to="/contact" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
             {t('mobile.contact')}
           </NavLink>
-          <button
-            className="mobile-lang-toggle"
-            onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
-            aria-label={language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
-          >
-            {language === 'sv' ? 'SE' : 'EN'}
-          </button>
+          <div className="mobile-lang-toggle">
+            <button
+              className={language === 'sv' ? 'active' : ''}
+              onClick={() => setLanguage('sv')}
+            >
+              SE
+            </button>
+            <span>/</span>
+            <button
+              className={language === 'en' ? 'active' : ''}
+              onClick={() => setLanguage('en')}
+            >
+              ENG
+            </button>
+          </div>
         </nav>
       </div>
     </header>
