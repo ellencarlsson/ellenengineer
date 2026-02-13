@@ -249,22 +249,6 @@
   83%      { top: 67%; opacity: 0; }
 }
 
-/* ===== ASCII DECORATION ===== */
-.about-ascii {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
-  font-size: 11px;
-  line-height: 1.6;
-  color: rgba(var(--accent-rose-warm-rgb), 0.06);
-  white-space: pre;
-  pointer-events: none;
-  user-select: none;
-  z-index: 2;
-}
-
 /* ===== TIMELINE ===== */
 .timeline {
   padding: 40px 60px 40px;
@@ -684,10 +668,6 @@
   }
 
   .timeline-hint {
-    display: none;
-  }
-
-  .about-ascii {
     display: none;
   }
 }
