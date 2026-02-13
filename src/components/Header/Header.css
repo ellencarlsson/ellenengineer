@@ -48,6 +48,7 @@
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   flex-wrap: nowrap;
+  height: 56px;
 }
 
 .nav {
@@ -302,6 +303,7 @@
   box-shadow: var(--shadow-md), 0 0 0 1px rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   flex-wrap: nowrap;
+  height: 56px;
 }
 
 /* Hamburger button - hidden on desktop */
@@ -582,12 +584,12 @@
 
   .header-left-pill,
   .header-right-pill {
-    padding: 4px;
+    padding: 4px 8px;
   }
 
   .nav-link {
     font-size: 13px;
-    padding: 8px 12px;
+    padding: 4px 10px;
     min-height: 36px;
   }
 
