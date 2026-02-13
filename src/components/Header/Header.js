@@ -115,11 +115,13 @@ function Header() {
             <NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
               {t('nav.contact')}
             </NavLink>
-            <div className="lang-switcher">
-              <button className={`lang-btn ${language === 'sv' ? 'active' : ''}`} onClick={() => setLanguage('sv')} aria-label="Svenska">SE</button>
-              <span className="lang-divider">/</span>
-              <button className={`lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')} aria-label="English">ENG</button>
-            </div>
+            <button
+              className="lang-toggle"
+              onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+              aria-label={language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
+            >
+              {language === 'sv' ? 'SE' : 'EN'}
+            </button>
           </div>
         </div>
 
@@ -164,11 +166,13 @@ function Header() {
           <NavLink to="/contact" className={({ isActive }) => isActive ? 'mobile-menu-link active' : 'mobile-menu-link'} onClick={handleNavClick}>
             {t('mobile.contact')}
           </NavLink>
-          <div className="mobile-lang-switcher">
-            <button className={`mobile-lang-btn ${language === 'sv' ? 'active' : ''}`} onClick={() => setLanguage('sv')} aria-label="Svenska">SE</button>
-            <span className="lang-divider">/</span>
-            <button className={`mobile-lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')} aria-label="English">ENG</button>
-          </div>
+          <button
+            className="mobile-lang-toggle"
+            onClick={() => setLanguage(language === 'sv' ? 'en' : 'sv')}
+            aria-label={language === 'sv' ? 'Switch to English' : 'Byt till svenska'}
+          >
+            {language === 'sv' ? 'SE' : 'EN'}
+          </button>
         </nav>
       </div>
     </header>
