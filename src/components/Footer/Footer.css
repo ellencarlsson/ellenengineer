@@ -76,10 +76,16 @@
   opacity: 0.8;
 }
 
+.footer-updated {
+  font-size: 0.7rem;
+  opacity: 0.4;
+  margin-top: var(--spacing-xs);
+}
+
 .footer-version {
   font-size: 0.65rem;
   opacity: 0.3;
-  margin-top: var(--spacing-xs);
+  margin-top: 4px;
 }
 
 /* Intermediate breakpoints */
@@ -133,6 +139,10 @@
   .footer-credits {
     font-size: 0.6rem;
   }
+
+  .footer-updated {
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -171,6 +181,10 @@
   }
 
   .footer-credits {
+    font-size: 8px;
+  }
+
+  .footer-updated {
     font-size: 8px;
   }
 
