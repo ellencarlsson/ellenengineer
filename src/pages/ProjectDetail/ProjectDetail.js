@@ -645,14 +645,20 @@ function ProjectDetail() {
       model: 'IBM DESKSTAR NP1',
       label: 'NORDPUNKT-2025',
       name: 'NordPunkt',
-      year: 'Under utveckling',
+      year: { sv: 'Under utveckling', en: 'In development' },
       capacity: '512 MB',
       interface: 'GPIO',
       status: 'IN DEVELOPMENT',
       ledColor: 'brown',
       accentColor: 'sand',
-      tagline: 'Raspberry Pi-enhet för automatisk schemaläggning och MGRS inom militären',
-      description: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+      tagline: {
+        sv: 'Raspberry Pi-enhet för automatisk schemaläggning och MGRS inom militären',
+        en: 'Raspberry Pi device for automatic scheduling and MGRS in the military'
+      },
+      description: {
+        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+        en: 'A guard schedule is a military schedule that controls who stands guard and when in the field. The main problem with doing this manually is making the calculations work out—the task must be covered around the clock while each person needs sleep and rest. Since multiple people must constantly be on duty, it quickly becomes a difficult puzzle to distribute shifts fairly so no one gets overloaded.\n\nTo make this easier, I\'m building a system that calculates the optimal schedule automatically. The system knows all the rules for rest periods, driving times, and staffing, and distributes shifts as fairly as possible.\n\nMGRS is the coordinate system used in the military to specify exact positions on the map. Calculating these manually is time-consuming and difficult to get right when tired or stressed. Therefore, I\'m also implementing a feature on the device that retrieves the MGRS coordinate automatically using GPS.'
+      },
       platforms: ['Raspberry Pi'],
       techStack: ['Python'],
       architecture: {
@@ -666,34 +672,43 @@ function ProjectDetail() {
         ],
         connections: [
           { from: 'gps', to: 'rpi', label: 'MGRS' },
-          { from: 'view', to: 'rpi', label: 'Sends\ncommands' },
-          { from: 'rpi', to: 'view', label: 'Shows MGRS\n/ Schedule' },
-          { from: 'rpi', to: 'schedule', label: 'Generate\nschedule' },
-          { from: 'schedule', to: 'rpi', label: 'Returns\nschedule' },
-          { from: 'schedule', to: 'sqlite', label: 'Read/Write' },
-          { from: 'webadmin', to: 'sqlite', label: 'Read/Write' },
+          { from: 'view', to: 'rpi', label: { sv: 'Skickar\nkommandon', en: 'Sends\ncommands' } },
+          { from: 'rpi', to: 'view', label: { sv: 'Visar MGRS\n/ Schema', en: 'Shows MGRS\n/ Schedule' } },
+          { from: 'rpi', to: 'schedule', label: { sv: 'Generera\nschema', en: 'Generate\nschedule' } },
+          { from: 'schedule', to: 'rpi', label: { sv: 'Returnerar\nschema', en: 'Returns\nschedule' } },
+          { from: 'schedule', to: 'sqlite', label: { sv: 'Läs/Skriv', en: 'Read/Write' } },
+          { from: 'webadmin', to: 'sqlite', label: { sv: 'Läs/Skriv', en: 'Read/Write' } },
         ],
-        subtitle: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.'
+        subtitle: {
+          sv: 'Allt körs på en Raspberry Pi med pekskärm. Web Admin används från en dator för att hantera data.',
+          en: 'Everything runs on a Raspberry Pi with a touchscreen. Web Admin is used from a computer to manage data.'
+        }
       },
       github: null,
       demo: null,
       image: null,
       demoVideos: null,
-      resultText: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
+      resultText: {
+        sv: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
+        en: 'The project is under development. The GPS module can read satellite signals and display the position as MGRS coordinates on the touchscreen. The schedule module can generate schedules based on rules such as no one working double shifts, all shifts having enough people, and work hours being distributed fairly. The device works completely offline without internet.'
+      },
       insights: [
         {
-          title: 'Bakgrund',
+          title: { sv: 'Bakgrund', en: 'Background' },
           items: [
             {
-              label: 'Från iOS till Raspberry Pi',
-              text: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.'
+              label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
+              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So now I\'m rebuilding it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
             }
           ]
         }
       ],
       hasWorkflow: false,
       workflow: [],
-      componentsText: 'Enheten är uppdelad i oberoende moduler som kan utvecklas var för sig.',
+      componentsText: {
+        sv: 'Enheten är uppdelad i oberoende moduler som kan utvecklas var för sig.',
+        en: 'The device is divided into independent modules that can be developed separately.'
+      },
       components: [
         {
           group: 'GPS',
@@ -701,12 +716,12 @@ function ProjectDetail() {
             {
               name: 'GPS Receiver',
               type: 'Hardware',
-              responsibility: 'En USB GPS-mottagare (VK-162) som fångar upp satellitsignaler och ger enhetens position.'
+              responsibility: { sv: 'En USB GPS-mottagare (VK-162) som fångar upp satellitsignaler och ger enhetens position.', en: 'A USB GPS receiver (VK-162) that captures satellite signals and provides the device\'s position.' }
             },
             {
               name: 'MGRS Converter',
               type: 'Service',
-              responsibility: 'Tar emot GPS-koordinater och konverterar dem till MGRS-format som kan användas direkt på en militär karta.'
+              responsibility: { sv: 'Tar emot GPS-koordinater och konverterar dem till MGRS-format som kan användas direkt på en militär karta.', en: 'Receives GPS coordinates and converts them to MGRS format that can be used directly on a military map.' }
             }
           ]
         },
@@ -716,27 +731,27 @@ function ProjectDetail() {
             {
               name: 'Schedule Engine',
               type: 'Service',
-              responsibility: 'Genererar scheman automatiskt utifrån tillgängliga personer och skift som behöver täckas.'
+              responsibility: { sv: 'Genererar scheman automatiskt utifrån tillgängliga personer och skift som behöver täckas.', en: 'Generates schedules automatically based on available personnel and shifts that need to be covered.' }
             },
             {
               name: 'Constraints',
-              type: 'Rules',
-              responsibility: 'Reglerna som schemat måste följa: ingen jobbar dubbla pass, tillräckligt med folk per skift, vilotider efter långa pass, och rättvis fördelning av arbetstimmar.'
+              type: { sv: 'Regler', en: 'Rules' },
+              responsibility: { sv: 'Reglerna som schemat måste följa: ingen jobbar dubbla pass, tillräckligt med folk per skift, vilotider efter långa pass, och rättvis fördelning av arbetstimmar.', en: 'The rules the schedule must follow: no one works double shifts, enough people per shift, rest periods after long shifts, and fair distribution of work hours.' }
             }
           ]
         },
         {
-          group: 'Databas',
+          group: { sv: 'Databas', en: 'Database' },
           items: [
             {
               name: 'SQLite',
               type: 'Database',
-              responsibility: 'Lokal databas som lagrar alla scheman, personer och inställningar direkt på enheten. Kräver inget internet.'
+              responsibility: { sv: 'Lokal databas som lagrar alla scheman, personer och inställningar direkt på enheten. Kräver inget internet.', en: 'Local database that stores all schedules, personnel, and settings directly on the device. Requires no internet.' }
             },
             {
               name: 'Web Admin',
               type: 'Interface',
-              responsibility: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Delar samma databas som enheten.'
+              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Shares the same database as the device.' }
             }
           ]
         }
@@ -825,7 +840,7 @@ function ProjectDetail() {
                 <div className="about-divider"></div>
                 <div className="about-item">
                   <span className="about-label">{t('projects.year')}</span>
-                  <span className="about-value">{project.year}</span>
+                  <span className="about-value">{loc(project.year)}</span>
                 </div>
               </div>
             </div>
@@ -988,7 +1003,7 @@ function ProjectDetail() {
                 <div className="components-list">
                   {project.components.map((group, gi) => (
                     <div key={gi} className="component-group">
-                      {group.group && <h4 className="component-group-title">{group.group}</h4>}
+                      {group.group && <h4 className="component-group-title">{loc(group.group)}</h4>}
                       <div className="component-grid">
                         {group.items.map((comp, i) => (
                           <div key={i} className="component-card">
