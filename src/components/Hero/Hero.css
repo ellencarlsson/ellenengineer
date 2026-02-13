@@ -262,7 +262,7 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .hero {
     min-height: auto;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-xl);
   }
 
   .hero-terminal {

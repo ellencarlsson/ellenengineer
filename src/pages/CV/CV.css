@@ -353,3 +353,48 @@
     font-size: 12px;
   }
 }
+
+/* Landscape mobile - keep desktop layout */
+@media (max-height: 500px) and (orientation: landscape) {
+  .cv-page {
+    padding: var(--spacing-sm) var(--spacing-xl);
+  }
+
+  .cv-layout {
+    flex-direction: row;
+    padding-top: 10px;
+    gap: var(--spacing-md);
+  }
+
+  .sql-block {
+    font-size: 9px;
+    line-height: 1.5;
+    min-height: auto;
+  }
+
+  .cv-actions {
+    margin-top: var(--spacing-sm);
+  }
+
+  .cv-button {
+    font-size: 9px;
+    padding: 6px 12px;
+  }
+
+  .cv-right {
+    flex: 0 0 200px;
+  }
+
+  .cv-skip-hint {
+    font-size: 9px;
+  }
+
+  .sql-result-check {
+    font-size: 9px;
+  }
+
+  .sql-result-text,
+  .sql-result-file {
+    font-size: 9px;
+  }
+}
