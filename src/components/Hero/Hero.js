@@ -25,8 +25,14 @@ function Hero() {
     { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'echo $CURRENT_STATUS' },
     { type: 'output', text: 'Just nu är jag på Luftvärnsregementet i Halmstad och kommer vara här till sommaren 2026.' },
     { type: 'output', text: '' },
-    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: './explore_projects.sh' },
-    { type: 'link', text: '→ Klicka här för att se mina projekt' }
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd projects/' },
+    { type: 'link', to: '/projects', text: '→ Klicka här för att se mina projekt' },
+    { type: 'output', text: '' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd about/' },
+    { type: 'link', to: '/about', text: '→ Klicka här för att veta mer om mig' },
+    { type: 'output', text: '' },
+    { type: 'command', prompt: 'ellen@ellenengineer:~$ ', text: 'cd contact/' },
+    { type: 'link', to: '/contact', text: '→ Klicka här för att kontakta mig' }
   ];
 
   /** Skips the animation and displays all text immediately. */
@@ -118,7 +124,7 @@ function Hero() {
                 if (line.type === 'link') {
                   return (
                     <div key={index} className="hero-line link" style={isHidden ? { visibility: 'hidden' } : undefined}>
-                      <Link to="/projects" className="hero-terminal-link">{line.text}</Link>
+                      <Link to={line.to} className="hero-terminal-link">{line.text}</Link>
                     </div>
                   );
                 }
