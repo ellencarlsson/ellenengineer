@@ -506,3 +506,79 @@
     stroke-width: 2.5;
   }
 }
+
+/* Landscape mobile - 75% node size */
+@media (max-height: 500px) and (orientation: landscape) {
+  .projects-page {
+    padding: 0.5rem 1rem;
+  }
+
+  .projects-network-container {
+    height: 70vh;
+    padding-top: 20px;
+  }
+
+  .node-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .node-inner {
+    padding: 0.5rem;
+  }
+
+  .node-name {
+    font-size: 0.7rem;
+  }
+
+  .node-tag {
+    font-size: 0.5rem;
+  }
+
+  .node-year {
+    font-size: 0.5rem;
+  }
+
+  .node-led {
+    width: 5px;
+    height: 5px;
+    top: 6px;
+    right: 6px;
+  }
+
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+
+  @keyframes orbit1 {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg) translateX(55px) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg) translateX(55px) rotate(-360deg);
+    }
+  }
+
+  @keyframes orbit2 {
+    0% {
+      transform: translate(-50%, -50%) rotate(120deg) translateX(58px) rotate(-120deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(480deg) translateX(58px) rotate(-480deg);
+    }
+  }
+
+  @keyframes orbit3 {
+    0% {
+      transform: translate(-50%, -50%) rotate(240deg) translateX(52px) rotate(-240deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(600deg) translateX(52px) rotate(-600deg);
+    }
+  }
+
+  .connection-line {
+    stroke-width: 1.5;
+  }
+}
