@@ -90,7 +90,7 @@ function Projects() {
       year: 'Under utveckling',
       platform: 'Raspberry Pi',
       tech: 'Python',
-      description: 'Applikation som tar fram MGRS-koordinater med hjälp av en Raspberry Pi.',
+      description: 'Militär applikation för MGRS-koordinater och schemaläggning med Raspberry Pi.',
       techStack: ['Python'],
       github: null,
       connectedTo: ['ellenengineer']
