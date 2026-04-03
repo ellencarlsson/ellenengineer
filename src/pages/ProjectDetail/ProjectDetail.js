@@ -803,7 +803,7 @@ function ProjectDetail() {
             {
               name: 'Web Admin',
               type: 'Interface',
-              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Körs lokalt och är inte en publik hemsida — den är enbart avsedd för den som administrerar enheten, Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Runs locally and is not a public website — it is only intended for whoever administers the device. Shares the same database as the device.' }
+              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Körs lokalt och är inte en publik hemsida, den är enbart avsedd för den som administrerar enheten, Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Runs locally and is not a public website, it is only intended for whoever administers the device. Shares the same database as the device.' }
             }
           ]
         }
