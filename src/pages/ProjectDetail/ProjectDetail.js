@@ -693,20 +693,54 @@ function ProjectDetail() {
       image: null,
       demoVideos: null,
       resultImages: [
-        { title: 'MGRS', src: '/images/mgrs.png' },
-        { title: 'Postschema', src: '/images/postschema.png' }
+        { title: 'Postschema', src: '/images/postschema.png', subtitle: { sv: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' } },
+        { title: 'MGRS', src: '/images/mgrs.png', subtitle: { sv: 'GPS-modulen läser latitud och longitud och konverterar koordinaterna till MGRS-format.', en: 'The GPS module reads latitude and longitude and converts the coordinates to MGRS format.' } }
       ],
       resultText: {
-        sv: 'Schemaläggningssystemet visade sig vara extremt svårt att implementera. Det finns för många yttre faktorer som påverkar hur ett rättvist schema ska skapas, t.ex. vädret (en patrull är jobbigare att genomföra i spöregn än i 10 grader och sol), om gruppen precis genomfört en omgruppering och inte sovit på länge, om någon är sjuk eller om någon sovit väldigt dåligt. Ingen algoritm kan väga ihop alla dessa parametrar bättre än en erfaren gruppchef med penna och papper. Lösningen blev därmed inte bättre än det manuella alternativet.\n\nMGRS-funktionen däremot fungerar riktigt bra. GPS-modulen läser satellitsignaler och visar positionen som MGRS-koordinater direkt på pekskärmen, vilket underlättar betydligt när man ska genomföra rekognosering av en ny grupperingsplats.',
+        sv: 'Schemaläggningssystemet visade sig vara extremt svårt att implementera. Det finns för många yttre faktorer som påverkar hur ett rättvist schema ska skapas, t.ex. vädret (en patrull är jobbigare att genomföra i spöregn än i 10 grader och sol), om gruppen precis genomfört en omgruppering och inte sovit på länge, om någon är sjuk eller om någon sovit väldigt dåligt. Ingen algoritm kan väga ihop alla dessa parametrar bättre än en erfaren gruppchef med penna och papper. Lösningen blev därmed inte bättre än det manuella alternativet.\n\nMGRS-funktionen däremot fungerar riktigt bra. GPS-modulen läser satellitsignaler och visar positionen som MGRS-koordinater direkt på skärmen, vilket underlättar betydligt när man ska genomföra rekognosering av en ny grupperingsplats.',
         en: 'The scheduling system proved extremely difficult to implement. There are too many external factors that affect how a fair schedule should be created — the weather, whether the group has just completed a regrouping and hasn\'t slept in hours, whether someone is sick and can\'t cover all posts. No algorithm can weigh all these parameters better than an experienced squad leader with a pen and paper. The solution therefore proved no better than the manual alternative, and that part of the project was abandoned.\n\nThe MGRS function, however, works really well. The GPS module reads satellite signals and displays the position as MGRS coordinates directly on the touchscreen, which makes it significantly easier when conducting reconnaissance of a new assembly point.'
       },
+      resultDetails: [
+        {
+          label: { sv: 'Användarens input', en: 'User input' },
+          text: { sv: 'Användaren anger vilka posttyper som ska bemannas och under vilka timmar, exempelvis: Eldpost 00–10, Patrull 00–02 och 06–08. Resultatet blir en lista block som generatorn sedan arbetar med.', en: 'The user specifies which post types need to be staffed and during which hours, for example: Fire post 00–10, Patrol 00–02 and 06–08. The result is a list of blocks that the generator then works with.' }
+        },
+        {
+          label: { sv: 'Hämta historik', en: 'Fetch history' },
+          text: { sv: 'Varje soldats tidigare pass läses in och räknas om till belastningspoäng. Poängen viktas efter tid på dygnet, nattpass (00–06) räknas tyngre än dagpass. Historiken används sedan i rangordningen.', en: 'Each soldier\'s previous shifts are read and converted into load points. The points are weighted by time of day — night shifts (00–06) count heavier than day shifts. The history is then used in the ranking.' }
+        },
+        {
+          label: { sv: 'Dela upp block i pass', en: 'Split blocks into shifts' },
+          text: { sv: 'Varje block delas upp så att varje pass respekterar min/max-reglerna för hur länge en soldat får sitta på samma post i sträck.', en: 'Each block is split so that every shift respects the min/max rules for how long a soldier can man the same post in a row.' }
+        },
+        {
+          label: { sv: 'Ta fram godkända kandidater', en: 'Find approved candidates' },
+          text: { sv: '- Rätt befattning för posttypen\n- Kan inte ha två poster samtidigt\n- Får inte överskrida max antal tillåtna timmar i sträck\n- Förare ska ha 6h sammanhängande vila', en: '- Correct role for the post type\n- Cannot have two posts at the same time\n- Cannot exceed max allowed hours in a row\n- Drivers must have 6h consecutive rest' }
+        },
+        {
+          label: { sv: 'Rangordna kandidater', en: 'Rank candidates' },
+          text: { sv: 'Bland godkända kandidater väljs den med lägst belastningspoäng först. Vid lika poäng avgör befattningsprioritet, vissa poster riktar sig i första hand till specifika befattningar. Vid fortsatt lika avgör slumpen.', en: 'Among approved candidates the one with the lowest load score is chosen first. If tied, position priority decides — some posts are directed primarily to specific roles. If still tied, chance decides.' }
+        },
+        {
+          label: { sv: 'Optimering', en: 'Optimisation' },
+          text: { sv: 'Systemet granskar det genererade schemat och försöker förbättra fördelningen av förarvila. Upprepas tills ingen förbättring hittas, max 10 iterationer.', en: 'The system reviews the generated schedule and tries to improve the distribution of driver rest. Repeats until no improvement is found, max 10 iterations.' }
+        },
+        {
+          label: { sv: 'Validera', en: 'Validate' },
+          text: { sv: 'Schemat kontrolleras mot alla hårda krav, ingen dubbelbokning, förarvila uppnådd, bemanning uppfylld. Pass som inte kan bemannas markeras som obemannade, användaren får själv tilldela en soldat till dessa manuellt efteråt.', en: 'The schedule is checked against all hard requirements — no double booking, driver rest achieved, staffing met. Validation reports deviations but does not regenerate the schedule.' }
+        },
+      ],
       insights: [
         {
-          title: { sv: 'Bakgrund', en: 'Background' },
+          title: { sv: 'Det som provades', en: 'What was tried' },
           items: [
             {
               label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
               text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Därför byggde jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. I worked on the iOS project from summer to autumn 2025, and started the Raspberry Pi version at the beginning of 2026.' }
+            },
+            {
+              label: { sv: 'OR-Tools', en: 'OR-Tools' },
+              text: { sv: 'Ett försök gjordes att använda OR-Tools CP-SAT solver för att hitta det optimala schemat matematiskt, men lösaren hade svårt att hantera kombinationen av alla regler och begränsningar, och jag valde därför att inte använda det.', en: 'An attempt was made to use the OR-Tools CP-SAT solver to find the optimal schedule mathematically, but the solver struggled to handle the combination of all rules and constraints, and was therefore taken out of use.' }
             }
           ]
         },
@@ -915,6 +949,22 @@ function ProjectDetail() {
                       <span className="result-image-title">{img.title}</span>
                       <div className="result-image-container">
                         <img className="result-image" src={img.src} alt={img.title} loading="lazy" />
+                      </div>
+                      {img.subtitle && <p className="result-image-subtitle">{loc(img.subtitle)}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.resultDetails && (
+                <div className="feature-commits">
+                  {project.resultDetails.map((item, i) => (
+                    <div key={i} className="feature-commit">
+                      <div className="feature-commit-dot insights-dot"></div>
+                      <div className="feature-commit-content">
+                        <span className="feature-commit-label">{loc(item.label)}</span>
+                        {loc(item.text).split('\n').map((line, j) => (
+                          <p key={j} className="feature-commit-text">{line}</p>
+                        ))}
                       </div>
                     </div>
                   ))}
