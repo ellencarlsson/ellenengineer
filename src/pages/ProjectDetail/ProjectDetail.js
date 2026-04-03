@@ -644,11 +644,11 @@ function ProjectDetail() {
         }
       ]
     },
-    'nordpunkt': {
-      id: 'nordpunkt',
+    'fieldcompanion': {
+      id: 'fieldcompanion',
       model: 'IBM DESKSTAR NP1',
-      label: 'NORDPUNKT-2025',
-      name: 'NordPunkt',
+      label: 'FIELDCOMPANION-2025',
+      name: 'Field Companion',
       year: { sv: 'Under utveckling', en: 'In development' },
       capacity: '512 MB',
       interface: 'GPIO',

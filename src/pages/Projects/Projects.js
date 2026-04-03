@@ -84,7 +84,7 @@ function Projects() {
       },
       techStack: ['Swift', 'Create ML'],
       github: null,
-      connectedTo: ['ellenengineer', 'nordpunkt']
+      connectedTo: ['ellenengineer', 'fieldcompanion']
     },
     {
       id: 'ellenengineer',
@@ -99,11 +99,11 @@ function Projects() {
       techStack: ['React', 'JavaScript', 'CSS3', 'React Router'],
       github: null,
       demo: 'https://ellenengineer.se',
-      connectedTo: ['nordpunkt']
+      connectedTo: ['fieldcompanion']
     },
     {
-      id: 'nordpunkt',
-      name: 'NordPunkt',
+      id: 'fieldcompanion',
+      name: 'Field Companion',
       year: { sv: 'Under utveckling', en: 'In development' },
       platform: 'Raspberry Pi',
       tech: 'Python',
@@ -116,6 +116,7 @@ function Projects() {
       connectedTo: ['ellenengineer']
     }
   ];
+
 
   /** Navigates to the project detail page. */
   const handleNodeClick = (projectId) => {
