@@ -649,7 +649,7 @@ function ProjectDetail() {
       model: 'IBM DESKSTAR NP1',
       label: 'FIELDCOMPANION-2025',
       name: 'Field Companion',
-      year: { sv: 'Under utveckling', en: 'In development' },
+      year: '2026',
       capacity: '512 MB',
       interface: 'GPIO',
       status: 'IN DEVELOPMENT',
@@ -660,7 +660,7 @@ function ProjectDetail() {
         en: 'Raspberry Pi device for automatic scheduling and MGRS in the military'
       },
       description: {
-        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta försökte jag bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför implementerade jag en lösning som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
         en: 'A post schedule is a military schedule that controls who is on post and when in the field. The main problem with doing this manually is making the calculations work out—the task must be covered around the clock while each person needs sleep and rest. Since multiple people must constantly be on duty, it quickly becomes a difficult puzzle to distribute shifts fairly so no one gets overloaded.\n\nTo make this easier, I\'m building a system that calculates the optimal schedule automatically. The system knows all the rules for rest periods, driving times, and staffing, and distributes shifts as fairly as possible.\n\nMGRS is the coordinate system used in the military to specify exact positions on the map. Calculating these manually is time-consuming and difficult to get right when tired or stressed. Therefore, I\'m also implementing a feature on the device that retrieves the MGRS coordinate automatically using GPS.'
       },
       platforms: ['Raspberry Pi'],
@@ -692,9 +692,13 @@ function ProjectDetail() {
       demo: null,
       image: null,
       demoVideos: null,
+      resultImages: [
+        { title: 'MGRS', src: '/images/mgrs.png' },
+        { title: 'Postschema', src: '/images/postschema.png' }
+      ],
       resultText: {
-        sv: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
-        en: 'The project is under development. The GPS module can read satellite signals and display the position as MGRS coordinates on the touchscreen. The schedule module can generate schedules based on rules such as no one working double shifts, all shifts having enough people, and work hours being distributed fairly. The device works completely offline without internet.'
+        sv: 'Schemaläggningssystemet visade sig vara extremt svårt att implementera. Det finns för många yttre faktorer som påverkar hur ett rättvist schema ska skapas, t.ex. vädret (en patrull är jobbigare att genomföra i spöregn än i 10 grader och sol), om gruppen precis genomfört en omgruppering och inte sovit på länge, om någon är sjuk eller om någon sovit väldigt dåligt. Ingen algoritm kan väga ihop alla dessa parametrar bättre än en erfaren gruppchef med penna och papper. Lösningen blev därmed inte bättre än det manuella alternativet.\n\nMGRS-funktionen däremot fungerar riktigt bra. GPS-modulen läser satellitsignaler och visar positionen som MGRS-koordinater direkt på pekskärmen, vilket underlättar betydligt när man ska genomföra rekognosering av en ny grupperingsplats.',
+        en: 'The scheduling system proved extremely difficult to implement. There are too many external factors that affect how a fair schedule should be created — the weather, whether the group has just completed a regrouping and hasn\'t slept in hours, whether someone is sick and can\'t cover all posts. No algorithm can weigh all these parameters better than an experienced squad leader with a pen and paper. The solution therefore proved no better than the manual alternative, and that part of the project was abandoned.\n\nThe MGRS function, however, works really well. The GPS module reads satellite signals and displays the position as MGRS coordinates directly on the touchscreen, which makes it significantly easier when conducting reconnaissance of a new assembly point.'
       },
       insights: [
         {
@@ -702,7 +706,16 @@ function ProjectDetail() {
           items: [
             {
               label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
-              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So now I\'m rebuilding it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
+              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Därför byggde jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. I worked on the iOS project from summer to autumn 2025, and started the Raspberry Pi version at the beginning of 2026.' }
+            }
+          ]
+        },
+        {
+          title: { sv: 'Att avsluta ett projekt', en: 'Closing a project' },
+          items: [
+            {
+              label: { sv: 'När man inser att det inte går', en: 'Realising it won\'t work' },
+              text: { sv: 'I praktiken visade det sig finnas för många yttre faktorer som påverkar schemaläggningen för att en algoritm ska kunna göra det bättre än en människa. Jag valde därför att avsluta projektet, även om det inte gick som jag hade hoppats.', en: 'From January 2026 I continued working on the new version and tried to find a good solution for the scheduling. But in April 2026 I realised it probably won\'t be possible to solve it in a way that is actually better than doing it manually. I therefore chose to close the project, even though it didn\'t turn out the way I had hoped.' }
             }
           ]
         }
@@ -863,7 +876,9 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.result ? 'expanded' : ''}`}>
             <div className="section-content">
               {project.resultText && (
-                <p className="result-description">{loc(project.resultText)}</p>
+                loc(project.resultText).split('\n\n').map((para, i) => (
+                  <p key={i} className="result-description">{para}</p>
+                ))
               )}
               {project.demoVideos && (
                 <div className="video-grid">

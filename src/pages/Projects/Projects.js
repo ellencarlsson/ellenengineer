@@ -104,7 +104,7 @@ function Projects() {
     {
       id: 'fieldcompanion',
       name: 'Field Companion',
-      year: { sv: 'Under utveckling', en: 'In development' },
+      year: '2026',
       platform: 'Raspberry Pi',
       tech: 'Python',
       description: {
