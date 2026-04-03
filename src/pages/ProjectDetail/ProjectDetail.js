@@ -644,24 +644,24 @@ function ProjectDetail() {
         }
       ]
     },
-    'nordpunkt': {
-      id: 'nordpunkt',
+    'fieldcompanion': {
+      id: 'fieldcompanion',
       model: 'IBM DESKSTAR NP1',
-      label: 'NORDPUNKT-2025',
-      name: 'NordPunkt',
-      year: { sv: 'Under utveckling', en: 'In development' },
+      label: 'FIELDCOMPANION-2026',
+      name: 'Field Companion',
+      year: '2026',
       capacity: '512 MB',
       interface: 'GPIO',
-      status: 'IN DEVELOPMENT',
+      status: 'DISCONTINUED',
       ledColor: 'brown',
       accentColor: 'sand',
       tagline: {
-        sv: 'Raspberry Pi-enhet för automatisk schemaläggning och MGRS inom militären',
-        en: 'Raspberry Pi device for automatic scheduling and MGRS in the military'
+        sv: 'Raspberry Pi-enhet för MGRS-koordinater och schemaläggning inom militären',
+        en: 'Raspberry Pi device for MGRS coordinates and scheduling in the military'
       },
       description: {
-        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta håller jag på att bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför håller jag också på att implementera en funktion på enheten som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
-        en: 'A post schedule is a military schedule that controls who is on post and when in the field. The main problem with doing this manually is making the calculations work out—the task must be covered around the clock while each person needs sleep and rest. Since multiple people must constantly be on duty, it quickly becomes a difficult puzzle to distribute shifts fairly so no one gets overloaded.\n\nTo make this easier, I\'m building a system that calculates the optimal schedule automatically. The system knows all the rules for rest periods, driving times, and staffing, and distributes shifts as fairly as possible.\n\nMGRS is the coordinate system used in the military to specify exact positions on the map. Calculating these manually is time-consuming and difficult to get right when tired or stressed. Therefore, I\'m also implementing a feature on the device that retrieves the MGRS coordinate automatically using GPS.'
+        sv: 'Ett postschema är ett schema inom militären som styr vem som ska posta och när ute i fält. Det stora problemet med att göra detta för hand är att få kalkylen att gå ihop, uppgiften måste lösas dygnet runt, samtidigt som varje person måste få sömn och vila. Eftersom flera personer ständigt måste vara i tjänst blir det snabbt ett svårt pussel att fördela passen rättvist så att ingen blir överbelastad.\n\nFör att underlätta detta försökte jag bygga ett system som räknar ut det bästa schemat automatiskt. Systemet kan alla regler för vilotider, körtider och bemanning, och fördelar passen så rättvist som möjligt.\n\nMGRS är det koordinatsystem som används i militären för att ange exakta positioner på kartan. Att räkna ut dessa manuellt är tidskrävande och svårt att få rätt när man är trött eller stressad. Därför implementerade jag en lösning som tar fram MGRS-koordinaten automatiskt med hjälp av GPS.',
+        en: 'A post schedule is a military schedule that controls who is on post and when in the field. The main problem with doing this manually is making the calculations work out—the task must be covered around the clock while each person needs sleep and rest. Since multiple people must constantly be on duty, it quickly becomes a difficult puzzle to distribute shifts fairly so no one gets overloaded.\n\nTo make this easier, I tried to build a system that calculates the optimal schedule automatically. The system knows all the rules for rest periods, driving times, and staffing, and distributes shifts as fairly as possible.\n\nMGRS is the coordinate system used in the military to specify exact positions on the map. Calculating these manually is time-consuming and difficult to get right when tired or stressed. Therefore I implemented a solution that retrieves the MGRS coordinate automatically using GPS.'
       },
       platforms: ['Raspberry Pi'],
       techStack: ['Python'],
@@ -692,17 +692,65 @@ function ProjectDetail() {
       demo: null,
       image: null,
       demoVideos: null,
+      resultImages: [
+        { title: 'Postschema', src: '/images/postschema.png', subtitle: { sv: 'Schemat visar vem som postar när, fördelat per timme och posttyp. Man kan se att jag ska ha eldpost mellan 18 till 19, och efter det ska jag sitta StriE från kl 22.', en: 'The schedule shows who is on post and when, distributed by hour and post type. You can see that I have fire post between 18 and 19, and after that I am on StriE from 22.' } },
+        { title: 'MGRS', src: '/images/mgrs.png', subtitle: { sv: 'GPS-modulen läser latitud och longitud och konverterar koordinaterna till MGRS-format.', en: 'The GPS module reads latitude and longitude and converts the coordinates to MGRS format.' } },
+        { title: 'Web Admin', src: '/images/webadmin.png', subtitle: { sv: 'Webbgränssnittet för att hantera posttyper, enheter och befattningar.', en: 'The web interface for managing post types, units and roles.' } }
+      ],
       resultText: {
-        sv: 'Projektet är under utveckling. GPS-modulen kan läsa satellitsignaler och visa positionen som MGRS-koordinater på pekskärmen. Schemamodulen kan generera scheman baserat på regler som att ingen jobbar dubbla pass, att alla skift har tillräckligt med folk, och att arbetstiden fördelas rättvist. Enheten fungerar helt offline utan internet.',
-        en: 'The project is under development. The GPS module can read satellite signals and display the position as MGRS coordinates on the touchscreen. The schedule module can generate schedules based on rules such as no one working double shifts, all shifts having enough people, and work hours being distributed fairly. The device works completely offline without internet.'
+        sv: 'Schemaläggningssystemet visade sig vara extremt svårt att implementera. Det finns för många yttre faktorer som påverkar hur ett rättvist schema ska skapas, t.ex. vädret (en patrull är jobbigare att genomföra i spöregn än i 10 grader och sol), om gruppen precis genomfört en omgruppering och inte sovit på länge, om någon är sjuk eller om någon sovit väldigt dåligt. Ingen algoritm kan väga ihop alla dessa parametrar bättre än en erfaren gruppchef med penna och papper. Lösningen blev därmed inte bättre än det manuella alternativet.\n\nMGRS-funktionen däremot fungerar riktigt bra. GPS-modulen läser satellitsignaler och visar positionen som MGRS-koordinater direkt på skärmen, vilket underlättar betydligt när man ska genomföra rekognosering av en ny grupperingsplats.',
+        en: 'The scheduling system proved extremely difficult to implement. There are too many external factors that affect how a fair schedule should be created — the weather, whether the group has just completed a regrouping and hasn\'t slept in hours, whether someone is sick and can\'t cover all posts. No algorithm can weigh all these parameters better than an experienced squad leader with a pen and paper. The solution therefore proved no better than the manual alternative, and that part of the project was abandoned.\n\nThe MGRS function, however, works really well. The GPS module reads satellite signals and displays the position as MGRS coordinates directly on the screen, which makes it significantly easier when conducting reconnaissance of a new assembly point.'
       },
+      resultDetails: [
+        {
+          label: { sv: 'Användarens input', en: 'User input' },
+          text: { sv: 'Användaren anger vilka posttyper som ska bemannas och under vilka timmar, exempelvis: Eldpost 00–10, Patrull 00–02 och 06–08. Resultatet blir en lista block som generatorn sedan arbetar med.', en: 'The user specifies which post types need to be staffed and during which hours, for example: Fire post 00–10, Patrol 00–02 and 06–08. The result is a list of blocks that the generator then works with.' }
+        },
+        {
+          label: { sv: 'Hämta historik', en: 'Fetch history' },
+          text: { sv: 'Varje soldats tidigare pass läses in och räknas om till belastningspoäng. Poängen viktas efter tid på dygnet, nattpass (00–06) räknas tyngre än dagpass. Historiken används sedan i rangordningen.', en: 'Each soldier\'s previous shifts are read and converted into load points. The points are weighted by time of day — night shifts (00–06) count heavier than day shifts. The history is then used in the ranking.' }
+        },
+        {
+          label: { sv: 'Dela upp block i pass', en: 'Split blocks into shifts' },
+          text: { sv: 'Varje block delas upp så att varje pass respekterar min/max-reglerna för hur länge en soldat får sitta på samma post i sträck.', en: 'Each block is split so that every shift respects the min/max rules for how long a soldier can man the same post in a row.' }
+        },
+        {
+          label: { sv: 'Ta fram godkända kandidater', en: 'Find approved candidates' },
+          text: { sv: '- Rätt befattning för posttypen\n- Kan inte ha två poster samtidigt\n- Får inte överskrida max antal tillåtna timmar i sträck\n- Förare ska ha 6h sammanhängande vila', en: '- Correct role for the post type\n- Cannot have two posts at the same time\n- Cannot exceed max allowed hours in a row\n- Drivers must have 6h consecutive rest' }
+        },
+        {
+          label: { sv: 'Rangordna kandidater', en: 'Rank candidates' },
+          text: { sv: 'Bland godkända kandidater väljs den med lägst belastningspoäng först. Vid lika poäng avgör befattningsprioritet, vissa poster riktar sig i första hand till specifika befattningar. Vid fortsatt lika avgör slumpen.', en: 'Among approved candidates the one with the lowest load score is chosen first. If tied, position priority decides — some posts are directed primarily to specific roles. If still tied, chance decides.' }
+        },
+        {
+          label: { sv: 'Optimering', en: 'Optimisation' },
+          text: { sv: 'Systemet granskar det genererade schemat och försöker förbättra fördelningen av förarvila. Upprepas tills ingen förbättring hittas, max 10 iterationer.', en: 'The system reviews the generated schedule and tries to improve the distribution of driver rest. Repeats until no improvement is found, max 10 iterations.' }
+        },
+        {
+          label: { sv: 'Validera', en: 'Validate' },
+          text: { sv: 'Schemat kontrolleras mot alla hårda krav, ingen dubbelbokning, förarvila uppnådd, bemanning uppfylld. Pass som inte kan bemannas markeras som obemannade, användaren får själv tilldela en soldat till dessa manuellt efteråt.', en: 'The schedule is checked against all hard requirements, no double booking, driver rest achieved, staffing met. Shifts that cannot be staffed are marked as unstaffed, and the user manually assigns a soldier to these afterwards.' }
+        },
+      ],
       insights: [
         {
-          title: { sv: 'Bakgrund', en: 'Background' },
+          title: { sv: 'Det som provades', en: 'What was tried' },
           items: [
             {
               label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
-              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Så nu bygger jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So now I\'m rebuilding it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
+              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Därför byggde jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So I rebuilt it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
+            },
+            {
+              label: { sv: 'OR-Tools', en: 'OR-Tools' },
+              text: { sv: 'Ett försök gjordes att använda OR-Tools CP-SAT solver för att hitta det optimala schemat matematiskt, men lösaren hade svårt att hantera kombinationen av alla regler och begränsningar, och jag valde därför att inte använda det.', en: 'An attempt was made to use the OR-Tools CP-SAT solver to find the optimal schedule mathematically, but the solver struggled to handle the combination of all rules and constraints, and I therefore chose not to use it.' }
+            }
+          ]
+        },
+        {
+          title: { sv: 'Att avsluta ett projekt', en: 'Closing a project' },
+          items: [
+            {
+              label: { sv: 'När man inser att det inte går', en: 'Realising it won\'t work' },
+              text: { sv: 'I praktiken visade det sig finnas för många yttre faktorer som påverkar schemaläggningen för att en algoritm ska kunna göra det bättre än en människa. Jag valde därför att avsluta projektet, även om det inte gick som jag hade hoppats.', en: 'In practice there turned out to be too many external factors affecting the scheduling for an algorithm to do it better than a human. I therefore chose to close the project, even though it didn\'t go the way I had hoped.' }
             }
           ]
         }
@@ -755,7 +803,7 @@ function ProjectDetail() {
             {
               name: 'Web Admin',
               type: 'Interface',
-              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Shares the same database as the device.' }
+              responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Körs lokalt och är inte en publik hemsida, den är enbart avsedd för den som administrerar enheten, Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Runs locally and is not a public website, it is only intended for whoever administers the device. Shares the same database as the device.' }
             }
           ]
         }
@@ -863,7 +911,9 @@ function ProjectDetail() {
           <div className={`section-body ${expandedSections.result ? 'expanded' : ''}`}>
             <div className="section-content">
               {project.resultText && (
-                <p className="result-description">{loc(project.resultText)}</p>
+                loc(project.resultText).split('\n\n').map((para, i) => (
+                  <p key={i} className="result-description">{para}</p>
+                ))
               )}
               {project.demoVideos && (
                 <div className="video-grid">
@@ -900,6 +950,22 @@ function ProjectDetail() {
                       <span className="result-image-title">{img.title}</span>
                       <div className="result-image-container">
                         <img className="result-image" src={img.src} alt={img.title} loading="lazy" />
+                      </div>
+                      {img.subtitle && <p className="result-image-subtitle">{loc(img.subtitle)}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {project.resultDetails && (
+                <div className="feature-commits">
+                  {project.resultDetails.map((item, i) => (
+                    <div key={i} className="feature-commit">
+                      <div className="feature-commit-dot insights-dot"></div>
+                      <div className="feature-commit-content">
+                        <span className="feature-commit-label">{loc(item.label)}</span>
+                        {loc(item.text).split('\n').map((line, j) => (
+                          <p key={j} className="feature-commit-text">{line}</p>
+                        ))}
                       </div>
                     </div>
                   ))}
