@@ -727,7 +727,7 @@ function ProjectDetail() {
         },
         {
           label: { sv: 'Validera', en: 'Validate' },
-          text: { sv: 'Schemat kontrolleras mot alla hårda krav, ingen dubbelbokning, förarvila uppnådd, bemanning uppfylld. Pass som inte kan bemannas markeras som obemannade, användaren får själv tilldela en soldat till dessa manuellt efteråt.', en: 'The schedule is checked against all hard requirements — no double booking, driver rest achieved, staffing met. Validation reports deviations but does not regenerate the schedule.' }
+          text: { sv: 'Schemat kontrolleras mot alla hårda krav, ingen dubbelbokning, förarvila uppnådd, bemanning uppfylld. Pass som inte kan bemannas markeras som obemannade, användaren får själv tilldela en soldat till dessa manuellt efteråt.', en: 'The schedule is checked against all hard requirements, no double booking, driver rest achieved, staffing met. Shifts that cannot be staffed are marked as unstaffed, and the user manually assigns a soldier to these afterwards.' }
         },
       ],
       insights: [
@@ -736,7 +736,7 @@ function ProjectDetail() {
           items: [
             {
               label: { sv: 'Från iOS till Raspberry Pi', en: 'From iOS to Raspberry Pi' },
-              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Därför byggde jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. I worked on the iOS project from summer to autumn 2025, and started the Raspberry Pi version at the beginning of 2026.' }
+              text: { sv: 'Jag byggde först en iOS-app för att lösa det, mest för att jag gillade att programmera i Swift och SwiftUI. Den funkade bra, men man får inte ta med telefonen ut i fält. Därför byggde jag om det till en fristående enhet med en Raspberry Pi och en liten pekskärm som man kan ta med sig överallt.', en: 'I first built an iOS app to solve this, mostly because I enjoyed programming in Swift and SwiftUI. It worked well, but you\'re not allowed to bring your phone into the field. So I rebuilt it as a standalone device with a Raspberry Pi and a small touchscreen that you can take anywhere.' }
             },
             {
               label: { sv: 'OR-Tools', en: 'OR-Tools' },
@@ -749,7 +749,7 @@ function ProjectDetail() {
           items: [
             {
               label: { sv: 'När man inser att det inte går', en: 'Realising it won\'t work' },
-              text: { sv: 'I praktiken visade det sig finnas för många yttre faktorer som påverkar schemaläggningen för att en algoritm ska kunna göra det bättre än en människa. Jag valde därför att avsluta projektet, även om det inte gick som jag hade hoppats.', en: 'From January 2026 I continued working on the new version and tried to find a good solution for the scheduling. But in April 2026 I realised it probably won\'t be possible to solve it in a way that is actually better than doing it manually. I therefore chose to close the project, even though it didn\'t turn out the way I had hoped.' }
+              text: { sv: 'I praktiken visade det sig finnas för många yttre faktorer som påverkar schemaläggningen för att en algoritm ska kunna göra det bättre än en människa. Jag valde därför att avsluta projektet, även om det inte gick som jag hade hoppats.', en: 'In practice there turned out to be too many external factors affecting the scheduling for an algorithm to do it better than a human. I therefore chose to close the project, even though it didn\'t go the way I had hoped.' }
             }
           ]
         }
