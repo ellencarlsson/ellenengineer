@@ -808,6 +808,26 @@ function ProjectDetail() {
               responsibility: { sv: 'Ett webbgränssnitt för att hantera data från en vanlig dator. Körs lokalt och är inte en publik hemsida, den är enbart avsedd för den som administrerar enheten, Delar samma databas som enheten.', en: 'A web interface for managing data from a regular computer. Runs locally and is not a public website, it is only intended for whoever administers the device. Shares the same database as the device.' }
             }
           ]
+        },
+        {
+          group: { sv: 'Hårdvara', en: 'Hardware' },
+          items: [
+            {
+              name: 'Raspberry Pi 5',
+              type: { sv: 'Enhet', en: 'Device' },
+              responsibility: { sv: 'Hjärnan i systemet. Kör all mjukvara lokalt utan internetuppkoppling.', en: 'The brain of the system. Runs all software locally without internet connection.' }
+            },
+            {
+              name: { sv: 'CUQI 3.5" pekskärm', en: 'CUQI 3.5" touchscreen' },
+              type: { sv: 'Skärm', en: 'Display' },
+              responsibility: { sv: '480×320 TFT LCD med pekfunktion och inbyggd kylfläns. Monterad direkt på Pi:n.', en: '480×320 TFT LCD with touch input and built-in cooling fan. Mounted directly on the Pi.' }
+            },
+            {
+              name: 'Ejoyous VK-162',
+              type: 'GPS',
+              responsibility: { sv: 'USB GPS-mottagare som fångar satellitsignaler och ger enhetens position i latitud/longitud.', en: 'USB GPS receiver that captures satellite signals and provides the device\'s position in latitude/longitude.' }
+            }
+          ]
         }
       ]
     },
