@@ -3,6 +3,7 @@
  */
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import NotFound from '../NotFound/NotFound';
 import { useLanguage } from '../../context/LanguageContext';
 import './ProjectDetail.css';
 
@@ -814,14 +815,7 @@ function ProjectDetail() {
   const project = projects[projectId];
 
   if (!project) {
-    return (
-      <div className="project-detail-page">
-        <div className="error-container">
-          <h1>404 - Project Not Found</h1>
-          <Link to="/projects" className="back-link">← Back to Storage Drives</Link>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (
