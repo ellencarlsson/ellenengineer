@@ -1524,6 +1524,19 @@
     grid-template-columns: 1fr;
   }
 
+  .result-images-row {
+    flex-direction: column;
+  }
+
+  .result-image-item,
+  .result-inline-image-item {
+    flex: 1 1 100%;
+  }
+
+  .result-text-with-image {
+    flex-direction: column;
+  }
+
   .back-link {
     font-size: 13px;
   }
